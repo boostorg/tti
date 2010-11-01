@@ -1,9 +1,13 @@
-#pragma once
+#if !defined(TT_INTROSPECTION_HPP)
+#define TT_INTROSPECTION_HPP
+
 #include <boost/config.hpp>
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/bool.hpp>
+#include <boost/mpl/identity.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/variadic_macro_data/VariadicMacroData.hpp>
 #include "detail/TTIntrospectionDetail.h"
@@ -13,12 +17,12 @@ namespace tti \
   { \
   namespace detail \
     { \
-    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
+    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
     } \
   template<class T> \
-  struct BOOST_PP_CAT(has_type_,name) \
+  struct trait \
     { \
-    typedef typename BOOST_PP_CAT(tti::detail::,trait)<T>::type type; \
+    typedef typename tti::detail::trait<T>::type type; \
     \
     BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
@@ -29,6 +33,37 @@ namespace tti \
   TTI_TRAIT_HAS_TYPE \
   ( \
   BOOST_PP_CAT(has_type_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_TRAIT_MEMBER_TYPE(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+    TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
+    } \
+  template<class T> \
+  struct trait \
+    { \
+    typedef typename \
+      boost::mpl::eval_if \
+        < \
+        tti::detail::trait<T>, \
+        tti::detail::membertype::trait<T>, \
+        boost::mpl::identity<tti::detail::notype> \
+        >::type \
+    type; \
+    }; \
+  } \
+/**/
+
+#define TTI_MEMBER_TYPE(name) \
+  TTI_TRAIT_MEMBER_TYPE \
+  ( \
+  BOOST_PP_CAT(member_type_,name), \
   name \
   ) \
 /**/
@@ -69,7 +104,7 @@ namespace tti \
       < \
       T, \
       U, \
-      typename BOOST_PP_CAT(tti::detail::,trait)<T>::type \
+      typename tti::detail::trait<T>::type \
       >::type \
     type; \
     \
@@ -96,7 +131,7 @@ namespace tti \
   template<class T> \
   struct trait \
     { \
-    typedef typename BOOST_PP_CAT(tti::detail::,trait)<T>::type type; \
+    typedef typename tti::detail::trait<T>::type type; \
     \
     BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
@@ -184,3 +219,44 @@ TTI_DETAIL_SAME(trait,name) \
   ) \
 /**/
 #endif
+
+#define TTI_TRAIT_HAS_MEMBER(trait,name) \
+namespace tti \
+  { \
+  template<class T> \
+  struct trait \
+    { \
+    template<class> \
+    struct class_of; \
+    \
+    template<class R,class C> \
+    struct class_of<R C::*> \
+      { \
+      typedef C type; \
+      }; \
+    \
+    template<T> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<typename class_of<T>::type>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef trait type; \
+    }; \
+  } \
+/**/
+  
+#define TTI_HAS_MEMBER(name) \
+  TTI_TRAIT_HAS_MEMBER \
+  ( \
+  BOOST_PP_CAT(has_member_,name), \
+  name \
+  ) \
+/**/
+
+#endif // TT_INTROSPECTION_HPP

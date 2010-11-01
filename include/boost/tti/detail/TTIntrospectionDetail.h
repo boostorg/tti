@@ -1,3 +1,6 @@
+#if !defined(TT_INTROSPECTION_DETAIL_HPP)
+#define TT_INTROSPECTION_DETAIL_HPP
+
 #pragma once
 #include <boost/config.hpp>
 #include <boost/mpl/has_xxx.hpp>
@@ -157,3 +160,40 @@ namespace tti \
   } \
 /**/
 #endif
+
+#define TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
+namespace membertype \
+  { \
+  template<class T> \
+  struct trait \
+    { \
+    typedef typename T::name type; \
+    }; \
+  } \
+/**/
+
+#define TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+namespace mpl \
+  { \
+  BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
+  } \
+template<class T> \
+struct trait \
+  { \
+  typedef typename tti::detail::mpl::trait<T>::type type; \
+  \
+  BOOST_STATIC_CONSTANT(bool,value=type::value); \
+  }; \
+/**/
+
+namespace tti
+  {
+  namespace detail
+    {
+    struct notype
+      {
+      };
+    }
+  }
+
+#endif // TT_INTROSPECTION_DETAIL_HPP
