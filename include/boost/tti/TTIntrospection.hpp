@@ -8,8 +8,14 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
+#include <boost/type_traits/remove_const.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/variadic_macro_data/VariadicMacroData.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/quote.hpp>
+#include <boost/mpl/int.hpp>
+#include <boost/function_types/parameter_types.hpp>
+#include <boost/function_types/is_member_object_pointer.hpp>
 #include "detail/TTIntrospectionDetail.hpp"
 
 #define TTI_TRAIT_HAS_TYPE(trait,name) \
@@ -235,6 +241,36 @@ namespace tti \
       typedef C type; \
       }; \
     \
+    template<class F> \
+    struct class_type \
+      { \
+      typedef typename \
+      boost::mpl::eval_if \
+        < \
+        boost::function_types::is_member_object_pointer<F>, \
+        class_of<F>, \
+        boost::remove_const \
+          < \
+          typename \
+          boost::mpl::at \
+            < \
+            typename \
+            boost::function_types::parameter_types \
+              < \
+              F, \
+              boost::mpl::quote1 \
+                < \
+                boost::mpl::identity \
+                > \
+              > \
+              ::type, \
+              boost::mpl::int_<0> \
+            >::type \
+          > \
+        >::type \
+      type; \
+      }; \
+    \
     template<T> \
     struct helper; \
     \
@@ -244,7 +280,7 @@ namespace tti \
     template<class U> \
     static ::boost::type_traits::no_type check(...); \
     \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<typename class_of<T>::type>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<typename class_type<T>::type>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
     \
     typedef trait type; \
     }; \
