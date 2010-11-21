@@ -1,7 +1,6 @@
 #if !defined(TT_INTROSPECTION_DETAIL_HPP)
 #define TT_INTROSPECTION_DETAIL_HPP
 
-#pragma once
 #include <boost/config.hpp>
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/bool.hpp>
@@ -11,6 +10,11 @@
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/arithmetic/sub.hpp>
 #include <boost/preprocessor/array/size.hpp>
+#include <boost/preprocessor/punctuation/comma_if.hpp>
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/iteration/iterate.hpp>
+#include <boost/preprocessor/repetition/enum_shifted.hpp>
+#include <boost/preprocessor/repetition/enum_shifted_params.hpp>
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #define TTI_DETAIL_TEMPLATE_PARAMETERS(z,n,args) \
@@ -186,6 +190,14 @@ struct trait \
   }; \
 /**/
 
+#define TTI_DETAIL_PP_REPEAT_CLASS(z,n,data) \
+  BOOST_PP_COMMA_IF(n) data \
+/**/
+
+#define TTI_DETAIL_PP_ENUM_SHIFTED_TYPENAME(z,n,data) \
+  BOOST_PP_CAT(typename P,n::type) \
+/**/
+
 namespace tti
   {
   namespace detail
@@ -193,6 +205,24 @@ namespace tti
     struct notype
       {
       };
+      
+#if defined(BOOST_NO_VARIADIC_TEMPLATES)
+
+    template<class T>
+    struct eval;
+    
+#if !defined(TTI_MAX_PARAMETERS) || TTI_MAX_PARAMETERS < 1 || TTI_MAX_PARAMETERS > 256
+#define TTI_MAX_PARAMETERS 10
+#endif
+
+#define BOOST_PP_ITERATION_LIMITS (1,TTI_MAX_PARAMETERS)
+#define BOOST_PP_FILENAME_1 "TTIntrospectionIterateEval.hpp"
+#include BOOST_PP_ITERATE()
+
+#else
+
+#endif
+      
     }
   }
 
