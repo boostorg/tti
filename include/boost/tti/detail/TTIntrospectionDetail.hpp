@@ -206,8 +206,6 @@ namespace tti
       {
       };
       
-#if defined(BOOST_NO_VARIADIC_TEMPLATES)
-
     template<class T>
     struct eval;
     
@@ -219,10 +217,6 @@ namespace tti
 #define BOOST_PP_FILENAME_1 "TTIntrospectionIterateEval.hpp"
 #include BOOST_PP_ITERATE()
 
-#else
-
-#endif
-      
     }
   }
 
