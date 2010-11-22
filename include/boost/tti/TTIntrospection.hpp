@@ -2,20 +2,22 @@
 #define TT_INTROSPECTION_HPP
 
 #include <boost/config.hpp>
-#include <boost/mpl/has_xxx.hpp>
-#include <boost/mpl/eval_if.hpp>
-#include <boost/mpl/bool.hpp>
-#include <boost/mpl/identity.hpp>
-#include <boost/type_traits/is_same.hpp>
-#include <boost/type_traits/detail/yes_no_type.hpp>
-#include <boost/type_traits/remove_const.hpp>
-#include <boost/preprocessor/cat.hpp>
-#include <boost/variadic_macro_data/VariadicMacroData.hpp>
-#include <boost/mpl/at.hpp>
-#include <boost/mpl/quote.hpp>
-#include <boost/mpl/int.hpp>
-#include <boost/function_types/parameter_types.hpp>
 #include <boost/function_types/is_member_object_pointer.hpp>
+#include <boost/function_types/parameter_types.hpp>
+#include <boost/mpl/has_xxx.hpp>
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/bool.hpp>
+#include <boost/mpl/eval_if.hpp>
+#include <boost/mpl/identity.hpp>
+#include <boost/mpl/int.hpp>
+#include <boost/mpl/quote.hpp>
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/repetition/enum_params.hpp>
+#include <boost/preprocessor/repetition/enum_params_with_a_default.hpp>
+#include <boost/type_traits/detail/yes_no_type.hpp>
+#include <boost/type_traits/is_same.hpp>
+#include <boost/type_traits/remove_const.hpp>
+#include <boost/variadic_macro_data/VariadicMacroData.hpp>
 #include "detail/TTIntrospectionDetail.hpp"
 
 #define TTI_TRAIT_HAS_TYPE(trait,name) \
@@ -295,4 +297,33 @@ namespace tti \
   ) \
 /**/
 
+namespace tti
+  {
+  template
+    <
+    class T,
+    template<class> class HasMember,
+    class R,
+    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::notype)
+    >
+  struct has_member_mf :
+    tti::detail::eval
+      <
+      HasMember 
+        <
+        tti::detail::eval
+          <
+          tti::detail::ptmf
+            <
+            boost::mpl::identity<T>,
+            R,
+            BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P)
+            >
+          >
+        >
+      >
+    {
+    };
+  }
+  
 #endif // TT_INTROSPECTION_HPP

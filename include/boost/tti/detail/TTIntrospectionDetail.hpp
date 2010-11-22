@@ -236,5 +236,5 @@ namespace tti
       };
     }
   }
-
+  
 #endif // TT_INTROSPECTION_DETAIL_HPP
