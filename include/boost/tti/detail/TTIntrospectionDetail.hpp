@@ -2,19 +2,24 @@
 #define TT_INTROSPECTION_DETAIL_HPP
 
 #include <boost/config.hpp>
-#include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/bool.hpp>
-#include <boost/preprocessor/array/elem.hpp>
-#include <boost/preprocessor/repetition/repeat.hpp>
-#include <boost/preprocessor/repetition/enum.hpp>
+#include <boost/mpl/has_xxx.hpp>
+#include <boost/mpl/remove.hpp>
+#include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/arithmetic/sub.hpp>
+#include <boost/preprocessor/array/elem.hpp>
 #include <boost/preprocessor/array/size.hpp>
-#include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/iteration/iterate.hpp>
+#include <boost/preprocessor/punctuation/comma_if.hpp>
+#include <boost/preprocessor/repetition/repeat.hpp>
+#include <boost/preprocessor/repetition/enum.hpp>
 #include <boost/preprocessor/repetition/enum_shifted.hpp>
 #include <boost/preprocessor/repetition/enum_shifted_params.hpp>
+#include <boost/preprocessor/repetition/enum_params.hpp>
+#include <boost/preprocessor/repetition/enum_params_with_a_default.hpp>
+#include <boost/function_types/member_function_pointer.hpp>
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #define TTI_DETAIL_TEMPLATE_PARAMETERS(z,n,args) \
@@ -198,6 +203,10 @@ struct trait \
   BOOST_PP_CAT(typename P,n::type) \
 /**/
 
+#if !defined(TTI_MAX_PARAMETERS) || TTI_MAX_PARAMETERS < 1 || TTI_MAX_PARAMETERS > 254
+#define TTI_MAX_PARAMETERS 10
+#endif
+
 namespace tti
   {
   namespace detail
@@ -209,14 +218,22 @@ namespace tti
     template<class T>
     struct eval;
     
-#if !defined(TTI_MAX_PARAMETERS) || TTI_MAX_PARAMETERS < 1 || TTI_MAX_PARAMETERS > 256
-#define TTI_MAX_PARAMETERS 10
-#endif
-
-#define BOOST_PP_ITERATION_LIMITS (1,TTI_MAX_PARAMETERS)
+#define BOOST_PP_ITERATION_LIMITS (1,BOOST_PP_ADD(2,TTI_MAX_PARAMETERS))
 #define BOOST_PP_FILENAME_1 "TTIntrospectionIterateEval.hpp"
 #include BOOST_PP_ITERATE()
 
+    template
+      <
+      class T,
+      class R,
+      BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::notype)
+      >
+    struct ptmf  
+      {
+      typedef boost::mpl::vector<R,T,BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P) > fseq;
+      typedef typename boost::mpl::remove<fseq,tti::detail::notype>::type ftseq;
+      typedef typename boost::function_types::member_function_pointer<ftseq>::type type;
+      };
     }
   }
 
