@@ -306,7 +306,7 @@ namespace tti
     class R,
     BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::notype)
     >
-  struct has_member_mf :
+  struct has_member_metafunction :
     tti::detail::eval
       <
       HasMember 

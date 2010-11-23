@@ -213,6 +213,7 @@ namespace tti
     {
     struct notype
       {
+      typedef notype type;
       };
       
     template<class T>
