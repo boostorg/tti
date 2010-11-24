@@ -213,7 +213,11 @@ namespace tti
     {
     struct notype
       {
-      typedef notype type;
+      typedef tti::detail::notype type;
+      };
+    struct noparam
+      {
+      typedef tti::detail::noparam type;
       };
       
     template<class T>
@@ -227,12 +231,12 @@ namespace tti
       <
       class T,
       class R,
-      BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::notype)
+      BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
       >
     struct ptmf  
       {
       typedef boost::mpl::vector<R,T,BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P) > fseq;
-      typedef typename boost::mpl::remove<fseq,tti::detail::notype>::type ftseq;
+      typedef typename boost::mpl::remove<fseq,tti::detail::noparam>::type ftseq;
       typedef typename boost::function_types::member_function_pointer<ftseq>::type type;
       };
     }

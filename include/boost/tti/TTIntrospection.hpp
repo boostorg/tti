@@ -45,7 +45,7 @@ namespace tti \
   ) \
 /**/
 
-#define TTI_TRAIT_MEMBER_TYPE(trait,name) \
+#define TTI_MF_TRAIT_MEMBER_TYPE(trait,name) \
 namespace tti \
   { \
   namespace detail \
@@ -61,17 +61,17 @@ namespace tti \
         < \
         tti::detail::trait<T>, \
         tti::detail::membertype::trait<T>, \
-        boost::mpl::identity<tti::detail::notype> \
+        tti::detail::notype \
         >::type \
     type; \
     }; \
   } \
 /**/
 
-#define TTI_MEMBER_TYPE(name) \
-  TTI_TRAIT_MEMBER_TYPE \
+#define TTI_MF_MEMBER_TYPE(name) \
+  TTI_MF_TRAIT_MEMBER_TYPE \
   ( \
-  BOOST_PP_CAT(member_type_,name), \
+  BOOST_PP_CAT(mf_member_type_,name), \
   name \
   ) \
 /**/
@@ -304,9 +304,9 @@ namespace tti
     class T,
     template<class> class HasMember,
     class R,
-    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::notype)
+    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
     >
-  struct has_member_metafunction :
+  struct mf_has_member_function :
     tti::detail::eval
       <
       HasMember 
