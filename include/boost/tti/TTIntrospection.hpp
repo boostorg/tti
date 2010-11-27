@@ -324,6 +324,29 @@ namespace tti
       >
     {
     };
+  template
+    <
+    class T,
+    template<class> class HasMember,
+    class R
+    >
+  struct mf_has_member_data :
+    tti::detail::eval
+      <
+      HasMember 
+        <
+        tti::detail::eval
+          <
+          tti::detail::ptmd
+            <
+            boost::mpl::identity<T>,
+            R
+            >
+          >
+        >
+      >
+    {
+    };
   }
   
 #endif // TT_INTROSPECTION_HPP

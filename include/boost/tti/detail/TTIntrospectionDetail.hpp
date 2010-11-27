@@ -233,11 +233,21 @@ namespace tti
       class R,
       BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
       >
-    struct ptmf  
+    struct ptmf
       {
       typedef boost::mpl::vector<R,T,BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P) > fseq;
       typedef typename boost::mpl::remove<fseq,tti::detail::noparam>::type ftseq;
       typedef typename boost::function_types::member_function_pointer<ftseq>::type type;
+      };
+      
+    template
+      <
+      class T,
+      class R
+      >
+    struct ptmd
+      {
+      typedef R T::* type;
       };
     }
   }
