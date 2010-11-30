@@ -30,7 +30,7 @@ namespace tti \
   template<class T> \
   struct trait \
     { \
-    typedef typename tti::detail::trait<T>::type type; \
+    typedef typename tti::detail::hastype::trait<T>::type type; \
     \
     BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
@@ -59,7 +59,7 @@ namespace tti \
     typedef typename \
       boost::mpl::eval_if \
         < \
-        tti::detail::trait<T>, \
+        tti::detail::hastype::trait<T>, \
         tti::detail::membertype::trait<T>, \
         tti::detail::notype \
         >::type \
@@ -228,6 +228,68 @@ TTI_DETAIL_SAME(trait,name) \
 /**/
 #endif
 
+#if defined(BOOST_NO_NULLPTR)
+#define TTI_TRAIT_HAS_MEMBER(trait,name) \
+namespace tti \
+  { \
+  template<class T> \
+  struct trait \
+    { \
+    template<class> \
+    struct class_of; \
+    \
+    template<class R,class C> \
+    struct class_of<R C::*> \
+      { \
+      typedef C type; \
+      }; \
+    \
+    template<class F> \
+    struct class_type \
+      { \
+      typedef typename \
+      boost::mpl::eval_if \
+        < \
+        boost::function_types::is_member_object_pointer<F>, \
+        class_of<F>, \
+        boost::remove_const \
+          < \
+          typename \
+          boost::mpl::at \
+            < \
+            typename \
+            boost::function_types::parameter_types \
+              < \
+              F, \
+              boost::mpl::quote1 \
+                < \
+                boost::mpl::identity \
+                > \
+              > \
+              ::type, \
+              boost::mpl::int_<0> \
+            >::type \
+          > \
+        >::type \
+      type; \
+      }; \
+    \
+    template<T> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<typename class_type<T>::type>(0))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef trait type; \
+    }; \
+  } \
+/**/
+#else
 #define TTI_TRAIT_HAS_MEMBER(trait,name) \
 namespace tti \
   { \
@@ -288,7 +350,8 @@ namespace tti \
     }; \
   } \
 /**/
-  
+#endif
+
 #define TTI_HAS_MEMBER(name) \
   TTI_TRAIT_HAS_MEMBER \
   ( \
@@ -297,8 +360,63 @@ namespace tti \
   ) \
 /**/
 
+#if defined(BOOST_NO_NULLPTR)
+#define TTI_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+namespace tti \
+  { \
+  template<class T,class Type> \
+  struct trait \
+    { \
+    template<Type *> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef trait type; \
+    }; \
+  } \
+/**/
+#else
+#define TTI_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+namespace tti \
+  { \
+  template<class T,class Type> \
+  struct trait \
+    { \
+    template<Type *> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef trait type; \
+    }; \
+  } \
+/**/
+#endif
+  
+#define TTI_HAS_STATIC_MEMBER(name) \
+  TTI_TRAIT_HAS_STATIC_MEMBER \
+  ( \
+  BOOST_PP_CAT(has_static_member_,name), \
+  name \
+  ) \
+/**/
+
 namespace tti
   {
+  
   template
     <
     class T,
@@ -324,6 +442,7 @@ namespace tti
       >
     {
     };
+    
   template
     <
     class T,
@@ -340,6 +459,56 @@ namespace tti
           tti::detail::ptmd
             <
             boost::mpl::identity<T>,
+            R
+            >
+          >
+        >
+      >
+    {
+    };
+    
+  template
+    <
+    class T,
+    template<class,class> class HasStaticMember,
+    class R,
+    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
+    >
+  struct mf_has_static_function :
+    tti::detail::eval
+      <
+      HasStaticMember 
+        <
+        boost::mpl::identity<T>,
+        tti::detail::eval
+          <
+          tti::detail::tfunction
+            <
+            R,
+            BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P)
+            >
+          >
+        >
+      >
+    {
+    };
+    
+  template
+    <
+    class T,
+    template<class,class> class HasStaticMember,
+    class R
+    >
+  struct mf_has_static_data :
+    tti::detail::eval
+      <
+      HasStaticMember 
+        <
+        boost::mpl::identity<T>,
+        tti::detail::eval
+          <
+          tti::detail::tdata
+            <
             R
             >
           >

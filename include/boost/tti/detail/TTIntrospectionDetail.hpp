@@ -20,6 +20,7 @@
 #include <boost/preprocessor/repetition/enum_params.hpp>
 #include <boost/preprocessor/repetition/enum_params_with_a_default.hpp>
 #include <boost/function_types/member_function_pointer.hpp>
+#include <boost/function_types/function_type.hpp>
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #define TTI_DETAIL_TEMPLATE_PARAMETERS(z,n,args) \
@@ -182,17 +183,20 @@ namespace membertype \
 /**/
 
 #define TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
-namespace mpl \
+namespace hastype \
   { \
-  BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
+  namespace mpl \
+    { \
+    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
+    } \
+  template<class T> \
+  struct trait \
+    { \
+    typedef typename mpl::trait<T>::type type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+    }; \
   } \
-template<class T> \
-struct trait \
-  { \
-  typedef typename tti::detail::mpl::trait<T>::type type; \
-  \
-  BOOST_STATIC_CONSTANT(bool,value=type::value); \
-  }; \
 /**/
 
 #define TTI_DETAIL_PP_REPEAT_CLASS(z,n,data) \
@@ -248,6 +252,27 @@ namespace tti
     struct ptmd
       {
       typedef R T::* type;
+      };
+      
+    template
+      <
+      class R,
+      BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
+      >
+    struct tfunction
+      {
+      typedef boost::mpl::vector<R,BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P) > fseq;
+      typedef typename boost::mpl::remove<fseq,tti::detail::noparam>::type ftseq;
+      typedef typename boost::function_types::function_type<ftseq>::type type;
+      };
+      
+    template
+      <
+      class R
+      >
+    struct tdata
+      {
+      typedef R type;
       };
     }
   }
