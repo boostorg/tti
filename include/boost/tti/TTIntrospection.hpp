@@ -45,7 +45,7 @@ namespace tti \
   ) \
 /**/
 
-#define TTI_MF_TRAIT_MEMBER_TYPE(trait,name) \
+#define TTI_TRAIT_MEMBER_TYPE(trait,name) \
 namespace tti \
   { \
   namespace detail \
@@ -68,10 +68,10 @@ namespace tti \
   } \
 /**/
 
-#define TTI_MF_MEMBER_TYPE(name) \
-  TTI_MF_TRAIT_MEMBER_TYPE \
+#define TTI_MEMBER_TYPE(name) \
+  TTI_TRAIT_MEMBER_TYPE \
   ( \
-  BOOST_PP_CAT(mf_member_type_,name), \
+  BOOST_PP_CAT(member_type_,name), \
   name \
   ) \
 /**/
@@ -124,7 +124,7 @@ namespace tti \
 #define TTI_HAS_TYPE_CHECK_TYPEDEF(name) \
   TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF \
   ( \
-  BOOST_PP_CAT(has_type_check_,name), \
+  BOOST_PP_CAT(has_type_check_typedef_,name), \
   name \
   ) \
 /**/
@@ -516,6 +516,18 @@ namespace tti
       >
     {
     };
+    
+  template
+    <
+    class T,
+    template<class,class> class HasTypeCheckTypedef,
+    class U
+    >
+  struct mf_has_type_check_typedef :
+    public mf_has_static_data<T,HasTypeCheckTypedef,U>
+    {
+    };
+    
   }
   
 #endif // TT_INTROSPECTION_HPP
