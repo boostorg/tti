@@ -171,30 +171,27 @@ namespace tti \
 /**/
 #endif
 
+#define TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+namespace mpl \
+  { \
+  BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
+  } \
+template<class T> \
+struct trait \
+  { \
+  typedef typename mpl::trait<T>::type type; \
+  \
+  BOOST_STATIC_CONSTANT(bool,value=type::value); \
+  }; \
+/**/
+
 #define TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
-namespace membertype \
+namespace member_type \
   { \
   template<class T> \
   struct trait \
     { \
     typedef typename T::name type; \
-    }; \
-  } \
-/**/
-
-#define TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
-namespace hastype \
-  { \
-  namespace mpl \
-    { \
-    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
-    } \
-  template<class T> \
-  struct trait \
-    { \
-    typedef typename mpl::trait<T>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
@@ -228,7 +225,7 @@ namespace tti
     struct eval;
     
 #define BOOST_PP_ITERATION_LIMITS (1,BOOST_PP_ADD(2,TTI_MAX_PARAMETERS))
-#define BOOST_PP_FILENAME_1 "TTIntrospectionIterateEval.hpp"
+#define BOOST_PP_FILENAME_1 <boost\tti\detail\TTIntrospectionIterateEval.hpp>
 #include BOOST_PP_ITERATE()
 
     template

@@ -30,7 +30,7 @@ namespace tti \
   template<class T> \
   struct trait \
     { \
-    typedef typename tti::detail::hastype::trait<T>::type type; \
+    typedef typename tti::detail::trait<T>::type type; \
     \
     BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
@@ -41,6 +41,36 @@ namespace tti \
   TTI_TRAIT_HAS_TYPE \
   ( \
   BOOST_PP_CAT(has_type_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_TRAIT_MFT_HAS_TYPE(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+    } \
+  template<class T> \
+  struct trait \
+    { \
+    typedef typename \
+    tti::detail::eval \
+      < \
+      tti::detail::trait<T> \
+      >::type \
+    type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+    }; \
+  } \
+/**/
+
+#define TTI_MFT_HAS_TYPE(name) \
+  TTI_TRAIT_MFT_HAS_TYPE \
+  ( \
+  BOOST_PP_CAT(mft_has_type_,name), \
   name \
   ) \
 /**/
@@ -59,8 +89,8 @@ namespace tti \
     typedef typename \
       boost::mpl::eval_if \
         < \
-        tti::detail::hastype::trait<T>, \
-        tti::detail::membertype::trait<T>, \
+        tti::detail::trait<T>, \
+        tti::detail::member_type::trait<T>, \
         tti::detail::notype \
         >::type \
     type; \
@@ -72,6 +102,43 @@ namespace tti \
   TTI_TRAIT_MEMBER_TYPE \
   ( \
   BOOST_PP_CAT(member_type_,name), \
+  name \
+  ) \
+/**/
+  
+#define TTI_TRAIT_MFT_MEMBER_TYPE(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+    TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
+    } \
+  template<class T> \
+  struct trait \
+    { \
+    typedef typename \
+      boost::mpl::eval_if \
+        < \
+        tti::detail::eval \
+          < \
+          tti::detail::trait<T> \
+          >, \
+        tti::detail::eval \
+          < \
+          tti::detail::member_type::trait<T> \
+          >, \
+        tti::detail::notype \
+        >::type \
+    type; \
+    }; \
+  } \
+/**/
+
+#define TTI_MFT_MEMBER_TYPE(name) \
+  TTI_TRAIT_MFT_MEMBER_TYPE \
+  ( \
+  BOOST_PP_CAT(mft_member_type_,name), \
   name \
   ) \
 /**/
@@ -125,6 +192,63 @@ namespace tti \
   TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF \
   ( \
   BOOST_PP_CAT(has_type_check_typedef_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_TRAIT_MFT_HAS_TYPE_CHECK_TYPEDEF(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
+    } \
+  \
+  template<class T,class U,class B> \
+  struct BOOST_PP_CAT(trait,_impl) \
+    { \
+    typedef typename \
+      boost::mpl::eval_if \
+        < \
+        boost::is_same<typename T::type::name,U>, \
+        boost::mpl::true_, \
+        boost::mpl::false_ \
+        >::type \
+    type; \
+    }; \
+  \
+  template<class T,class U> \
+  struct BOOST_PP_CAT(trait,_impl)<T,U,boost::mpl::false_::type> \
+    { \
+    typedef boost::mpl::false_::type type; \
+    }; \
+  \
+  template<class T,class U> \
+  struct trait \
+    { \
+    \
+    typedef typename \
+      BOOST_PP_CAT(trait,_impl) \
+      < \
+      T, \
+      U, \
+      typename \
+        tti::detail::eval \
+          < \
+          tti::detail::trait<T> \
+          >::type \
+      >::type \
+    type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+    }; \
+  } \
+/**/
+
+#define TTI_MFT_HAS_TYPE_CHECK_TYPEDEF(name) \
+  TTI_TRAIT_MFT_HAS_TYPE_CHECK_TYPEDEF \
+  ( \
+  BOOST_PP_CAT(mft_has_type_check_typedef_,name), \
   name \
   ) \
 /**/
@@ -447,6 +571,32 @@ namespace tti
     <
     class T,
     template<class> class HasMember,
+    class R,
+    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
+    >
+  struct mf_mft_has_member_function :
+    tti::detail::eval
+      <
+      HasMember 
+        <
+        tti::detail::eval
+          <
+          tti::detail::ptmf
+            <
+            T,
+            R,
+            BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P)
+            >
+          >
+        >
+      >
+    {
+    };
+    
+  template
+    <
+    class T,
+    template<class> class HasMember,
     class R
     >
   struct mf_has_member_data :
@@ -470,6 +620,30 @@ namespace tti
   template
     <
     class T,
+    template<class> class HasMember,
+    class R
+    >
+  struct mf_mft_has_member_data :
+    tti::detail::eval
+      <
+      HasMember 
+        <
+        tti::detail::eval
+          <
+          tti::detail::ptmd
+            <
+            T,
+            R
+            >
+          >
+        >
+      >
+    {
+    };
+    
+  template
+    <
+    class T,
     template<class,class> class HasStaticMember,
     class R,
     BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
@@ -480,6 +654,32 @@ namespace tti
       HasStaticMember 
         <
         boost::mpl::identity<T>,
+        tti::detail::eval
+          <
+          tti::detail::tfunction
+            <
+            R,
+            BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P)
+            >
+          >
+        >
+      >
+    {
+    };
+    
+  template
+    <
+    class T,
+    template<class,class> class HasStaticMember,
+    class R,
+    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
+    >
+  struct mf_mft_has_static_function :
+    tti::detail::eval
+      <
+      HasStaticMember 
+        <
+        T,
         tti::detail::eval
           <
           tti::detail::tfunction
@@ -520,11 +720,46 @@ namespace tti
   template
     <
     class T,
+    template<class,class> class HasStaticMember,
+    class R
+    >
+  struct mf_mft_has_static_data :
+    tti::detail::eval
+      <
+      HasStaticMember 
+        <
+        T,
+        tti::detail::eval
+          <
+          tti::detail::tdata
+            <
+            R
+            >
+          >
+        >
+      >
+    {
+    };
+    
+  template
+    <
+    class T,
     template<class,class> class HasTypeCheckTypedef,
     class U
     >
   struct mf_has_type_check_typedef :
     public mf_has_static_data<T,HasTypeCheckTypedef,U>
+    {
+    };
+    
+  template
+    <
+    class T,
+    template<class,class> class HasTypeCheckTypedef,
+    class U
+    >
+  struct mf_mft_has_type_check_typedef :
+    public mf_mft_has_static_data<T,HasTypeCheckTypedef,U>
     {
     };
     
