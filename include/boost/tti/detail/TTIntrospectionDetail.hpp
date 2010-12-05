@@ -23,9 +23,11 @@
 #include <boost/function_types/function_type.hpp>
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
+
 #define TTI_DETAIL_TEMPLATE_PARAMETERS(z,n,args) \
 BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
 /**/
+
 #define TTI_DETAIL_HAS_MEMBER_IMPLEMENTATION(args,introspect_macro) \
    template \
      < \
@@ -45,7 +47,9 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
          >::type type; \
      }; \
 /**/
+
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+
 #define TTI_DETAIL_HAS_MEMBER_MULTI_SUBSTITUTE(z,n,args) \
   template \
     < \
@@ -68,6 +72,7 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     { \
     }; \
 /**/
+
 #define TTI_DETAIL_HAS_MEMBER_SUBSTITUTE(args) \
   BOOST_PP_REPEAT \
     ( \
@@ -76,6 +81,7 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     args \
     ) \
 /**/
+
 #define TTI_DETAIL_HAS_MEMBER_INTROSPECT(args) \
   template< typename U > \
   struct BOOST_MPL_HAS_MEMBER_INTROSPECTION_NAME(args) \
@@ -90,6 +96,7 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     typedef boost::mpl::bool_< value > type; \
     }; \
 /**/
+
 #define TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE(args) \
   TTI_DETAIL_HAS_MEMBER_IMPLEMENTATION \
     ( \
@@ -97,7 +104,9 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     TTI_DETAIL_HAS_MEMBER_INTROSPECT \
     ) \
 /**/
-#else
+
+#else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+
 #define TTI_DETAIL_HAS_MEMBER_MULTI_SUBSTITUTE_WITH_TEMPLATE_SFINAE(z,n,args) \
   template \
     < \
@@ -127,6 +136,7 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
       type; \
     }; \
 /**/
+
 #define TTI_DETAIL_HAS_MEMBER_SUBSTITUTE_WITH_TEMPLATE_SFINAE(args) \
   typedef void \
       BOOST_MPL_HAS_MEMBER_INTROSPECTION_SUBSTITUTE_TAG_NAME(args); \
@@ -137,6 +147,7 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     args \
     ) \
 /**/
+
 #define TTI_DETAIL_HAS_MEMBER_INTROSPECT_WITH_TEMPLATE_SFINAE(args) \
   BOOST_MPL_HAS_MEMBER_REJECT_WITH_TEMPLATE_SFINAE(args,BOOST_PP_NIL) \
   BOOST_MPL_HAS_MEMBER_ACCEPT_WITH_TEMPLATE_SFINAE(args,BOOST_PP_NIL) \
@@ -145,6 +156,7 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
       : BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)< U > { \
   }; \
 /**/
+
 #define TTI_DETAIL_HAS_MEMBER_WITH_TEMPLATE_SFINAE(args) \
   TTI_DETAIL_HAS_MEMBER_SUBSTITUTE_WITH_TEMPLATE_SFINAE \
     ( \
@@ -156,8 +168,10 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     TTI_DETAIL_HAS_MEMBER_INTROSPECT_WITH_TEMPLATE_SFINAE \
     ) \
 /**/
-#endif
-#else
+
+#endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+#else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
+
 #define TTI_DETAIL_SAME(trait,name) \
 namespace tti \
   { \
@@ -169,7 +183,8 @@ namespace tti \
     ) \
   } \
 /**/
-#endif
+
+#endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
 #define TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
 namespace mpl \
@@ -263,14 +278,6 @@ namespace tti
       typedef typename boost::function_types::function_type<ftseq>::type type;
       };
       
-    template
-      <
-      class R
-      >
-    struct tdata
-      {
-      typedef R type;
-      };
     }
   }
   

@@ -45,36 +45,6 @@ namespace tti \
   ) \
 /**/
 
-#define TTI_TRAIT_MFT_HAS_TYPE(trait,name) \
-namespace tti \
-  { \
-  namespace detail \
-    { \
-    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
-    } \
-  template<class T> \
-  struct trait \
-    { \
-    typedef typename \
-    tti::detail::eval \
-      < \
-      tti::detail::trait<T> \
-      >::type \
-    type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
-    }; \
-  } \
-/**/
-
-#define TTI_MFT_HAS_TYPE(name) \
-  TTI_TRAIT_MFT_HAS_TYPE \
-  ( \
-  BOOST_PP_CAT(mft_has_type_,name), \
-  name \
-  ) \
-/**/
-
 #define TTI_TRAIT_MEMBER_TYPE(trait,name) \
 namespace tti \
   { \
@@ -102,43 +72,6 @@ namespace tti \
   TTI_TRAIT_MEMBER_TYPE \
   ( \
   BOOST_PP_CAT(member_type_,name), \
-  name \
-  ) \
-/**/
-  
-#define TTI_TRAIT_MFT_MEMBER_TYPE(trait,name) \
-namespace tti \
-  { \
-  namespace detail \
-    { \
-    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
-    TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
-    } \
-  template<class T> \
-  struct trait \
-    { \
-    typedef typename \
-      boost::mpl::eval_if \
-        < \
-        tti::detail::eval \
-          < \
-          tti::detail::trait<T> \
-          >, \
-        tti::detail::eval \
-          < \
-          tti::detail::member_type::trait<T> \
-          >, \
-        tti::detail::notype \
-        >::type \
-    type; \
-    }; \
-  } \
-/**/
-
-#define TTI_MFT_MEMBER_TYPE(name) \
-  TTI_TRAIT_MFT_MEMBER_TYPE \
-  ( \
-  BOOST_PP_CAT(mft_member_type_,name), \
   name \
   ) \
 /**/
@@ -196,63 +129,6 @@ namespace tti \
   ) \
 /**/
 
-#define TTI_TRAIT_MFT_HAS_TYPE_CHECK_TYPEDEF(trait,name) \
-namespace tti \
-  { \
-  namespace detail \
-    { \
-    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
-    } \
-  \
-  template<class T,class U,class B> \
-  struct BOOST_PP_CAT(trait,_impl) \
-    { \
-    typedef typename \
-      boost::mpl::eval_if \
-        < \
-        boost::is_same<typename T::type::name,U>, \
-        boost::mpl::true_, \
-        boost::mpl::false_ \
-        >::type \
-    type; \
-    }; \
-  \
-  template<class T,class U> \
-  struct BOOST_PP_CAT(trait,_impl)<T,U,boost::mpl::false_::type> \
-    { \
-    typedef boost::mpl::false_::type type; \
-    }; \
-  \
-  template<class T,class U> \
-  struct trait \
-    { \
-    \
-    typedef typename \
-      BOOST_PP_CAT(trait,_impl) \
-      < \
-      T, \
-      U, \
-      typename \
-        tti::detail::eval \
-          < \
-          tti::detail::trait<T> \
-          >::type \
-      >::type \
-    type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
-    }; \
-  } \
-/**/
-
-#define TTI_MFT_HAS_TYPE_CHECK_TYPEDEF(name) \
-  TTI_TRAIT_MFT_HAS_TYPE_CHECK_TYPEDEF \
-  ( \
-  BOOST_PP_CAT(mft_has_type_check_typedef_,name), \
-  name \
-  ) \
-/**/
-
 #define TTI_TRAIT_HAS_TEMPLATE(trait,name) \
 namespace tti \
   { \
@@ -280,6 +156,7 @@ namespace tti \
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+
 #define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
 namespace tti \
   { \
@@ -289,7 +166,9 @@ namespace tti \
     )  \
   } \
 /**/
+
 #if !defined(BOOST_NO_VARIADIC_MACROS)
+
 #define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
 namespace tti \
   { \
@@ -299,8 +178,10 @@ namespace tti \
     )  \
   } \
 /**/
+
 #endif // !defined(BOOST_NO_VARIADIC_MACROS)
-#else
+#else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+
 #define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
 namespace tti \
   { \
@@ -310,7 +191,9 @@ namespace tti \
     ) \
   } \
 /**/
+
 #if !defined(BOOST_NO_VARIADIC_MACROS)
+
 #define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
 namespace tti \
   { \
@@ -320,16 +203,21 @@ namespace tti \
     ) \
   } \
 /**/
+
 #endif // !defined(BOOST_NO_VARIADIC_MACROS)
 #endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
-#else
+#else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
+
 #define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
 TTI_DETAIL_SAME(trait,name) \
 /**/
+
 #if !defined(BOOST_NO_VARIADIC_MACROS)
+
 #define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
 TTI_DETAIL_SAME(trait,name) \
 /**/
+
 #endif // !defined(BOOST_NO_VARIADIC_MACROS)
 #endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
@@ -341,7 +229,9 @@ TTI_DETAIL_SAME(trait,name) \
   tpSeq \
   ) \
 /**/
+
 #if !defined(BOOST_NO_VARIADIC_MACROS)
+
 #define TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
   TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
@@ -350,9 +240,10 @@ TTI_DETAIL_SAME(trait,name) \
   __VA_ARGS__ \
   ) \
 /**/
-#endif
 
+#endif // !defined(BOOST_NO_VARIADIC_MACROS)
 #if defined(BOOST_NO_NULLPTR)
+
 #define TTI_TRAIT_HAS_MEMBER(trait,name) \
 namespace tti \
   { \
@@ -413,7 +304,9 @@ namespace tti \
     }; \
   } \
 /**/
-#else
+
+#else // !!defined(BOOST_NO_NULLPTR)
+
 #define TTI_TRAIT_HAS_MEMBER(trait,name) \
 namespace tti \
   { \
@@ -474,7 +367,8 @@ namespace tti \
     }; \
   } \
 /**/
-#endif
+
+#endif // defined(BOOST_NO_NULLPTR)
 
 #define TTI_HAS_MEMBER(name) \
   TTI_TRAIT_HAS_MEMBER \
@@ -485,6 +379,7 @@ namespace tti \
 /**/
 
 #if defined(BOOST_NO_NULLPTR)
+
 #define TTI_TRAIT_HAS_STATIC_MEMBER(trait,name) \
 namespace tti \
   { \
@@ -506,7 +401,9 @@ namespace tti \
     }; \
   } \
 /**/
-#else
+
+#else // !defined(BOOST_NO_NULLPTR)
+
 #define TTI_TRAIT_HAS_STATIC_MEMBER(trait,name) \
 namespace tti \
   { \
@@ -528,7 +425,8 @@ namespace tti \
     }; \
   } \
 /**/
-#endif
+
+#endif // defined(BOOST_NO_NULLPTR)
   
 #define TTI_HAS_STATIC_MEMBER(name) \
   TTI_TRAIT_HAS_STATIC_MEMBER \
@@ -543,8 +441,34 @@ namespace tti
   
   template
     <
-    class T,
+    template<class> class HasType,
+    class T
+    >
+  struct mf_has_type :
+    tti::detail::eval
+      <
+      HasType
+        <
+        T
+        >
+      >
+    {
+    };
+    
+  template
+    <
+    template<class> class MemberType,
+    class T
+    >
+  struct mf_member_type :
+    public mf_has_type<MemberType,T>
+    {
+    };
+    
+  template
+    <
     template<class> class HasMember,
+    class T,
     class R,
     BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
     >
@@ -557,32 +481,6 @@ namespace tti
           <
           tti::detail::ptmf
             <
-            boost::mpl::identity<T>,
-            R,
-            BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P)
-            >
-          >
-        >
-      >
-    {
-    };
-    
-  template
-    <
-    class T,
-    template<class> class HasMember,
-    class R,
-    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
-    >
-  struct mf_mft_has_member_function :
-    tti::detail::eval
-      <
-      HasMember 
-        <
-        tti::detail::eval
-          <
-          tti::detail::ptmf
-            <
             T,
             R,
             BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P)
@@ -595,8 +493,8 @@ namespace tti
     
   template
     <
-    class T,
     template<class> class HasMember,
+    class T,
     class R
     >
   struct mf_has_member_data :
@@ -608,30 +506,6 @@ namespace tti
           <
           tti::detail::ptmd
             <
-            boost::mpl::identity<T>,
-            R
-            >
-          >
-        >
-      >
-    {
-    };
-    
-  template
-    <
-    class T,
-    template<class> class HasMember,
-    class R
-    >
-  struct mf_mft_has_member_data :
-    tti::detail::eval
-      <
-      HasMember 
-        <
-        tti::detail::eval
-          <
-          tti::detail::ptmd
-            <
             T,
             R
             >
@@ -643,8 +517,8 @@ namespace tti
     
   template
     <
-    class T,
     template<class,class> class HasStaticMember,
+    class T,
     class R,
     BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
     >
@@ -653,32 +527,6 @@ namespace tti
       <
       HasStaticMember 
         <
-        boost::mpl::identity<T>,
-        tti::detail::eval
-          <
-          tti::detail::tfunction
-            <
-            R,
-            BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P)
-            >
-          >
-        >
-      >
-    {
-    };
-    
-  template
-    <
-    class T,
-    template<class,class> class HasStaticMember,
-    class R,
-    BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
-    >
-  struct mf_mft_has_static_function :
-    tti::detail::eval
-      <
-      HasStaticMember 
-        <
         T,
         tti::detail::eval
           <
@@ -695,8 +543,8 @@ namespace tti
     
   template
     <
-    class T,
     template<class,class> class HasStaticMember,
+    class T,
     class R
     >
   struct mf_has_static_data :
@@ -704,38 +552,8 @@ namespace tti
       <
       HasStaticMember 
         <
-        boost::mpl::identity<T>,
-        tti::detail::eval
-          <
-          tti::detail::tdata
-            <
-            R
-            >
-          >
-        >
-      >
-    {
-    };
-    
-  template
-    <
-    class T,
-    template<class,class> class HasStaticMember,
-    class R
-    >
-  struct mf_mft_has_static_data :
-    tti::detail::eval
-      <
-      HasStaticMember 
-        <
         T,
-        tti::detail::eval
-          <
-          tti::detail::tdata
-            <
-            R
-            >
-          >
+        R
         >
       >
     {
@@ -743,23 +561,12 @@ namespace tti
     
   template
     <
-    class T,
     template<class,class> class HasTypeCheckTypedef,
+    class T,
     class U
     >
   struct mf_has_type_check_typedef :
-    public mf_has_static_data<T,HasTypeCheckTypedef,U>
-    {
-    };
-    
-  template
-    <
-    class T,
-    template<class,class> class HasTypeCheckTypedef,
-    class U
-    >
-  struct mf_mft_has_type_check_typedef :
-    public mf_mft_has_static_data<T,HasTypeCheckTypedef,U>
+    public mf_has_static_data<HasTypeCheckTypedef,T,U>
     {
     };
     
