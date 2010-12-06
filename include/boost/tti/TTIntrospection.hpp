@@ -14,10 +14,10 @@
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/repetition/enum_params.hpp>
 #include <boost/preprocessor/repetition/enum_params_with_a_default.hpp>
+#include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/remove_const.hpp>
-#include <boost/variadic_macro_data/VariadicMacroData.hpp>
 #include "detail/TTIntrospectionDetail.hpp"
 
 #define TTI_TRAIT_HAS_TYPE(trait,name) \
@@ -167,19 +167,6 @@ namespace tti \
   } \
 /**/
 
-#if !defined(BOOST_NO_VARIADIC_MACROS)
-
-#define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
-  { \
-  TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
-    (  \
-      ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( trait, name, 1, false, __VA_ARGS__ ) )  \
-    )  \
-  } \
-/**/
-
-#endif // !defined(BOOST_NO_VARIADIC_MACROS)
 #else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
 
 #define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
@@ -192,19 +179,6 @@ namespace tti \
   } \
 /**/
 
-#if !defined(BOOST_NO_VARIADIC_MACROS)
-
-#define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
-  { \
-  TTI_DETAIL_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
-    ( \
-      ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( trait, name, 1, false, __VA_ARGS__ ) )  \
-    ) \
-  } \
-/**/
-
-#endif // !defined(BOOST_NO_VARIADIC_MACROS)
 #endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
 #else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
@@ -212,13 +186,6 @@ namespace tti \
 TTI_DETAIL_SAME(trait,name) \
 /**/
 
-#if !defined(BOOST_NO_VARIADIC_MACROS)
-
-#define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-TTI_DETAIL_SAME(trait,name) \
-/**/
-
-#endif // !defined(BOOST_NO_VARIADIC_MACROS)
 #endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
 #define TTI_HAS_TEMPLATE_CHECK_PARAMS(name,tpSeq) \
@@ -230,18 +197,6 @@ TTI_DETAIL_SAME(trait,name) \
   ) \
 /**/
 
-#if !defined(BOOST_NO_VARIADIC_MACROS)
-
-#define TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
-  TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
-  ( \
-  BOOST_PP_CAT(has_template_check_,name), \
-  name, \
-  __VA_ARGS__ \
-  ) \
-/**/
-
-#endif // !defined(BOOST_NO_VARIADIC_MACROS)
 #if defined(BOOST_NO_NULLPTR)
 
 #define TTI_TRAIT_HAS_MEMBER(trait,name) \
