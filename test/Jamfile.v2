@@ -22,6 +22,8 @@ alias tti
         [ compile-fail TestHasMemberFail.cpp ]
         [ compile-fail TestHasMemberFail2.cpp ]
         [ compile-fail TestHasMemberFail3.cpp ]
+        [ compile-fail TestHasMemberFail4.cpp ]
+        [ compile-fail TestHasMemberFail5.cpp ]
         [ run TestHasStaticMember.cpp ]
         [ compile TestHasStaticMemberCompile.cpp ]
         [ compile-fail TestHasStaticMemberFail.cpp ]
