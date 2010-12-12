@@ -46,7 +46,7 @@ TTI_DETAIL_SAME(trait,name) \
 #define TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
   TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
-  BOOST_PP_CAT(has_template_check_,name), \
+  BOOST_PP_CAT(has_template_check_params_,name), \
   name, \
   __VA_ARGS__ \
   ) \

@@ -55,6 +55,10 @@ struct AnotherType
     
   // Template
   
+  template <class,class,class,class,class,class> struct SomeMemberTemplate { };
+  template <class,class,int,class,template <class> class InnerTemplate,class,long> struct ManyParameters { };
+  template <class,class,class,class> struct SimpleTMP { };
+  
   // Data
   
   bool aMember;

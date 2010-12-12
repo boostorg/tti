@@ -11,10 +11,12 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/int.hpp>
 #include <boost/mpl/quote.hpp>
+#include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/repetition/enum_params.hpp>
 #include <boost/preprocessor/repetition/enum_params_with_a_default.hpp>
-#include <boost/preprocessor/arithmetic/add.hpp>
+#include <boost/preprocessor/seq/enum.hpp>
+#include <boost/preprocessor/seq/size.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/remove_const.hpp>
@@ -191,7 +193,7 @@ TTI_DETAIL_SAME(trait,name) \
 #define TTI_HAS_TEMPLATE_CHECK_PARAMS(name,tpSeq) \
   TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
-  BOOST_PP_CAT(has_template_check_,name), \
+  BOOST_PP_CAT(has_template_check_params_,name), \
   name, \
   tpSeq \
   ) \
