@@ -4,6 +4,14 @@
 int main()
   {
   
+  // You can always instantiate without compiler errors
+  
+  tti::has_member_aMember<long AType::*> aVar;
+  tti::has_member_someDataMember<double AnotherType::*> aVar2;
+  tti::has_member_someFunctionMember<double (AnotherType::*)(short,short,long,int)> aVar3;
+  
+  // Compile time asserts
+  
   BOOST_MPL_ASSERT((tti::has_member_AnInt<int AType::*>));
   BOOST_MPL_ASSERT((tti::has_member_AnInt<long AnotherType::*>));
   BOOST_MPL_ASSERT((tti::has_member_VoidFunction<void (AType::*)()>));

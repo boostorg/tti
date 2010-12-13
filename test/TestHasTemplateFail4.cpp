@@ -4,9 +4,9 @@
 int main()
   {
   
-  // Wrong enclosing type
+  // Not all 'typename' parameters
   
-  BOOST_MPL_ASSERT((tti::has_template_ATPMemberTemplate<AnotherType>));
+  BOOST_MPL_ASSERT((tti::HaveAnotherMT<AType>));
   
   return 0;
 

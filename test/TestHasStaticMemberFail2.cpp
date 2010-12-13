@@ -4,7 +4,9 @@
 int main()
   {
   
-  BOOST_MPL_ASSERT((boost::mpl::false_));
+  // Wrong enclosing type for DSMember
+  
+  BOOST_MPL_ASSERT((AnotherType,short));
   
   return 0;
 
