@@ -1,4 +1,4 @@
-#include "TestHasType.hpp"
+#include "TestHasTypeCheckTypedef.hpp"
 #include <boost/mpl/assert.hpp>
 
 int main()
@@ -6,7 +6,7 @@ int main()
   
   // NoOtherType does not exist at all
   
-  BOOST_MPL_ASSERT((tti::has_type_NoOtherType<AnotherType>));
+  BOOST_MPL_ASSERT((tti::has_type_check_typedef_NoOtherType<AType,int>));
   
   return 0;
 

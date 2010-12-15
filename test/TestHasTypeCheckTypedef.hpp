@@ -4,4 +4,14 @@
 #include "TestStructs.hpp"
 #include <boost/tti/TTIntrospection.hpp>
 
+TTI_HAS_TYPE_CHECK_TYPEDEF(AnIntType)
+TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF(NameStruct,AStructType)
+TTI_HAS_TYPE_CHECK_TYPEDEF(AnIntTypeReference)
+TTI_HAS_TYPE_CHECK_TYPEDEF(BType)
+TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF(TheInteger,AnIntegerType)
+TTI_HAS_TYPE_CHECK_TYPEDEF(CType)
+TTI_HAS_TYPE_CHECK_TYPEDEF(AnotherIntegerType)
+TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF(SomethingElse,someOtherType)
+TTI_HAS_TYPE_CHECK_TYPEDEF(NoOtherType)
+
 #endif // TEST_HAS_TYPE_CHECK_TYPEDEF_HPP
