@@ -93,4 +93,6 @@ alias ttiVM
         [ compile TestVMHasTemplateCheckParamsCompile.cpp : <include>../../../../variadic_macro_data ]
         [ compile-fail TestVMHasTemplateCheckParamsFail.cpp : <include>../../../../variadic_macro_data ]
         [ compile-fail TestVMHasTemplateCheckParamsFail2.cpp : <include>../../../../variadic_macro_data ]
+        [ compile-fail TestVMHasTemplateCheckParamsFail3.cpp : <include>../../../../variadic_macro_data ]
+        [ compile-fail TestVMHasTemplateCheckParamsFail4.cpp : <include>../../../../variadic_macro_data ]
     ;

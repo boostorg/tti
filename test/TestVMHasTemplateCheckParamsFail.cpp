@@ -4,7 +4,9 @@
 int main()
   {
   
-  BOOST_MPL_ASSERT((boost::mpl::false_));
+  // TemplateNotExist does not exist at all
+  
+  BOOST_MPL_ASSERT((tti::has_template_check_params_TemplateNotExist<AType>));
   
   return 0;
 
