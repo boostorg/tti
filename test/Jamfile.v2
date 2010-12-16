@@ -61,6 +61,7 @@ alias tti
         [ compile TestMFHasMemberDataCompile.cpp ]
         [ compile-fail TestMFHasMemberDataFail.cpp ]
         [ compile-fail TestMFHasMemberDataFail2.cpp ]
+        [ compile-fail TestMFHasMemberDataFail3.cpp ]
         [ run TestMFHasMemberFunction.cpp ]
         [ compile TestMFHasMemberFunctionCompile.cpp ]
         [ compile-fail TestMFHasMemberFunctionFail.cpp ]
