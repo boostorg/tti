@@ -6,12 +6,12 @@
 
 TTI_HAS_MEMBER(AnInt)
 TTI_HAS_MEMBER(VoidFunction)
-TTI_HAS_MEMBER(IntFunction)
+TTI_TRAIT_HAS_MEMBER(FunctionReturningInt,IntFunction)
 TTI_HAS_MEMBER(aFunction)
-TTI_HAS_MEMBER(anotherFunction)
+TTI_TRAIT_HAS_MEMBER(AnotherIntFunction,anotherFunction)
 TTI_HAS_MEMBER(sFunction)
 TTI_HAS_MEMBER(aMember)
-TTI_HAS_MEMBER(cMem)
+TTI_TRAIT_HAS_MEMBER(CMember,cMem)
 TTI_HAS_MEMBER(someDataMember)
 TTI_HAS_MEMBER(someFunctionMember)
 
