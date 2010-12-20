@@ -4,14 +4,14 @@
 int main()
   {
   
-  // Wrong enclosing type
+  // Wrong function parameter type
   
   BOOST_MPL_ASSERT((tti::mf_has_static_function
                       <
-                      tti::HaveTheSIntFunction,
+                      tti::has_static_member_TSFunction,
                       boost::mpl::identity<AnotherType>,
-                      boost::mpl::identity<int>,
-                      boost::mpl::identity<long>,
+                      tti::member_type_AStructType<AType>,
+                      tti::NameIntType<AnotherType>,
                       boost::mpl::identity<double>
                       >
                   ));

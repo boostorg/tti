@@ -4,16 +4,16 @@
 int main()
   {
   
-  // someFunctionMember does not exist at all
+  // Wrong enclosing type for nested type
   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::has_member_someFunctionMember,
+                      tti::has_member_sFunction,
                       boost::mpl::identity<AnotherType>,
-                      boost::mpl::identity<short>,
-                      boost::mpl::identity<double>,
+                      tti::member_type_AnIntType<AnotherType>,
                       boost::mpl::identity<int>,
-                      boost::mpl::identity<long>
+                      boost::mpl::identity<long>,
+                      boost::mpl::identity<double>
                       >
                   ));
   
