@@ -1,6 +1,5 @@
 #include "TestMFHasMemberData.hpp"
 #include <boost/detail/lightweight_test.hpp>
-#include <boost/mpl/identity.hpp>
 
 int main()
   {

@@ -4,7 +4,15 @@
 int main()
   {
   
-  BOOST_MPL_ASSERT((boost::mpl::false_));
+  // Wrong enclosing type
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type_check_typedef
+                      <
+                      tti::has_type_check_typedef_BType,
+                      boost::mpl::identity<AnotherType>,
+                      tti::member_type_BType<AType>
+                      >
+                  ));
   
   return 0;
 

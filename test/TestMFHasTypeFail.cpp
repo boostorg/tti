@@ -4,7 +4,14 @@
 int main()
   {
   
-  BOOST_MPL_ASSERT((boost::mpl::false_));
+  // NoOtherType does not exist at all
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::has_type_NoOtherType,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
   
   return 0;
 

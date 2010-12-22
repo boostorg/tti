@@ -12,6 +12,5 @@ TTI_TRAIT_MEMBER_TYPE(TheInteger,AnIntegerType)
 TTI_MEMBER_TYPE(CType)
 TTI_MEMBER_TYPE(AnotherIntegerType)
 TTI_TRAIT_MEMBER_TYPE(SomethingElse,someOtherType)
-TTI_MEMBER_TYPE(NoOtherType)
 
 #endif // TEST_MEMBER_TYPE_HPP

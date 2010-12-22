@@ -4,13 +4,13 @@
 int main()
   {
   
-  // NoOtherType does not exist at all
+  // Wrong typedef type
   
   BOOST_MPL_ASSERT((tti::mf_has_type_check_typedef
                       <
-                      tti::has_type_check_typedef_NoOtherType,
-                      boost::mpl::identity<AnotherType>,
-                      boost::mpl::identity<float>
+                      tti::TheInteger,
+                      tti::member_type_BType<AType>,
+                      boost::mpl::identity<long>
                       >
                   ));
   
