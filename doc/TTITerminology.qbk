@@ -1,16 +1,16 @@
 [section:tti_terminology Terminology]
 
 The term "enclosing type" refers to the type which is being introspected. 
-This type is always a user-defined class, struct, or union.
+This type is always a class, struct, or union.
 
 The term "inner xxx", where xxx is some element of the enclosing type, 
 refers to either a type, template, function, or data within the enclosing 
-type. The term "inner element" also refers to these entities.
+type. The term "inner element" also refers to any one of these entities in general.
 
 I use the term "nested type" to refer to a type within another type.
-I use the term "function member" or "data member" to refer to non-static 
+I use the term "member function" or "member data" to refer to non-static 
 functions or data that are part of the enclosing type.
-I use the term "static function" or "static data" to refer to static 
+I use the term "static member function" or "static member data" to refer to static 
 functions or data that are part of the enclosing type.
 I use the term "class template member" to refer to a class template 
 nested within the enclosing type.

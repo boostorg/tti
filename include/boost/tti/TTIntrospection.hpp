@@ -20,6 +20,7 @@
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/remove_const.hpp>
+#include "TTIntrospectionTemplate.hpp"
 #include "detail/TTIntrospectionDetail.hpp"
 
 /*
@@ -720,12 +721,12 @@ namespace tti
 /// A metafunction which checks whether a type exists within an enclosing type.
 /**
 
-    This metafunction takes all its types as metafunctions whose typedef 'type' member is the actual type used.
+    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
     
     The metafunction types and return:
 
       HasType = Template class generated from the TTI_HAS_TYPE ( or TTI_TRAIT_HAS_TYPE ) macro.<br />
-      T       = The enclosing type as a metafunction.
+      T       = The enclosing type as a nullary metafunction.
       
       returns = 'value' is true if the type exists within the enclosing type,
                 otherwise 'value' is false.
@@ -750,12 +751,12 @@ namespace tti
 /// A metafunction whose typedef 'type' is either the internal type or an unspecified type.
 /**
 
-    This metafunction takes all its types as metafunctions whose typedef 'type' member is the actual type used.
+    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
     
     The metafunction types and return:
 
       MemberType = Template class generated from the TTI_MEMBER_TYPE ( or TTI_TRAIT_MEMBER_TYPE ) macro.<br />
-      T          = The enclosing type as a metafunction.
+      T          = The enclosing type as a nullary metafunction.
       
       returns = 'type' is the inner type of the 'name' in TTI_MEMBER_TYPE ( or TTI_TRAIT_MEMBER_TYPE ) 
                 if the inner type exists within the enclosing type,
@@ -782,17 +783,44 @@ namespace tti
     {
     };
     
+/// A metafunction which checks whether a type of a particular signature exists within an enclosing type.
+/**
+
+    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
+    
+    The metafunction types and return:
+
+      HasTypeCheckTypedef = Template class generated from the TTI_HAS_TYPE_CHECK_TYPEDEF ( or TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF ) macro.<br />
+      T                   = The enclosing type as a nullary metafunction.<br />
+      U                   = The type of the enclosed type as a nullary metafunction.
+      
+      returns = 'value' is true if the type exists within the enclosing type,
+                with the correct type signature,
+                otherwise 'value' is false.
+                          
+*/
+  template
+    <
+    template<class,class> class HasTypeCheckTypedef,
+    class T,
+    class U
+    >
+  struct mf_has_type_check_typedef :
+    public mf_has_static_data<HasTypeCheckTypedef,T,U>
+    {
+    };
+    
 /// A metafunction which checks whether a member function exists within an enclosing type.
 /**
 
-    This metafunction takes all its types as metafunctions whose typedef 'type' member is the actual type used.
+    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
     
     The metafunction types and return:
 
       HasMember = Template class generated from the TTI_HAS_MEMBER ( or TTI_TRAIT_HAS_MEMBER ) macro.<br />
-      T         = The enclosing type as a metafunction.<br />
-      R         = The return type of the member function as a metafunction.<br />
-      P...      = The parameter types of the member function, each as a metafunction.<br /> 
+      T         = The enclosing type as a nullary metafunction.<br />
+      R         = The return type of the member function as a nullary metafunction.<br />
+      P...      = The parameter types of the member function, each as a nullary metafunction.<br /> 
                   There can be up to TTI_MAX_PARAMETERS number of parameters. The default is 10.
       
       returns = 'value' is true if the member function exists within the enclosing type,
@@ -828,13 +856,13 @@ namespace tti
 /// A metafunction which checks whether a member data exists within an enclosing type.
 /**
 
-    This metafunction takes all its types as metafunctions whose typedef 'type' member is the actual type used.
+    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
     
     The metafunction types and return:
 
       HasMember = Template class generated from the TTI_HAS_MEMBER ( or TTI_TRAIT_HAS_MEMBER ) macro.<br />
-      T         = The enclosing type as a metafunction.<br />
-      R         = The type of the member data as a metafunction.
+      T         = The enclosing type as a nullary metafunction.<br />
+      R         = The type of the member data as a nullary metafunction.
       
       returns = 'value' is true if the member data exists within the enclosing type,
                 otherwise 'value' is false.
@@ -867,14 +895,14 @@ namespace tti
 /// A metafunction which checks whether a static member function exists within an enclosing type.
 /**
 
-    This metafunction takes all its types as metafunctions whose typedef 'type' member is the actual type used.
+    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
     
     The metafunction types and return:
 
       HasStatic Member = Template class generated from the TTI_HAS_STATIC_MEMBER ( or TTI_TRAIT_HAS_STATIC_MEMBER ) macro.<br />
-      T                = The enclosing type as a metafunction.<br />
-      R                = The return type of the static member function as a metafunction.<br />
-      P...             = The parameter types of the static member function, each as a metafunction.<br /> 
+      T                = The enclosing type as a nullary metafunction.<br />
+      R                = The return type of the static member function as a nullary metafunction.<br />
+      P...             = The parameter types of the static member function, each as a nullary metafunction.<br /> 
                          There can be up to TTI_MAX_PARAMETERS number of parameters. The default is 10.
       
       returns = 'value' is true if the static member function exists within the enclosing type,
@@ -910,13 +938,13 @@ namespace tti
 /// A metafunction which checks whether a static member data exists within an enclosing type.
 /**
 
-    This metafunction takes all its types as metafunctions whose typedef 'type' member is the actual type used.
+    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
     
     The metafunction types and return:
 
       HasStaticMember = Template class generated from the TTI_HAS_STATIC_MEMBER ( or TTI_TRAIT_HAS_STATIC_MEMBER ) macro.<br />
-      T               = The enclosing type as a metafunction.<br />
-      R               = The type of the static member data as a metafunction.
+      T               = The enclosing type as a nullary metafunction.<br />
+      R               = The type of the static member data as a nullary metafunction.
       
       returns = 'value' is true if the member data exists within the enclosing type,
                 otherwise 'value' is false.
@@ -937,33 +965,6 @@ namespace tti
         R
         >
       >
-    {
-    };
-    
-/// A metafunction which checks whether a type of a particular signature exists within an enclosing type.
-/**
-
-    This metafunction takes all its types as metafunctions whose typedef 'type' member is the actual type used.
-    
-    The metafunction types and return:
-
-      HasTypeCheckTypedef = Template class generated from the TTI_HAS_TYPE_CHECK_TYPEDEF ( or TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF ) macro.<br />
-      T                   = The enclosing type as a metafunction.<br />
-      U                   = The type of the enclosed type as a metafunction.
-      
-      returns = 'value' is true if the type exists within the enclosing type,
-                with the correct type signature,
-                otherwise 'value' is false.
-                          
-*/
-  template
-    <
-    template<class,class> class HasTypeCheckTypedef,
-    class T,
-    class U
-    >
-  struct mf_has_type_check_typedef :
-    public mf_has_static_data<HasTypeCheckTypedef,T,U>
     {
     };
     

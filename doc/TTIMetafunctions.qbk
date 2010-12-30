@@ -1,0 +1,101 @@
+[section:tti_metafunctions Metafunctions]
+
+A table of these metafunctions is given, based on the inner element whose 
+existence the metaprogrammer is querying. A more detailed explanation can be found 
+in the reference section. All of the metafunctions are in the tti top-level namespace,
+all have a particular name, and all begin with the prefix 'mf_' so as not to conflict with 
+the macro metafunctions in the library.
+
+[table:tbmetafunctions TTI Metafunctions
+  [
+    [Inner Element]
+    [Template]
+    [Parameters]
+    [Macro Equivalent]
+  ]
+  [
+    [Type]
+    [tti::mf_has_type]
+    [
+    template<class> class HasType = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction
+    ]
+    [TTI_HAS_TYPE (TTI_TRAIT_HAS_TYPE)]
+  ]
+  [
+    [Type with check]
+    [tti::mf_has_type_check_typedef]
+    [
+    template<class,class> class HasTypeCheckTypedef = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction[br]
+    class U = type to check against nullary metafunction
+    ]
+    [TTI_HAS_TYPE_CHECK_TYPEDEF (TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF)]
+  ]
+  [
+    [Member data]
+    [tti::mf_has_member_data]
+    [
+    template<class> class HasMember = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction[br]
+    class R = type of member data nullary Metafunction
+    ]
+    [TTI_HAS_MEMBER (TTI_TRAIT_HAS_MEMBER)]
+  ]
+  [
+    [Member function]
+    [tti::mf_has_member_function]
+    [
+    template<class> class HasMember = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction[br]
+    class R = return value nullary metafunction[br]
+    class Types... = parameter types as nullary metafunctions
+    ]
+    [TTI_HAS_MEMBER (TTI_TRAIT_HAS_MEMBER)]
+  ]
+  [
+    [Static data]
+    [tti::mf_has_static_data]
+    [
+    template<class,class> class HasStaticMember = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction[br]
+    class R = type of static data nullary metafunction
+    ]
+    [TTI_HAS_STATIC_MEMBER (TTI_TRAIT_HAS_STATIC_MEMBER)]
+  ]
+  [
+    [Static function]
+    [tti::mf_has_static_function]
+    [
+    template<class,class> class HasStaticMember = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction[br]
+    class R = return value nullary metafunction[br]
+    class Types... = parameter types as nullary metafunctions
+    ]
+    [TTI_HAS_STATIC_MEMBER (TTI_TRAIT_HAS_STATIC_MEMBER)]
+  ]
+]
+
+Just as there is the macro TTI_MEMBER_TYPE (TTI_TRAIT_MEMBER_TYPE) for creating 
+a macro metafunction which returns a nested type if it exists, else an unspecified 
+type, there is also the equivalent metafunction.
+
+[table:tbmetanested TTI Nested Type Metafunction
+  [
+    [Inner Element]
+    [Template]
+    [Parameters]
+    [Macro Equivalent]
+  ]
+  [
+    [Type]
+    [tti::mf_member_type]
+    [
+    template<class> class MemberType = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction
+    ]
+    [TTI_MEMBER_TYPE (TTI_TRAIT_MEMBER_TYPE)]
+  ]
+]
+
+[endsect]

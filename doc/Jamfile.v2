@@ -15,6 +15,7 @@ doxygen TypeTraitsIntrospectionReference
   :
     $(here)/../../../boost/tti/TTIntrospection.hpp
     $(here)/../../../boost/tti/TTIntrospectionVM.hpp
+    $(here)/../../../boost/tti/TTIntrospectionTemplate.hpp
   : 
     <doxygen:param>PROJECT_NAME="TTI"
     <doxygen:param>PROJECT_NUMBER=1

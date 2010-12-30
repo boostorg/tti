@@ -3,9 +3,11 @@
 
 #include <boost/config.hpp>
 #include <boost/mpl/has_xxx.hpp>
-#include <boost/preprocessor/cat.hpp>
+#include <boost/mpl/identity.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
+#include <boost/preprocessor/cat.hpp>
 #include <boost/variadic_macro_data/VariadicMacroData.hpp>
+#include "TTIntrospectionTemplate.hpp"
 #include "detail/TTIntrospectionDetail.hpp"
 
 /*
