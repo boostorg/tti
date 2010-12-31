@@ -1,10 +1,32 @@
 [section:tti_metafunctions Metafunctions]
 
+The nested type metafunctions parallel the macro metafunctions but allow 
+nested types to be used without compiler errors and without needing to use the 
+T::InnerType notation for nested types.
+
+For each of these metafunctions the first parameter is the class template of its corresponding macro metafunction 
+and the remaining parameter are 'types', which always consists first of the enclosing type and then 
+possibly other types which make up the signature of whatever inner element we are introspecting. Each of these
+'types' is passed as a nullary metafunction whose typedef 'type' is the actual type.
+
+It is important to understand what this accomplishes. For a type which is in scope, we can always use 
+boost::mpl::identity to create our nullary metafunction, and there can never be a compiler error for
+such known types as long as such declarations for them exist. For nested types, which may or may not 
+exist, we can pass the result of the macro pair TTI\_MEMBER\_TYPE ( TTI\_TRAIT\_MEMBER\_TYPE ) or its equivalent 
+nested type metafunction tti::mf\_member\_type ( explained later ).
+
+To use these metafunctions you need to include the main header file 'TTIntrospection.hpp',
+unless otherwise noted.
+
+[tip The header file <boost/mpl/identity.hpp> is included by the TTI header files so you need not 
+manually include it in order to use boost::mpl::identity to wrap a known type as a nullary 
+metafunction for the nested type metafunctions.]
+
 A table of these metafunctions is given, based on the inner element whose 
-existence the metaprogrammer is querying. A more detailed explanation can be found 
-in the reference section. All of the metafunctions are in the tti top-level namespace,
-all have a particular name, and all begin with the prefix 'mf_' so as not to conflict with 
-the macro metafunctions in the library.
+existence the metaprogrammer is introspecting. A more detailed explanation can be found 
+in the reference section. All of the metafunctions are in the top-level 'tti' namespace,
+all have a particular name based on the type of its functionality, and all begin with the prefix 
+'mf_' so as not to conflict with the macro metafunctions in the library.
 
 [table:tbmetafunctions TTI Metafunctions
   [
@@ -15,68 +37,88 @@ the macro metafunctions in the library.
   ]
   [
     [Type]
-    [tti::mf_has_type]
+    [tti::mf\_has\_type]
     [
-    template<class> class HasType = generated macro metafunction[br]
+    template<class> class HasType[br]
+    = generated macro metafunction[br]
     class T = enclosing type nullary metafunction
     ]
-    [TTI_HAS_TYPE (TTI_TRAIT_HAS_TYPE)]
+    [TTI\_HAS\_TYPE (TTI\_TRAIT\_HAS\_TYPE)]
   ]
   [
     [Type with check]
-    [tti::mf_has_type_check_typedef]
+    [tti::mf\_has\_type\_check\_typedef]
     [
-    template<class,class> class HasTypeCheckTypedef = generated macro metafunction[br]
+    template<class,class> class HasTypeCheckTypedef[br]
+    = generated macro metafunction[br]
     class T = enclosing type nullary metafunction[br]
     class U = type to check against nullary metafunction
     ]
-    [TTI_HAS_TYPE_CHECK_TYPEDEF (TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF)]
+    [TTI\_HAS\_TYPE\_CHECK\_TYPEDEF (TTI\_TRAIT\_HAS\_TYPE\_CHECK\_TYPEDEF)]
+  ]
+  [
+    [Template]
+    [tti::mf\_has\_template]
+    [
+    template<class,class> class HasTemplate[br]
+    = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction
+    ]
+    [
+    TTI\_HAS\_TEMPLATE (TTI\_TRAIT\_HAS\_TEMPLATE)[br]
+    TTI\_HAS\_TEMPLATE\_CHECK\_PARAMS (TTI\_TRAIT\_HAS\_TEMPLATE\_CHECK\_PARAMS)[br]
+    TTI\_VM\_HAS\_TEMPLATE\_CHECK\_PARAMS (TTI\_VM\_TRAIT\_HAS\_TEMPLATE\_CHECK\_PARAMS)
+    ]
   ]
   [
     [Member data]
-    [tti::mf_has_member_data]
+    [tti::mf\_has\_member\_data]
     [
-    template<class> class HasMember = generated macro metafunction[br]
+    template<class> class HasMember[br]
+    = generated macro metafunction[br]
     class T = enclosing type nullary metafunction[br]
     class R = type of member data nullary Metafunction
     ]
-    [TTI_HAS_MEMBER (TTI_TRAIT_HAS_MEMBER)]
+    [TTI\_HAS\_MEMBER (TTI\_TRAIT\_HAS\_MEMBER)]
   ]
   [
     [Member function]
-    [tti::mf_has_member_function]
+    [tti::mf\_has\_member\_function]
     [
-    template<class> class HasMember = generated macro metafunction[br]
+    template<class> class HasMember[br]
+    = generated macro metafunction[br]
     class T = enclosing type nullary metafunction[br]
     class R = return value nullary metafunction[br]
     class Types... = parameter types as nullary metafunctions
     ]
-    [TTI_HAS_MEMBER (TTI_TRAIT_HAS_MEMBER)]
+    [TTI\_HAS\_MEMBER (TTI\_TRAIT\_HAS\_MEMBER)]
   ]
   [
     [Static data]
-    [tti::mf_has_static_data]
+    [tti::mf\_has\_static\_data]
     [
-    template<class,class> class HasStaticMember = generated macro metafunction[br]
+    template<class,class> class HasStaticMember[br]
+    = generated macro metafunction[br]
     class T = enclosing type nullary metafunction[br]
     class R = type of static data nullary metafunction
     ]
-    [TTI_HAS_STATIC_MEMBER (TTI_TRAIT_HAS_STATIC_MEMBER)]
+    [TTI\_HAS\_STATIC\_MEMBER (TTI\_TRAIT\_HAS\_STATIC\_MEMBER)]
   ]
   [
     [Static function]
-    [tti::mf_has_static_function]
+    [tti::mf\_has\_static\_function]
     [
-    template<class,class> class HasStaticMember = generated macro metafunction[br]
+    template<class,class> class HasStaticMember[br]
+    = generated macro metafunction[br]
     class T = enclosing type nullary metafunction[br]
     class R = return value nullary metafunction[br]
     class Types... = parameter types as nullary metafunctions
     ]
-    [TTI_HAS_STATIC_MEMBER (TTI_TRAIT_HAS_STATIC_MEMBER)]
+    [TTI\_HAS\_STATIC\_MEMBER (TTI\_TRAIT\_HAS\_STATIC\_MEMBER)]
   ]
 ]
 
-Just as there is the macro TTI_MEMBER_TYPE (TTI_TRAIT_MEMBER_TYPE) for creating 
+Just as there is the macro pair TTI\_MEMBER\_TYPE (TTI\_TRAIT\_MEMBER\_TYPE) for creating 
 a macro metafunction which returns a nested type if it exists, else an unspecified 
 type, there is also the equivalent metafunction.
 
@@ -89,13 +131,22 @@ type, there is also the equivalent metafunction.
   ]
   [
     [Type]
-    [tti::mf_member_type]
+    [tti::mf\_member\_type]
     [
-    template<class> class MemberType = generated macro metafunction[br]
+    template<class> class MemberType[br]
+    = generated macro metafunction[br]
     class T = enclosing type nullary metafunction
     ]
-    [TTI_MEMBER_TYPE (TTI_TRAIT_MEMBER_TYPE)]
+    [TTI\_MEMBER\_TYPE (TTI\_TRAIT\_MEMBER\_TYPE)]
   ]
 ]
+
+The use of this metafunction allows us to created deeply nested types, 
+which may or may not exist, as nullary metafunctions. This then can 
+be used with the other nested type metafunctions above. The key 
+information above is that the enclosing type is a nullary metafunction, 
+which means that the enclosing type can be specified as the result 
+of using TTI\_MEMBER\_TYPE (TTI\_TRAIT\_MEMBER\_TYPE) as well as the 
+result of using itself.
 
 [endsect]

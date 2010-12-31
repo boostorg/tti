@@ -18,11 +18,11 @@ All of the questions above attempt to find an answer about an inner element with
 a particular name. In order to do this using template metaprogramming, macros are used 
 so that the name of the inner element can be passed to the macro. The macro will then 
 generate an appropriate metafunction, which the template metaprogrammer can then use to 
-query the information that is needed. The name itself of the inner element is always passed 
-to the macro as a macro parameter, but other macro parameters may be needed also in some cases.
+introspect the information that is needed. The name itself of the inner element is always passed 
+to the macro as a macro parameter, but other macro parameters may also be needed in some cases.
 
-All of the macros start with the prefix TTI_, create their metafunctions in the top-level 
-tti namespace, and come in two forms: 
+All of the macros start with the prefix TTI_, create their metafunctions in a top-level 
+namespace called 'tti, and come in two forms: 
 
 # In the simplest form the 'name' of the inner element is used directly to generate the name 
   of the metafunction as well as serving as the 'name' to introspect. The 'name' is appended 
@@ -30,50 +30,23 @@ tti namespace, and come in two forms:
   macro part of the name in lower case. As an example, for the macro TTI_HAS_TYPE(MyType) the 
   name of the metafunction is 'tti::has_type_MyType' and it will look for an inner type 
   called 'MyType'.
-# In the slightly more complicated form the macro starts with TTI\_TRAIT\_ and a 'trait' name is 
-  passed as the first parameter, with the 'name' of the inner element as the second parameter. 
-  The 'trait' serves only to completely name the metafunction in the tti namespace. As an example, 
-  for the macro TTI_TRAIT_HAS_TYPE(MyTrait,MyType) the name of the metafunction is 'tti::MyTrait' and it will 
-  look for an inner type called 'MyType'.
+# In the slightly more complicated form which I call the complex form, the macro starts with 
+  TTI\_TRAIT\_ and a 'trait' name is passed as the first parameter, with the 'name' of the inner 
+  element as the second parameter. The 'trait' serves only to completely name the metafunction in 
+  the tti namespace. As an example, for the macro TTI_TRAIT_HAS_TYPE(MyTrait,MyType) the name of 
+  the metafunction is 'tti::MyTrait' and it will look for an inner type called 'MyType'.
   
-[important Any given metafunction generated, when introspecting a particular inner element, can be reused 
-for any combination of template parameters which involve the same type of inner element. Once a metafunction 
-is generated, attempting to generate another metafunction of the same name will create ODR violations since 
-two C++ constructs with the same name/type in the same namespace will have been created. This latter
-possibility has much less chance of occurence if you use the simple form of each macro and just reuse 
-the metafunction if you are querying for two entities of the same name in different enclosing types, or in 
-the same enclosing type but with different signatures.]
+[important Any given macro metafunction generated, when introspecting a particular inner element, can be reused 
+for any combination of template parameters which involve the same type of inner element. Once a macro metafunction 
+is generated, attempting to generate another macro metafunction of the same name will create ODR violations since 
+two C++ constructs with the same name/type in the same namespace will have been created. This latter possibility 
+has much less chance of occurence if you use the simple form of each macro and just reuse 
+the macro metafunction. You can even do this if you are introspecting for two entities of the same name in 
+different enclosing types, or in the same enclosing type but with different signatures,
+as with overloaded member functions.]
   
-[section:tti_reason Why the TTI Library ?]
-
-In the Boost Type Traits library there is  compile time functionality for 
-querying information about a C++ type. This information is very useful 
-during template metaprogramming and forms the basis, along with the 
-constructs of the Boost MPL library, and some other compile time 
-libraries, for much of the template metaprogramming in Boost.
-
-One area which is mostly missing in the Type Traits library is the ability 
-to determine what C++ inner elements are part of a type, where the inner 
-element may be a nested type, function or data member, static function or 
-static data member, or class template.
-
-There has been some of this functionality in Boost, both in already existing
-libraries and in libraries on which others have worked but which were 
-never submitted for acceptance into Boost. An example with an existing Boost
-library is Boost MPL, where there is functionality, in the form of macros, 
-to determine whether an enclosing type has a particular nested type or nested 
-class template. An example with a library which was never submitted to Boost 
-is the Concept Traits Library from which much of the functionality of this 
-library, related to type traits, was taken and improved upon.
-
-It may also be possible that some other Boost libraries, highly dependent 
-on advanced template metaprogramming techniques, also have internal 
-functionality to query a type's elements at compile time. But to the best 
-of my knowledge this sort of functionality has never been incorporated in 
-a single Boost library. This library is an attempt to do so, and to bring  
-a recognizable set of interfaces to compile-time type introspection to Boost 
-so that other metaprogramming libraries can use them for their own needs.
-
-[endsect]
-
+Once either of these two macro forms are used for a particular type of inner element, the 
+corresponding macro metafunction has the exact same functionality. I refer to these two macros as 
+a macro pair.
+  
 [endsect]

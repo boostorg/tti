@@ -3,9 +3,9 @@
 Welcome to the Type Traits Introspection library version 1.0 .
 
 The Type Traits Introspection library, or TTI for short, is a library 
-of macros generating metafunctions, and a set of metafunctions themselves, 
-which provide the ability to introspect by name the elements of a type at 
-compile time. 
+of macros generating metafunctions, and a set of parallel nested type 
+metafunctions, which provide the ability to introspect by name the 
+elements of a type at compile time. 
 
 The name of the library is chosen because the library offers 
 compile time functionality on a type, as does the Boost Type Traits library, 
@@ -13,9 +13,12 @@ and because the functionality the library offers is the ability to introspect
 a type about the existence of a specific element. 
 
 I use the word "introspect" in a very broad sense here. Normally language 
-introspection means asking for information to be initially returned by name. 
+introspection means initially asking for information to be initially returned by name. 
 In the TTI library one must always supply the name, and use the functionality 
-for the correct type of element to find out if the particular named entity exists.
+for the correct type of inner element to find out if the particular named entity exists.
+You may prefer the term "query" instead of "introspection" to denote what this 
+library does, but I use terminology based on the word "introspect" throughout 
+this documentation.
 
 The functionality of the library may be summed up as:
 
@@ -23,14 +26,16 @@ The functionality of the library may be summed up as:
   using a set of macros. Each macro takes the name of the 
   type's element and generates a metafunction which can be 
   subsequently invoked to determine whether or not the 
-  element exists within the type.
+  element exists within the type. These metafunctions 
+  will be called macro metafunctions in the documentation.
 # Provide corresponding metafunctions which can operate 
   on each of the macro metafunctions generated. 
   These secondary metafunctions provide 
   the same set of introspection as the primary ones but 
   allow nested types, which do not actually have to exist, 
   to be passed in template parameters without producing 
-  a compiler error.
+  a compiler error. These metafunctions will be called 
+  nested type metafunctions in the documentation.
    
 The library is a header only library.
 
@@ -39,10 +44,16 @@ divided depending on whether or not the library
 functionality supporting variadic macros is to be used.
 
 # The main header, which does not require using the library 
-support for variadic macros, is 'TTIntrospection.hpp'. 
+support for variadic macros, is 'TTIntrospection.hpp'. This 
+can be used for the vast majority of functionality in the library.
 # The secondary header, which uses a very small subset of the 
 library functionality, providing an alternate use of a particular 
 macro with variadic macro support, is 'TTIntrospectionVM.hpp'.
+
+Furthermore there is a third header file which both of the header 
+files above include, called 'TTIntrospectionTemplate.hpp' but 
+this should never be included itself but only through either 
+of the main header files.
         
 The library is dependent on Boost PP, Boost MPL, 
 Boost Type Traits, and Boost Function Types. 
@@ -50,7 +61,7 @@ Boost Type Traits, and Boost Function Types.
 If the secondary header is used the library is also dependent 
 on the variadic_macro_data library currently in the sandbox. 
 If the secondary header is not used there is no need to download 
-the variadic_macro_data library and use it.
+the variadic_macro_data library and use it in any way.
 
 Since the dependencies of the library are all header only 
 libraries, there is no need to build anything in order to use 

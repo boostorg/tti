@@ -12,7 +12,7 @@ I use the term "member function" or "member data" to refer to non-static
 functions or data that are part of the enclosing type.
 I use the term "static member function" or "static member data" to refer to static 
 functions or data that are part of the enclosing type.
-I use the term "class template member" to refer to a class template 
+I use the term "nested class template" to refer to a class template 
 nested within the enclosing type.
 
 Other terminology may be just as valid for the notion of C++ language 

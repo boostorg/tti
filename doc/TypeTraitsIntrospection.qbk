@@ -11,6 +11,7 @@
 ]
  
 [include TTIIntroduction.qbk]
+[include TTIWhy.qbk]
 [include TTITerminology.qbk]
 [include TTIFunctionality.qbk]
 [include TTIDetail.qbk]
