@@ -88,6 +88,11 @@ alias tti
         [ compile-fail TestMFHasTypeCheckTypedefFail.cpp ]
         [ compile-fail TestMFHasTypeCheckTypedefFail2.cpp ]
         [ compile-fail TestMFHasTypeCheckTypedefFail3.cpp ]
+        [ run TestMFHasTemplateCheckParams.cpp ]
+        [ compile TestMFHasTemplateCheckParamsCompile.cpp ]
+        [ compile-fail TestMFHasTemplateCheckParamsFail.cpp ]
+        [ compile-fail TestMFHasTemplateCheckParamsFail2.cpp ]
+        [ compile-fail TestMFHasTemplateCheckParamsFail3.cpp ]
         [ run TestMFMemberType.cpp ]
         [ compile TestMFMemberTypeCompile.cpp ]
     ;
@@ -100,4 +105,9 @@ alias ttiVM
         [ compile-fail TestVMHasTemplateCheckParamsFail2.cpp : <include>../../../../variadic_macro_data ]
         [ compile-fail TestVMHasTemplateCheckParamsFail3.cpp : <include>../../../../variadic_macro_data ]
         [ compile-fail TestVMHasTemplateCheckParamsFail4.cpp : <include>../../../../variadic_macro_data ]
+        [ run TestVMMFHasTemplateCheckParams.cpp : : : <include>../../../../variadic_macro_data ]
+        [ compile TestVMMFHasTemplateCheckParamsCompile.cpp : <include>../../../../variadic_macro_data ]
+        [ compile-fail TestVMMFHasTemplateCheckParamsFail.cpp : <include>../../../../variadic_macro_data ]
+        [ compile-fail TestVMMFHasTemplateCheckParamsFail2.cpp : <include>../../../../variadic_macro_data ]
+        [ compile-fail TestVMMFHasTemplateCheckParamsFail3.cpp : <include>../../../../variadic_macro_data ]
     ;

@@ -9,6 +9,7 @@ struct AType
   typedef int AnIntType;
   struct AStructType
     {
+    template <class> struct MStrMemberTemplate { };
     };
   typedef int & AnIntTypeReference;
   struct BType
@@ -17,6 +18,7 @@ struct AType
     struct CType
       {
       typedef int AnotherIntegerType;
+      template <class,class,int,short,class,template <class,int> class InnerTemplate,class> struct CTManyParameters { };
       };
     };
     

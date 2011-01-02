@@ -779,7 +779,13 @@ namespace tti
     class T
     >
   struct mf_member_type :
-    public mf_has_type<MemberType,T>
+    tti::detail::eval
+      <
+      MemberType
+        <
+        T
+        >
+      >
     {
     };
     
@@ -806,7 +812,14 @@ namespace tti
     class U
     >
   struct mf_has_type_check_typedef :
-    public mf_has_static_data<HasTypeCheckTypedef,T,U>
+    tti::detail::eval
+      <
+      HasTypeCheckTypedef
+        <
+        T,
+        U
+        >
+      >
     {
     };
     

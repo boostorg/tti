@@ -1,6 +1,8 @@
 #if !defined(TT_INTROSPECTION_TEMPLATE_HPP)
 #define TT_INTROSPECTION_TEMPLATE_HPP
 
+#include <boost/mpl/bool.hpp>
+#include <boost/mpl/identity.hpp>
 #include "detail/TTIntrospectionDetail.hpp"
 
 /*
@@ -22,9 +24,8 @@ namespace tti
     
     The metafunction types and return:
 
-      HasTemplate = Template class generated from either TTI_HAS_TEMPLATE ( or TTI_TRAIT_HAS_TEMPLATE ) 
-                    or TTI_HAS_TEMPLATE_CHECK_PARAMS ( or TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS ) 
-                    or TTI_VM_HAS_TEMPLATE_CHECK_PARAMS ( or TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS ) macros.<br />
+      HasTemplateCheckParams = Template class generated from either TTI_HAS_TEMPLATE_CHECK_PARAMS ( TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS ) 
+                    or TTI_VM_HAS_TEMPLATE_CHECK_PARAMS ( TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS ) macros.<br />
       T           = The enclosing type as a nullary metafunction.
       
       returns = 'value' is true if the template exists within the enclosing type,
@@ -33,15 +34,16 @@ namespace tti
 */
   template
     <
-    template<class> class HasTemplate,
+    template<class,class = boost::mpl::bool_< false > > class HasTemplateCheckParams,
     class T
     >
-  struct mf_has_template :
+  struct mf_has_template_check_params :
     tti::detail::eval
       <
-      HasTemplate
+      HasTemplateCheckParams
         <
-        T
+        T,
+        boost::mpl::identity<boost::mpl::bool_< false > >
         >
       >
     {
