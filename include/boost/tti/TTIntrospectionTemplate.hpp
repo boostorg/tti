@@ -17,7 +17,7 @@
 namespace tti
   {
   
-/// A metafunction which checks whether a class template exists within an enclosing type.
+/// A metafunction which checks whether a class template with its parameters exists within an enclosing type.
 /**
 
     This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
@@ -42,8 +42,7 @@ namespace tti
       <
       HasTemplateCheckParams
         <
-        T,
-        boost::mpl::identity<boost::mpl::bool_< false > >
+        T
         >
       >
     {

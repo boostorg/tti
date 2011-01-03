@@ -57,8 +57,20 @@ all have a particular name based on the type of its functionality, and all begin
     [TTI\_HAS\_TYPE\_CHECK\_TYPEDEF (TTI\_TRAIT\_HAS\_TYPE\_CHECK\_TYPEDEF)]
   ]
   [
+    [Class Template]
+    [tti::mf\_has\_template]
+    [
+    template<class> class HasTemplate[br]
+    = generated macro metafunction[br]
+    class T = enclosing type nullary metafunction
+    ]
+    [
+    TTI\_HAS\_TEMPLATE (TTI\_TRAIT\_HAS\_TEMPLATE)
+    ]
+  ]
+  [
     [Class Template with params]
-    [tti::mf\_has\_template_check_params]
+    [tti::mf\_has\_template\_check\_params]
     [
     template<class> class HasTemplateCheckParams[br]
     = generated macro metafunction[br]
