@@ -3,14 +3,14 @@
 The elements which a template metaprogrammer might be interested in finding 
 out about at compile time about a type are:
 
-# Does it have a nested type with a particular name ?
-# Does it have a nested type with a particular name which is a typedef for a particular type ?
-# Does it have a nested class template with a particular name ?
-# Does it have a nested class template with a particular name and a particular signature ?
-# Does it have a member function with a particular name and a particular signature ?
-# Does it have a member data with a particular name and of a particular type ?
-# Does it have a static member function with a particular name and a particular signature ?
-# Does it have a static member data with a particular name and of a particular type ?
+* Does it have a nested type with a particular name ?
+* Does it have a nested type with a particular name which is a typedef for a particular type ?
+* Does it have a nested class template with a particular name ?
+* Does it have a nested class template with a particular name and a particular signature ?
+* Does it have a member function with a particular name and a particular signature ?
+* Does it have a member data with a particular name and of a particular type ?
+* Does it have a static member function with a particular name and a particular signature ?
+* Does it have a static member data with a particular name and of a particular type ?
 
 These are the compile-time questions which the TTI library answers.
 
@@ -22,7 +22,7 @@ introspect the information that is needed. The name itself of the inner element 
 to the macro as a macro parameter, but other macro parameters may also be needed in some cases.
 
 All of the macros start with the prefix TTI_, create their metafunctions in a top-level 
-namespace called 'tti, and come in two forms: 
+namespace called 'tti', and come in two forms: 
 
 # In the simplest form the 'name' of the inner element is used directly to generate the name 
   of the metafunction as well as serving as the 'name' to introspect. The 'name' is appended 
@@ -47,6 +47,6 @@ as with overloaded member functions.]
   
 Once either of these two macro forms are used for a particular type of inner element, the 
 corresponding macro metafunction has the exact same functionality. I refer to these two macros as 
-a macro pair.
+a macro pair, and their are denoted in the documentation as 'SIMPLE_FORM ( COMPLEX_FORM )'.
   
 [endsect]
