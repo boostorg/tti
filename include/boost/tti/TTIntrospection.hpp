@@ -418,6 +418,286 @@ TTI_DETAIL_SAME(trait,name) \
   ) \
 /**/
 
+#if defined(BOOST_MSVC)
+
+#if defined(BOOST_NO_NULLPTR)
+
+/// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
+/**
+
+    trait = the name of the metafunction within the tti namespace.<br />
+    name  = the name of the inner member.
+
+    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.<br />
+    
+              The metafunction types and return:
+    
+                T = the type, in the form of a member data pointer or member function pointer, 
+                    in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
+#define TTI_TRAIT_HAS_MEMBER(trait,name) \
+namespace tti \
+  { \
+  template<class T> \
+  struct trait \
+    { \
+    template<class> \
+    struct class_of; \
+    \
+    template<class R,class C> \
+    struct class_of<R C::*> \
+      { \
+      typedef C type; \
+      }; \
+    \
+    template<class> \
+    struct return_of; \
+    \
+    template<class R,class C> \
+    struct return_of<R C::*> \
+      { \
+      typedef R type; \
+      }; \
+    \
+    template<bool,typename U> \
+    struct menable_if; \
+    \
+    template<typename U> \
+    struct menable_if<true,U> \
+      { \
+      typedef U type; \
+      }; \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::yes_type check2(V U::*); \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::no_type check2(U); \
+    \
+    template<class F> \
+    struct class_type \
+      { \
+      typedef typename \
+      boost::remove_const \
+        < \
+        typename \
+        boost::mpl::at \
+          < \
+          typename \
+          boost::function_types::parameter_types \
+            < \
+            F, \
+            boost::mpl::quote1 \
+              < \
+              boost::mpl::identity \
+              > \
+            > \
+            ::type, \
+            boost::mpl::int_<0> \
+          >::type \
+        >::type \
+      type; \
+      }; \
+    \
+    template<T> \
+    struct helper; \
+    \
+    template<typename U,typename V> \
+    static typename \
+      menable_if \
+        < \
+        sizeof(check2<U,V>(&U::name))==sizeof(::boost::type_traits::yes_type), \
+        ::boost::type_traits::yes_type \
+        > \
+      ::type \
+    has_matching_member(int); \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::no_type has_matching_member(...); \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    template<class F> \
+    struct ttc_md \
+      { \
+      typedef boost::mpl::bool_<sizeof(has_matching_member<typename class_of<F>::type,typename return_of<F>::type>(0))==sizeof(::boost::type_traits::yes_type)> type; \
+      }; \
+    \
+    template<class F> \
+    struct ttc_mf \
+      { \
+      typedef boost::mpl::bool_<sizeof(check<typename class_type<F>::type>(0))==sizeof(::boost::type_traits::yes_type)> type; \
+      }; \
+    \
+    template<class F> \
+    struct type_to_check \
+      { \
+      typedef typename \
+      boost::mpl::eval_if \
+        < \
+        boost::function_types::is_member_object_pointer<F>, \
+        ttc_md<F>, \
+        ttc_mf<F> \
+        >::type \
+      type; \
+      }; \
+    \
+    typedef typename type_to_check<T>::type type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+    \
+    }; \
+  } \
+/**/
+
+#else // !defined(BOOST_NO_NULLPTR)
+
+/// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
+/**
+
+    trait = the name of the metafunction within the tti namespace.<br />
+    name  = the name of the inner member.
+
+    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.<br />
+    
+              The metafunction types and return:
+    
+                T = the type, in the form of a member data pointer or member function pointer, 
+                    in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
+#define TTI_TRAIT_HAS_MEMBER(trait,name) \
+namespace tti \
+  { \
+  template<class T> \
+  struct trait \
+    { \
+    template<class> \
+    struct class_of; \
+    \
+    template<class R,class C> \
+    struct class_of<R C::*> \
+      { \
+      typedef C type; \
+      }; \
+    \
+    template<class> \
+    struct return_of; \
+    \
+    template<class R,class C> \
+    struct return_of<R C::*> \
+      { \
+      typedef R type; \
+      }; \
+    \
+    template<bool,typename U> \
+    struct menable_if; \
+    \
+    template<typename U> \
+    struct menable_if<true,U> \
+      { \
+      typedef U type; \
+      }; \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::yes_type check2(V U::*); \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::no_type check2(U); \
+    \
+    template<class F> \
+    struct class_type \
+      { \
+      typedef typename \
+      boost::remove_const \
+        < \
+        typename \
+        boost::mpl::at \
+          < \
+          typename \
+          boost::function_types::parameter_types \
+            < \
+            F, \
+            boost::mpl::quote1 \
+              < \
+              boost::mpl::identity \
+              > \
+            > \
+            ::type, \
+            boost::mpl::int_<0> \
+          >::type \
+        >::type \
+      type; \
+      }; \
+    \
+    template<T> \
+    struct helper; \
+    \
+    template<typename U,typename V> \
+    static typename \
+      menable_if \
+        < \
+        sizeof(check2<U,V>(&U::name))==sizeof(::boost::type_traits::yes_type), \
+        ::boost::type_traits::yes_type \
+        > \
+      ::type \
+    has_matching_member(int); \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::no_type has_matching_member(...); \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    template<class F> \
+    struct ttc_md \
+      { \
+      typedef boost::mpl::bool_<sizeof(has_matching_member<typename class_of<F>::type,typename return_of<F>::type>(0))==sizeof(::boost::type_traits::yes_type)> type; \
+      }; \
+    \
+    template<class F> \
+    struct ttc_mf \
+      { \
+      typedef boost::mpl::bool_<sizeof(check<typename class_type<F>::type>(nullptr))==sizeof(::boost::type_traits::yes_type)> type; \
+      }; \
+    \
+    template<class F> \
+    struct type_to_check \
+      { \
+      typedef typename \
+      boost::mpl::eval_if \
+        < \
+        boost::function_types::is_member_object_pointer<F>, \
+        ttc_md<F>, \
+        ttc_mf<F> \
+        >::type \
+      type; \
+      }; \
+    \
+    typedef typename type_to_check<T>::type type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+    \
+    }; \
+  } \
+/**/
+
+#endif // defined(BOOST_NO_NULLPTR)
+
+#else // !defined(BOOST_MSVC)
+
 #if defined(BOOST_NO_NULLPTR)
 
 /// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
@@ -497,7 +777,7 @@ namespace tti \
   } \
 /**/
 
-#else // !!defined(BOOST_NO_NULLPTR)
+#else // !defined(BOOST_NO_NULLPTR)
 
 /// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
 /**
@@ -577,6 +857,8 @@ namespace tti \
 /**/
 
 #endif // defined(BOOST_NO_NULLPTR)
+
+#endif // defined(BOOST_MSVC)
 
 /// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
 /**
