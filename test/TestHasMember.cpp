@@ -17,6 +17,10 @@ int main()
   BOOST_TEST(tti::CMember<bool AnotherType::*>::value);
   BOOST_TEST(!tti::has_member_someDataMember<short AType::*>::value);
   BOOST_TEST(!tti::has_member_someFunctionMember<AType (AnotherType::*)(long,int)>::value);
+  BOOST_TEST(tti::has_member_IntBT<AType::BType AType::*>::value);
+  BOOST_TEST(tti::NestedData<AType::BType::CType AType::*>::value);
+  BOOST_TEST(tti::AOther<AType AnotherType::*>::value);
+  BOOST_TEST(tti::has_member_ONestStr<AType::AStructType AnotherType::*>::value);
   
   return boost::report_errors();
 

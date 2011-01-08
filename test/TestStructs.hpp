@@ -32,6 +32,8 @@ struct AType
   // Data
   
   int AnInt;
+  BType IntBT;
+  BType::CType NestedCT;
   
   // Function
   
@@ -66,6 +68,8 @@ struct AnotherType
   bool aMember;
   bool cMem;
   long AnInt;
+  AType OtherAT;
+  AType::AStructType ONestStr;
   
   // Function
   

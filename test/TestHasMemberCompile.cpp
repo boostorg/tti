@@ -22,6 +22,10 @@ int main()
   BOOST_MPL_ASSERT((tti::has_member_sFunction<AType::AnIntType (AnotherType::*)(int,long,double)>));
   BOOST_MPL_ASSERT((tti::has_member_aMember<bool AnotherType::*>));
   BOOST_MPL_ASSERT((tti::CMember<bool AnotherType::*>));
+  BOOST_MPL_ASSERT((tti::has_member_IntBT<AType::BType AType::*>));
+  BOOST_MPL_ASSERT((tti::NestedData<AType::BType::CType AType::*>));
+  BOOST_MPL_ASSERT((tti::AOther<AType AnotherType::*>));
+  BOOST_MPL_ASSERT((tti::has_member_ONestStr<AType::AStructType AnotherType::*>));
   
   return 0;
 
