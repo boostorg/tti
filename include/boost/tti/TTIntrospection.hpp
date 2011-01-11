@@ -122,7 +122,7 @@ namespace tti \
         < \
         tti::detail::trait<T>, \
         tti::detail::member_type::trait<T>, \
-        tti::detail::notype \
+        boost::mpl::identity<tti::detail::notype> \
         >::type \
     type; \
     }; \

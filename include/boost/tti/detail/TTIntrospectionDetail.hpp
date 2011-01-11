@@ -229,7 +229,6 @@ namespace tti
     {
     struct notype
       {
-      typedef tti::detail::notype type;
       };
     struct noparam
       {
