@@ -5,10 +5,10 @@ for introspecting an inner element by name. Each macro for a particular type of 
 element has two forms, the simple one where the first macro parameter designating the 
 'name' of the inner element is used to create the name of the metafunction, and the 
 complex one where the first macro parameter, called 'trait', designates 
-the name of the metafunction and the second macro parameter designates the 'name' to be queried. 
-Other than that difference, the two forms of the macro produce the exact same results.
-All of the introspecting macros create a metafunction whose boolean 'value' specifies 
-whether or not the inner element exists. 
+the name of the metafunction and the second macro parameter designates the 'name' to be 
+introspected. Other than that difference, the two forms of the macro produce the exact same 
+results. All of the introspecting macros create a metafunction whose boolean 'value' 
+specifies whether or not the inner element exists. 
 
 To use these metafunctions you need to include the main header file 'TTIntrospection.hpp',
 unless otherwise noted.

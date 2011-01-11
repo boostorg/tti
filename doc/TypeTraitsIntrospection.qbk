@@ -18,5 +18,7 @@
 [include TTINestedType.qbk]
 [include TTIMetafunctions.qbk]
 [include TTIReference.qbk]
+[include TTITests.qbk]
 [include TTIHistory.qbk]
+[include TTIToDo.qbk]
 [include TTIAcknowledgements.qbk]

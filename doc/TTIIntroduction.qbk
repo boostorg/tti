@@ -13,7 +13,8 @@ and because the functionality the library offers is the ability to introspect
 a type about the existence of a specific element. 
 
 I use the word "introspect" in a very broad sense here. Normally language 
-introspection means initially asking for information to be initially returned by name. 
+introspection means initially asking for information to be initially returned by name, 
+which can then further be used to introspect for more specific information.
 In the TTI library one must always supply the name, and use the functionality 
 for the correct type of inner element to find out if the particular named entity exists.
 You may prefer the term "query" instead of "introspection" to denote what this 
@@ -22,20 +23,22 @@ this documentation.
 
 The functionality of the library may be summed up as:
 
-# Provide the means to introspect a type at compile time 
+* Provide the means to introspect a type at compile time 
   using a set of macros. Each macro takes the name of the 
   type's element and generates a metafunction which can be 
   subsequently invoked to determine whether or not the 
   element exists within the type. These metafunctions 
   will be called macro metafunctions in the documentation.
-# Provide corresponding metafunctions which can operate 
+* Provide corresponding metafunctions which can operate 
   on each of the macro metafunctions generated. 
-  These secondary metafunctions provide 
+  These secondary metafunctions provide nearly
   the same set of introspection as the primary ones but 
   allow nested types, which do not actually have to exist, 
   to be passed in template parameters without producing 
-  a compiler error. These metafunctions will be called 
-  nested type metafunctions in the documentation.
+  a compiler error. They also work with individual types 
+  when specifying function syntax rather than a composite 
+  type. These metafunctions will be called nested type 
+  metafunctions in the documentation.
    
 The library is a header only library.
 

@@ -1,7 +1,7 @@
 [section:tti_functionality General Functionality]
 
-The elements which a template metaprogrammer might be interested in finding 
-out about at compile time about a type are:
+The elements about which a template metaprogrammer might be interested in finding 
+out at compile time about a type are:
 
 * Does it have a nested type with a particular name ?
 * Does it have a nested type with a particular name which is a typedef for a particular type ?
@@ -30,23 +30,23 @@ namespace called 'tti', and come in two forms:
   macro part of the name in lower case. As an example, for the macro TTI_HAS_TYPE(MyType) the 
   name of the metafunction is 'tti::has_type_MyType' and it will look for an inner type 
   called 'MyType'.
-# In the slightly more complicated form which I call the complex form, the macro starts with 
+# In the slightly more complicated form, which I call the complex form, the macro starts with 
   TTI\_TRAIT\_ and a 'trait' name is passed as the first parameter, with the 'name' of the inner 
   element as the second parameter. The 'trait' serves only to completely name the metafunction in 
   the tti namespace. As an example, for the macro TTI_TRAIT_HAS_TYPE(MyTrait,MyType) the name of 
   the metafunction is 'tti::MyTrait' and it will look for an inner type called 'MyType'.
   
-[important Any given macro metafunction generated, when introspecting a particular inner element, can be reused 
-for any combination of template parameters which involve the same type of inner element. Once a macro metafunction 
-is generated, attempting to generate another macro metafunction of the same name will create ODR violations since 
-two C++ constructs with the same name/type in the same namespace will have been created. This latter possibility 
-has much less chance of occurence if you use the simple form of each macro and just reuse 
+[important When introspecting a particular inner element any given macro metafunction generated can be reused 
+with any combination of template parameters which involve the same type of inner element. Furthermore once a macro 
+metafunction is generated, attempting to generate another macro metafunction of the same name will create ODR 
+violations since two C++ constructs with the same name/type in the same namespace will have been created. This 
+latter possibility has much less chance of occurence if you use the simple form of each macro and just reuse 
 the macro metafunction. You can even do this if you are introspecting for two entities of the same name in 
 different enclosing types, or in the same enclosing type but with different signatures,
 as with overloaded member functions.]
   
 Once either of these two macro forms are used for a particular type of inner element, the 
 corresponding macro metafunction has the exact same functionality. I refer to these two macros as 
-a macro pair, and their are denoted in the documentation as 'SIMPLE_FORM ( COMPLEX_FORM )'.
+a macro pair, and they are denoted in the documentation as 'SIMPLE_FORM ( COMPLEX_FORM )'.
   
 [endsect]
