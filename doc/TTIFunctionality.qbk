@@ -25,14 +25,14 @@ All of the macros start with the prefix TTI_, create their metafunctions in a to
 namespace called 'tti', and come in two forms: 
 
 # In the simplest form the 'name' of the inner element is used directly to generate the name 
-  of the metafunction as well as serving as the 'name' to introspect. The 'name' is appended 
-  to the name of the macro, with the TTI_ prefix removed, a final underscore added, and the 
-  macro part of the name in lower case. As an example, for the macro TTI_HAS_TYPE(MyType) the 
-  name of the metafunction is 'tti::has_type_MyType' and it will look for an inner type 
-  called 'MyType'.
+  of the metafunction as well as serving as the 'name' to introspect. To generate the name of 
+  the metafunction the 'name' is appended to the name of the macro, with the TTI_ prefix removed, 
+  a final underscore added, and the macro part of the name in lower case. As an example, for the 
+  macro TTI_HAS_TYPE(MyType) the name of the metafunction is 'tti::has_type_MyType' and it will 
+  look for an inner type called 'MyType'.
 # In the slightly more complicated form, which I call the complex form, the macro starts with 
   TTI\_TRAIT\_ and a 'trait' name is passed as the first parameter, with the 'name' of the inner 
-  element as the second parameter. The 'trait' serves only to completely name the metafunction in 
+  element as the second parameter. The 'trait' name serves only to completely name the metafunction in 
   the tti namespace. As an example, for the macro TTI_TRAIT_HAS_TYPE(MyTrait,MyType) the name of 
   the metafunction is 'tti::MyTrait' and it will look for an inner type called 'MyType'.
   

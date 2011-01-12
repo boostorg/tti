@@ -78,7 +78,6 @@ struct T
     };
   };
 
-
 We can represent this by first creating a series of member type macros for each of our nested 
 types:
 
@@ -93,14 +92,11 @@ as specified above by instantiating our macro metafunctions.
 typedef typename
 tti::member\_type\_FindType
   <
-  typename
-  tti::member\_type\_CType
+  typename tti::member\_type\_CType
     <
-    typename
-    tti::member\_type\_BType
+    typename tti::member\_type\_BType
       <
-      typename
-      tti::member\_type\_AType
+      typename tti::member\_type\_AType
         <
         T
         >::type
@@ -151,7 +147,7 @@ tti::has\_type\_FindType
   >
   
 Because this duplicates much of our code to create our nested type as a metafunction,
-TTI\_MEMBER\_TYPE also has, as a conveniende, a boolean compile-time constant value 
+TTI\_MEMBER\_TYPE also has, as a convenience, a boolean compile-time constant value 
 called 'valid' which returns 'true' if our nested type exists or 'false' if it does not.
 
 [heading A more elegant solution]

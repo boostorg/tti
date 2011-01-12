@@ -55,7 +55,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
     ]
     [
     tti::has\_template\_'name'[br]
-    class T = enclosing type
+    class T = enclosing type[br]
+    All of the template parameters must be 'class' ( or 'typename' ) parameters
     ]
   ]
   [
@@ -88,7 +89,9 @@ where 'trait' is the first parameter to the corresponding complex form macro.
     ]
     [
     tti::has\_member\_'name'[br]
-    class T = pointer to data or function member
+    class T = pointer to data or function member[br]
+    The form for T is 'Type Class::*' for member data[br]
+    The form for T is 'ReturnType (Class::*)(Zero or more comma-separated parameter types)' for member function
     ]
   ]
   [
