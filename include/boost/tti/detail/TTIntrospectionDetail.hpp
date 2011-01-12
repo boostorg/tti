@@ -4,6 +4,7 @@
 #include <boost/config.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/has_xxx.hpp>
+#include <boost/mpl/not.hpp>
 #include <boost/mpl/remove.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
@@ -21,6 +22,7 @@
 #include <boost/preprocessor/repetition/enum_params_with_a_default.hpp>
 #include <boost/function_types/member_function_pointer.hpp>
 #include <boost/function_types/function_type.hpp>
+#include <boost/type_traits/is_same.hpp>
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
@@ -277,6 +279,21 @@ namespace tti
       typedef typename boost::function_types::function_type<ftseq>::type type;
       };
       
+    template
+      <
+      class T
+      >
+    struct valid_type :
+      boost::mpl::not_
+        <
+        boost::is_same
+          <
+          T,
+          notype
+          >
+        >
+      {
+      };
     }
   }
   

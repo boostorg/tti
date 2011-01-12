@@ -98,7 +98,9 @@ namespace tti \
               
                 T = the enclosing type.<br />
                 returns = 'type' is the inner type of 'name' if the inner type exists
-                          within the enclosing type, else 'type' is an unspecified type.
+                          within the enclosing type, else 'type' is an unspecified type.<br />
+                          'valid' is true if the inner type of 'name' exists
+                          within the enclosing type, else 'valid' is false.
                           
     The purpose of this macro is to encapsulate the 'name' type as the typedef 'type'
     of a metafunction, but only if it exists within the enclosing type. This allows for
@@ -125,6 +127,10 @@ namespace tti \
         boost::mpl::identity<tti::detail::notype> \
         >::type \
     type; \
+    \
+    typedef typename tti::detail::valid_type<type>::type valtype; \
+    \
+    BOOST_STATIC_CONSTANT(bool,valid=valtype::value); \
     }; \
   } \
 /**/
@@ -140,7 +146,9 @@ namespace tti \
               
                 T = the enclosing type.<br />
                 returns = 'type' is the inner type of 'name' if the inner type exists
-                          within the enclosing type, else 'type' is an unspecified type.
+                          within the enclosing type, else 'type' is an unspecified type.<br />
+                          'valid' is true if the inner type of 'name' exists
+                          within the enclosing type, else 'valid' is false.
                           
     The purpose of this macro is to encapsulate the 'name' type as the typedef 'type'
     of a metafunction, but only if it exists within the enclosing type. This allows for
@@ -1042,7 +1050,9 @@ namespace tti
       
       returns = 'type' is the inner type of the 'name' in TTI_MEMBER_TYPE ( or TTI_TRAIT_MEMBER_TYPE ) 
                 if the inner type exists within the enclosing type,
-                else 'type' is an unspecified type.
+                else 'type' is an unspecified type.<br />
+                'valid' is true if the inner type of 'name' exists
+                within the enclosing type, else 'valid' is false.
                           
     The purpose of this metafunction is to encapsulate the 'name' type
     in TTI_MEMBER_TYPE ( or TTI_TRAIT_MEMBER_TYPE ) as the typedef 'type'
