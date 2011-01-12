@@ -37,7 +37,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Type]
-    [tti::mf\_has\_type]
+    [
+    [classref tti::mf_has_type]
+    ]
     [
     template<class> class HasType[br]
     = generated macro metafunction[br]
@@ -47,7 +49,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Type with check]
-    [tti::mf\_has\_type\_check\_typedef]
+    [
+    [classref tti::mf_has_type_check_typedef]
+    ]
     [
     template<class,class> class HasTypeCheckTypedef[br]
     = generated macro metafunction[br]
@@ -58,7 +62,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Class Template]
-    [tti::mf\_has\_template]
+    [
+    [classref tti::mf_has_template]
+    ]
     [
     template<class> class HasTemplate[br]
     = generated macro metafunction[br]
@@ -70,7 +76,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Class Template with params]
-    [tti::mf\_has\_template\_check\_params]
+    [
+    [classref tti::mf_has_template_check_params]
+    ]
     [
     template<class> class HasTemplateCheckParams[br]
     = generated macro metafunction[br]
@@ -83,7 +91,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Member data]
-    [tti::mf\_has\_member\_data]
+    [
+    [classref tti::mf_has_member_data]
+    ]
     [
     template<class> class HasMember[br]
     = generated macro metafunction[br]
@@ -94,7 +104,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Member function]
-    [tti::mf\_has\_member\_function]
+    [
+    [classref tti::mf_has_member_function]
+    ]
     [
     template<class> class HasMember[br]
     = generated macro metafunction[br]
@@ -106,7 +118,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Static data]
-    [tti::mf\_has\_static\_data]
+    [
+    [classref tti::mf_has_static_data]
+    ]
     [
     template<class,class> class HasStaticMember[br]
     = generated macro metafunction[br]
@@ -117,7 +131,9 @@ all have a particular name based on the type of its functionality, and all begin
   ]
   [
     [Static function]
-    [tti::mf\_has\_static\_function]
+    [
+    [classref tti::mf_has_static_function]
+    ]
     [
     template<class,class> class HasStaticMember[br]
     = generated macro metafunction[br]
@@ -152,7 +168,9 @@ type, there is also the equivalent metafunction.
   ]
   [
     [Type]
-    [tti::mf\_member\_type]
+    [
+    [classref tti::mf_member_type]
+    ]
     [
     template<class> class MemberType[br]
     = generated macro metafunction[br]
@@ -169,49 +187,49 @@ the simpler syntax when using mf\_member\_type.
 
 As an example, given the theoretical relationship of types we used before:
 
-struct T
-  {
-  struct AType
-    {
-    struct BType
-      {
-      struct CType
-        {
-        struct FindType
-          {
-          };
-        }
-      };
-    };
-  };
+ struct T
+   {
+   struct AType
+     {
+     struct BType
+       {
+       struct CType
+         {
+         struct FindType
+           {
+           };
+         }
+       };
+     };
+   };
   
 We can use mf_member_type as follows. First we create our corresponding macro metafunctions:
 
-TTI\_MEMBER\_TYPE(FindType)
-TTI\_MEMBER\_TYPE(AType)
-TTI\_MEMBER\_TYPE(BType)
-TTI\_MEMBER\_TYPE(CType)
+ TTI_MEMBER_TYPE(FindType)
+ TTI_MEMBER_TYPE(AType)
+ TTI_MEMBER_TYPE(BType)
+ TTI_MEMBER_TYPE(CType)
 
 Next we can create a typedef to reflect a nested type called FindType which has the relationship
 as specified above by instantiating using mf_member_type.
 
-typedef
-tti::mf\_member\_type
-  <
-  tti::member\_type\_FindType,
-  tti::mf\_member\_type
-    <
-    tti::member\_type\_CType,
-    tti::mf\_member\_type
-      <
-      tti::member\_type\_BType,
-      tti::member\_type\_AType
-        <
-        T
-        >
-      >
-    >
-  > MyFindType;
+ typedef
+ tti::mf_member_type
+   <
+   tti::member_type_FindType,
+   tti::mf_member_type
+     <
+     tti::member_type_CType,
+     tti::mf_member_type
+       <
+       tti::member_type_BType,
+       tti::member_type_AType
+         <
+         T
+         >
+       >
+     >
+   > MyFindType;
   
 The nested type created can be used with the other nested type metafunctions above. 
 The key information above is that the enclosing type is a nullary metafunction, 

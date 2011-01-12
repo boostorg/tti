@@ -28,8 +28,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
   [
     [Type]
     [
-    TTI\_HAS\_TYPE(name)[br]
-    TTI\_TRAIT\_HAS\_TYPE(trait,name)
+    [macroref TTI_HAS_TYPE TTI\_HAS\_TYPE](name)[br]
+    [macroref TTI_TRAIT_HAS_TYPE TTI\_TRAIT\_HAS\_TYPE](trait,name)
     ]
     [
     tti::has\_type\_'name'[br]
@@ -39,8 +39,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
   [
     [Type with check]
     [
-    TTI\_HAS\_TYPE\_CHECK\_TYPEDEF(name)[br]
-    TTI\_TRAIT\_HAS\_TYPE\_CHECK\_TYPEDEF(trait,name)
+    [macroref TTI_HAS_TYPE_CHECK_TYPEDEF TTI\_HAS\_TYPE\_CHECK\_TYPEDEF](name)[br]
+    [macroref TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF TTI\_TRAIT\_HAS\_TYPE\_CHECK\_TYPEDEF](trait,name)
     ]
     [
     tti::has\_type\_check\_typedef\_'name'[br]
@@ -50,8 +50,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
   [
     [Class Template]
     [
-    TTI\_HAS\_TEMPLATE(name)[br]
-    TTI\_TRAIT\_HAS\_TEMPLATE(trait,name)
+    [macroref TTI_HAS_TEMPLATE TTI\_HAS\_TEMPLATE](name)[br]
+    [macroref TTI_TRAIT_HAS_TEMPLATE TTI\_TRAIT\_HAS\_TEMPLATE](trait,name)
     ]
     [
     tti::has\_template\_'name'[br]
@@ -62,8 +62,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
   [
     [Class Template with params]
     [
-    TTI\_HAS\_TEMPLATE\_CHECK\_PARAMS(name,ppSeq[footnote A Boost PP data sequence with each comma separated portion of the template parameters as its own sequence element.])[br]
-    TTI\_TRAIT\_HAS\_TEMPLATE\_CHECK\_PARAMS(trait,name,ppSeq)
+    [macroref TTI_HAS_TEMPLATE_CHECK_PARAMS TTI\_HAS\_TEMPLATE\_CHECK\_PARAMS](name,ppSeq[footnote A Boost PP data sequence with each comma separated portion of the template parameters as its own sequence element.])[br]
+    [macroref TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS TTI\_TRAIT\_HAS\_TEMPLATE\_CHECK\_PARAMS](trait,name,ppSeq)
     ]
     [
     tti::has\_template\_check\_params\_'name'[br]
@@ -73,8 +73,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
   [
     [Class Template with params using variadic macros[footnote Header file is TTIntrospectionVM.hpp.]]
     [
-    TTI\_VM\_HAS\_TEMPLATE\_CHECK\_PARAMS(name,...[footnote The template parameters as variadic data.])[br]
-    TTI\_VM\_TRAIT\_HAS\_TEMPLATE\_CHECK\_PARAMS(trait,name,...)
+    [macroref TTI_VM_HAS_TEMPLATE_CHECK_PARAMS TTI\_VM\_HAS\_TEMPLATE\_CHECK\_PARAMS](name,...[footnote The template parameters as variadic data.])[br]
+    [macroref TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS TTI\_VM\_TRAIT\_HAS\_TEMPLATE\_CHECK\_PARAMS](trait,name,...)
     ]
     [
     tti::has\_template\_check\_params\_'name'[br]
@@ -84,8 +84,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
   [
     [Data or function member]
     [
-    TTI\_HAS\_MEMBER(name)[br]
-    TTI\_TRAIT\_HAS\_MEMBER(trait,name)
+    [macroref TTI_HAS_MEMBER TTI\_HAS\_MEMBER](name)[br]
+    [macroref TTI_TRAIT_HAS_MEMBER TTI\_TRAIT\_HAS\_MEMBER](trait,name)
     ]
     [
     tti::has\_member\_'name'[br]
@@ -97,8 +97,8 @@ where 'trait' is the first parameter to the corresponding complex form macro.
   [
     [Static data or static function member]
     [
-    TTI\_HAS\_STATIC\_MEMBER(name)[br]
-    TTI\_TRAIT\_HAS\_STATIC\_MEMBER(trait,name)
+    [macroref TTI_HAS_STATIC_MEMBER TTI\_HAS\_STATIC\_MEMBER](name)[br]
+    [macroref TTI_TRAIT_HAS_STATIC_MEMBER TTI\_TRAIT\_HAS\_STATIC\_MEMBER](trait,name)
     ]
     [
     tti::has\_static\_member\_'name'[br]
@@ -121,8 +121,8 @@ it returns an unspecified type.
   [
     [Type]
     [
-    TTI\_MEMBER\_TYPE(name)[br]
-    TTI\_TRAIT\_MEMBER\_TYPE(trait,name)
+    [macroref TTI_MEMBER_TYPE TTI\_MEMBER\_TYPE](name)[br]
+    [macroref TTI_TRAIT_MEMBER_TYPE TTI\_TRAIT\_MEMBER\_TYPE](trait,name)
     ]
     [
     tti::member\_type\_'name'[br]
