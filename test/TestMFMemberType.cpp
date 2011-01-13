@@ -1,116 +1,75 @@
 #include "TestMFMemberType.hpp"
 #include <boost/detail/lightweight_test.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 int main()
   {
   
-  BOOST_TEST((boost::is_same
+  BOOST_TEST((tti::mf_member_type
                 <
-                tti::mf_member_type
-                  <
-                  tti::member_type_AnIntType,
-                  boost::mpl::identity<AType>
-                  >
-                ::type,
-                AType::AnIntType
+                tti::member_type_AnIntType,
+                boost::mpl::identity<AType>
                 >
-              ::value
+              ::valid
             ));
             
-  BOOST_TEST((boost::is_same
+  BOOST_TEST((tti::mf_member_type
                 <
-                tti::mf_member_type
-                  <
-                  tti::NameStruct,
-                  boost::mpl::identity<AType>
-                  >
-                ::type,
-                AType::AStructType
+                tti::NameStruct,
+                boost::mpl::identity<AType>
                 >
-              ::value
+              ::valid
             ));
             
-  BOOST_TEST((boost::is_same
+  BOOST_TEST((tti::mf_member_type
                 <
-                tti::mf_member_type
-                  <
-                  tti::member_type_AnIntTypeReference,
-                  boost::mpl::identity<AType>
-                  >
-                ::type,
-                AType::AnIntTypeReference
+                tti::member_type_AnIntTypeReference,
+                boost::mpl::identity<AType>
                 >
-              ::value
+              ::valid
             ));
             
-  BOOST_TEST((boost::is_same
+  BOOST_TEST((tti::mf_member_type
                 <
-                tti::mf_member_type
-                  <
-                  tti::member_type_BType,
-                  boost::mpl::identity<AType>
-                  >
-                ::type,
-                AType::BType
+                tti::member_type_BType,
+                boost::mpl::identity<AType>
                 >
-              ::value
+              ::valid
             ));
             
-  BOOST_TEST((boost::is_same
+  BOOST_TEST((tti::mf_member_type
                 <
-                tti::mf_member_type
-                  <
-                  tti::TheInteger,
-                  tti::member_type_BType<AType>
-                  >
-                ::type,
-                AType::BType::AnIntegerType
+                tti::TheInteger,
+                tti::member_type_BType<AType>
                 >
-              ::value
+              ::valid
             ));
             
-  BOOST_TEST((boost::is_same
+  BOOST_TEST((tti::mf_member_type
                 <
+                tti::member_type_CType,
+                tti::member_type_BType<AType>
+                >
+              ::valid
+            ));
+            
+  BOOST_TEST((tti::mf_member_type
+                <
+                tti::member_type_AnotherIntegerType,
                 tti::mf_member_type
                   <
                   tti::member_type_CType,
                   tti::member_type_BType<AType>
                   >
-                ::type,
-                AType::BType::CType
                 >
-              ::value
+              ::valid
             ));
             
-  BOOST_TEST((boost::is_same
+  BOOST_TEST((tti::mf_member_type
                 <
-                tti::mf_member_type
-                  <
-                  tti::member_type_AnotherIntegerType,
-                  tti::mf_member_type
-                    <
-                    tti::member_type_CType,
-                    tti::member_type_BType<AType>
-                    >
-                  >
-                ::type,
-                AType::BType::CType::AnotherIntegerType
+                tti::SomethingElse,
+                boost::mpl::identity<AnotherType>
                 >
-              ::value
-            ));
-            
-  BOOST_TEST((boost::is_same
-                <
-                tti::mf_member_type
-                  <
-                  tti::SomethingElse,
-                  boost::mpl::identity<AnotherType>
-                  >
-                ::type,
-                AnotherType::someOtherType
-                >
-              ::value
+              ::valid
             ));
   
   return boost::report_errors();

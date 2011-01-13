@@ -4,6 +4,18 @@ regenerate the documentation for this library.
 You can use the jamfile in the test directory to 
 run the tests for this library.
 
+When running the tests you can use either of the 
+two targets if you like. The 'tti' target runs all 
+the tests except for those involving variadic macro 
+support in the library. The 'ttiVM' target runs 
+the tests involving variadic macro support in the 
+library. If you do n9ot specify a target all tests 
+are run.
+
+For variadic macro support in the library 
+you will ned to download the variadic_macro_data 
+library from the sandbox.
+
 You can execute these jamfiles while keeping this  
 library in its own separate directory from a 
 Boost distribution by:
