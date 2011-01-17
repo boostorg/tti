@@ -19,7 +19,6 @@
 #include <boost/preprocessor/repetition/enum_shifted.hpp>
 #include <boost/preprocessor/repetition/enum_shifted_params.hpp>
 #include <boost/preprocessor/repetition/enum_params.hpp>
-#include <boost/preprocessor/repetition/enum_params_with_a_default.hpp>
 #include <boost/function_types/member_function_pointer.hpp>
 #include <boost/function_types/function_type.hpp>
 #include <boost/type_traits/is_same.hpp>
@@ -225,6 +224,10 @@ namespace member_type \
 #define TTI_MAX_PARAMETERS 10
 #endif
 
+#if defined(__GNUC__) && __GNUC__ == 3
+#define TTI_GNUC3 1
+#endif
+
 namespace tti
   {
   namespace detail
@@ -244,11 +247,22 @@ namespace tti
 #define BOOST_PP_FILENAME_1 <boost\tti\detail\TTIntrospectionIterateEval.hpp>
 #include BOOST_PP_ITERATE()
 
+#if defined(TTI_GNUC3)
+      
+    template<class T,int N>
+    struct eval_gcc3;
+    
+#define BOOST_PP_ITERATION_LIMITS (1,BOOST_PP_ADD(2,TTI_MAX_PARAMETERS))
+#define BOOST_PP_FILENAME_1 <boost\tti\detail\TTIntrospectionIterateEvalGcc3.hpp>
+#include BOOST_PP_ITERATE()
+
+#endif
+
     template
       <
       class T,
       class R,
-      BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
+      BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,class P)
       >
     struct ptmf
       {
@@ -270,7 +284,7 @@ namespace tti
     template
       <
       class R,
-      BOOST_PP_ENUM_PARAMS_WITH_A_DEFAULT(TTI_MAX_PARAMETERS,class P,tti::detail::noparam)
+      BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,class P)
       >
     struct tfunction
       {
@@ -294,6 +308,7 @@ namespace tti
         >
       {
       };
+      
     }
   }
   
