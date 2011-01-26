@@ -4,16 +4,16 @@
 int main()
   {
   
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_check_typedef_AnIntType,
+                tti::has_type_AnIntType,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int>
                 >
               ::value
             ));
             
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
                 tti::NameStruct,
                 boost::mpl::identity<AType>,
@@ -22,25 +22,25 @@ int main()
               ::value
             ));
             
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_check_typedef_AnIntTypeReference,
+                tti::has_type_AnIntTypeReference,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int &>
                 >
               ::value
             ));
             
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_check_typedef_BType,
+                tti::has_type_BType,
                 boost::mpl::identity<AType>,
                 tti::member_type_BType<AType>
                 >
               ::value
             ));
             
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
                 tti::TheInteger,
                 tti::member_type_BType<AType>,
@@ -49,9 +49,9 @@ int main()
               ::value
             ));
             
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_check_typedef_CType,
+                tti::has_type_CType,
                 tti::member_type_BType<AType>,
                 tti::mf_member_type
                   <
@@ -62,9 +62,9 @@ int main()
               ::value
             ));
             
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_check_typedef_AnotherIntegerType,
+                tti::has_type_AnotherIntegerType,
                 tti::mf_member_type
                   <
                   tti::member_type_CType,
@@ -75,7 +75,7 @@ int main()
               ::value
             ));
             
-  BOOST_TEST((tti::mf_has_type_check_typedef
+  BOOST_TEST((tti::mf_has_type
                 <
                 tti::SomethingElse,
                 boost::mpl::identity<AnotherType>,
@@ -84,9 +84,9 @@ int main()
               ::value
             ));
             
-  BOOST_TEST((!tti::mf_has_type_check_typedef
+  BOOST_TEST((!tti::mf_has_type
                 <
-                tti::has_type_check_typedef_NoOtherType,
+                tti::has_type_NoOtherType,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<double>
                 >

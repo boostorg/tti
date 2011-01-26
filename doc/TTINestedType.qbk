@@ -46,21 +46,20 @@ The TTI library offers a better solution in the form of a set of constructs whic
 nested types without producing a compiler error if the nested type does not exist, but still 
 are able to do the introspecting for inner elements that our TTI macro metafunctions do.
 
-We have already seen one of those constructs, the macro TTI\_MEMBER\_TYPE 
-( TTI\_TRAIT\_MEMBER\_TYPE ), which generates a metafunction based on the name 
+We have already seen one of those constructs, the macro TTI\_MEMBER\_TYPE, 
+which generates a metafunction based on the name 
 of an inner type. But instead of telling us whether that inner type exists it instead returns
 a typedef 'type' which is that inner type if it exists, else it is an unspecified type if it 
 does not. In this way we have created a metafunction, very similar in functionality to 
 boost::mpl::identity, but which still returns some unspecified marker 'type' if our nested type is invalid.
 
-We can use the functionality of TTI\_MEMBER\_TYPE ( TTI\_TRAIT\_MEMBER\_TYPE ) to construct nested types
+We can use the functionality of TTI\_MEMBER\_TYPE to construct nested types
 for our other macro metafunctions, without having to use the T::InnerType syntax and produce a compiler 
 error if no such type actually exists within our scope. We can even do this in deeply nested contexts 
 by stringing together, so to speak, a series of these macro metafunction results.
 
 As an example, given a type T, let us create a metafunction where there is a nested type FindType
-whose enclosing type is CType, where CType's enclosing type is BType, where BType's enclosing type 
-is AType, and where AType's enclosing type is our original T. We can represent this conventially as:
+whose enclosing type is eventually T, as represented by the following structure:
 
  struct T
    {
@@ -78,7 +77,7 @@ is AType, and where AType's enclosing type is our original T. We can represent t
      };
    };
 
-We can represent this by first creating a series of member type macros for each of our nested 
+In our TTI code we first create a series of member type macros for each of our nested 
 types:
 
  TTI_MEMBER_TYPE(FindType)
@@ -104,7 +103,7 @@ as specified above by instantiating our macro metafunctions.
      >::type
    > MyFindType;
   
-We can use the above typedef to pass the type of FindType 
+We can use the above typedef to pass the type as FindType 
 to one of our macro metafunctions. FindType may not actually exist but we will not generate 
 a compiler error when we use it. 
 
@@ -124,8 +123,8 @@ and use this in our metaprogramming code. Our metafunction now tells us whether 
 FindType has a static member data called MyData of type 'int', even if FindType does not actually 
 exist as we have specified it as a type.
 
-We can also find out whether the deeply nested type 'FindType' actually exists in a similar manner. 
-Our metafunction would be:
+As an alternative we can also directly find out whether the deeply nested type 'FindType' 
+actually exists in a similar manner. Our metafunction would be:
 
  TTI_HAS_TYPE(FindType)
 
@@ -146,20 +145,30 @@ Our metafunction would be:
      >::type
    >
   
-Because this duplicates much of our code to create our nested type as a metafunction,
+Because this duplicates much of our code using 'MyFindType' to create our nested type as a metafunction,
 TTI\_MEMBER\_TYPE also has, as a convenience, a boolean compile-time constant value 
 called 'valid' which returns 'true' if our nested type exists or 'false' if it does not.
+Using this functionality of TTI\_MEMBER\_TYPE with our 'MyFindType' metafunction above 
+we could create the nullary metafunction:
+
+ boost::mpl::bool_
+   <
+   MyFindType::valid
+   >
+ 
+directly instead of replicating the same functionality with our 'tti::has_type_FindType' metafunction.
 
 [heading A more elegant solution]
 
 Although using TTI\_MEMBER\_TYPE represents a good solution to creating a nested type 
 without the possible compile-time error of the T::InnerType syntax, reaching in to 
-specify all those ::type expressions does get syntactically tedious. Because of this 
-the TTI library offers a parallel set of metafunctions to the macro metafunctions 
-where the 'types' used are themselves nullary metafunctions. Furthermore, composite 
-types are broken down into a notation of individual types so that nested types can be 
-more easily passed to these metafunctions in the formation of data and function signatures.
-This parallel set of metafunctions, using nullary metafunctions to specify individual types, 
-are called 'nested type metafunctions' and are fully explained in the next section.
+specify all those ::type expressions, along with their repeated 'typename', 
+does get syntactically tedious. Because of this the TTI library offers a parallel set of 
+metafunctions to the macro metafunctions where the 'types' used are themselves nullary 
+metafunctions. Furthermore, composite types are broken down into a notation of individual 
+types so that nested types can be more easily passed to these metafunctions in the formation 
+of data and function signatures. This parallel set of metafunctions, using nullary 
+metafunctions to specify individual types, are called 'nested type metafunctions' and are 
+fully explained later after we give some examples of macro metafunction use.
 
 [endsect]

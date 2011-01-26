@@ -3,7 +3,5 @@
 * Use FunctionTypes tag type for the function nested metafunctions.
 * Create metafunctions that work with mpl lambda expressions.
 * See if function templates can be introspected.
-* Put some examples in the documentation.
-* Find a workarounnd so that gcc3+ can compile TTI correctly.
 
 [endsect]

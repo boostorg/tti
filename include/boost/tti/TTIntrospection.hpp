@@ -32,39 +32,75 @@
 /** \file
 */
 
-/// Expands to a metafunction which tests whether an inner type with a particular name exists.
+/// Expands to a metafunction which tests whether an inner type with a particular name exists and optionally is a particular type.
 /**
 
     trait = the name of the metafunction within the tti namespace.<br />
     name  = the name of the inner type.
 
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.<br />
+    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
     
               The metafunction types and return:
     
                 T = the enclosing type in which to look for our 'name'.<br />
-                returns = 'value' is true if the 'name' type exists within the enclosing type,
+                U = the type of the inner type named 'name' as an optional parameter.<br />
+                returns = 'value' is true if the 'name' type exists within the enclosing type
+                          and, if type U is specified, the 'name' type is the same as the type U,
                           otherwise 'value' is false.
-                          
+    
 */
 #define TTI_TRAIT_HAS_TYPE(trait,name) \
 namespace tti \
   { \
   namespace detail \
     { \
-    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
     } \
+  \
+  template<class T,class U,class B> \
+  struct BOOST_PP_CAT(trait,_impl) \
+    { \
+    typedef typename \
+      boost::mpl::eval_if \
+        < \
+        boost::is_same<typename T::name,U>, \
+        boost::mpl::true_, \
+        boost::mpl::false_ \
+        >::type \
+    type; \
+    }; \
+  \
+  template<class T,class U> \
+  struct BOOST_PP_CAT(trait,_impl)<T,U,boost::mpl::false_::type> \
+    { \
+    typedef boost::mpl::false_::type type; \
+    }; \
+  \
   template<class T> \
+  struct BOOST_PP_CAT(trait,_impl)<T,tti::detail::notype,boost::mpl::true_::type> \
+    { \
+    typedef boost::mpl::true_::type type; \
+    }; \
+  \
+  template<class T,class U = tti::detail::notype> \
   struct trait \
     { \
-    typedef typename tti::detail::trait<T>::type type; \
+    \
+    typedef typename \
+      BOOST_PP_CAT(trait,_impl) \
+      < \
+      T, \
+      U, \
+      typename tti::detail::trait<T>::type \
+      >::type \
+    type; \
     \
     BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
 
-/// Expands to a metafunction which tests whether an inner type with a particular name exists.
+/// Expands to a metafunction which tests whether an inner type with a particular name exists and optionally is a particular type.
 /**
 
     name  = the name of the inner type.
@@ -72,10 +108,12 @@ namespace tti \
     returns = a metafunction called "tti::has_type_name" where 'name' is the macro parameter.
     
               The metafunction types and return:
-              
+    
                 T = the enclosing type in which to look for our 'name'.<br />
-                returns = 'value' is true if the 'name' type exists within the enclosing type,
-                           otherwise 'value' is false.
+                U = the type of the inner type named 'name' as an optional parameter.<br />
+                returns = 'value' is true if the 'name' type exists within the enclosing type
+                          and, if type U is specified, the 'name' type is the same as the type U,
+                          otherwise 'value' is false.
     
 */
 #define TTI_HAS_TYPE(name) \
@@ -164,92 +202,6 @@ namespace tti \
   ) \
 /**/
   
-/// Expands to a metafunction which tests whether an inner type with a particular name exists and is a particular type.
-/**
-
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner type.
-
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
-    
-              The metafunction types and return:
-    
-                T = the enclosing type in which to look for our 'name'.<br />
-                U = the type of the inner type named 'name'.<br />
-                returns = 'value' is true if the 'name' type exists within the enclosing type
-                          and the 'name' type is the same as the type U,
-                          otherwise 'value' is false.
-    
-*/
-#define TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF(trait,name) \
-namespace tti \
-  { \
-  namespace detail \
-    { \
-    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
-    } \
-  \
-  template<class T,class U,class B> \
-  struct BOOST_PP_CAT(trait,_impl) \
-    { \
-    typedef typename \
-      boost::mpl::eval_if \
-        < \
-        boost::is_same<typename T::name,U>, \
-        boost::mpl::true_, \
-        boost::mpl::false_ \
-        >::type \
-    type; \
-    }; \
-  \
-  template<class T,class U> \
-  struct BOOST_PP_CAT(trait,_impl)<T,U,boost::mpl::false_::type> \
-    { \
-    typedef boost::mpl::false_::type type; \
-    }; \
-  \
-  template<class T,class U> \
-  struct trait \
-    { \
-    \
-    typedef typename \
-      BOOST_PP_CAT(trait,_impl) \
-      < \
-      T, \
-      U, \
-      typename tti::detail::trait<T>::type \
-      >::type \
-    type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
-    }; \
-  } \
-/**/
-
-/// Expands to a metafunction which tests whether an inner type with a particular name exists and is a particular type.
-/**
-
-    name  = the name of the inner type.
-
-    returns = a metafunction called "tti::has_type_check_typedef_name" where 'name' is the macro parameter.
-    
-              The metafunction types and return:
-    
-                T = the enclosing type in which to look for our 'name'.<br />
-                U = the type of the inner type named 'name'.<br />
-                returns = 'value' is true if the 'name' type exists within the enclosing type
-                          and the 'name' type is the same as the type U,
-                          otherwise 'value' is false.
-    
-*/
-#define TTI_HAS_TYPE_CHECK_TYPEDEF(name) \
-  TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF \
-  ( \
-  BOOST_PP_CAT(has_type_check_typedef_,name), \
-  name \
-  ) \
-/**/
-
 /// Expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
@@ -1008,7 +960,7 @@ namespace tti \
 namespace tti
   {
   
-/// A metafunction which checks whether a type exists within an enclosing type.
+/// A metafunction which checks whether a type exists within an enclosing type and optionally is a particular type.
 /**
 
     This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
@@ -1017,22 +969,26 @@ namespace tti
 
       HasType = Template class generated from the TTI_HAS_TYPE ( or TTI_TRAIT_HAS_TYPE ) macro.<br />
       T       = The enclosing type as a nullary metafunction.
+      U       = the type of the inner type as a nullary metafunction, as an optional parameter.<br />
       
-      returns = 'value' is true if the type exists within the enclosing type,
+      returns = 'value' is true if the type exists within the enclosing type
+                and, if type U is specified, the type is the same as the type U,
                 otherwise 'value' is false.
                           
 */
   template
     <
-    template<class> class HasType,
-    class T
+    template<class,class> class HasType,
+    class T,
+    class U = boost::mpl::identity<tti::detail::notype>
     >
   struct mf_has_type :
     tti::detail::eval
       <
       HasType
         <
-        T
+        T,
+        U
         >
       >
     {
@@ -1076,40 +1032,6 @@ namespace tti
       MemberType
         <
         T
-        >
-      >
-    {
-    };
-    
-/// A metafunction which checks whether a type of a particular signature exists within an enclosing type.
-/**
-
-    This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.
-    
-    The metafunction types and return:
-
-      HasTypeCheckTypedef = Template class generated from the TTI_HAS_TYPE_CHECK_TYPEDEF ( or TTI_TRAIT_HAS_TYPE_CHECK_TYPEDEF ) macro.<br />
-      T                   = The enclosing type as a nullary metafunction.<br />
-      U                   = The type of the enclosed type as a nullary metafunction.
-      
-      returns = 'value' is true if the type exists within the enclosing type,
-                with the correct type signature,
-                otherwise 'value' is false.
-                          
-*/
-  template
-    <
-    template<class,class> class HasTypeCheckTypedef,
-    class T,
-    class U
-    >
-  struct mf_has_type_check_typedef :
-    tti::detail::eval
-      <
-      HasTypeCheckTypedef
-        <
-        T,
-        U
         >
       >
     {

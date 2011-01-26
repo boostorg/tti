@@ -1,5 +1,10 @@
 [section:tti_history History]
 
+Version 1.1
+
+* Library now compiles with gcc 3.4.2 and gcc 3.4.5.
+* Examples of use have been added to the documentation.
+
 Version 1.0
 
 Initial version of the libary.

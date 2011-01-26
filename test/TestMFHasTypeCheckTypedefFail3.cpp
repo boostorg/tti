@@ -6,7 +6,7 @@ int main()
   
   // Wrong typedef type
   
-  BOOST_MPL_ASSERT((tti::mf_has_type_check_typedef
+  BOOST_MPL_ASSERT((tti::mf_has_type
                       <
                       tti::TheInteger,
                       tti::member_type_BType<AType>,

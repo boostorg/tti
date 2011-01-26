@@ -15,6 +15,6 @@ just want to run the tests for the variadic macro portion
 of TTI, specify the target as 'ttiVM'.
 
 The TTI library has been tested with VC++ 8, 9, 10 and with 
-gcc 4.3.0, 4.4.0, and 4.5.0-1.
+gcc 3.4.2, 3.4.5, 4.3.0, 4.4.0, 4.5.0-1, and 4.5.2-1.
 
 [endsect]

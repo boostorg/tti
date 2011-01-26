@@ -1,0 +1,205 @@
+[section:tti_usingMM Using the Macro Metafunctions]
+[#sectti_usingMM]
+
+Using the macro metafunctions can be illustrated by first creating some hypothetical
+user-defined type with corresponding nested types and other inner elements.
+With this type we can illustrate the use of the macro metafunctions. This is 
+just meant to serve as a model for what a type T might entail from within 
+a class or function template.
+
+ // An enclosing type
+
+ struct AType
+   {
+   
+   // Type
+   
+   typedef int AnIntType; // as a typedef
+   
+   struct BType // as a nested type
+     {
+     struct CType
+       {
+       };
+     };
+   
+   // Template
+   
+   template <class> struct AMemberTemplate { };
+   template <class,class,int,class,template <class> class InnerTemplate,class,long> struct ManyParameters { };
+   template <class,class,int,short,class,template <class,int> class InnerTemplate,class> struct MoreParameters { };
+   
+   // Data
+   
+   BType IntBT;
+   
+   // Function
+   
+   int IntFunction(short) { return 0; }
+   
+   // Static Data
+   
+   static short DSMember;
+   
+   // Static Function
+   
+   static int SIntFunction(long,double) { return 2; }
+   
+   };
+  
+I will be using the type above just to illustrate the sort of 
+metaprogramming questions we can ask of some type T which is passed 
+to the template programmer in a class template. Here is what the 
+class template might look like:
+
+ #include <boost/TTIntrospection.hpp>
+
+ template<class T>
+ struct OurTemplateClass
+   {
+   
+   // compile-time template code regarding T
+   
+   };
+
+Now let us create and invoke the macro metafunctions for each of our inner element types, 
+to see if type T above corresponds to our hypothetical type above. Imagine this being 
+within 'OurTemplateClass' above. In the examples below the same macro is invoked just once 
+to avoid ODR violations.
+ 
+[heading Type]
+
+Does T have a nested type called 'AnIntType' ?
+
+ TTI_HAS_TYPE(AnIntType)
+ 
+ tti::has_type_AnIntType
+   <
+   T
+   >
+   
+Does T have a nested type called 'BType' ?
+
+ TTI_HAS_TYPE(BType)
+  
+ tti::has_type_BType
+   <
+   T
+   >
+   
+[heading Type checking the typedef]
+
+Does T have a nested typedef called 'AnIntType' whose type is an 'int' ?
+
+ tti::has_type_AnIntType
+   <
+   T,
+   int
+   >
+
+[heading Template]
+
+Does T have a nested class template called 'AMemberTemplate' whose template 
+parameters are all types ('class' or 'typename') ?
+
+ TTI_HAS_TEMPLATE(AMemberTemplate)
+ 
+ tti::has_template_AMemberTemplate
+   <
+   T
+   >
+
+[heading Template with params]
+
+Does T have a nested class template called 'MoreParameters' whose template 
+parameters are specified exactly ?
+
+ TTI_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,(class)(class)(int)(short)(class)(template <class)(int> class InnerTemplate)(class))
+ 
+ tti::has_template_check_params_MoreParameters
+   <
+   T
+   >
+
+[heading Template with params using variadic macros]
+
+[note Include the 'TTIntrospectionVM.hpp' header file
+when using this macro.]
+
+Does T have a nested class template called 'ManyParameters' whose template 
+parameters are specified exactly ?
+
+ TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(ManyParameters,class,class,int,class,template <class> class InnerTemplate,class,long)
+ 
+ tti::has_template_check_params_ManyParameters
+   <
+   T
+   >
+
+[heading Member data]
+
+Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
+
+ TTI_HAS_MEMBER(IntBT)
+ 
+ tti::has_member_IntBT
+   <
+   AType::BType T::*
+   >
+
+[heading Member function]
+
+Does T have a member function called 'IntFunction' whose type is 
+'int (short)' ?
+
+ TTI_HAS_MEMBER(IntFunction)
+ 
+ tti::has_member_IntFunction
+   <
+   int (T::*)(short)
+   >
+
+[heading Static member data]
+
+Does T have a static member data called 'DSMember' whose type is 'short' ?
+
+ TTI_HAS_STATIC_MEMBER(DSMember)
+ 
+ tti::has_static_member_DSMember
+   <
+   T,
+   short
+   >
+
+[heading Static member function]
+
+Does T have a static member function called 'SIntFunction' whose type 
+is 'int (long,double)' ?
+
+ TTI_HAS_STATIC_MEMBER(SIntFunction)
+ 
+ tti::has_static_member_SIntFunction
+   <
+   T,
+   int (long,double)
+   >
+
+[heading Member type]
+
+Create a nested type T::BType::CType without creating a compiler error
+if T does not have the nested type BType::CType ?
+
+ TTI_MEMBER_TYPE(BType)
+ TTI_MEMBER_TYPE(CType)
+ 
+ typename
+ tti::member_type_CType
+   <
+   typename
+   tti::member_type_BType
+     <
+     T
+     >::type
+   >::type
+ 
+[endsect]
