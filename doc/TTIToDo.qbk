@@ -1,6 +1,5 @@
 [section:tti_todo ToDo]
 
-* Use FunctionTypes tag type for the function nested metafunctions.
 * Create metafunctions that work with mpl lambda expressions.
 * See if function templates can be introspected.
 

@@ -18,13 +18,12 @@ if --enable-index in  [ modules.peek : ARGV ]
    using auto-index ;
    project tti_doc : requirements
              <auto-index>on
-             <auto-index-type>appendix
              <auto-index-script>index.idx
              <auto-index-prefix>../../../
              <auto-index-verbose>on
              <format>html:<auto-index-internal>on
              <format>html:<xsl:param>generate.index=0
-             <format>pdf:<auto-index-internal>off
+             <format>pdf:<auto-index-internal>on
              <format>pdf:<xsl:param>index.on.type=1
              <quickbook-define>enable_index ;
 }
@@ -95,5 +94,9 @@ install css : [ glob $(BOOST_ROOT)/doc/src/*.css ]
     : <location>html ;
 install images : [ glob $(BOOST_ROOT)/doc/src/images/*.png ]
     : <location>html/images ;
+install pdfinstall
+    : standalone
+    : <location>$(here) <install-type>PDF <name>TypeTraitsIntrospection.pdf
+    ;
 explicit css ;
 explicit images ;

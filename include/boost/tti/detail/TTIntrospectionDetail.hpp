@@ -5,7 +5,9 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/not.hpp>
+#include <boost/mpl/push_front.hpp>
 #include <boost/mpl/remove.hpp>
+#include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/arithmetic/sub.hpp>
@@ -18,7 +20,6 @@
 #include <boost/preprocessor/repetition/enum.hpp>
 #include <boost/preprocessor/repetition/enum_shifted.hpp>
 #include <boost/preprocessor/repetition/enum_shifted_params.hpp>
-#include <boost/preprocessor/repetition/enum_params.hpp>
 #include <boost/function_types/member_function_pointer.hpp>
 #include <boost/function_types/function_type.hpp>
 #include <boost/type_traits/is_same.hpp>
@@ -220,6 +221,158 @@ namespace member_type \
   BOOST_PP_CAT(typename P,n::type) \
 /**/
 
+#if defined(BOOST_NO_NULLPTR)
+
+#define TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
+  template<class T,class C> \
+  struct trait \
+    { \
+    template<T> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<C>(0))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef boost::mpl::bool_<value> type; \
+    }; \
+/**/
+
+#else // !defined(BOOST_NO_NULLPTR)
+
+#define TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
+  template<class T,class C> \
+  struct trait \
+    { \
+    template<T> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<C>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef boost::mpl::bool_<value> type; \
+    }; \
+/**/
+
+#endif // defined(BOOST_NO_NULLPTR)
+
+#if defined(BOOST_MSVC)
+
+#define TTI_DETAIL_TRAIT_HAS_MEMBER_DATA(trait,name) \
+  template<class T,class C> \
+  struct trait \
+    { \
+    template<class> \
+    struct return_of; \
+    \
+    template<class R,class C> \
+    struct return_of<R C::*> \
+      { \
+      typedef R type; \
+      }; \
+    \
+    template<bool,typename U> \
+    struct menable_if; \
+    \
+    template<typename U> \
+    struct menable_if<true,U> \
+      { \
+      typedef U type; \
+      }; \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::yes_type check2(V U::*); \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::no_type check2(U); \
+    \
+    template<typename U,typename V> \
+    static typename \
+      menable_if \
+        < \
+        sizeof(check2<U,V>(&U::name))==sizeof(::boost::type_traits::yes_type), \
+        ::boost::type_traits::yes_type \
+        > \
+      ::type \
+    has_matching_member(int); \
+    \
+    template<typename U,typename V> \
+    static ::boost::type_traits::no_type has_matching_member(...); \
+    \
+    template<class U,class V> \
+    struct ttc_md \
+      { \
+      typedef boost::mpl::bool_<sizeof(has_matching_member<V,typename return_of<U>::type>(0))==sizeof(::boost::type_traits::yes_type)> type; \
+      }; \
+    \
+    typedef typename ttc_md<T,C>::type type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+    \
+    }; \
+/**/
+
+#else // !defined(BOOST_MSVC)
+
+#define TTI_DETAIL_TRAIT_HAS_MEMBER_DATA(trait,name) \
+  TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
+/**/
+
+#endif // defined(BOOST_MSVC)
+
+#if defined(BOOST_NO_NULLPTR)
+
+#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
+  template<class T,class Type> \
+  struct trait \
+    { \
+    template<Type *> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef boost::mpl::bool_<value> type; \
+    }; \
+/**/
+
+#else // !defined(BOOST_NO_NULLPTR)
+
+#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
+  template<class T,class Type> \
+  struct trait \
+    { \
+    template<Type *> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef boost::mpl::bool_<value> type; \
+    }; \
+/**/
+
+#endif // defined(BOOST_NO_NULLPTR)
+
 #if !defined(TTI_MAX_PARAMETERS) || TTI_MAX_PARAMETERS < 1 || TTI_MAX_PARAMETERS > 254
 #define TTI_MAX_PARAMETERS 10
 #endif
@@ -258,19 +411,69 @@ namespace tti
 
 #endif
 
+    template <class T>
+    struct tself : T
+      {
+      };
+  
+    template<class T>
+    struct mf_eval_function;
+
+    template
+      <
+      template
+        <
+        class,
+        class,
+        class,
+        class
+        > 
+      class TC,
+      class T,
+      class R,
+      class FS,
+      class TAG
+      >
+    struct mf_eval_function<TC<T,R,FS,TAG> > : 
+      TC
+      <
+      typename T::type,
+      typename R::type,
+      typename boost::mpl::transform<FS,tself<boost::mpl::_1> >::type,
+      TAG
+      > 
+      {
+      };
+
     template
       <
       class T,
       class R,
-      BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,class P)
+      class FS,
+      class TAG
       >
-    struct ptmf
+    struct mf_ptmf_seq
       {
-      typedef boost::mpl::vector<R,T,BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P) > fseq;
-      typedef typename boost::mpl::remove<fseq,tti::detail::noparam>::type ftseq;
-      typedef typename boost::function_types::member_function_pointer<ftseq>::type type;
+      typedef typename boost::mpl::transform<FS,tself<boost::mpl::_1> >::type tfs;
+      typedef typename boost::mpl::push_front<tfs,typename T::type>::type tfs1;
+      typedef typename boost::mpl::push_front<tfs1,typename R::type>::type tfs2;
+      typedef typename boost::function_types::member_function_pointer<tfs2,TAG>::type type;
       };
-      
+
+    template
+      <
+      class T,
+      class R,
+      class FS,
+      class TAG
+      >
+    struct ptmf_seq
+      {
+      typedef typename boost::mpl::push_front<FS,T>::type tfs1;
+      typedef typename boost::mpl::push_front<tfs1,R>::type tfs2;
+      typedef typename boost::function_types::member_function_pointer<tfs2,TAG>::type type;
+      };
+
     template
       <
       class T,
@@ -284,13 +487,26 @@ namespace tti
     template
       <
       class R,
-      BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,class P)
+      class FS,
+      class TAG
       >
-    struct tfunction
+    struct tfunction_seq
       {
-      typedef boost::mpl::vector<R,BOOST_PP_ENUM_PARAMS(TTI_MAX_PARAMETERS,P) > fseq;
-      typedef typename boost::mpl::remove<fseq,tti::detail::noparam>::type ftseq;
-      typedef typename boost::function_types::function_type<ftseq>::type type;
+      typedef typename boost::mpl::push_front<FS,R>::type ftseq;
+      typedef typename boost::function_types::function_type<ftseq,TAG>::type type;
+      };
+      
+    template
+      <
+      class R,
+      class FS,
+      class TAG
+      >
+    struct mf_tfunction_seq
+      {
+      typedef typename boost::mpl::transform<FS,tself<boost::mpl::_1> >::type fseq;
+      typedef typename boost::mpl::push_front<fseq,typename R::type>::type ftseq;
+      typedef typename boost::function_types::function_type<ftseq,TAG>::type type;
       };
       
     template

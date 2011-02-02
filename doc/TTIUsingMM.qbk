@@ -136,7 +136,7 @@ parameters are specified exactly ?
    T
    >
 
-[heading Member data]
+[heading Member data with composite type]
 
 Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
 
@@ -147,7 +147,19 @@ Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
    AType::BType T::*
    >
 
-[heading Member function]
+[heading Member data with individual types]
+
+Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
+
+ TTI_HAS_MEMBER_DATA(IntBT)
+ 
+ tti::has_member_data_IntBT
+   <
+   T,
+   AType::BType
+   >
+
+[heading Member function with composite type]
 
 Does T have a member function called 'IntFunction' whose type is 
 'int (short)' ?
@@ -157,6 +169,20 @@ Does T have a member function called 'IntFunction' whose type is
  tti::has_member_IntFunction
    <
    int (T::*)(short)
+   >
+
+[heading Member function with individual types]
+
+Does T have a member function called 'IntFunction' whose type is 
+'int (short)' ?
+
+ TTI_HAS_MEMBER_FUNCTION(IntFunction)
+ 
+ tti::has_member_function_IntFunction
+   <
+   T,
+   int,
+   boost::mpl::vector<short>
    >
 
 [heading Static member data]
@@ -171,7 +197,7 @@ Does T have a static member data called 'DSMember' whose type is 'short' ?
    short
    >
 
-[heading Static member function]
+[heading Static member function with composite type]
 
 Does T have a static member function called 'SIntFunction' whose type 
 is 'int (long,double)' ?
@@ -182,6 +208,20 @@ is 'int (long,double)' ?
    <
    T,
    int (long,double)
+   >
+
+[heading Static member function with individual types]
+
+Does T have a static member function called 'SIntFunction' whose type 
+is 'int (long,double)' ?
+
+ TTI_HAS_STATIC_MEMBER(SIntFunction)
+ 
+ tti::has_static_member_SIntFunction
+   <
+   T,
+   int,
+   boost::mpl::vector<long,double>
    >
 
 [heading Member type]

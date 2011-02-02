@@ -4,6 +4,19 @@ Version 1.1
 
 * Library now compiles with gcc 3.4.2 and gcc 3.4.5.
 * Examples of use have been added to the documentation.
+* TTI_HAS_TYPE and tti::mf_has_type now have optional typedef checking.
+* New macro metafunction functionality which allows composite typed to be treated as individual types has been implemented. These include:
+  * TTI_HAS_MEMBER_DATA
+  * TTI_HAS_MEMBER_FUNCTION
+  * TTI_HAS_STATIC_MEMBER_FUNCTION
+* New nullary metafunction functionality which uses new underlying macro metafunctions. These include:
+  * tti::mf_has_static_member_function uses the new underlying TTI_HAS_STATIC_MEMBER_FUNCTION macro metafunction.
+    Its signature uses an optional MPL forward sequence for the parameter types and an optional Boost function_types tag type.
+* Breaking changes
+  * TTI_HAS_TYPE_CHECK_TYPEDEF and tti::mf_has_type_check_typedef have been removed, and the functionality in them folded into TTI_HAS_TYPE and tti::mf_has_type.
+  * tti::mf_has_static_function has been removed and its functionality moved to tti::mf_has_static_member_function ( see above ).
+  * tti::mf_member_data uses the new underlying TTI_HAS_MEMBER_DATA macro metafunction.
+  * The signature for tti::mf_has_member_function has changed to use an optional MPL forward sequence for the parameter types and an optional Boost function_types tag type.
 
 Version 1.0
 

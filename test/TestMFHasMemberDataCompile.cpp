@@ -6,7 +6,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
                       <
-                      tti::has_member_AnInt,
+                      tti::has_member_data_AnInt,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<int> 
                       >
@@ -14,7 +14,7 @@ int main()
                   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
                       <
-                      tti::has_member_AnInt,
+                      tti::has_member_data_AnInt,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<long> 
                       >
@@ -22,7 +22,7 @@ int main()
                   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
                       <
-                      tti::has_member_aMember,
+                      tti::has_member_data_aMember,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<bool> 
                       >
@@ -38,7 +38,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
                 <
-                tti::has_member_IntBT,
+                tti::has_member_data_IntBT,
                 boost::mpl::identity<AType>,
                 tti::member_type_BType<AType>
                 >
@@ -66,7 +66,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
                 <
-                tti::has_member_ONestStr,
+                tti::has_member_data_ONestStr,
                 boost::mpl::identity<AnotherType>,
                 tti::member_type_AStructType<AType>
                 >

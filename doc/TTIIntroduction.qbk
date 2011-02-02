@@ -1,9 +1,9 @@
 [section:tti_intro Introduction]
 
-Welcome to the Type Traits Introspection library version 1.0 .
+Welcome to the Type Traits Introspection library version 1.1 .
 
 The Type Traits Introspection library, or TTI for short, is a library 
-of macros generating metafunctions, and a set of parallel nested type 
+of macros generating metafunctions, and a set of parallel nullary type 
 metafunctions, which provide the ability to introspect by name the 
 elements of a type at compile time. 
 
@@ -13,7 +13,7 @@ and because the functionality the library offers is the ability to introspect
 a type about the existence of a specific element. 
 
 I use the word "introspect" in a very broad sense here. Normally language 
-introspection means initially asking for information to be initially returned by name, 
+introspection means initially asking for information to be returned by name, 
 which can then further be used to introspect for more specific information.
 In the TTI library one must always supply the name, and use the functionality 
 for the correct type of inner element to find out if the particular named entity exists.
@@ -30,15 +30,15 @@ The functionality of the library may be summed up as:
   element exists within the type. These metafunctions 
   will be called macro metafunctions in the documentation.
 * Provide corresponding metafunctions which can operate 
-  on each of the macro metafunctions generated. 
+  on nearly each of the macro metafunctions generated. 
   These secondary metafunctions provide nearly
-  the same set of introspection as the primary ones but 
-  allow nested types, which do not actually have to exist, 
-  to be passed in template parameters without producing 
-  a compiler error. They also work with individual types 
-  when specifying function syntax rather than a composite 
-  type. These metafunctions will be called nested type 
-  metafunctions in the documentation.
+  the same set of introspection as the macro metafunctions but 
+  allow for an easier to use syntax and lazy evaluation, where 
+  the types being passed are in the form of metafunctions
+  themselves. They always work with individual types 
+  when specifying function and data syntax rather than a 
+  composite type. These metafunctions are called 'nullary type
+  metafunctions' in the documentation.
    
 The library is a header only library.
 

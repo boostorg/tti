@@ -6,13 +6,16 @@ int main()
   
   // SomeStaticFunction does not exist at all
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_function
+  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
                       <
                       tti::Pickedname,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<short>,
-                      boost::mpl::identity<int>,
-                      boost::mpl::identity<long>
+                      boost::mpl::vector
+                        <
+                        boost::mpl::identity<int>,
+                        boost::mpl::identity<long>
+                        >
                       >
                   ));
   

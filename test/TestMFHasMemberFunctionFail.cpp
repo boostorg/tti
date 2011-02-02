@@ -8,12 +8,15 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::has_member_someFunctionMember,
+                      tti::has_member_function_someFunctionMember,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<short>,
-                      boost::mpl::identity<double>,
-                      boost::mpl::identity<int>,
-                      boost::mpl::identity<long>
+                      boost::mpl::vector
+                        <
+                        boost::mpl::identity<double>,
+                        boost::mpl::identity<int>,
+                        boost::mpl::identity<long>
+                        >
                       >
                   ));
   

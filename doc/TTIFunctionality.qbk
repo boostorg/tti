@@ -15,7 +15,7 @@ out at compile time about a type are:
 These are the compile-time questions which the TTI library answers.
 
 All of the questions above attempt to find an answer about an inner element with 
-a particular name. In order to do this using template metaprogramming macros are used 
+a particular name. In order to do this using template metaprogramming, macros are used 
 so that the name of the inner element can be passed to the macro. The macro will then 
 generate an appropriate metafunction, which the template metaprogrammer can then use to 
 introspect the information that is needed. The name itself of the inner element is always passed 

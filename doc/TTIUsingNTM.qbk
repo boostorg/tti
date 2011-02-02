@@ -1,10 +1,10 @@
-[section:tti_usingNTM Using the Nested Type Metafunctions]
+[section:tti_usingNTM Using the Nullary Type Metafunctions]
 [#sectti_usingNTM]
 
-Using the nested type metafunctions can be illustrated by first creating some hypothetical
+Using the nullary type metafunctions can be illustrated by first creating some hypothetical
 user-defined type with corresponding nested types and other inner elements.
 This user-defined type will be weighted toward showing deeply nested types and elements within 
-those nested types. With this type we can illustrate the use of the nested type metafunctions. This is 
+those nested types. With this type we can illustrate the use of the nullary type metafunctions. This is 
 just meant to serve as a model for what a type T might entail from within 
 a class or function template.
 
@@ -46,7 +46,7 @@ a class or function template.
    
          // Function
     
-         int IntFunction(short) { return 0; }
+         int IntFunction(short) const { return 0; }
     
          // Static Data
     
@@ -203,11 +203,11 @@ within 'BType::CType' whose template parameters are specified exactly ?
 
 Does T have a member data called 'IntBT' whose type is 'BType' ?
 
- TTI_HAS_MEMBER(IntBT)
+ TTI_HAS_MEMBER_DATA(IntBT)
  
  tti::mf_has_member_data
    <
-   tti::has_member_IntBT,
+   tti::has_member_data_IntBT,
    boost::mpl::identity<T>,
    BTypeNM
    >
@@ -215,16 +215,17 @@ Does T have a member data called 'IntBT' whose type is 'BType' ?
 [heading Member function]
 
 Does T have a member function called 'IntFunction' 
-within 'BType::CType::DType' whose type is 'int (short)' ?
+within 'BType::CType::DType' whose type is 'int (short) const' ?
 
- TTI_HAS_MEMBER(IntFunction)
+ TTI_HAS_MEMBER_FUNCTION(IntFunction)
  
  tti::mf_has_member_function
    <
-   tti::has_member_IntFunction,
+   tti::has_member_function_IntFunction,
    DTypeNM,
    boost::mpl::identity<int>,
-   boost::mpl::identity<short>
+   boost::mpl::vector<boost::mpl::identity<short> >,
+   boost::function_types::const_qualified
    >
 
 [heading Static member data]
@@ -246,15 +247,14 @@ within 'BType::CType::DType' whose type is 'short' ?
 Does T have a static member function called 'SIntFunction' 
 within 'BType::CType::DType' whose type is 'int (long,double)' ?
 
- TTI_HAS_STATIC_MEMBER(SIntFunction)
+ TTI_HAS_STATIC_MEMBER_FUNCTION(SIntFunction)
  
- tti::mf_has_static_function
+ tti::mf_has_static_member_function
    <
-   tti::has_static_member_SIntFunction,
+   tti::has_static_member_function_SIntFunction,
    DTypeNM,
    boost::mpl::identity<int>,
-   boost::mpl::identity<long>,
-   boost::mpl::identity<double>
+   boost::mpl::vector<boost::mpl::identity<long>,boost::mpl::identity<double> >
    >
 
 [endsect]
