@@ -1,5 +1,11 @@
-You can use the jamfile in the doc directory to 
-regenerate the documentation for this library.
+The library comes with full documentation with an index, 
+in both HTML and PDF format. However, you can use the 
+jamfile in the doc directory to regenerate the documentation 
+for this library. 
+
+Add '--enable-index' to the command line to have an index 
+with the documentation. Add 'pdf' on the command line to
+regenerate the PDF documentation.
 
 You can use the jamfile in the test directory to 
 run the tests for this library.
@@ -50,7 +56,9 @@ to regenerate the docs or run the test.
 If you want to contact me directly, my name is 
 Edward Diener and you can reach me at 
 eld@tropicsoft.com. I am an independent computer
-consultant and I live in Atlanta, Georgia.
+consultant with my own company, I live in Atlanta, Georgia,
+and I am always looking for exciting projects on which to 
+work for a living.
 
 You can also of course use the Boost newsgroups 
 to ask questions and make comments or suggestions 
