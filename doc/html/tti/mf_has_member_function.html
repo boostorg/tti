@@ -24,18 +24,23 @@
 <h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
 <div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="../typetraitsintrospection_reference.html#header.boost.tti.TTIntrospection_hpp" title="Header &lt;boost/tti/TTIntrospection.hpp&gt;">boost/tti/TTIntrospection.hpp</a>&gt;
 
-</span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">template</span><span class="special">&lt;</span> <span class="keyword">class</span> <span class="special">&gt;</span> <span class="keyword">class</span> HasMember<span class="special">,</span> <span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> R<span class="special">&gt;</span> 
+</span><span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">typename</span> HasMemberFunction<span class="special">,</span> <span class="keyword">typename</span> T<span class="special">,</span> <span class="keyword">typename</span> R<span class="special">,</span> 
+         <span class="keyword">typename</span> FS <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">mpl</span><span class="special">::</span><span class="identifier">vector</span><span class="special">&lt;</span><span class="special">&gt;</span><span class="special">,</span> 
+         <span class="keyword">typename</span> TAG <span class="special">=</span> <span class="identifier">boost</span><span class="special">::</span><span class="identifier">function_types</span><span class="special">::</span><span class="identifier">null_tag</span><span class="special">&gt;</span> 
 <span class="keyword">struct</span> <a class="link" href="mf_has_member_function.html" title="Struct template mf_has_member_function">mf_has_member_function</a> <span class="special">{</span>
 <span class="special">}</span><span class="special">;</span></pre></div>
 <div class="refsect1">
-<a name="id968446"></a><h2>Description</h2>
-<p>This metafunction takes all its types as nullary metafunctions whose typedef 'type' member is the actual type used.</p>
+<a name="id930076"></a><h2>Description</h2>
+<p>This metafunction takes its specific types, except for the optional parameters, as nullary metafunctions whose typedef 'type' member is the actual type used.</p>
 <p>The metafunction types and return:</p>
-<p>HasMember = Template class generated from the TTI_HAS_MEMBER ( or TTI_TRAIT_HAS_MEMBER ) macro.<br>
- T = The enclosing type as a nullary metafunction.<br>
- R = The return type of the member function as a nullary metafunction.<br>
- P... = The parameter types of the member function, each as a nullary metafunction.<br>
- There can be up to TTI_MAX_PARAMETERS number of parameters. The default is 10.</p>
+<p>HasMemberFunction = a Boost MPL lambda expression using the metafunction generated from the TTI_HAS_MEMBER_FUNCTION ( or TTI_TRAIT_HAS_MEMBER_FUNCTION ) macro.<br>
+ The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction&lt;_,_&gt; ( or optionally 'metafunction&lt;_,_,_&gt; or ' 'metafunction&lt;_,_,_,_&gt; )'.<br>
+ T = the enclosing type as a nullary metafunction.<br>
+ R = the return type of the member function as a nullary metafunction.<br>
+ FS = an optional parameter which is the parameters of the member function, each as a nullary metafunction, as a boost::mpl forward sequence.<br>
+ This parameter defaults to boost::mpl::vector&lt;&gt;.<br>
+ TAG = an optional parameter which is a boost::function_types tag to apply to the member function.<br>
+ This parameter defaults to boost::function_types::null_tag.</p>
 <p>returns = 'value' is true if the member function exists within the enclosing type, otherwise 'value' is false. </p>
 </div>
 </div>

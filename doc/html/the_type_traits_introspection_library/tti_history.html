@@ -19,11 +19,98 @@
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="the_type_traits_introspection_library.tti_history"></a><a class="link" href="tti_history.html" title="History">History</a>
 </h2></div></div></div>
+<a name="the_type_traits_introspection_library.tti_history.version_1_1"></a><h4>
+<a name="id933402"></a>
+      <a class="link" href="tti_history.html#the_type_traits_introspection_library.tti_history.version_1_1">Version
+      1.1</a>
+    </h4>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem">
+          Library now also compiles with gcc 3.4.2 and gcc 3.4.5.
+        </li>
+<li class="listitem">
+          Examples of use have been added to the documentation.
+        </li>
+<li class="listitem">
+          In the documentation the previously mentioned 'nested type metafunctions'
+          are now called "nullary type metafunctions'.
+        </li>
+<li class="listitem">
+          TTI_HAS_TYPE and tti::mf_has_type now have optional typedef checking.
+        </li>
+<li class="listitem">
+<p class="simpara">
+          New macro metafunction functionality which allows composite typed to be
+          treated as individual types has been implemented. These include:
+        </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem">
+              TTI_HAS_MEMBER_DATA
+            </li>
+<li class="listitem">
+              TTI_HAS_MEMBER_FUNCTION
+            </li>
+<li class="listitem">
+              TTI_HAS_STATIC_MEMBER_FUNCTION
+            </li>
+</ul></div>
+</li>
+<li class="listitem">
+          New nullary type metafunction tti::mf_has_static_member_function uses the
+          new underlying TTI_HAS_STATIC_MEMBER_FUNCTION macro metafunction. Its signature
+          uses an optional MPL forward sequence for the parameter types and an optional
+          Boost function_types tag type.
+        </li>
+<li class="listitem">
+          New nullary type metafunctions tti::valid_member_type and tti::mf_valid_member_type
+          for checking if the 'type' returned from invoking the TTI_MEMBER_TYPE or
+          tti::mf_member_type metafunctions is valid.
+        </li>
+<li class="listitem">
+<p class="simpara">
+          Breaking changes
+        </p>
+<div class="itemizedlist"><ul class="itemizedlist" type="circle">
+<li class="listitem">
+              TTI_HAS_TYPE_CHECK_TYPEDEF and tti::mf_has_type_check_typedef have
+              been removed, and the functionality in them folded into TTI_HAS_TYPE
+              and tti::mf_has_type.
+            </li>
+<li class="listitem">
+              TTI_MEMBER_TYPE and tti::mf_member_type no longer also return a 'valid'
+              boolean constant. Use tti::valid_member_type or tti::mf_valid_member_type
+              metafunctions instead ( see above ).
+            </li>
+<li class="listitem">
+              tti::mf_has_static_function has been removed and its functionality
+              moved to tti::mf_has_static_member_function ( see above ).
+            </li>
+<li class="listitem">
+              tti::mf_member_data uses the new underlying TTI_HAS_MEMBER_DATA macro
+              metafunction.
+            </li>
+<li class="listitem">
+              The signature for tti::mf_has_member_function has changed to use an
+              optional MPL forward sequence for the parameter types and an optional
+              Boost function_types tag type.
+            </li>
+<li class="listitem">
+              All nullary type metafunctions take their corresponding macro metafunction
+              parameter as a class in the form of a Boost MPL lambda expression instead
+              of as a template template parameter as previously. Using a placeholder
+              expression is the easiest way to pass the corresponding macro metafunction
+              to its nullary type metafunction.
+            </li>
+</ul></div>
+</li>
+</ul></div>
+<a name="the_type_traits_introspection_library.tti_history.version_1_0"></a><h4>
+<a name="id933554"></a>
+      <a class="link" href="tti_history.html#the_type_traits_introspection_library.tti_history.version_1_0">Version
+      1.0</a>
+    </h4>
 <p>
-      Version 1.0
-    </p>
-<p>
-      Initial version of the libary.
+      Initial version of the library.
     </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

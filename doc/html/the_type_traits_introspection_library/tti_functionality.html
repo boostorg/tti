@@ -7,7 +7,7 @@
 <link rel="home" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.0">
 <link rel="up" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.0">
 <link rel="prev" href="tti_terminology.html" title="Terminology">
-<link rel="next" href="tti_detail.html" title="Macros">
+<link rel="next" href="tti_detail.html" title="Macro Metafunctions">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table cellpadding="2" width="100%"><tr><td valign="top"></td></tr></table>
@@ -90,7 +90,7 @@
           The 'trait' name serves only to completely name the metafunction in the
           tti namespace. As an example, for the macro TTI_TRAIT_HAS_TYPE(MyTrait,MyType)
           the name of the metafunction is 'tti::MyTrait' and it will look for an
-          inner type called 'MyType'.
+          inner type called 'MyType'. Every macro has a corresponding complex form.
         </li>
 </ol></div>
 <div class="important"><table border="0" summary="Important">
@@ -115,8 +115,11 @@
 <p>
       Once either of these two macro forms are used for a particular type of inner
       element, the corresponding macro metafunction has the exact same functionality.
-      I refer to these two macros as a macro pair, and they are denoted in the documentation
-      as 'SIMPLE_FORM ( COMPLEX_FORM )'.
+    </p>
+<p>
+      In the succeeding documentation all macro metafunctions will be referred by
+      their simple form name, but remember that the complex form name can always
+      alternatively be used.
     </p>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

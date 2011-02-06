@@ -19,19 +19,20 @@
 <a name="TTI_HAS_TYPE"></a><div class="titlepage"></div>
 <div class="refnamediv">
 <h2><span class="refentrytitle">Macro TTI_HAS_TYPE</span></h2>
-<p>TTI_HAS_TYPE &#8212; Expands to a metafunction which tests whether an inner type with a particular name exists. </p>
+<p>TTI_HAS_TYPE &#8212; Expands to a metafunction which tests whether an inner type with a particular name exists and optionally is a particular type. </p>
 </div>
 <h2 xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv-title">Synopsis</h2>
 <div xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" class="refsynopsisdiv"><pre class="synopsis"><span class="comment">// In header: &lt;<a class="link" href="typetraitsintrospection_reference.html#header.boost.tti.TTIntrospection_hpp" title="Header &lt;boost/tti/TTIntrospection.hpp&gt;">boost/tti/TTIntrospection.hpp</a>&gt;
 
 </span>TTI_HAS_TYPE(name)</pre></div>
 <div class="refsect1">
-<a name="id968928"></a><h2>Description</h2>
+<a name="id930576"></a><h2>Description</h2>
 <p>name = the name of the inner type.</p>
 <p>returns = a metafunction called "tti::has_type_name" where 'name' is the macro parameter.</p>
 <p>The metafunction types and return:</p>
 <p>T = the enclosing type in which to look for our 'name'.<br>
- returns = 'value' is true if the 'name' type exists within the enclosing type, otherwise 'value' is false. </p>
+ U = the type of the inner type named 'name' as an optional parameter.<br>
+ returns = 'value' is true if the 'name' type exists within the enclosing type and, if type U is specified, the 'name' type is the same as the type U, otherwise 'value' is false. </p>
 </div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>

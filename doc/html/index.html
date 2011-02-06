@@ -29,10 +29,16 @@
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_terminology.html">Terminology</a></span></dt>
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_functionality.html">General
     Functionality</a></span></dt>
-<dt><span class="section"><a href="the_type_traits_introspection_library/tti_detail.html">Macros</a></span></dt>
+<dt><span class="section"><a href="the_type_traits_introspection_library/tti_detail.html">Macro
+    Metafunctions</a></span></dt>
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_nested_type.html">Nested
     Types</a></span></dt>
-<dt><span class="section"><a href="the_type_traits_introspection_library/tti_metafunctions.html">Metafunctions</a></span></dt>
+<dt><span class="section"><a href="the_type_traits_introspection_library/tti_usingMM.html">Using
+    the Macro Metafunctions</a></span></dt>
+<dt><span class="section"><a href="the_type_traits_introspection_library/tti_metafunctions.html">Nullary
+    Type Metafunctions</a></span></dt>
+<dt><span class="section"><a href="the_type_traits_introspection_library/tti_usingNTM.html">Using
+    the Nullary Type Metafunctions</a></span></dt>
 <dt><span class="section"><a href="typetraitsintrospection_reference.html">TypeTraitsIntrospection Reference</a></span></dt>
 <dd><dl>
 <dt><span class="section"><a href="typetraitsintrospection_reference.html#header.boost.tti.TTIntrospection_hpp">Header &lt;boost/tti/TTIntrospection.hpp&gt;</a></span></dt>
@@ -47,6 +53,7 @@
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_history.html">History</a></span></dt>
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_todo.html">ToDo</a></span></dt>
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_acknowledgments.html">Acknowledgments</a></span></dt>
+<dt><span class="section"><a href="index/s15.html">Index</a></span></dt>
 </dl>
 </div>
 <div class="section">
@@ -54,11 +61,11 @@
 <a name="the_type_traits_introspection_library.tti_intro"></a><a class="link" href="index.html#the_type_traits_introspection_library.tti_intro" title="Introduction">Introduction</a>
 </h2></div></div></div>
 <p>
-      Welcome to the Type Traits Introspection library version 1.0 .
+      Welcome to the Type Traits Introspection library version 1.1 .
     </p>
 <p>
       The Type Traits Introspection library, or TTI for short, is a library of macros
-      generating metafunctions, and a set of parallel nested type metafunctions,
+      generating metafunctions, and a set of parallel nullary type metafunctions,
       which provide the ability to introspect by name the elements of a type at compile
       time.
     </p>
@@ -70,11 +77,11 @@
     </p>
 <p>
       I use the word "introspect" in a very broad sense here. Normally
-      language introspection means initially asking for information to be initially
-      returned by name, which can then further be used to introspect for more specific
-      information. In the TTI library one must always supply the name, and use the
-      functionality for the correct type of inner element to find out if the particular
-      named entity exists. You may prefer the term "query" instead of "introspection"
+      language introspection means initially asking for information to be returned
+      by name, which can then further be used to introspect for more specific information.
+      In the TTI library one must always supply the name, and use the functionality
+      for the correct type of inner element to find out if the particular named entity
+      exists. You may prefer the term "query" instead of "introspection"
       to denote what this library does, but I use terminology based on the word "introspect"
       throughout this documentation.
     </p>
@@ -86,17 +93,17 @@
           Provide the means to introspect a type at compile time using a set of macros.
           Each macro takes the name of the type's element and generates a metafunction
           which can be subsequently invoked to determine whether or not the element
-          exists within the type. These metafunctions will be called macro metafunctions
-          in the documentation.
+          exists within the type. These metafunctions will be called "macro
+          metafunctions" in the documentation.
         </li>
 <li class="listitem">
-          Provide corresponding metafunctions which can operate on each of the macro
-          metafunctions generated. These secondary metafunctions provide nearly the
-          same set of introspection as the primary ones but allow nested types, which
-          do not actually have to exist, to be passed in template parameters without
-          producing a compiler error. They also work with individual types when specifying
-          function syntax rather than a composite type. These metafunctions will
-          be called nested type metafunctions in the documentation.
+          Provide corresponding metafunctions which can operate on nearly each of
+          the macro metafunctions generated. These secondary metafunctions provide
+          nearly the same set of introspection as the macro metafunctions but allow
+          for an easier to use syntax, where the types being passed are in the form
+          of nullary metafunctions themselves. They always work with individual types
+          when specifying function and data syntax rather than a composite type.
+          These metafunctions are called 'nullary type metafunctions' in the documentation.
         </li>
 </ul></div>
 <p>
@@ -139,7 +146,7 @@
 </div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"><p><small>Last revised: January 12, 2011 at 16:50:24 GMT</small></p></td>
+<td align="left"><p><small>Last revised: February 06, 2011 at 16:42:29 GMT</small></p></td>
 <td align="right"><div class="copyright-footer"></div></td>
 </tr></table>
 <hr>

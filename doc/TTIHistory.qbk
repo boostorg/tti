@@ -1,6 +1,6 @@
 [section:tti_history History]
 
-Version 1.1
+[heading Version 1.1]
 
 * Library now also compiles with gcc 3.4.2 and gcc 3.4.5.
 * Examples of use have been added to the documentation.
@@ -22,8 +22,8 @@ Version 1.1
   * All nullary type metafunctions take their corresponding macro metafunction parameter as a class in the form of a Boost MPL lambda expression instead of as a template template parameter as previously.
     Using a placeholder expression is the easiest way to pass the corresponding macro metafunction to its nullary type metafunction. 
 
-Version 1.0
+[heading Version 1.0]
 
-Initial version of the libary.
+Initial version of the library.
 
 [endsect]
