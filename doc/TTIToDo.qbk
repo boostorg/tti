@@ -1,6 +1,7 @@
 [section:tti_todo ToDo]
 
-* Create metafunctions that work with mpl lambda expressions.
 * See if function templates can be introspected.
+* Improve tests
+* Improve documentation
 
 [endsect]

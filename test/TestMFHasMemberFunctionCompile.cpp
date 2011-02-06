@@ -1,22 +1,23 @@
 #include "TestMFHasMemberFunction.hpp"
 #include <boost/mpl/assert.hpp>
-#include <boost/mpl/vector.hpp>
 
 int main()
   {
+  
+  using namespace boost::mpl::placeholders;
   
   // You can always instantiate without compiler errors
   
   tti::mf_has_member_function
     <
-    tti::FunctionReturningInt,
+    tti::FunctionReturningInt<_,_>,
     boost::mpl::identity<AnotherType>,
     boost::mpl::identity<short>
     > aVar;
   
   tti::mf_has_member_function
     <
-    tti::has_member_function_sFunction,
+    tti::has_member_function_sFunction<_,_,_>,
     boost::mpl::identity<AnotherType>,
     tti::member_type_AnIntType<AnotherType>,
     boost::mpl::vector
@@ -29,7 +30,7 @@ int main()
                       
   tti::mf_has_member_function
     <
-    tti::has_member_function_someFunctionMember,
+    tti::has_member_function_someFunctionMember<_,_,_>,
     boost::mpl::identity<AnotherType>,
     boost::mpl::identity<short>,
     boost::mpl::vector
@@ -44,7 +45,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::has_member_function_VoidFunction,
+                      tti::has_member_function_VoidFunction<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<void>
                       >
@@ -52,7 +53,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::FunctionReturningInt,
+                      tti::FunctionReturningInt<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<int>
                       >
@@ -60,7 +61,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::FunctionReturningInt,
+                      tti::FunctionReturningInt<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<double>,
                       boost::mpl::vector<boost::mpl::identity<int> >
@@ -69,7 +70,7 @@ int main()
                   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::has_member_function_aFunction,
+                      tti::has_member_function_aFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<AType>,
                       boost::mpl::vector<boost::mpl::identity<int> >
@@ -78,7 +79,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::AnotherIntFunction,
+                      tti::AnotherIntFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<int>,
                       boost::mpl::vector<boost::mpl::identity<AType> >
@@ -87,7 +88,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_member_function
                       <
-                      tti::has_member_function_sFunction,
+                      tti::has_member_function_sFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       tti::member_type_AnIntType<AType>,
                       boost::mpl::vector

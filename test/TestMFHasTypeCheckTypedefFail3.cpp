@@ -4,11 +4,13 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // Wrong typedef type
   
   BOOST_MPL_ASSERT((tti::mf_has_type
                       <
-                      tti::TheInteger,
+                      tti::TheInteger<_,_>,
                       tti::member_type_BType<AType>,
                       boost::mpl::identity<long>
                       >

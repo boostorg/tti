@@ -4,14 +4,14 @@
 int main()
   {
   
-  BOOST_TEST(tti::member_type_AnIntType<AType>::valid);
-  BOOST_TEST(tti::NameStruct<AType>::valid);
-  BOOST_TEST(tti::member_type_AnIntTypeReference<AType>::valid);
-  BOOST_TEST(tti::member_type_BType<AType>::valid);
-  BOOST_TEST(tti::TheInteger<AType::BType>::valid);
-  BOOST_TEST(tti::member_type_CType<AType::BType>::valid);
-  BOOST_TEST(tti::member_type_AnotherIntegerType<AType::BType::CType>::valid);
-  BOOST_TEST(tti::SomethingElse<AnotherType>::valid);
+  BOOST_TEST(tti::mf_valid_member_type<tti::member_type_AnIntType<AType> >::value);
+  BOOST_TEST(tti::mf_valid_member_type<tti::NameStruct<AType> >::value);
+  BOOST_TEST(tti::mf_valid_member_type<tti::member_type_AnIntTypeReference<AType> >::value);
+  BOOST_TEST(tti::mf_valid_member_type<tti::member_type_BType<AType> >::value);
+  BOOST_TEST(tti::mf_valid_member_type<tti::TheInteger<AType::BType> >::value);
+  BOOST_TEST(tti::mf_valid_member_type<tti::member_type_CType<AType::BType> >::value);
+  BOOST_TEST(tti::mf_valid_member_type<tti::member_type_AnotherIntegerType<AType::BType::CType> >::value);
+  BOOST_TEST(tti::mf_valid_member_type<tti::SomethingElse<AnotherType> >::value);
   
   return boost::report_errors();
 

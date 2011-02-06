@@ -4,17 +4,19 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // You can always instantiate without compiler errors
   
   tti::mf_has_template
     <
-    tti::has_template_TemplateNotExist,
+    tti::has_template_TemplateNotExist<_>,
     tti::MT_BType<AType>
     > aVar;
     
   tti::mf_has_template
     <
-    tti::has_template_ATPMemberTemplate,
+    tti::has_template_ATPMemberTemplate<_>,
     boost::mpl::identity<AnotherType>
     > aVar2;
   
@@ -22,28 +24,28 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_template
                       <
-                      tti::HaveMStr,
+                      tti::HaveMStr<_>,
                       tti::member_type_AStructType<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((tti::mf_has_template
                       <
-                      tti::has_template_ATPMemberTemplate,
+                      tti::has_template_ATPMemberTemplate<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((tti::mf_has_template
                       <
-                      tti::HaveCL,
+                      tti::HaveCL<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((tti::mf_has_template
                       <
-                      tti::has_template_SimpleTMP,
+                      tti::has_template_SimpleTMP<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));

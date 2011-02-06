@@ -4,11 +4,13 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // Not all 'typename' parameters
   
   BOOST_MPL_ASSERT((tti::mf_has_template
                       <
-                      tti::AMT,
+                      tti::AMT<_>,
                       boost::mpl::identity<AType>
                       >
                   ));

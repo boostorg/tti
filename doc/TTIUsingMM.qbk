@@ -242,4 +242,28 @@ if T does not have the nested type BType::CType ?
      >::type
    >::type
  
+[heading Member type existence]
+
+Does a nested type T::BType::CType, created without creating a compiler error
+if T does not have the nested type BType::CType, actually exist ?
+
+ TTI_MEMBER_TYPE(BType)
+ TTI_MEMBER_TYPE(CType)
+ 
+ typedef typename
+ tti::member_type_CType
+   <
+   typename
+   tti::member_type_BType
+     <
+     T
+     >::type
+   >::type
+ AType;
+ 
+ tti::valid_member_type
+   <
+   AType
+   >
+ 
 [endsect]

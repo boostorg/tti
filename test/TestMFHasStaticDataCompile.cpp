@@ -4,11 +4,13 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // You can always instantiate without compiler errors
   
   tti::mf_has_static_data
     <
-    tti::has_static_member_SomeStaticData,
+    tti::has_static_member_SomeStaticData<_,_>,
     boost::mpl::identity<AnotherType>,
     boost::mpl::identity<double>
     > aVar;
@@ -17,7 +19,7 @@ int main()
   
   BOOST_MPL_ASSERT((tti::mf_has_static_data
                       <
-                      tti::has_static_member_DSMember,
+                      tti::has_static_member_DSMember<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<short>
                       >

@@ -1,99 +1,92 @@
 #include "TestMFMemberType.hpp"
 #include <boost/mpl/assert.hpp>
-#include <boost/mpl/bool.hpp>
 
 int main()
   {
   
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  using namespace boost::mpl::placeholders;
+  
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::member_type_AnIntType,
+                        tti::member_type_AnIntType<_>,
                         boost::mpl::identity<AType>
                         >
-                      ::valid
                       >
                   ));
             
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::NameStruct,
+                        tti::NameStruct<_>,
                         boost::mpl::identity<AType>
                         >
-                      ::valid
                       >
                   ));
             
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::member_type_AnIntTypeReference,
+                        tti::member_type_AnIntTypeReference<_>,
                         boost::mpl::identity<AType>
                         >
-                      ::valid
                       >
                   ));
             
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::member_type_BType,
+                        tti::member_type_BType<_>,
                         boost::mpl::identity<AType>
                         >
-                      ::valid
                       >
                   ));
             
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::TheInteger,
+                        tti::TheInteger<_>,
                         tti::member_type_BType<AType>
                         >
-                      ::valid
                       >
                   ));
             
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::member_type_CType,
+                        tti::member_type_CType<_>,
                         tti::member_type_BType<AType>
                         >
-                      ::valid
                       >
                   ));
             
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::member_type_AnotherIntegerType,
+                        tti::member_type_AnotherIntegerType<_>,
                         tti::mf_member_type
                           <
-                          tti::member_type_CType,
+                          tti::member_type_CType<_>,
                           tti::member_type_BType<AType>
                           >
                         >
-                      ::valid
                       >
                   ));
             
-  BOOST_MPL_ASSERT((boost::mpl::bool_
+  BOOST_MPL_ASSERT((tti::mf_valid_member_type
                       <
                       tti::mf_member_type
                         <
-                        tti::SomethingElse,
+                        tti::SomethingElse<_>,
                         boost::mpl::identity<AnotherType>
                         >
-                      ::valid
                       >
                   ));
   

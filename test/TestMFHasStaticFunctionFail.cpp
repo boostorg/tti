@@ -4,11 +4,13 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // SomeStaticFunction does not exist at all
   
   BOOST_MPL_ASSERT((tti::mf_has_static_member_function
                       <
-                      tti::Pickedname,
+                      tti::Pickedname<_,_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<short>,
                       boost::mpl::vector

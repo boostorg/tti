@@ -4,11 +4,13 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // Wrong member type
   
   BOOST_MPL_ASSERT((tti::mf_has_static_data
                       <
-                      tti::has_static_member_DSMember,
+                      tti::has_static_member_DSMember<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<int>
                       >

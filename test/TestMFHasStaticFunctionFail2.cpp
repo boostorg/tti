@@ -4,11 +4,13 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // Wrong enclosing type
   
   BOOST_MPL_ASSERT((tti::mf_has_static_member_function
                       <
-                      tti::HaveTheSIntFunction,
+                      tti::HaveTheSIntFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<int>,
                       boost::mpl::vector

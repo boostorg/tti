@@ -4,9 +4,11 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::has_member_data_AnInt,
+                tti::has_member_data_AnInt<_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int> 
                 >
@@ -15,7 +17,7 @@ int main()
             
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::has_member_data_AnInt,
+                tti::has_member_data_AnInt<_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<long> 
                 >
@@ -24,7 +26,7 @@ int main()
             
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::has_member_data_aMember,
+                tti::has_member_data_aMember<_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<bool> 
                 >
@@ -33,7 +35,7 @@ int main()
             
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::CMember,
+                tti::CMember<_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<bool> 
                 >
@@ -42,7 +44,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::has_member_data_IntBT,
+                tti::has_member_data_IntBT<_,_>,
                 boost::mpl::identity<AType>,
                 tti::member_type_BType<AType>
                 >
@@ -51,11 +53,11 @@ int main()
   
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::NestedData,
+                tti::NestedData<_,_>,
                 boost::mpl::identity<AType>,
                 tti::mf_member_type
                   <
-                  tti::member_type_CType,
+                  tti::member_type_CType<_>,
                   tti::member_type_BType<AType>
                   >
                 >
@@ -64,7 +66,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::AOther,
+                tti::AOther<_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<AType>
                 >
@@ -73,7 +75,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_member_data
                 <
-                tti::has_member_data_ONestStr,
+                tti::has_member_data_ONestStr<_,_>,
                 boost::mpl::identity<AnotherType>,
                 tti::member_type_AStructType<AType>
                 >

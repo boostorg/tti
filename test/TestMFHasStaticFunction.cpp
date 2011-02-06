@@ -4,9 +4,11 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   BOOST_TEST((tti::mf_has_static_member_function
                 <
-                tti::HaveTheSIntFunction,
+                tti::HaveTheSIntFunction<_,_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int>,
                 boost::mpl::vector
@@ -20,7 +22,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_static_member_function
                 <
-                tti::TheTIntFunction,
+                tti::TheTIntFunction<_,_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<AType>,
                 boost::mpl::vector
@@ -34,7 +36,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_static_member_function
                 <
-                tti::has_static_member_function_TSFunction,
+                tti::has_static_member_function_TSFunction<_,_,_>,
                 boost::mpl::identity<AnotherType>,
                 tti::member_type_AStructType<AType>,
                 boost::mpl::vector

@@ -4,9 +4,11 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   BOOST_TEST((tti::mf_has_template_check_params
                 <
-                tti::HT_Str,
+                tti::HT_Str<_>,
                 tti::member_type_AStructType<AType>
                 >
               ::value
@@ -14,7 +16,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_template_check_params
                 <
-                tti::has_template_check_params_AnotherMemberTemplate,
+                tti::has_template_check_params_AnotherMemberTemplate<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -22,7 +24,7 @@ int main()
   
   BOOST_TEST((!tti::mf_has_template_check_params
                 <
-                tti::WrongParametersForMP,
+                tti::WrongParametersForMP<_>,
                 boost::mpl::identity<AnotherType>
                 >
               ::value
@@ -30,10 +32,10 @@ int main()
   
   BOOST_TEST((tti::mf_has_template_check_params
                 <
-                tti::has_template_check_params_CTManyParameters,
+                tti::has_template_check_params_CTManyParameters<_>,
                 tti::mf_member_type
                   <
-                  tti::member_type_CType,
+                  tti::member_type_CType<_>,
                   tti::MT_BType<AType>
                   >
                 >
@@ -42,10 +44,10 @@ int main()
   
   BOOST_TEST((!tti::mf_has_template_check_params
                 <
-                tti::has_template_check_params_TemplateNotExist,
+                tti::has_template_check_params_TemplateNotExist<_>,
                 tti::mf_member_type
                   <
-                  tti::member_type_CType,
+                  tti::member_type_CType<_>,
                   tti::MT_BType<AType>
                   >
                 >

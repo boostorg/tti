@@ -28,13 +28,13 @@ The functionality of the library may be summed up as:
   type's element and generates a metafunction which can be 
   subsequently invoked to determine whether or not the 
   element exists within the type. These metafunctions 
-  will be called macro metafunctions in the documentation.
+  will be called "macro metafunctions" in the documentation.
 * Provide corresponding metafunctions which can operate 
   on nearly each of the macro metafunctions generated. 
   These secondary metafunctions provide nearly
   the same set of introspection as the macro metafunctions but 
-  allow for an easier to use syntax and lazy evaluation, where 
-  the types being passed are in the form of metafunctions
+  allow for an easier to use syntax, where 
+  the types being passed are in the form of nullary metafunctions
   themselves. They always work with individual types 
   when specifying function and data syntax rather than a 
   composite type. These metafunctions are called 'nullary type

@@ -4,11 +4,13 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   // Wrong function parameter type
   
   BOOST_MPL_ASSERT((tti::mf_has_static_member_function
                       <
-                      tti::has_static_member_function_TSFunction,
+                      tti::has_static_member_function_TSFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       tti::member_type_AStructType<AType>,
                       boost::mpl::vector

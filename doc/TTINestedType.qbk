@@ -99,7 +99,7 @@ as specified above by instantiating our macro metafunctions.
          >::type
        >::type
      >::type
-   > MyFindType;
+   >::type MyFindType;
   
 We can use the above typedef to pass the type as FindType 
 to one of our macro metafunctions. FindType may not actually exist but we will not generate 
@@ -143,15 +143,18 @@ actually exists in a similar manner. Our metafunction would be:
      >::type
    >
   
-Because this duplicates much of our code using 'MyFindType' to create our nested type as a metafunction,
-TTI\_MEMBER\_TYPE also has, as a convenience, a boolean compile-time constant value 
-called 'valid' which returns 'true' if our nested type exists or 'false' if it does not.
-Using this functionality of TTI\_MEMBER\_TYPE with our 'MyFindType' metafunction above 
+Because this duplicates much of our code for the 'MyFindType' typedef to 
+create our nested type, we can instead, and much more easily, pass our type 'MyFindType', since we already
+have it in the form of a type,
+to another metafunction called 'tti::valid_member_type', which returns a boolean constant
+which is 'true' if our nested exists or 'false' if it does not.
+
+Using this functionality with our 'MyFindType' type above 
 we could create the nullary metafunction:
 
- boost::mpl::bool_
+ tti::valid_member_type
    <
-   MyFindType::valid
+   MyFindType
    >
  
 directly instead of replicating the same functionality with our 'tti::has_type_FindType' metafunction.
@@ -159,13 +162,13 @@ directly instead of replicating the same functionality with our 'tti::has_type_F
 The using of TTI\_MEMBER\_TYPE to create a nested type which may or may not exist, and which can
 subsequently be used with our macro metafunctions whenever a nested type is required, without producing 
 a compiler error when the type does not actually exist, is the main reason we have separate 
-but similar functionality to determine whether a member data, a member function, or a static member 
+but similar functionality among our macro metafunctions to determine whether a member data, a member function, or a static member 
 function exists within an enclosing type. 
 
-In the more general form, using TTI\_HAS\_MEMBER and TTI\_HAS\_STATIC\_MEMBER, the signature for the member 
+In the more general case, when using TTI\_HAS\_MEMBER and TTI\_HAS\_STATIC\_MEMBER, the signature for the member 
 data, member function, and the function portion of a static member function is a composite type. This makes 
-for a syntactical notation which is easy to denotate, but we 
-can not use the nested type functionality in TTI\_MEMBER\_TYPE within this notation very easily. But
+for a syntactical notation which is easy to specify, but because of that composite type notation we 
+can not use the nested type functionality in TTI\_MEMBER\_TYPE very easily. But
 when we use the TTI\_HAS\_MEMBER\_DATA, TTI\_HAS\_MEMBER\_FUNCTION, and TTI\_HAS\_STATIC\_MEMBER\_FUNCTION
 the composite types in our signatures are broken down into their individual types so that using 
 TTI\_MEMBER\_TYPE, if necessary, for one of the individual types is easy.
@@ -178,14 +181,14 @@ specify all those ::type expressions, along with their repeated 'typename',
 does get syntactically tedious. 
 
 Because of this the TTI library offers a parallel set of 
-metafunctions to the macro metafunctions where the 'types' specified are themselves nullary 
-metafunctions and which, as with all metafunctions, lazy evaluation can take place. 
+metafunctions to the macro metafunctions where the 'types' specified are themselves nullary metafunctions.
 This parallel set of metafunctions, using nullary metafunctions to specify individual types, 
+rather than the actual types themselves,
 are called 'nullary type metafunctions'. In this group there is also a nullary metafunction 
 paralleling our TTI\_MEMBER\_TYPE macro metafunction, and therefore a further construct 
 making the specifying of nested types easy and error-free to use.
 
-This group of nullary metafunctions will be 
+This group of nullary type metafunctions will be 
 fully explained later after we give some examples of macro metafunction use.
 
 [endsect]

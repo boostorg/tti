@@ -4,9 +4,11 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   BOOST_TEST((tti::mf_has_static_data
                 <
-                tti::has_static_member_DSMember,
+                tti::has_static_member_DSMember<_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<short>
                 >

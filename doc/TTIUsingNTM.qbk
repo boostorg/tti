@@ -88,8 +88,8 @@ to avoid ODR violations.
  
 [heading Member type]
 
-We start off by creating typedef's for our theoretical inner types       
-in relation to T as nullary metafunctions. None of these typedefs 
+We start off by creating typedef's, as nullary metafunctions, for our 
+theoretical inner types in relation to T . None of these typedefs 
 will produce a compiler error even if our structure does not correspond 
 to T's reality. This also illustrates using 'tti::mf_member_type'.
 
@@ -100,7 +100,7 @@ to T's reality. This also illustrates using 'tti::mf_member_type'.
  typedef
  tti::mf_member_type
    <
-   tti::member_type_BType,
+   tti::member_type_BType<_>,
    boost::mpl::identity<T>
    >
  BTypeNM;
@@ -108,7 +108,7 @@ to T's reality. This also illustrates using 'tti::mf_member_type'.
  typedef
  tti::mf_member_type
    <
-   tti::member_type_CType,
+   tti::member_type_CType<_>,
    BTypeNM
    >
  CTypeNM;
@@ -116,7 +116,7 @@ to T's reality. This also illustrates using 'tti::mf_member_type'.
  typedef
  tti::mf_member_type
    <
-   tti::member_type_DType,
+   tti::member_type_DType<_>,
    CTypeNM
    >
  DTypeNM;
@@ -131,16 +131,16 @@ Does T have a nested type called 'DType' within 'BType::CType' ?
   
  tti::mf_has_type
    <
-   tti::has_type_DType,
+   tti::has_type_DType<_>,
    CTypeNM
    >
    
-We could just have easily used the boolean constant 'valid' of our
-DTypeNM typedef to the same effect:
+We could just have easily used the tti::mf_valid_member_type
+metafunction to the same effect:
 
-  boost::mpl::bool_
+  tti::mf_valid_member_type
     <
-    DTypeNM::valid
+    DTypeNM
     >
    
 [heading Type checking the typedef]
@@ -152,7 +152,7 @@ within 'BType::CType::DType' whose type is a 'double' ?
  
  tti::mf_has_type
    <
-   tti::has_type_ADoubleType,
+   tti::has_type_ADoubleType<_,_>,
    DTypeNM,
    boost::mpl::identity<double>
    >
@@ -166,7 +166,7 @@ within 'BType::CType' whose template parameters are all types ('class' or 'typen
  
  tti::mf_has_template
    <
-   tti::has_template_AMemberTemplate,
+   tti::has_template_AMemberTemplate<_>,
    CTypeNM
    >
 
@@ -179,23 +179,23 @@ within 'BType' whose template parameters are specified exactly ?
  
  tti::mf_has_template_check_params
    <
-   tti::has_template_check_params_ManyParameters,
+   tti::has_template_check_params_ManyParameters<_>,
    BTypeNM
    >
 
 [heading Template with params using variadic macros]
 
-[note Include the 'TTIntrospectionVM.hpp' header file
-when using this macro.]
-
 Does T have a nested class template called 'MoreParameters' 
 within 'BType::CType' whose template parameters are specified exactly ?
+
+[note Include the 'TTIntrospectionVM.hpp' header file
+when using this macro.]
 
  TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,class,class,int,short,class,template <class,int> class InnerTemplate,class)
  
  tti::mf_has_template_check_params
    <
-   tti::has_template_check_params_MoreParameters,
+   tti::has_template_check_params_MoreParameters<_>,
    CTypeNM
    >
 
@@ -207,7 +207,7 @@ Does T have a member data called 'IntBT' whose type is 'BType' ?
  
  tti::mf_has_member_data
    <
-   tti::has_member_data_IntBT,
+   tti::has_member_data_IntBT<_,_>,
    boost::mpl::identity<T>,
    BTypeNM
    >
@@ -221,7 +221,7 @@ within 'BType::CType::DType' whose type is 'int (short) const' ?
  
  tti::mf_has_member_function
    <
-   tti::has_member_function_IntFunction,
+   tti::has_member_function_IntFunction<_,_,_,_>,
    DTypeNM,
    boost::mpl::identity<int>,
    boost::mpl::vector<boost::mpl::identity<short> >,
@@ -237,7 +237,7 @@ within 'BType::CType::DType' whose type is 'short' ?
  
  tti::mf_has_static_data
    <
-   tti::has_static_member_DSMember,
+   tti::has_static_member_DSMember<_,_>,
    DTypeNM,
    boost::mpl::identity<short>
    >
@@ -251,7 +251,7 @@ within 'BType::CType::DType' whose type is 'int (long,double)' ?
  
  tti::mf_has_static_member_function
    <
-   tti::has_static_member_function_SIntFunction,
+   tti::has_static_member_function_SIntFunction<_,_,_>,
    DTypeNM,
    boost::mpl::identity<int>,
    boost::mpl::vector<boost::mpl::identity<long>,boost::mpl::identity<double> >

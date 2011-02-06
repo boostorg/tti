@@ -4,9 +4,11 @@
 int main()
   {
   
+  using namespace boost::mpl::placeholders;
+  
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_AnIntType,
+                tti::has_type_AnIntType<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -14,7 +16,7 @@ int main()
             
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::NameStruct,
+                tti::NameStruct<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -22,7 +24,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_AnIntTypeReference,
+                tti::has_type_AnIntTypeReference<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -30,7 +32,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_BType,
+                tti::has_type_BType<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -38,7 +40,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::TheInteger,
+                tti::TheInteger<_>,
                 tti::member_type_BType<AType>
                 >
               ::value
@@ -46,7 +48,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_CType,
+                tti::has_type_CType<_>,
                 tti::member_type_BType<AType>
                 >
               ::value
@@ -54,10 +56,10 @@ int main()
   
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::has_type_AnotherIntegerType,
+                tti::has_type_AnotherIntegerType<_>,
                 tti::mf_member_type
                   <
-                  tti::member_type_CType,
+                  tti::member_type_CType<_>,
                   tti::member_type_BType<AType>
                   >
                 >
@@ -66,7 +68,7 @@ int main()
   
   BOOST_TEST((tti::mf_has_type
                 <
-                tti::SomethingElse,
+                tti::SomethingElse<_>,
                 boost::mpl::identity<AnotherType>
                 >
               ::value

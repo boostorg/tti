@@ -49,7 +49,9 @@ to regenerate the docs or run the test.
 
 If you want to contact me directly, my name is 
 Edward Diener and you can reach me at 
-eld@tropicsoft.com. You can also of course 
-use the Boost newsgroups to ask questions 
-and make comments or suggestions about the 
-library.
+eld@tropicsoft.com. I am an independent computer
+consultant and I live in Atlanta, Georgia.
+
+You can also of course use the Boost newsgroups 
+to ask questions and make comments or suggestions 
+about the library.

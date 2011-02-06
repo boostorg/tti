@@ -373,14 +373,6 @@ namespace member_type \
 
 #endif // defined(BOOST_NO_NULLPTR)
 
-#if !defined(TTI_MAX_PARAMETERS) || TTI_MAX_PARAMETERS < 1 || TTI_MAX_PARAMETERS > 254
-#define TTI_MAX_PARAMETERS 10
-#endif
-
-#if defined(__GNUC__) && __GNUC__ == 3
-#define TTI_GNUC3 1
-#endif
-
 namespace tti
   {
   namespace detail
@@ -388,78 +380,12 @@ namespace tti
     struct notype
       {
       };
-    struct noparam
-      {
-      typedef tti::detail::noparam type;
-      };
       
-    template<class T>
-    struct eval;
-    
-#define BOOST_PP_ITERATION_LIMITS (1,BOOST_PP_ADD(2,TTI_MAX_PARAMETERS))
-#define BOOST_PP_FILENAME_1 <boost\tti\detail\TTIntrospectionIterateEval.hpp>
-#include BOOST_PP_ITERATE()
-
-#if defined(TTI_GNUC3)
-      
-    template<class T,int N>
-    struct eval_gcc3;
-    
-#define BOOST_PP_ITERATION_LIMITS (1,BOOST_PP_ADD(2,TTI_MAX_PARAMETERS))
-#define BOOST_PP_FILENAME_1 <boost\tti\detail\TTIntrospectionIterateEvalGcc3.hpp>
-#include BOOST_PP_ITERATE()
-
-#endif
-
     template <class T>
     struct tself : T
       {
       };
   
-    template<class T>
-    struct mf_eval_function;
-
-    template
-      <
-      template
-        <
-        class,
-        class,
-        class,
-        class
-        > 
-      class TC,
-      class T,
-      class R,
-      class FS,
-      class TAG
-      >
-    struct mf_eval_function<TC<T,R,FS,TAG> > : 
-      TC
-      <
-      typename T::type,
-      typename R::type,
-      typename boost::mpl::transform<FS,tself<boost::mpl::_1> >::type,
-      TAG
-      > 
-      {
-      };
-
-    template
-      <
-      class T,
-      class R,
-      class FS,
-      class TAG
-      >
-    struct mf_ptmf_seq
-      {
-      typedef typename boost::mpl::transform<FS,tself<boost::mpl::_1> >::type tfs;
-      typedef typename boost::mpl::push_front<tfs,typename T::type>::type tfs1;
-      typedef typename boost::mpl::push_front<tfs1,typename R::type>::type tfs2;
-      typedef typename boost::function_types::member_function_pointer<tfs2,TAG>::type type;
-      };
-
     template
       <
       class T,
@@ -495,36 +421,6 @@ namespace tti
       typedef typename boost::mpl::push_front<FS,R>::type ftseq;
       typedef typename boost::function_types::function_type<ftseq,TAG>::type type;
       };
-      
-    template
-      <
-      class R,
-      class FS,
-      class TAG
-      >
-    struct mf_tfunction_seq
-      {
-      typedef typename boost::mpl::transform<FS,tself<boost::mpl::_1> >::type fseq;
-      typedef typename boost::mpl::push_front<fseq,typename R::type>::type ftseq;
-      typedef typename boost::function_types::function_type<ftseq,TAG>::type type;
-      };
-      
-    template
-      <
-      class T
-      >
-    struct valid_type :
-      boost::mpl::not_
-        <
-        boost::is_same
-          <
-          T,
-          notype
-          >
-        >
-      {
-      };
-      
     }
   }
   
