@@ -13,9 +13,9 @@ his help and his introspection work.
 
 Two of the introspection templates are taken from the MPL and 
 lifted into my library under a different name for the sake 
-of orthogonality, so I would like to thank Aleksey Gurtovoy and
+of completeness, so I would like to thank Aleksey Gurtovoy and
 David Abrahams for that library, and Daniel Walker for work on 
-those MPL introspection macros. 
+those MPL introspection macros.
 
 Finally thanks to Anthony Williams for supplying a workaround 
 for a Visual C++ bug which is needed for introspecting member 

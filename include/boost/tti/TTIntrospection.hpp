@@ -2,18 +2,13 @@
 #define TT_INTROSPECTION_HPP
 
 #include <boost/config.hpp>
-#include <boost/function_types/is_member_object_pointer.hpp>
-#include <boost/function_types/parameter_types.hpp>
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/apply.hpp>
-#include <boost/mpl/at.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/identity.hpp>
-#include <boost/mpl/int.hpp>
 #include <boost/mpl/placeholders.hpp>
-#include <boost/mpl/quote.hpp>
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
@@ -57,48 +52,52 @@ namespace tti \
   { \
   namespace detail \
     { \
-    BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
+    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
     } \
-  \
-  template<class T,class U,class B> \
-  struct BOOST_PP_CAT(trait,_impl) \
-    { \
-    typedef typename \
-      boost::mpl::eval_if \
-        < \
-        boost::is_same<typename T::name,U>, \
-        boost::mpl::true_, \
-        boost::mpl::false_ \
-        >::type \
-    type; \
-    }; \
-  \
-  template<class T,class U> \
-  struct BOOST_PP_CAT(trait,_impl)<T,U,boost::mpl::false_::type> \
-    { \
-    typedef boost::mpl::false_::type type; \
-    }; \
-  \
-  template<class T> \
-  struct BOOST_PP_CAT(trait,_impl)<T,tti::detail::notype,boost::mpl::true_::type> \
-    { \
-    typedef boost::mpl::true_::type type; \
-    }; \
   \
   template<class T,class U = tti::detail::notype> \
   struct trait \
     { \
     \
     typedef typename \
-      BOOST_PP_CAT(trait,_impl) \
+      detail::trait \
       < \
       T, \
       U, \
-      typename tti::detail::trait<T>::type \
+      typename detail::mpl::trait<T>::type \
       >::type \
     type; \
     \
     BOOST_STATIC_CONSTANT(bool,value=type::value); \
+    }; \
+  } \
+/**/
+
+#define TTI_MTFC_TRAIT_HAS_TYPE(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+    } \
+  \
+  struct trait \
+    { \
+    template<class T,class U = tti::detail::notype> \
+    struct apply \
+      { \
+      \
+      typedef typename \
+        detail::trait \
+        < \
+        T, \
+        U, \
+        typename detail::mpl::trait<T>::type \
+        >::type \
+      type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
     }; \
   } \
 /**/
@@ -123,6 +122,14 @@ namespace tti \
   TTI_TRAIT_HAS_TYPE \
   ( \
   BOOST_PP_CAT(has_type_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_MTFC_HAS_TYPE(name) \
+  TTI_MTFC_TRAIT_HAS_TYPE \
+  ( \
+  BOOST_PP_CAT(mtfc_has_type_,name), \
   name \
   ) \
 /**/
@@ -152,7 +159,7 @@ namespace tti \
   { \
   namespace detail \
     { \
-    TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
+    TTI_DETAIL_TRAIT_HAS_TYPE_MEMBER_TYPE(trait,name) \
     TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
     } \
   template<class T> \
@@ -166,6 +173,32 @@ namespace tti \
         boost::mpl::identity<tti::detail::notype> \
         >::type \
     type; \
+    }; \
+  } \
+/**/
+
+#define TTI_MTFC_TRAIT_MEMBER_TYPE(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_TYPE_MEMBER_TYPE(trait,name) \
+    TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
+    } \
+  struct trait \
+    { \
+    template<class T> \
+    struct apply \
+      { \
+      typedef typename \
+        boost::mpl::eval_if \
+          < \
+          tti::detail::trait<T>, \
+          tti::detail::member_type::trait<T>, \
+          boost::mpl::identity<tti::detail::notype> \
+          >::type \
+      type; \
+      }; \
     }; \
   } \
 /**/
@@ -193,6 +226,14 @@ namespace tti \
   TTI_TRAIT_MEMBER_TYPE \
   ( \
   BOOST_PP_CAT(member_type_,name), \
+  name \
+  ) \
+/**/
+  
+#define TTI_MTFC_MEMBER_TYPE(name) \
+  TTI_MTFC_TRAIT_MEMBER_TYPE \
+  ( \
+  BOOST_PP_CAT(mtfc_member_type_,name), \
   name \
   ) \
 /**/
@@ -231,6 +272,26 @@ namespace tti \
   } \
 /**/
   
+#define TTI_MTFC_TRAIT_HAS_TEMPLATE(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    BOOST_MPL_HAS_XXX_TEMPLATE_NAMED_DEF(trait, name, false) \
+    } \
+  struct trait \
+    { \
+    template<class T> \
+    struct apply \
+      { \
+      typedef typename tti::detail::trait<T>::type type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
+    }; \
+  } \
+/**/
+  
 /// Expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
@@ -251,6 +312,14 @@ namespace tti \
   TTI_TRAIT_HAS_TEMPLATE \
   ( \
   BOOST_PP_CAT(has_template_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_MTFC_HAS_TEMPLATE(name) \
+  TTI_MTFC_TRAIT_HAS_TEMPLATE \
+  ( \
+  BOOST_PP_CAT(mtfc_has_template_,name), \
   name \
   ) \
 /**/
@@ -287,6 +356,19 @@ namespace tti \
   } \
 /**/
 
+#define TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+namespace tti \
+  { \
+  struct trait \
+    { \
+    TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
+      (  \
+        ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( apply, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
+      )  \
+    }; \
+  } \
+/**/
+
 #else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
 
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
@@ -318,6 +400,16 @@ namespace tti \
   } \
 /**/
 
+#define TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+namespace tti \
+  { \
+  TTI_DETAIL_MTFC_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
+    ( \
+      ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( trait, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
+    ) \
+  } \
+/**/
+
 #endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
 #else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
@@ -341,7 +433,20 @@ namespace tti \
     
 */
 #define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
-TTI_DETAIL_SAME(trait,name) \
+namespace tti \
+  { \
+  TTI_DETAIL_SAME(trait,name) \
+  } \
+/**/
+
+#define TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+namespace tti \
+  { \
+  struct trait \
+    { \
+    TTI_DETAIL_SAME(apply,name) \
+    }; \
+  } \
 /**/
 
 #endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
@@ -373,9 +478,14 @@ TTI_DETAIL_SAME(trait,name) \
   ) \
 /**/
 
-#if defined(BOOST_MSVC)
-
-#if defined(BOOST_NO_NULLPTR)
+#define TTI_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,tpSeq) \
+  TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
+  ( \
+  BOOST_PP_CAT(mtfc_has_template_check_params_,name), \
+  name, \
+  tpSeq \
+  ) \
+/**/
 
 /// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
 /**
@@ -396,424 +506,20 @@ TTI_DETAIL_SAME(trait,name) \
 #define TTI_TRAIT_HAS_MEMBER(trait,name) \
 namespace tti \
   { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_MEMBER(trait,name) \
+    } \
   template<class T> \
   struct trait \
     { \
-    template<class> \
-    struct class_of; \
-    \
-    template<class R,class C> \
-    struct class_of<R C::*> \
-      { \
-      typedef C type; \
-      }; \
-    \
-    template<class> \
-    struct return_of; \
-    \
-    template<class R,class C> \
-    struct return_of<R C::*> \
-      { \
-      typedef R type; \
-      }; \
-    \
-    template<bool,typename U> \
-    struct menable_if; \
-    \
-    template<typename U> \
-    struct menable_if<true,U> \
-      { \
-      typedef U type; \
-      }; \
-    \
-    template<typename U,typename V> \
-    static ::boost::type_traits::yes_type check2(V U::*); \
-    \
-    template<typename U,typename V> \
-    static ::boost::type_traits::no_type check2(U); \
-    \
-    template<class F> \
-    struct class_type \
-      { \
-      typedef typename \
-      boost::remove_const \
-        < \
-        typename \
-        boost::mpl::at \
-          < \
-          typename \
-          boost::function_types::parameter_types \
-            < \
-            F, \
-            boost::mpl::quote1 \
-              < \
-              boost::mpl::identity \
-              > \
-            > \
-            ::type, \
-            boost::mpl::int_<0> \
-          >::type \
-        >::type \
-      type; \
-      }; \
-    \
-    template<T> \
-    struct helper; \
-    \
-    template<typename U,typename V> \
-    static typename \
-      menable_if \
-        < \
-        sizeof(check2<U,V>(&U::name))==sizeof(::boost::type_traits::yes_type), \
-        ::boost::type_traits::yes_type \
-        > \
-      ::type \
-    has_matching_member(int); \
-    \
-    template<typename U,typename V> \
-    static ::boost::type_traits::no_type has_matching_member(...); \
-    \
-    template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-    \
-    template<class U> \
-    static ::boost::type_traits::no_type check(...); \
-    \
-    template<class F> \
-    struct ttc_md \
-      { \
-      typedef boost::mpl::bool_<sizeof(has_matching_member<typename class_of<F>::type,typename return_of<F>::type>(0))==sizeof(::boost::type_traits::yes_type)> type; \
-      }; \
-    \
-    template<class F> \
-    struct ttc_mf \
-      { \
-      typedef boost::mpl::bool_<sizeof(check<typename class_type<F>::type>(0))==sizeof(::boost::type_traits::yes_type)> type; \
-      }; \
-    \
-    template<class F> \
-    struct type_to_check \
-      { \
-      typedef typename \
-      boost::mpl::eval_if \
-        < \
-        boost::function_types::is_member_object_pointer<F>, \
-        ttc_md<F>, \
-        ttc_mf<F> \
-        >::type \
-      type; \
-      }; \
-    \
-    typedef typename type_to_check<T>::type type; \
+    typedef typename detail::trait<T>::type type; \
     \
     BOOST_STATIC_CONSTANT(bool,value=type::value); \
     \
     }; \
   } \
 /**/
-
-#else // !defined(BOOST_NO_NULLPTR)
-
-/// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
-/**
-
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner member.
-
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.<br />
-    
-              The metafunction types and return:
-    
-                T = the type, in the form of a member data pointer or member function pointer, 
-                    in which to look for our 'name'.<br />
-                returns = 'value' is true if the 'name' exists, with the appropriate type,
-                          otherwise 'value' is false.
-                          
-*/
-#define TTI_TRAIT_HAS_MEMBER(trait,name) \
-namespace tti \
-  { \
-  template<class T> \
-  struct trait \
-    { \
-    template<class> \
-    struct class_of; \
-    \
-    template<class R,class C> \
-    struct class_of<R C::*> \
-      { \
-      typedef C type; \
-      }; \
-    \
-    template<class> \
-    struct return_of; \
-    \
-    template<class R,class C> \
-    struct return_of<R C::*> \
-      { \
-      typedef R type; \
-      }; \
-    \
-    template<bool,typename U> \
-    struct menable_if; \
-    \
-    template<typename U> \
-    struct menable_if<true,U> \
-      { \
-      typedef U type; \
-      }; \
-    \
-    template<typename U,typename V> \
-    static ::boost::type_traits::yes_type check2(V U::*); \
-    \
-    template<typename U,typename V> \
-    static ::boost::type_traits::no_type check2(U); \
-    \
-    template<class F> \
-    struct class_type \
-      { \
-      typedef typename \
-      boost::remove_const \
-        < \
-        typename \
-        boost::mpl::at \
-          < \
-          typename \
-          boost::function_types::parameter_types \
-            < \
-            F, \
-            boost::mpl::quote1 \
-              < \
-              boost::mpl::identity \
-              > \
-            > \
-            ::type, \
-            boost::mpl::int_<0> \
-          >::type \
-        >::type \
-      type; \
-      }; \
-    \
-    template<T> \
-    struct helper; \
-    \
-    template<typename U,typename V> \
-    static typename \
-      menable_if \
-        < \
-        sizeof(check2<U,V>(&U::name))==sizeof(::boost::type_traits::yes_type), \
-        ::boost::type_traits::yes_type \
-        > \
-      ::type \
-    has_matching_member(int); \
-    \
-    template<typename U,typename V> \
-    static ::boost::type_traits::no_type has_matching_member(...); \
-    \
-    template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-    \
-    template<class U> \
-    static ::boost::type_traits::no_type check(...); \
-    \
-    template<class F> \
-    struct ttc_md \
-      { \
-      typedef boost::mpl::bool_<sizeof(has_matching_member<typename class_of<F>::type,typename return_of<F>::type>(0))==sizeof(::boost::type_traits::yes_type)> type; \
-      }; \
-    \
-    template<class F> \
-    struct ttc_mf \
-      { \
-      typedef boost::mpl::bool_<sizeof(check<typename class_type<F>::type>(nullptr))==sizeof(::boost::type_traits::yes_type)> type; \
-      }; \
-    \
-    template<class F> \
-    struct type_to_check \
-      { \
-      typedef typename \
-      boost::mpl::eval_if \
-        < \
-        boost::function_types::is_member_object_pointer<F>, \
-        ttc_md<F>, \
-        ttc_mf<F> \
-        >::type \
-      type; \
-      }; \
-    \
-    typedef typename type_to_check<T>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
-    \
-    }; \
-  } \
-/**/
-
-#endif // defined(BOOST_NO_NULLPTR)
-
-#else // !defined(BOOST_MSVC)
-
-#if defined(BOOST_NO_NULLPTR)
-
-/// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
-/**
-
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner member.
-
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.<br />
-    
-              The metafunction types and return:
-    
-                T = the type, in the form of a member data pointer or member function pointer, 
-                    in which to look for our 'name'.<br />
-                returns = 'value' is true if the 'name' exists, with the appropriate type,
-                          otherwise 'value' is false.
-                          
-*/
-#define TTI_TRAIT_HAS_MEMBER(trait,name) \
-namespace tti \
-  { \
-  template<class T> \
-  struct trait \
-    { \
-    template<class> \
-    struct class_of; \
-    \
-    template<class R,class C> \
-    struct class_of<R C::*> \
-      { \
-      typedef C type; \
-      }; \
-    \
-    template<class F> \
-    struct class_type \
-      { \
-      typedef typename \
-      boost::mpl::eval_if \
-        < \
-        boost::function_types::is_member_object_pointer<F>, \
-        class_of<F>, \
-        boost::remove_const \
-          < \
-          typename \
-          boost::mpl::at \
-            < \
-            typename \
-            boost::function_types::parameter_types \
-              < \
-              F, \
-              boost::mpl::quote1 \
-                < \
-                boost::mpl::identity \
-                > \
-              > \
-              ::type, \
-              boost::mpl::int_<0> \
-            >::type \
-          > \
-        >::type \
-      type; \
-      }; \
-    \
-    template<T> \
-    struct helper; \
-    \
-    template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-    \
-    template<class U> \
-    static ::boost::type_traits::no_type check(...); \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<typename class_type<T>::type>(0))==sizeof(::boost::type_traits::yes_type)); \
-    \
-    typedef boost::mpl::bool_<value> type; \
-    }; \
-  } \
-/**/
-
-#else // !defined(BOOST_NO_NULLPTR)
-
-/// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
-/**
-
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner member.
-
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
-    
-              The metafunction types and return:
-    
-                T = the type, in the form of a member data pointer or member function pointer, 
-                    in which to look for our 'name'.<br />
-                returns = 'value' is true if the 'name' exists, with the appropriate type,
-                          otherwise 'value' is false.
-                          
-*/
-#define TTI_TRAIT_HAS_MEMBER(trait,name) \
-namespace tti \
-  { \
-  template<class T> \
-  struct trait \
-    { \
-    template<class> \
-    struct class_of; \
-    \
-    template<class R,class C> \
-    struct class_of<R C::*> \
-      { \
-      typedef C type; \
-      }; \
-    \
-    template<class F> \
-    struct class_type \
-      { \
-      typedef typename \
-      boost::mpl::eval_if \
-        < \
-        boost::function_types::is_member_object_pointer<F>, \
-        class_of<F>, \
-        boost::remove_const \
-          < \
-          typename \
-          boost::mpl::at \
-            < \
-            typename \
-            boost::function_types::parameter_types \
-              < \
-              F, \
-              boost::mpl::quote1 \
-                < \
-                boost::mpl::identity \
-                > \
-              > \
-              ::type, \
-              boost::mpl::int_<0> \
-            >::type \
-          > \
-        >::type \
-      type; \
-      }; \
-    \
-    template<T> \
-    struct helper; \
-    \
-    template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-    \
-    template<class U> \
-    static ::boost::type_traits::no_type check(...); \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<typename class_type<T>::type>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
-    \
-    typedef boost::mpl::bool_<value> type; \
-    }; \
-  } \
-/**/
-
-#endif // defined(BOOST_NO_NULLPTR)
-
-#endif // defined(BOOST_MSVC)
 
 /// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
 /**
@@ -873,6 +579,26 @@ namespace tti \
   } \
 /**/
 
+#define TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
+    } \
+  struct trait \
+    { \
+    template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
+    struct apply \
+      { \
+      typedef detail::trait<typename detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
+    }; \
+  } \
+/**/
+
 /// Expands to a metafunction which tests whether a member function with a particular name and signature exists.
 /**
 
@@ -894,6 +620,14 @@ namespace tti \
   TTI_TRAIT_HAS_MEMBER_FUNCTION \
   ( \
   BOOST_PP_CAT(has_member_function_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_MTFC_HAS_MEMBER_FUNCTION(name) \
+  TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION \
+  ( \
+  BOOST_PP_CAT(mtfc_has_member_function_,name), \
   name \
   ) \
 /**/
@@ -931,6 +665,26 @@ namespace tti \
   } \
 /**/
 
+#define TTI_MTFC_TRAIT_HAS_MEMBER_DATA(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_MEMBER_DATA(trait,name) \
+    } \
+  struct trait \
+    { \
+    template<class T,class R> \
+    struct apply \
+      { \
+      typedef detail::trait<typename detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
+    }; \
+  } \
+/**/
+
 /// Expands to a metafunction which tests whether a member data with a particular name and type exists.
 /**
 
@@ -950,6 +704,14 @@ namespace tti \
   TTI_TRAIT_HAS_MEMBER_DATA \
   ( \
   BOOST_PP_CAT(has_member_data_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_MTFC_HAS_MEMBER_DATA(name) \
+  TTI_MTFC_TRAIT_HAS_MEMBER_DATA \
+  ( \
+  BOOST_PP_CAT(mtfc_has_member_data_,name), \
   name \
   ) \
 /**/
@@ -997,6 +759,31 @@ namespace tti \
   } \
 /**/
 
+#define TTI_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+namespace tti \
+  { \
+  struct trait \
+    { \
+    template<class T,class Type> \
+    struct apply \
+      { \
+      template<Type *> \
+      struct helper; \
+      \
+      template<class U> \
+      static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+      \
+      template<class U> \
+      static ::boost::type_traits::no_type check(...); \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
+      \
+      typedef boost::mpl::bool_<value> type; \
+      }; \
+    }; \
+  } \
+/**/
+
 #else // !defined(BOOST_NO_NULLPTR)
 
 /// Expands to a metafunction which tests whether a static member data or a static member function with a particular name and type exists.
@@ -1040,6 +827,31 @@ namespace tti \
   } \
 /**/
 
+#define TTI_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+namespace tti \
+  { \
+  struct trait \
+    { \
+    template<class T,class Type> \
+    struct apply \
+      { \
+      template<Type *> \
+      struct helper; \
+      \
+      template<class U> \
+      static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+      \
+      template<class U> \
+      static ::boost::type_traits::no_type check(...); \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+      \
+      typedef boost::mpl::bool_<value> type; \
+      }; \
+    }; \
+  } \
+/**/
+
 #endif // defined(BOOST_NO_NULLPTR)
   
 /// Expands to a metafunction which tests whether a static member data or a static member function with a particular name and type exists.
@@ -1064,6 +876,14 @@ namespace tti \
   TTI_TRAIT_HAS_STATIC_MEMBER \
   ( \
   BOOST_PP_CAT(has_static_member_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_MTFC_HAS_STATIC_MEMBER(name) \
+  TTI_MTFC_TRAIT_HAS_STATIC_MEMBER \
+  ( \
+  BOOST_PP_CAT(mtfc_has_static_member_,name), \
   name \
   ) \
 /**/
@@ -1103,6 +923,26 @@ namespace tti \
   } \
 /**/
 
+#define TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
+    } \
+  struct trait \
+    { \
+    template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
+    struct apply \
+      { \
+      typedef detail::trait<T,typename detail::tfunction_seq<R,FS,TAG>::type> type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
+    }; \
+  } \
+/**/
+
 /// Expands to a metafunction which tests whether a static member function with a particular name and signature exists.
 /**
 
@@ -1124,6 +964,14 @@ namespace tti \
   TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION \
   ( \
   BOOST_PP_CAT(has_static_member_function_,name), \
+  name \
+  ) \
+/**/
+
+#define TTI_MTFC_HAS_STATIC_MEMBER_FUNCTION(name) \
+  TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_FUNCTION \
+  ( \
+  BOOST_PP_CAT(mtfc_has_static_member_function_,name), \
   name \
   ) \
 /**/

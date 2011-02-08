@@ -74,6 +74,74 @@ int main()
               ::value
             ));
             
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::mtfc_has_type_AnIntType,
+                boost::mpl::identity<AType>
+                >
+              ::value
+            ));
+            
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::MetaFNameStruct,
+                boost::mpl::identity<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::mtfc_has_type_AnIntTypeReference,
+                boost::mpl::identity<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::mtfc_has_type_BType,
+                boost::mpl::identity<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::MClassTheInteger,
+                tti::member_type_BType<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::mtfc_has_type_CType,
+                tti::member_type_BType<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::mtfc_has_type_AnotherIntegerType,
+                tti::mf_member_type
+                  <
+                  tti::mtfc_member_type_CType,
+                  tti::member_type_BType<AType>
+                  >
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_type
+                <
+                tti::MTFCSomethingElse,
+                boost::mpl::identity<AnotherType>
+                >
+              ::value
+            ));
+            
   return boost::report_errors();
 
   }

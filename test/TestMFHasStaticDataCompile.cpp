@@ -25,6 +25,14 @@ int main()
                       >
                   ));
   
+  BOOST_MPL_ASSERT((tti::mf_has_static_data
+                      <
+                      tti::mtfc_has_static_member_DSMember,
+                      boost::mpl::identity<AType>,
+                      boost::mpl::identity<short>
+                      >
+                  ));
+  
   return 0;
 
   }

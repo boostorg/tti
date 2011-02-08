@@ -10,7 +10,7 @@ int main()
   
   tti::mf_has_type
     <
-    tti::has_type_AnIntType<_>,
+    tti::mtfc_has_type_AnIntType,
     boost::mpl::identity<AnotherType>
     > aVar;
   
@@ -78,6 +78,66 @@ int main()
   BOOST_MPL_ASSERT((tti::mf_has_type
                       <
                       tti::SomethingElse<_>,
+                      boost::mpl::identity<AnotherType>
+                      >
+                  ));
+            
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::mtfc_has_type_AnIntType,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
+            
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::MetaFNameStruct,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::mtfc_has_type_AnIntTypeReference,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::mtfc_has_type_BType,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::MClassTheInteger,
+                      tti::member_type_BType<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::mtfc_has_type_CType,
+                      tti::member_type_BType<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::mtfc_has_type_AnotherIntegerType,
+                      tti::mf_member_type
+                        <
+                        tti::member_type_CType<_>,
+                        tti::member_type_BType<AType>
+                        >
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_type
+                      <
+                      tti::MTFCSomethingElse,
                       boost::mpl::identity<AnotherType>
                       >
                   ));

@@ -46,6 +46,46 @@ int main()
               ::value
             ));
   
+  BOOST_TEST((tti::mf_has_template
+                <
+                tti::MetaHaveMStr,
+                tti::member_type_AStructType<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((!tti::mf_has_template
+                <
+                tti::mtfc_has_template_TemplateNotExist,
+                tti::MT_BType<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_template
+                <
+                tti::mtfc_has_template_ATPMemberTemplate,
+                boost::mpl::identity<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_template
+                <
+                tti::MFClassHaveCL,
+                boost::mpl::identity<AType>
+                >
+              ::value
+            ));
+  
+  BOOST_TEST((tti::mf_has_template
+                <
+                tti::mtfc_has_template_SimpleTMP,
+                boost::mpl::identity<AnotherType>
+                >
+              ::value
+            ));
+  
   return boost::report_errors();
   
   }

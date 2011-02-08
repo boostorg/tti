@@ -50,6 +50,19 @@ namespace tti \
   } \
 /**/
 
+#define TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
+namespace tti \
+  { \
+  struct trait \
+    { \
+    TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
+      (  \
+        ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( apply, name, 1, false, __VA_ARGS__ ) )  \
+      )  \
+    }; \
+  } \
+/**/
+
 #else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
 
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
@@ -79,6 +92,16 @@ namespace tti \
   } \
 /**/
 
+#define TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
+namespace tti \
+  { \
+  TTI_DETAIL_MTFC_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
+    ( \
+      ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( trait, name, 1, false, __VA_ARGS__ ) )  \
+    ) \
+  } \
+/**/
+
 #endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
 #else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
@@ -100,7 +123,20 @@ namespace tti \
     
 */
 #define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-TTI_DETAIL_SAME(trait,name) \
+namespace tti \
+  { \
+  TTI_DETAIL_SAME(trait,name) \
+  } \
+/**/
+
+#define TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
+namespace tti \
+  { \
+  struct trait \
+    { \
+    TTI_DETAIL_SAME(apply,name) \
+    }; \
+  } \
 /**/
 
 #endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
@@ -125,6 +161,15 @@ TTI_DETAIL_SAME(trait,name) \
   TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
   BOOST_PP_CAT(has_template_check_params_,name), \
+  name, \
+  __VA_ARGS__ \
+  ) \
+/**/
+
+#define TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
+  TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
+  ( \
+  BOOST_PP_CAT(mtfc_has_template_check_params_,name), \
   name, \
   __VA_ARGS__ \
   ) \

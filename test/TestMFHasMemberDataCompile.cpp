@@ -39,40 +39,108 @@ int main()
                   ));
   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
-                <
-                tti::has_member_data_IntBT<_,_>,
-                boost::mpl::identity<AType>,
-                tti::member_type_BType<AType>
-                >
-            ));
+                      <
+                      tti::has_member_data_IntBT<_,_>,
+                      boost::mpl::identity<AType>,
+                      tti::member_type_BType<AType>
+                      >
+                  ));
   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
-                <
-                tti::NestedData<_,_>,
-                boost::mpl::identity<AType>,
-                tti::mf_member_type
-                  <
-                  tti::member_type_CType<_>,
-                  tti::member_type_BType<AType>
-                  >
-                >
-            ));
+                      <
+                      tti::NestedData<_,_>,
+                      boost::mpl::identity<AType>,
+                      tti::mf_member_type
+                        <
+                        tti::member_type_CType<_>,
+                        tti::member_type_BType<AType>
+                        >
+                      >
+                  ));
   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
-                <
-                tti::AOther<_,_>,
-                boost::mpl::identity<AnotherType>,
-                boost::mpl::identity<AType>
-                >
-            ));
+                      <
+                      tti::AOther<_,_>,
+                      boost::mpl::identity<AnotherType>,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
   
   BOOST_MPL_ASSERT((tti::mf_has_member_data
-                <
-                tti::has_member_data_ONestStr<_,_>,
-                boost::mpl::identity<AnotherType>,
-                tti::member_type_AStructType<AType>
-                >
-            ));
+                      <
+                      tti::has_member_data_ONestStr<_,_>,
+                      boost::mpl::identity<AnotherType>,
+                      tti::member_type_AStructType<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::mtfc_has_member_data_AnInt,
+                      boost::mpl::identity<AType>,
+                      boost::mpl::identity<int> 
+                      >
+                  ));
+            
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::mtfc_has_member_data_AnInt,
+                      boost::mpl::identity<AnotherType>,
+                      boost::mpl::identity<long> 
+                      >
+                  ));
+            
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::mtfc_has_member_data_aMember,
+                      boost::mpl::identity<AnotherType>,
+                      boost::mpl::identity<bool> 
+                      >
+                  ));
+            
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::MFCMember,
+                      boost::mpl::identity<AnotherType>,
+                      boost::mpl::identity<bool> 
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::mtfc_has_member_data_IntBT,
+                      boost::mpl::identity<AType>,
+                      tti::member_type_BType<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::MFNestedData,
+                      boost::mpl::identity<AType>,
+                      tti::mf_member_type
+                        <
+                        tti::mtfc_member_type_CType,
+                        tti::member_type_BType<AType>
+                        >
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::MFAOther,
+                      boost::mpl::identity<AnotherType>,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_member_data
+                      <
+                      tti::mtfc_has_member_data_ONestStr,
+                      boost::mpl::identity<AnotherType>,
+                      tti::member_type_AStructType<AType>
+                      >
+                  ));
   
   return 0;
 

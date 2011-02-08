@@ -16,7 +16,7 @@ int main()
     
   tti::mf_has_template
     <
-    tti::has_template_ATPMemberTemplate<_>,
+    tti::mtfc_has_template_ATPMemberTemplate,
     boost::mpl::identity<AnotherType>
     > aVar2;
   
@@ -46,6 +46,34 @@ int main()
   BOOST_MPL_ASSERT((tti::mf_has_template
                       <
                       tti::has_template_SimpleTMP<_>,
+                      boost::mpl::identity<AnotherType>
+                      >
+                  ));
+
+  BOOST_MPL_ASSERT((tti::mf_has_template
+                      <
+                      tti::MetaHaveMStr,
+                      tti::member_type_AStructType<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_template
+                      <
+                      tti::mtfc_has_template_ATPMemberTemplate,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_template
+                      <
+                      tti::MFClassHaveCL,
+                      boost::mpl::identity<AType>
+                      >
+                  ));
+  
+  BOOST_MPL_ASSERT((tti::mf_has_template
+                      <
+                      tti::mtfc_has_template_SimpleTMP,
                       boost::mpl::identity<AnotherType>
                       >
                   ));
