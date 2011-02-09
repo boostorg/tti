@@ -1,6 +1,7 @@
 #if !defined(TT_INTROSPECTION_TEMPLATE_HPP)
 #define TT_INTROSPECTION_TEMPLATE_HPP
 
+#include <boost/config.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/apply.hpp>
 #include "detail/TTIntrospectionDetail.hpp"
@@ -38,10 +39,13 @@ namespace tti
     class HasTemplateCheckParams,
     class T
     >
-  struct mf_has_template_check_params
+  struct mf_has_template_check_params :
+    boost::mpl::apply
+      <
+      HasTemplateCheckParams,
+      typename T::type
+      >::type
     {
-    typedef typename boost::mpl::apply<HasTemplateCheckParams,typename T::type>::type type;
-    BOOST_STATIC_CONSTANT(bool,value=type::value);
     };
   }
   

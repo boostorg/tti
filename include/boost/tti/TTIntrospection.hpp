@@ -5,17 +5,13 @@
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/apply.hpp>
-#include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/identity.hpp>
+#include <boost/mpl/not.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
-#include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include <boost/preprocessor/seq/enum.hpp>
-#include <boost/preprocessor/seq/size.hpp>
-#include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/remove_const.hpp>
 #include "TTIntrospectionTemplate.hpp"
@@ -73,6 +69,23 @@ namespace tti \
   } \
 /**/
 
+/// Expands to a metafunction class which tests whether an inner type with a particular name exists and optionally is a particular type.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner type.
+
+    returns = a metfunction class called "tti::trait" where 'trait' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                U = the type of the inner type named 'name' as an optional parameter.<br />
+                returns = 'value' is true if the 'name' type exists within the enclosing type
+                          and, if type U is specified, the 'name' type is the same as the type U,
+                          otherwise 'value' is false.
+    
+*/
 #define TTI_MTFC_TRAIT_HAS_TYPE(trait,name) \
 namespace tti \
   { \
@@ -126,6 +139,22 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether an inner type with a particular name exists and optionally is a particular type.
+/**
+
+    name  = the name of the inner type.
+
+    returns = a metafunction class called "tti::mtfc_has_type_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                U = the type of the inner type named 'name' as an optional parameter.<br />
+                returns = 'value' is true if the 'name' type exists within the enclosing type
+                          and, if type U is specified, the 'name' type is the same as the type U,
+                          otherwise 'value' is false.
+    
+*/
 #define TTI_MTFC_HAS_TYPE(name) \
   TTI_MTFC_TRAIT_HAS_TYPE \
   ( \
@@ -177,6 +206,26 @@ namespace tti \
   } \
 /**/
 
+/// Expands to a metafunction class whose typedef 'type' is either the named type or an unspecified type.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner type.
+
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+              
+                T = the enclosing type.<br />
+                returns = 'type' is the inner type of 'name' if the inner type exists
+                          within the enclosing type, else 'type' is an unspecified type.<br />
+                          
+    The purpose of this macro is to encapsulate the 'name' type as the typedef 'type'
+    of a metafunction class, but only if it exists within the enclosing type. This allows for
+    a lazy evaluation of inner type existence which can be used by other metafunctions
+    in this library.
+    
+*/
 #define TTI_MTFC_TRAIT_MEMBER_TYPE(trait,name) \
 namespace tti \
   { \
@@ -230,6 +279,25 @@ namespace tti \
   ) \
 /**/
   
+/// Expands to a metafunction class whose typedef 'type' is either the named type or an unspecified type.
+/**
+
+    name  = the name of the inner type.
+
+    returns = a metafunction class called "tti::member_type_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+              
+                T = the enclosing type.<br />
+                returns = 'type' is the inner type of 'name' if the inner type exists
+                          within the enclosing type, else 'type' is an unspecified type.<br />
+                          
+    The purpose of this macro is to encapsulate the 'name' type as the typedef 'type'
+    of a metafunction class, but only if it exists within the enclosing type. This allows for
+    a lazy evaluation of inner type existence which can be used by other metafunctions
+    in this library.
+    
+*/
 #define TTI_MTFC_MEMBER_TYPE(name) \
   TTI_MTFC_TRAIT_MEMBER_TYPE \
   ( \
@@ -272,6 +340,23 @@ namespace tti \
   } \
 /**/
   
+/// Expands to a metafunction class which tests whether an inner class template with a particular name exists.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner template.
+
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' template exists within the enclosing type,
+                          otherwise 'value' is false.
+                          
+                The template must have all 'class' ( or 'typename' ) parameters types.
+    
+*/
 #define TTI_MTFC_TRAIT_HAS_TEMPLATE(trait,name) \
 namespace tti \
   { \
@@ -316,6 +401,22 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether an inner class template with a particular name exists.
+/**
+
+    name  = the name of the inner template.
+
+    returns = a metafunction class called "tti::has_template_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' template exists within the enclosing type,
+                          otherwise 'value' is false.
+                          
+                The template must have all 'class' ( or 'typename' ) parameters types.
+    
+*/
 #define TTI_MTFC_HAS_TEMPLATE(name) \
   TTI_MTFC_TRAIT_HAS_TEMPLATE \
   ( \
@@ -324,9 +425,6 @@ namespace tti \
   ) \
 /**/
 
-#if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
-#if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
-
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
 
@@ -349,40 +447,32 @@ namespace tti \
 #define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
 namespace tti \
   { \
-  TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
-    (  \
-      ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( trait, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
-    )  \
-  } \
-/**/
-
-#define TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
-namespace tti \
-  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+    } \
+  template<class T> \
   struct trait \
     { \
-    TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
-      (  \
-        ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( apply, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
-      )  \
+    typedef typename detail::trait<T>::type type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
 
-#else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
-
-/// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
+/// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.<br />
+    trait = the name of the metafunction class within the tti namespace.<br />
     name  = the name of the inner class template.<br />
     tpSeq = a Boost PP sequence which has the class template parameters.
             Each part of the template parameters separated by a comma ( , )
             is put in a separate sequence element.<br />
 
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.
     
-              The metafunction types and return:
+              The metafunction class's 'apply' metafunction types and return:
     
                 T = the enclosing type in which to look for our 'name'.<br />
                 returns = 'value' is true if the 'name' class template with the signature
@@ -390,66 +480,25 @@ namespace tti \
                           otherwise 'value' is false.
     
 */
-#define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
-namespace tti \
-  { \
-  TTI_DETAIL_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
-    ( \
-      ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( trait, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
-    ) \
-  } \
-/**/
-
 #define TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
 namespace tti \
   { \
-  TTI_DETAIL_MTFC_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
-    ( \
-      ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( trait, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
-    ) \
-  } \
-/**/
-
-#endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
-#else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
-
-/// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
-/**
-
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner class template.<br />
-    tpSeq = a Boost PP sequence which has the class template parameters.
-            Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.<br />
-
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
-    
-              The metafunction types and return:
-    
-                T = the enclosing type in which to look for our 'name'.<br />
-                returns = 'value' is true if the 'name' class template with the signature
-                          as defined by the 'tpSeq' exists within the enclosing type,
-                          otherwise 'value' is false.
-    
-*/
-#define TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
-namespace tti \
-  { \
-  TTI_DETAIL_SAME(trait,name) \
-  } \
-/**/
-
-#define TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
-namespace tti \
-  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+    } \
   struct trait \
     { \
-    TTI_DETAIL_SAME(apply,name) \
+    template<class T> \
+    struct apply \
+      { \
+      typedef typename detail::trait::apply<T>::type type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
     }; \
   } \
 /**/
-
-#endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
@@ -478,6 +527,24 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
+/**
+
+    name  = the name of the inner class template.<br />
+    tpSeq = a Boost PP sequence which has the class template parameters.
+            Each part of the template parameters separated by a comma ( , )
+            is put in a separate sequence element.
+
+    returns = a metafunction class called "tti::has_template_check_params_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' class template with the signature
+                          as defined by the 'tpSeq' exists within the enclosing type,
+                          otherwise 'value' is false.
+    
+*/
 #define TTI_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,tpSeq) \
   TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
@@ -579,6 +646,24 @@ namespace tti \
   } \
 /**/
 
+/// Expands to a metafunction class which tests whether a member function with a particular name and signature exists.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.<br />
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T   = the enclosing type in which to look for our 'name'.<br />
+                R   = the return type of the member function.<br />
+                FS  = an optional parameter which are the parameters of the member function as a boost::mpl forward sequence.<br />
+                TAG = an optional parameter which is a boost::function_types tag to apply to the member function.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
 #define TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
 namespace tti \
   { \
@@ -624,6 +709,23 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether a member function with a particular name and signature exists.
+/**
+
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::has_member_function_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T   = the enclosing type in which to look for our 'name'.<br />
+                R   = the return type of the member function.<br />
+                FS  = an optional parameter which are the parameters of the member function as a boost::mpl forward sequence.<br />
+                TAG = an optional parameter which is a boost::function_types tag to apply to the member function.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
 #define TTI_MTFC_HAS_MEMBER_FUNCTION(name) \
   TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION \
   ( \
@@ -665,6 +767,22 @@ namespace tti \
   } \
 /**/
 
+/// Expands to a metafunction class which tests whether a member data with a particular name and type exists.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.<br />
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T   = the enclosing type in which to look for our 'name'.<br />
+                R   = the type of the member data.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
 #define TTI_MTFC_TRAIT_HAS_MEMBER_DATA(trait,name) \
 namespace tti \
   { \
@@ -708,6 +826,21 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether a member data with a particular name and type exists.
+/**
+
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::has_member_data_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T   = the enclosing type in which to look for our 'name'.<br />
+                R   = the type of the member data.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
 #define TTI_MTFC_HAS_MEMBER_DATA(name) \
   TTI_MTFC_TRAIT_HAS_MEMBER_DATA \
   ( \
@@ -716,8 +849,6 @@ namespace tti \
   ) \
 /**/
 
-#if defined(BOOST_NO_NULLPTR)
-
 /// Expands to a metafunction which tests whether a static member data or a static member function with a particular name and type exists.
 /**
 
@@ -740,61 +871,29 @@ namespace tti \
 #define TTI_TRAIT_HAS_STATIC_MEMBER(trait,name) \
 namespace tti \
   { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+    } \
   template<class T,class Type> \
   struct trait \
     { \
-    template<Type *> \
-    struct helper; \
+    typedef typename detail::trait<T,Type>::type type; \
     \
-    template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-    \
-    template<class U> \
-    static ::boost::type_traits::no_type check(...); \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
-    \
-    typedef boost::mpl::bool_<value> type; \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
 
-#define TTI_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
-namespace tti \
-  { \
-  struct trait \
-    { \
-    template<class T,class Type> \
-    struct apply \
-      { \
-      template<Type *> \
-      struct helper; \
-      \
-      template<class U> \
-      static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-      \
-      template<class U> \
-      static ::boost::type_traits::no_type check(...); \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
-      \
-      typedef boost::mpl::bool_<value> type; \
-      }; \
-    }; \
-  } \
-/**/
-
-#else // !defined(BOOST_NO_NULLPTR)
-
-/// Expands to a metafunction which tests whether a static member data or a static member function with a particular name and type exists.
+/// Expands to a metafunction class which tests whether a static member data or a static member function with a particular name and type exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.<br />
+    trait = the name of the metafunction class within the tti namespace.<br />
     name  = the name of the inner member.
 
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.<br />
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.<br />
     
-              The metafunction types and return:
+              The metafunction class's 'apply' metafunction types and return:
     
                 T    = the enclosing type.<br />
                 Type = the static member data or static member function type,
@@ -805,55 +904,27 @@ namespace tti \
                           otherwise 'value' is false.
                           
 */
-#define TTI_TRAIT_HAS_STATIC_MEMBER(trait,name) \
-namespace tti \
-  { \
-  template<class T,class Type> \
-  struct trait \
-    { \
-    template<Type *> \
-    struct helper; \
-    \
-    template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-    \
-    template<class U> \
-    static ::boost::type_traits::no_type check(...); \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
-    \
-    typedef boost::mpl::bool_<value> type; \
-    }; \
-  } \
-/**/
-
 #define TTI_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
 namespace tti \
   { \
+  namespace detail \
+    { \
+    TTI_DETAIL_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+    } \
   struct trait \
     { \
     template<class T,class Type> \
     struct apply \
       { \
-      template<Type *> \
-      struct helper; \
+      typedef typename detail::trait::apply<T,Type>::type type; \
       \
-      template<class U> \
-      static ::boost::type_traits::yes_type check(helper<&U::name> *); \
-      \
-      template<class U> \
-      static ::boost::type_traits::no_type check(...); \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
-      \
-      typedef boost::mpl::bool_<value> type; \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
     }; \
   } \
 /**/
 
-#endif // defined(BOOST_NO_NULLPTR)
-  
+
 /// Expands to a metafunction which tests whether a static member data or a static member function with a particular name and type exists.
 /**
 
@@ -880,6 +951,24 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether a static member data or a static member function with a particular name and type exists.
+/**
+
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::has_static_member_name" where 'name' is the macro parameter.<br />
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T    = the enclosing type.<br />
+                Type = the static member data or static member function type,
+                       in the form of a data or function type,
+                       in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' exists within the enclosing type,
+                          with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
 #define TTI_MTFC_HAS_STATIC_MEMBER(name) \
   TTI_MTFC_TRAIT_HAS_STATIC_MEMBER \
   ( \
@@ -923,6 +1012,24 @@ namespace tti \
   } \
 /**/
 
+/// Expands to a metafunction class which tests whether a static member function with a particular name and signature exists.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.<br />
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T   = the enclosing type in which to look for our 'name'.<br />
+                R   = the return type of the static member function.<br />
+                FS  = an optional parameter which are the parameters of the static member function as a boost::mpl forward sequence.<br />
+                TAG = an optional parameter which is a boost::function_types tag to apply to the static member function.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
 #define TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
 namespace tti \
   { \
@@ -968,6 +1075,23 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether a static member function with a particular name and signature exists.
+/**
+
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::has_static_member_function_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T   = the enclosing type in which to look for our 'name'.<br />
+                R   = the return type of the static member function.<br />
+                FS  = an optional parameter which are the parameters of the static member function as a boost::mpl forward sequence.<br />
+                TAG = an optional parameter which is a boost::function_types tag to apply to the static member function.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
 #define TTI_MTFC_HAS_STATIC_MEMBER_FUNCTION(name) \
   TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_FUNCTION \
   ( \

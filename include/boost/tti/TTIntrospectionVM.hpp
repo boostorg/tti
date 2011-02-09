@@ -2,13 +2,12 @@
 #define TT_INTROSPECTION_VM_HPP
 
 #include <boost/config.hpp>
-#include <boost/mpl/has_xxx.hpp>
-#include <boost/mpl/identity.hpp>
-#include <boost/preprocessor/arithmetic/add.hpp>
-#include <boost/preprocessor/cat.hpp>
-#include <boost/variadic_macro_data/VariadicMacroData.hpp>
 #include "TTIntrospectionTemplate.hpp"
-#include "detail/TTIntrospectionDetail.hpp"
+
+#if !defined(BOOST_NO_VARIADIC_MACROS)
+
+#include <boost/preprocessor/cat.hpp>
+#include "detail/TTIntrospectionVMDetail.hpp"
 
 /*
 
@@ -19,10 +18,6 @@
 /** \file
 */
 
-#if !defined(BOOST_NO_VARIADIC_MACROS)
-#if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
-#if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
-
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
 
@@ -43,38 +38,30 @@
 #define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
 namespace tti \
   { \
-  TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
-    (  \
-      ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( trait, name, 1, false, __VA_ARGS__ ) )  \
-    )  \
-  } \
-/**/
-
-#define TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
-  { \
+  namespace detail \
+    { \
+    TTI_VM_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
+    } \
+  template<class T> \
   struct trait \
     { \
-    TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
-      (  \
-        ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( apply, name, 1, false, __VA_ARGS__ ) )  \
-      )  \
+    typedef typename detail::trait<T>::type type; \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
 
-#else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
-
-/// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
+/// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.<br />
+    trait = the name of the metafunction class within the tti namespace.<br />
     name  = the name of the inner class template.<br />
     ...   = variadic macro data which has the class template parameters.
 
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.
     
-              The metafunction types and return:
+              The metafunction class's 'apply' metafunction types and return:
     
                 T = the enclosing type in which to look for our 'name'.<br />
                 returns = 'value' is true if the 'name' class template, with the signature
@@ -82,64 +69,26 @@ namespace tti \
                           otherwise 'value' is false.
     
 */
-#define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
-  { \
-  TTI_DETAIL_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
-    ( \
-      ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( trait, name, 1, false, __VA_ARGS__ ) )  \
-    ) \
-  } \
-/**/
-
 #define TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
 namespace tti \
   { \
-  TTI_DETAIL_MTFC_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
-    ( \
-      ( BOOST_PP_ADD(VMD_DATA_SIZE(__VA_ARGS__),4), ( trait, name, 1, false, __VA_ARGS__ ) )  \
-    ) \
-  } \
-/**/
-
-#endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
-#else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
-
-/// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
-/**
-
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner class template.<br />
-    ...   = variadic macro data which has the class template parameters.
-
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
-    
-              The metafunction types and return:
-    
-                T = the enclosing type in which to look for our 'name'.<br />
-                returns = 'value' is true if the 'name' class template, with the signature
-                          as defined by the '...' variadic macro data, exists within the enclosing type,
-                          otherwise 'value' is false.
-    
-*/
-#define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
-  { \
-  TTI_DETAIL_SAME(trait,name) \
-  } \
-/**/
-
-#define TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
-  { \
+  namespace detail \
+    { \
+    TTI_VM_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
+    } \
   struct trait \
     { \
-    TTI_DETAIL_SAME(apply,name) \
+    template<class T> \
+    struct apply \
+      { \
+      typedef typename detail::trait::apply<T>::type type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
     }; \
   } \
 /**/
 
-#endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
@@ -166,6 +115,22 @@ namespace tti \
   ) \
 /**/
 
+/// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
+/**
+
+    name  = the name of the inner class template.<br />
+    ...   = variadic macro data which has the class template parameters.
+
+    returns = a metafunction class called "tti::mtfc_has_template_check_params_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' class template, with the signature
+                          as defined by the '...' variadic macro data, exists within the enclosing type,
+                          otherwise 'value' is false.
+    
+*/
 #define TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
   TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \

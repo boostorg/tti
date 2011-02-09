@@ -8,23 +8,18 @@
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/int.hpp>
-#include <boost/mpl/not.hpp>
 #include <boost/mpl/push_front.hpp>
 #include <boost/mpl/quote.hpp>
-#include <boost/mpl/remove.hpp>
-#include <boost/mpl/transform.hpp>
-#include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/arithmetic/sub.hpp>
 #include <boost/preprocessor/array/elem.hpp>
 #include <boost/preprocessor/array/size.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include <boost/preprocessor/iteration/iterate.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/preprocessor/repetition/enum.hpp>
-#include <boost/preprocessor/repetition/enum_shifted.hpp>
-#include <boost/preprocessor/repetition/enum_shifted_params.hpp>
+#include <boost/preprocessor/seq/enum.hpp>
+#include <boost/preprocessor/seq/size.hpp>
 #include <boost/function_types/function_type.hpp>
 #include <boost/function_types/is_member_object_pointer.hpp>
 #include <boost/function_types/member_function_pointer.hpp>
@@ -810,6 +805,146 @@ struct trait<T,tti::detail::notype,boost::mpl::true_::type> \
 #endif // defined(BOOST_NO_NULLPTR)
 
 #endif // defined(BOOST_MSVC)
+
+#if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
+#if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+
+#define TTI_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+  TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
+    (  \
+      ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( trait, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
+    )  \
+/**/
+
+#define TTI_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+  struct trait \
+    { \
+    TTI_DETAIL_HAS_MEMBER_WITH_FUNCTION_SFINAE \
+      (  \
+        ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( apply, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
+      )  \
+    }; \
+/**/
+
+#else // !!BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+
+#define TTI_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+  TTI_DETAIL_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
+    ( \
+      ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( trait, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
+    ) \
+/**/
+
+#define TTI_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+  TTI_DETAIL_MTFC_HAS_MEMBER_WITH_TEMPLATE_SFINAE \
+    ( \
+      ( BOOST_PP_ADD(BOOST_PP_SEQ_SIZE(tpSeq),4), ( trait, name, 1, false, BOOST_PP_SEQ_ENUM(tpSeq) ) )  \
+    ) \
+/**/
+
+#endif // !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
+#else // !!defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
+
+#define TTI_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+  TTI_DETAIL_SAME(trait,name) \
+/**/
+
+#define TTI_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
+  struct trait \
+    { \
+    TTI_DETAIL_SAME(apply,name) \
+    }; \
+/**/
+
+#endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
+
+#if defined(BOOST_NO_NULLPTR)
+
+#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+  template<class T,class Type> \
+  struct trait \
+    { \
+    template<Type *> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef boost::mpl::bool_<value> type; \
+    }; \
+/**/
+
+#define TTI_DETAIL_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+  struct trait \
+    { \
+    template<class T,class Type> \
+    struct apply \
+      { \
+      template<Type *> \
+      struct helper; \
+      \
+      template<class U> \
+      static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+      \
+      template<class U> \
+      static ::boost::type_traits::no_type check(...); \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
+      \
+      typedef boost::mpl::bool_<value> type; \
+      }; \
+    }; \
+/**/
+
+#else // !defined(BOOST_NO_NULLPTR)
+
+#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+  template<class T,class Type> \
+  struct trait \
+    { \
+    template<Type *> \
+    struct helper; \
+    \
+    template<class U> \
+    static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+    \
+    template<class U> \
+    static ::boost::type_traits::no_type check(...); \
+    \
+    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+    \
+    typedef boost::mpl::bool_<value> type; \
+    }; \
+/**/
+
+#define TTI_DETAIL_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+  struct trait \
+    { \
+    template<class T,class Type> \
+    struct apply \
+      { \
+      template<Type *> \
+      struct helper; \
+      \
+      template<class U> \
+      static ::boost::type_traits::yes_type check(helper<&U::name> *); \
+      \
+      template<class U> \
+      static ::boost::type_traits::no_type check(...); \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+      \
+      typedef boost::mpl::bool_<value> type; \
+      }; \
+    }; \
+/**/
+
+#endif // defined(BOOST_NO_NULLPTR)
 
 namespace tti
   {
