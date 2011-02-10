@@ -17,6 +17,7 @@
 [include TTIDetail.qbk]
 [include TTINestedType.qbk]
 [include TTIUsingMM.qbk]
+[include TTIMetaClasses.qbk]
 [include TTIMetafunctions.qbk]
 [include TTIUsingNTM.qbk]
 [include TTIReference.qbk]

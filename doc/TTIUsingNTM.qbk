@@ -85,6 +85,11 @@ Now let us create and invoke the nested metafunctions for each of our inner elem
 to see if type T above corresponds to our hypothetical type above. Imagine this being 
 within 'OurTemplateClass' above. In the examples below the same macro is invoked just once 
 to avoid ODR violations.
+
+I will also be mixing the way the macro metafunction metadata is passed to our  
+nullary type metafunctions, whether as a metafunction class or as a placeholder 
+expression. Both will work just fine since our nullary type metafunctions work 
+with any lambda expression as the first template parameter.
  
 [heading Member type]
 
@@ -94,7 +99,7 @@ will produce a compiler error even if our structure does not correspond
 to T's reality. This also illustrates using 'tti::mf_member_type'.
 
  TTI_MEMBER_TYPE(BType)
- TTI_MEMBER_TYPE(CType)
+ TTI_MTFC_MEMBER_TYPE(CType)
  TTI_MEMBER_TYPE(DType)
  
  typedef
@@ -108,7 +113,7 @@ to T's reality. This also illustrates using 'tti::mf_member_type'.
  typedef
  tti::mf_member_type
    <
-   tti::member_type_CType<_>,
+   tti::mtfc_member_type_CType,
    BTypeNM
    >
  CTypeNM;
@@ -148,11 +153,11 @@ metafunction to the same effect:
 Does T have a nested typedef called 'ADoubleType' 
 within 'BType::CType::DType' whose type is a 'double' ?
 
- TTI_HAS_TYPE(ADoubleType)
+ TTI_MTFC_HAS_TYPE(ADoubleType)
  
  tti::mf_has_type
    <
-   tti::has_type_ADoubleType<_,_>,
+   tti::mtfc_has_type_ADoubleType,
    DTypeNM,
    boost::mpl::identity<double>
    >
@@ -162,11 +167,11 @@ within 'BType::CType::DType' whose type is a 'double' ?
 Does T have a nested class template called 'AMemberTemplate' 
 within 'BType::CType' whose template parameters are all types ('class' or 'typename') ?
 
- TTI_HAS_TEMPLATE(AMemberTemplate)
+ TTI_MTFC_HAS_TEMPLATE(AMemberTemplate)
  
  tti::mf_has_template
    <
-   tti::has_template_AMemberTemplate<_>,
+   tti::mtfc_has_template_AMemberTemplate,
    CTypeNM
    >
 
@@ -191,11 +196,11 @@ within 'BType::CType' whose template parameters are specified exactly ?
 [note Include the 'TTIntrospectionVM.hpp' header file
 when using this macro.]
 
- TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,class,class,int,short,class,template <class,int> class InnerTemplate,class)
+ TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,class,class,int,short,class,template <class,int> class InnerTemplate,class)
  
  tti::mf_has_template_check_params
    <
-   tti::has_template_check_params_MoreParameters<_>,
+   tti::mtfc_has_template_check_params_MoreParameters,
    CTypeNM
    >
 
@@ -203,11 +208,11 @@ when using this macro.]
 
 Does T have a member data called 'IntBT' whose type is 'BType' ?
 
- TTI_HAS_MEMBER_DATA(IntBT)
+ TTI_MTFC_HAS_MEMBER_DATA(IntBT)
  
  tti::mf_has_member_data
    <
-   tti::has_member_data_IntBT<_,_>,
+   tti::mtfc_has_member_data_IntBT,
    boost::mpl::identity<T>,
    BTypeNM
    >
@@ -233,11 +238,11 @@ within 'BType::CType::DType' whose type is 'int (short) const' ?
 Does T have a static member data called 'DSMember' 
 within 'BType::CType::DType' whose type is 'short' ?
 
- TTI_HAS_STATIC_MEMBER(DSMember)
+ TTI_MTFC_HAS_STATIC_MEMBER(DSMember)
  
  tti::mf_has_static_data
    <
-   tti::has_static_member_DSMember<_,_>,
+   tti::mtfc_has_static_member_DSMember,
    DTypeNM,
    boost::mpl::identity<short>
    >

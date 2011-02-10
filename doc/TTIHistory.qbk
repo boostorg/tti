@@ -1,5 +1,10 @@
 [section:tti_history History]
 
+[heading Version 1.2]
+
+* Added the set of metafunction class macros for passing the macro metafunctions as metadata.
+  This complements passing the macro metafunctions as metadata using placeholder expressions.
+
 [heading Version 1.1]
 
 * Library now also compiles with gcc 3.4.2 and gcc 3.4.5.

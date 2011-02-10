@@ -284,7 +284,7 @@ namespace tti \
 
     name  = the name of the inner type.
 
-    returns = a metafunction class called "tti::member_type_name" where 'name' is the macro parameter.
+    returns = a metafunction class called "tti::mtfc_member_type_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
               
@@ -406,7 +406,7 @@ namespace tti \
 
     name  = the name of the inner template.
 
-    returns = a metafunction class called "tti::has_template_name" where 'name' is the macro parameter.
+    returns = a metafunction class called "tti::mtfc_has_template_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -535,7 +535,7 @@ namespace tti \
             Each part of the template parameters separated by a comma ( , )
             is put in a separate sequence element.
 
-    returns = a metafunction class called "tti::has_template_check_params_name" where 'name' is the macro parameter.
+    returns = a metafunction class called "tti::mtfc_has_template_check_params_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -588,6 +588,43 @@ namespace tti \
   } \
 /**/
 
+/// Expands to a metafunction class which tests whether a member data or member function with a particular name and type exists.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.<br />
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the type, in the form of a member data pointer or member function pointer, 
+                    in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
+#define TTI_MTFC_TRAIT_HAS_MEMBER(trait,name) \
+namespace tti \
+  { \
+  namespace detail \
+    { \
+    TTI_DETAIL_TRAIT_HAS_MEMBER(trait,name) \
+    } \
+  struct trait \
+    { \
+    template<class T> \
+    struct apply \
+      { \
+      typedef typename detail::trait<T>::type type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      \
+      }; \
+    }; \
+  } \
+/**/
+
 /// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
 /**
 
@@ -607,6 +644,29 @@ namespace tti \
   TTI_TRAIT_HAS_MEMBER \
   ( \
   BOOST_PP_CAT(has_member_,name), \
+  name \
+  ) \
+/**/
+
+/// Expands to a metafunction class which tests whether a member data or member function with a particular name and type exists.
+/**
+
+    name  = the name of the inner member.
+
+    returns = a metafunction class called "tti::mtfc_has_member_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the type, in the form of a member data pointer or member function pointer, 
+                    in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' exists, with the appropriate type,
+                          otherwise 'value' is false.
+                          
+*/
+#define TTI_MTFC_HAS_MEMBER(name) \
+  TTI_MTFC_TRAIT_HAS_MEMBER \
+  ( \
+  BOOST_PP_CAT(mtfc_has_member_,name), \
   name \
   ) \
 /**/
@@ -714,7 +774,7 @@ namespace tti \
 
     name  = the name of the inner member.
 
-    returns = a metafunction class called "tti::has_member_function_name" where 'name' is the macro parameter.
+    returns = a metafunction class called "tti::mtfc_has_member_function_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -831,7 +891,7 @@ namespace tti \
 
     name  = the name of the inner member.
 
-    returns = a metafunction class called "tti::has_member_data_name" where 'name' is the macro parameter.
+    returns = a metafunction class called "tti::mtfc_has_member_data_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -956,7 +1016,7 @@ namespace tti \
 
     name  = the name of the inner member.
 
-    returns = a metafunction class called "tti::has_static_member_name" where 'name' is the macro parameter.<br />
+    returns = a metafunction class called "tti::mtfc_has_static_member_name" where 'name' is the macro parameter.<br />
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -1080,7 +1140,7 @@ namespace tti \
 
     name  = the name of the inner member.
 
-    returns = a metafunction class called "tti::has_static_member_function_name" where 'name' is the macro parameter.
+    returns = a metafunction class called "tti::mtfc_has_static_member_function_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -1163,7 +1223,8 @@ namespace tti
     The metafunction types and return:
 
       HasType = a Boost MPL lambda expression using the metafunction generated from the TTI_HAS_TYPE ( or TTI_TRAIT_HAS_TYPE ) macro.<br />
-                The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction<_>' ( or optionally 'metafunction<_,_>' ).<br />
+                The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction\<_\>' ( or optionally 'metafunction\<_,_\>' ).
+                You can also use the metafunction class generated by the TTI_MTFC_HAS_TYPE ( or TTI_MTFC_TRAIT_HAS_TYPE ) macro.<br />
       T       = the enclosing type as a nullary metafunction.<br />
       U       = the type of the inner type as a nullary metafunction, as an optional parameter.
       
@@ -1196,7 +1257,8 @@ namespace tti
     The metafunction types and return:
 
       MemberType = a Boost MPL lambda expression using the metafunction generated from the TTI_MEMBER_TYPE ( or TTI_TRAIT_MEMBER_TYPE ) macro.<br />
-                   The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction<_>'.<br />
+                   The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction\<_\>'.
+                   You can also use the metafunction class generated by the TTI_MTFC_MEMBER_TYPE ( or TTI_MTFC_TRAIT_MEMBER_TYPE ) macro.<br />
       T          = the enclosing type as a nullary metafunction.
       
       returns = 'type' is the inner type of the 'name' in TTI_MEMBER_TYPE ( or TTI_TRAIT_MEMBER_TYPE ) 
@@ -1238,7 +1300,8 @@ namespace tti
     The metafunction types and return:
 
       HasTemplate = a Boost MPL lambda expression using the metafunction generated from the TTI_HAS_TEMPLATE ( TTI_TRAIT_HAS_TEMPLATE ) macro.<br />
-                    The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction<_>'.<br />
+                    The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction\<_\>'.
+                    You can also use the metafunction class generated by the TTI_MTFC_HAS_TEMPLATE ( TTI_MTFC_TRAIT_HAS_TEMPLATE ) macro.<br />
       T           = the enclosing type as a nullary metafunction.
       
       returns = 'value' is true if the template exists within the enclosing type,
@@ -1267,7 +1330,8 @@ namespace tti
     The metafunction types and return:
 
       HasMemberFunction = a Boost MPL lambda expression using the metafunction generated from the TTI_HAS_MEMBER_FUNCTION ( or TTI_TRAIT_HAS_MEMBER_FUNCTION ) macro.<br />
-                          The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction<_,_> ( or optionally 'metafunction<_,_,_> or ' 'metafunction<_,_,_,_> )'.<br />
+                          The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction\<_,_\> ( or optionally 'metafunction\<_,_,_\> or ' 'metafunction\<_,_,_,_\> )'.
+                          You can also use the metafunction class generated by the TTI_MTFC_HAS_MEMBER_FUNCTION ( or TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION ) macro.<br />
       T         = the enclosing type as a nullary metafunction.<br />
       R         = the return type of the member function as a nullary metafunction.<br />
       FS        = an optional parameter which is the parameters of the member function, each as a nullary metafunction, as a boost::mpl forward sequence.<br />
@@ -1307,7 +1371,8 @@ namespace tti
     The metafunction types and return:
 
       HasMemberData = a Boost MPL lambda expression using the metafunction generated from the TTI_HAS_MEMBER_DATA ( or TTI_TRAIT_HAS_MEMBER_DATA ) macro.<br />
-                      The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction<_,_>'.<br />
+                      The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction\<_,_\>'.
+                      You can also use the metafunction class generated by the TTI_MTFC_HAS_MEMBER_DATA ( or TTI_MTFC_TRAIT_HAS_MEMBER_DATA ) macro.<br />
       T         = the enclosing type as a nullary metafunction.<br />
       R         = the type of the member data as a nullary metafunction.
       
@@ -1339,7 +1404,8 @@ namespace tti
     The metafunction types and return:
 
       HasStaticMemberFunction = a Boost MPL lambda expression using the metafunction generated from the TTI_HAS_STATIC_MEMBER_FUNCTION ( or TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION ) macro.<br />
-                                The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction<_,_> ( or optionally 'metafunction<_,_,_> or ' 'metafunction<_,_,_,_> )'.<br />
+                                The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction\<_,_\> ( or optionally 'metafunction\<_,_,_\> or ' 'metafunction\<_,_,_,_\> )'.
+                                You can also use the metafunction class generated by the TTI_MTFC_HAS_STATIC_MEMBER_FUNCTION ( or TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_FUNCTION ) macro.<br />
       T               = the enclosing type as a nullary metafunction.<br />
       R               = the return type of the static member function as a nullary metafunction.<br />
       FS              = an optional parameter which is the parameters of the static member function, each as a nullary metafunction, as a boost::mpl forward sequence.<br />
@@ -1377,7 +1443,8 @@ namespace tti
     The metafunction types and return:
 
       HasStaticMember = a Boost MPL lambda expression using the metafunction generated from the TTI_HAS_STATIC_MEMBER ( or TTI_TRAIT_HAS_STATIC_MEMBER ) macro.<br />
-                        The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction<_,_>'.<br />
+                        The easiest way to generate the lambda expression is to use a Boost MPL placeholder expression of the form 'metafunction\<_,_\>'.
+                        You can also use the metafunction class generated by the TTI_MTFC_HAS_STATIC_MEMBER ( or TTI_MTFC_TRAIT_HAS_STATIC_MEMBER ) macro.<br />
       T               = the enclosing type as a nullary metafunction.<br />
       R               = the type of the static member data as a nullary metafunction.
       

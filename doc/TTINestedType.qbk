@@ -188,7 +188,6 @@ are called 'nullary type metafunctions'. In this group there is also a nullary m
 paralleling our TTI\_MEMBER\_TYPE macro metafunction, and therefore a further construct 
 making the specifying of nested types easy and error-free to use.
 
-This group of nullary type metafunctions will be 
-fully explained later after we give some examples of macro metafunction use.
+This group of nullary type metafunctions will be fully explained later.
 
 [endsect]
