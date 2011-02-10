@@ -265,18 +265,21 @@ struct trait \
       boost::mpl::false_ \
       >::type \
   type; \
+  BOOST_STATIC_CONSTANT(bool,value=type::value); \
   }; \
 \
 template<class T,class U> \
 struct trait<T,U,boost::mpl::false_::type> \
   { \
   typedef boost::mpl::false_::type type; \
+  BOOST_STATIC_CONSTANT(bool,value=type::value); \
   }; \
 \
 template<class T> \
 struct trait<T,tti::detail::notype,boost::mpl::true_::type> \
   { \
   typedef boost::mpl::true_::type type; \
+  BOOST_STATIC_CONSTANT(bool,value=type::value); \
   }; \
 /**/
 

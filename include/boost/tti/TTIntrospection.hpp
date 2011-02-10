@@ -50,21 +50,15 @@ namespace tti \
     { \
     TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
     } \
-  \
   template<class T,class U = tti::detail::notype> \
-  struct trait \
-    { \
-    \
-    typedef typename \
-      detail::trait \
+  struct trait : \
+    detail::trait \
       < \
       T, \
       U, \
       typename detail::mpl::trait<T>::type \
-      >::type \
-    type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      > \
+    { \
     }; \
   } \
 /**/
@@ -93,23 +87,17 @@ namespace tti \
     { \
     TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
     } \
-  \
   struct trait \
     { \
     template<class T,class U = tti::detail::notype> \
-    struct apply \
-      { \
-      \
-      typedef typename \
-        detail::trait \
+    struct apply : \
+      detail::trait \
         < \
         T, \
         U, \
         typename detail::mpl::trait<T>::type \
-        >::type \
-      type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+        > \
+      { \
       }; \
     }; \
   } \
@@ -192,16 +180,14 @@ namespace tti \
     TTI_DETAIL_TRAIT_MEMBER_TYPE(trait,name) \
     } \
   template<class T> \
-  struct trait \
+  struct trait : \
+    boost::mpl::eval_if \
+      < \
+      tti::detail::trait<T>, \
+      tti::detail::member_type::trait<T>, \
+      boost::mpl::identity<tti::detail::notype> \
+      > \
     { \
-    typedef typename \
-      boost::mpl::eval_if \
-        < \
-        tti::detail::trait<T>, \
-        tti::detail::member_type::trait<T>, \
-        boost::mpl::identity<tti::detail::notype> \
-        >::type \
-    type; \
     }; \
   } \
 /**/
@@ -237,16 +223,14 @@ namespace tti \
   struct trait \
     { \
     template<class T> \
-    struct apply \
+    struct apply : \
+      boost::mpl::eval_if \
+        < \
+        tti::detail::trait<T>, \
+        tti::detail::member_type::trait<T>, \
+        boost::mpl::identity<tti::detail::notype> \
+        > \
       { \
-      typedef typename \
-        boost::mpl::eval_if \
-          < \
-          tti::detail::trait<T>, \
-          tti::detail::member_type::trait<T>, \
-          boost::mpl::identity<tti::detail::notype> \
-          >::type \
-      type; \
       }; \
     }; \
   } \
@@ -331,11 +315,9 @@ namespace tti \
     BOOST_MPL_HAS_XXX_TEMPLATE_NAMED_DEF(trait, name, false) \
     } \
   template<class T> \
-  struct trait \
+  struct trait : \
+    tti::detail::trait<T> \
     { \
-    typedef typename tti::detail::trait<T>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
@@ -367,11 +349,9 @@ namespace tti \
   struct trait \
     { \
     template<class T> \
-    struct apply \
+    struct apply : \
+      tti::detail::trait<T> \
       { \
-      typedef typename tti::detail::trait<T>::type type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
     }; \
   } \
@@ -452,11 +432,9 @@ namespace tti \
     TTI_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,tpSeq) \
     } \
   template<class T> \
-  struct trait \
+  struct trait : \
+    detail::trait<T> \
     { \
-    typedef typename detail::trait<T>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
@@ -490,11 +468,9 @@ namespace tti \
   struct trait \
     { \
     template<class T> \
-    struct apply \
+    struct apply : \
+      detail::trait::apply<T> \
       { \
-      typedef typename detail::trait::apply<T>::type type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
     }; \
   } \
@@ -578,12 +554,9 @@ namespace tti \
     TTI_DETAIL_TRAIT_HAS_MEMBER(trait,name) \
     } \
   template<class T> \
-  struct trait \
+  struct trait : \
+    detail::trait<T> \
     { \
-    typedef typename detail::trait<T>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
-    \
     }; \
   } \
 /**/
@@ -614,12 +587,9 @@ namespace tti \
   struct trait \
     { \
     template<class T> \
-    struct apply \
+    struct apply : \
+      detail::trait<T> \
       { \
-      typedef typename detail::trait<T>::type type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
-      \
       }; \
     }; \
   } \
@@ -697,11 +667,9 @@ namespace tti \
     TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
     } \
   template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
-  struct trait \
+  struct trait : \
+    detail::trait<typename detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> \
     { \
-    typedef detail::trait<typename detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
@@ -734,11 +702,9 @@ namespace tti \
   struct trait \
     { \
     template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
-    struct apply \
+    struct apply : \
+      detail::trait<typename detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> \
       { \
-      typedef detail::trait<typename detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
     }; \
   } \
@@ -818,11 +784,9 @@ namespace tti \
     TTI_DETAIL_TRAIT_HAS_MEMBER_DATA(trait,name) \
     } \
   template<class T,class R> \
-  struct trait \
+  struct trait : \
+    detail::trait<typename detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> \
     { \
-    typedef detail::trait<typename detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
@@ -853,11 +817,9 @@ namespace tti \
   struct trait \
     { \
     template<class T,class R> \
-    struct apply \
+    struct apply : \
+      detail::trait<typename detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> \
       { \
-      typedef detail::trait<typename detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
     }; \
   } \
@@ -936,11 +898,9 @@ namespace tti \
     TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER(trait,name) \
     } \
   template<class T,class Type> \
-  struct trait \
+  struct trait : \
+    detail::trait<T,Type> \
     { \
-    typedef typename detail::trait<T,Type>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
@@ -974,11 +934,9 @@ namespace tti \
   struct trait \
     { \
     template<class T,class Type> \
-    struct apply \
+    struct apply : \
+      detail::trait::apply<T,Type> \
       { \
-      typedef typename detail::trait::apply<T,Type>::type type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
     }; \
   } \
@@ -1063,11 +1021,9 @@ namespace tti \
     TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
     } \
   template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
-  struct trait \
+  struct trait : \
+    detail::trait<T,typename detail::tfunction_seq<R,FS,TAG>::type> \
     { \
-    typedef detail::trait<T,typename detail::tfunction_seq<R,FS,TAG>::type> type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
   } \
 /**/
@@ -1100,11 +1056,9 @@ namespace tti \
   struct trait \
     { \
     template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
-    struct apply \
+    struct apply : \
+      detail::trait<T,typename detail::tfunction_seq<R,FS,TAG>::type> \
       { \
-      typedef detail::trait<T,typename detail::tfunction_seq<R,FS,TAG>::type> type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
     }; \
   } \
