@@ -1,4 +1,4 @@
-#include "TestMFHasTemplateCheckParams.hpp"
+#include "test_mf_has_template_check_params.hpp"
 #include <boost/mpl/assert.hpp>
 
 int main()

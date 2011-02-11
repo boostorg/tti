@@ -1,4 +1,4 @@
-#include "TestMFHasTypeCheckTypedef.hpp"
+#include "test_mf_has_type_check_typedef.hpp"
 #include <boost/detail/lightweight_test.hpp>
 
 int main()

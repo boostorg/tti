@@ -1,5 +1,10 @@
 [section:tti_history History]
 
+[heading Version 1.3]
+
+* Changed the filenames to lower case and undescores.
+* The names of the main header files are shortened to 'tti.hpp' and 'tti_vm.hpp'.
+
 [heading Version 1.2]
 
 * Added the set of metafunction class macros for passing the macro metafunctions as metadata.

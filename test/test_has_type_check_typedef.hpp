@@ -1,8 +1,8 @@
 #if !defined(TEST_HAS_TYPE_CHECK_TYPEDEF_HPP)
 #define TEST_HAS_TYPE_CHECK_TYPEDEF_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_HAS_TYPE(AnIntType)
 TTI_TRAIT_HAS_TYPE(NameStruct,AStructType)

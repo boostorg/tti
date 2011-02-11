@@ -3,8 +3,8 @@
 
 #if !defined(BOOST_NO_VARIADIC_MACROS)
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospectionVM.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti_vm.hpp>
 
 TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(ATPMemberTemplate,class)
 TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(HaveCL,CLMemberTemplate,class,class)

@@ -14,8 +14,8 @@
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/remove_const.hpp>
-#include "TTIntrospectionTemplate.hpp"
-#include "detail/TTIntrospectionDetail.hpp"
+#include "mf_template_params.hpp"
+#include "detail/dtti.hpp"
 
 /*
 

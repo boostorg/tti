@@ -1,8 +1,8 @@
 #if !defined(TEST_HAS_MEMBER_HPP)
 #define TEST_HAS_MEMBER_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_HAS_MEMBER(AnInt)
 TTI_HAS_MEMBER(VoidFunction)

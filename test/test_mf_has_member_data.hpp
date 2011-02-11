@@ -1,8 +1,8 @@
 #if !defined(TEST_MF_HAS_MEMBER_DATA_HPP)
 #define TEST_MF_HAS_MEMBER_DATA_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_HAS_MEMBER_DATA(AnInt)
 TTI_HAS_MEMBER_DATA(aMember)

@@ -10,7 +10,7 @@
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/variadic_macro_data/VariadicMacroData.hpp>
-#include "TTIntrospectionDetail.hpp"
+#include "dtti.hpp"
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)

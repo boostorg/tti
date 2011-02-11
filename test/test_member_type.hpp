@@ -1,8 +1,8 @@
 #if !defined(TEST_MEMBER_TYPE_HPP)
 #define TEST_MEMBER_TYPE_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_MEMBER_TYPE(AnIntType)
 TTI_TRAIT_MEMBER_TYPE(NameStruct,AStructType)

@@ -1,4 +1,4 @@
-#include "TestHasMember.hpp"
+#include "test_has_member.hpp"
 #include <boost/detail/lightweight_test.hpp>
 
 int main()

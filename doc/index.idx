@@ -1,6 +1,6 @@
-!scan boost/tti/TTIntrospection.hpp
-!scan boost/tti/TTIntrospectionVM.hpp
-!scan boost/tti/TTIntrospectionTemplate.hpp
+!scan boost/tti/tti.hpp
+!scan boost/tti/tti_vm.hpp
+!scan boost/tti/mf_template_params.hpp
 
 
 

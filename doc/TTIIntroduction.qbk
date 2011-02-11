@@ -53,15 +53,15 @@ functionality supporting variadic macros is to be used.
 
 # The main header, which does not require using the library 
 support for variadic macros, is 
-[headerref boost/tti/TTIntrospection.hpp 'TTIntrospection.hpp'].
+[headerref boost/tti/tti.hpp 'tti.hpp'].
 This can be used for the vast majority of functionality in the library.
 # The secondary header, which uses a very small subset of the 
 library functionality, providing an alternate use of a particular 
 macro with variadic macro support, is 
-[headerref boost/tti/TTIntrospectionVM.hpp 'TTIntrospectionVM.hpp'].
+[headerref boost/tti/tti_vm.hpp 'tti_vm.hpp'].
 
 Furthermore there is a third header file which both of the header 
-files above include, called 'TTIntrospectionTemplate.hpp' but 
+files above include, called 'mf_template_params.hpp' but 
 this should never be included itself but only through either 
 of the main header files.
         

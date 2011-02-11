@@ -4,8 +4,8 @@
 <title>Using the Macro Metafunctions</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.0">
-<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.0">
-<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.0">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.3">
+<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.3">
 <link rel="prev" href="tti_nested_type.html" title="Nested Types">
 <link rel="next" href="tti_metaclasses.html" title="Macro Metafunctions as Metadata">
 </head>
@@ -72,7 +72,7 @@
       questions we can ask of some type T which is passed to the template programmer
       in a class template. Here is what the class template might look like:
     </p>
-<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">TTIntrospection</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
+<pre class="programlisting"><span class="preprocessor">#include</span> <span class="special">&lt;</span><span class="identifier">boost</span><span class="special">/</span><span class="identifier">tti</span><span class="special">.</span><span class="identifier">hpp</span><span class="special">&gt;</span>
 
 <span class="keyword">template</span><span class="special">&lt;</span><span class="keyword">class</span> <span class="identifier">T</span><span class="special">&gt;</span>
 <span class="keyword">struct</span> <span class="identifier">OurTemplateClass</span>
@@ -89,7 +89,7 @@
       below the same macro is invoked just once to avoid ODR violations.
     </p>
 <a name="the_type_traits_introspection_library.tti_usingMM.type"></a><h4>
-<a name="id898007"></a>
+<a name="id922037"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.type">Type</a>
     </h4>
 <p>
@@ -113,7 +113,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.type_checking_the_typedef"></a><h4>
-<a name="id898119"></a>
+<a name="id922149"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.type_checking_the_typedef">Type
       checking the typedef</a>
     </h4>
@@ -127,7 +127,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.template"></a><h4>
-<a name="id898178"></a>
+<a name="id922207"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.template">Template</a>
     </h4>
 <p>
@@ -142,7 +142,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.template_with_params"></a><h4>
-<a name="id898242"></a>
+<a name="id922272"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.template_with_params">Template
       with params</a>
     </h4>
@@ -158,7 +158,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.template_with_params_using_variadic_macros"></a><h4>
-<a name="id898384"></a>
+<a name="id922414"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.template_with_params_using_variadic_macros">Template
       with params using variadic macros</a>
     </h4>
@@ -168,7 +168,7 @@
 <th align="left">Note</th>
 </tr>
 <tr><td align="left" valign="top"><p>
-        Include the 'TTIntrospectionVM.hpp' header file when using this macro.
+        Include the 'tti_vm.hpp' header file when using this macro.
       </p></td></tr>
 </table></div>
 <p>
@@ -183,7 +183,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.member_data_with_composite_type"></a><h4>
-<a name="id901257"></a>
+<a name="id925287"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.member_data_with_composite_type">Member
       data with composite type</a>
     </h4>
@@ -198,7 +198,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.member_data_with_individual_types"></a><h4>
-<a name="id901335"></a>
+<a name="id925365"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.member_data_with_individual_types">Member
       data with individual types</a>
     </h4>
@@ -214,7 +214,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.member_function_with_composite_type"></a><h4>
-<a name="id901413"></a>
+<a name="id925443"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.member_function_with_composite_type">Member
       function with composite type</a>
     </h4>
@@ -230,7 +230,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.member_function_with_individual_types"></a><h4>
-<a name="id901494"></a>
+<a name="id925524"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.member_function_with_individual_types">Member
       function with individual types</a>
     </h4>
@@ -248,7 +248,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.static_member_data"></a><h4>
-<a name="id901599"></a>
+<a name="id925629"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.static_member_data">Static
       member data</a>
     </h4>
@@ -264,7 +264,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.static_member_function_with_composite_type"></a><h4>
-<a name="id901670"></a>
+<a name="id925699"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.static_member_function_with_composite_type">Static
       member function with composite type</a>
     </h4>
@@ -281,7 +281,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.static_member_function_with_individual_types"></a><h4>
-<a name="id901760"></a>
+<a name="id925789"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.static_member_function_with_individual_types">Static
       member function with individual types</a>
     </h4>
@@ -299,7 +299,7 @@
   <span class="special">&gt;</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.member_type"></a><h4>
-<a name="id901874"></a>
+<a name="id925903"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.member_type">Member
       type</a>
     </h4>
@@ -321,7 +321,7 @@
   <span class="special">&gt;::</span><span class="identifier">type</span>
 </pre>
 <a name="the_type_traits_introspection_library.tti_usingMM.member_type_existence"></a><h4>
-<a name="id901992"></a>
+<a name="id926022"></a>
       <a class="link" href="tti_usingMM.html#the_type_traits_introspection_library.tti_usingMM.member_type_existence">Member
       type existence</a>
     </h4>

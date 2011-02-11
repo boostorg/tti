@@ -1,4 +1,4 @@
-#include "TestHasStaticMember.hpp"
+#include "test_has_static_member.hpp"
 
 int main()
   {

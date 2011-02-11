@@ -4,7 +4,7 @@
 #include <boost/config.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/apply.hpp>
-#include "detail/TTIntrospectionDetail.hpp"
+#include "detail/dtti.hpp"
 
 /*
 

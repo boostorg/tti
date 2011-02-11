@@ -1,8 +1,8 @@
 #if !defined(TEST_MF_HAS_STATIC_FUNCTION_HPP)
 #define TEST_MF_HAS_STATIC_FUNCTION_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION(HaveTheSIntFunction,SIntFunction)
 TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION(TheTIntFunction,TIntFunction)

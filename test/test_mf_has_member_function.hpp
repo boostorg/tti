@@ -1,8 +1,8 @@
 #if !defined(TEST_MF_HAS_MEMBER_FUNCTION_HPP)
 #define TEST_MF_HAS_MEMBER_FUNCTION_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_HAS_MEMBER_FUNCTION(VoidFunction)
 TTI_TRAIT_HAS_MEMBER_FUNCTION(FunctionReturningInt,IntFunction)

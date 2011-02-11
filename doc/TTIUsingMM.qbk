@@ -52,7 +52,7 @@ metaprogramming questions we can ask of some type T which is passed
 to the template programmer in a class template. Here is what the 
 class template might look like:
 
- #include <boost/TTIntrospection.hpp>
+ #include <boost/tti.hpp>
 
  template<class T>
  struct OurTemplateClass
@@ -123,7 +123,7 @@ parameters are specified exactly ?
 
 [heading Template with params using variadic macros]
 
-[note Include the 'TTIntrospectionVM.hpp' header file
+[note Include the 'tti_vm.hpp' header file
 when using this macro.]
 
 Does T have a nested class template called 'ManyParameters' whose template 

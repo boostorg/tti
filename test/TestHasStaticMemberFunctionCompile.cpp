@@ -1,4 +1,4 @@
-#include "TestHasStaticMemberFunction.hpp"
+#include "test_has_static_member_function.hpp"
 #include <boost/mpl/assert.hpp>
 
 int main()

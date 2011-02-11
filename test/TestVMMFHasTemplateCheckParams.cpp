@@ -1,4 +1,4 @@
-#include "TestVMMFHasTemplateCheckParams.hpp"
+#include "test_vm_mf_has_template_check_params.hpp"
 #include <boost/detail/lightweight_test.hpp>
 
 int main()

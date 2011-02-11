@@ -1,8 +1,8 @@
 #if !defined(TEST_MF_HAS_TEMPLATE_HPP)
 #define TEST_MF_HAS_TEMPLATE_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_TRAIT_HAS_TEMPLATE(HaveMStr,MStrMemberTemplate)
 TTI_HAS_TEMPLATE(TemplateNotExist)

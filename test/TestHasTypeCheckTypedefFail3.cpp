@@ -1,4 +1,4 @@
-#include "TestHasTypeCheckTypedef.hpp"
+#include "test_has_type_check_typedef.hpp"
 
 int main()
   {

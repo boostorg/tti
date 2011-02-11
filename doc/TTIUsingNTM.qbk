@@ -71,7 +71,7 @@ metaprogramming questions we can ask of some type T which is passed
 to the template programmer in a class template. Here is what the 
 class template might look like:
 
- #include <boost/TTIntrospection.hpp>
+ #include <boost/tti.hpp>
 
  template<class T>
  struct OurTemplateClass
@@ -193,7 +193,7 @@ within 'BType' whose template parameters are specified exactly ?
 Does T have a nested class template called 'MoreParameters' 
 within 'BType::CType' whose template parameters are specified exactly ?
 
-[note Include the 'TTIntrospectionVM.hpp' header file
+[note Include the 'tti_vm.hpp' header file
 when using this macro.]
 
  TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,class,class,int,short,class,template <class,int> class InnerTemplate,class)

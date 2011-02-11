@@ -43,15 +43,15 @@ such known types as long as declarations for them exist or it is a built-in C++ 
 For nested types, which may or may not exist, we can pass the result of TTI\_MEMBER\_TYPE 
 or its equivalent nullary type metafunction tti::mf\_member\_type ( explained later ).
 
-To use these metafunctions you need to include the main header file 'TTIntrospection.hpp',
+To use these metafunctions you need to include the main header file 'tti.hpp',
 unless otherwise noted.
 
 [tip The header file <boost/mpl/identity.hpp> is included by the TTI header files so you need not 
 manually include it in order to use boost::mpl::identity to wrap a known type as a nullary 
 metafunction for the nullary type metafunctions. Also the header file <boost/mpl/vector.hpp> is 
-included by the main TTI header file 'TTIntrospection.hpp' so if you use an MPL vector as your 
+included by the main TTI header file 'tti.hpp' so if you use an MPL vector as your 
 forward sequence wrapper for parameter types, you need not manually include the header file. Finally
-the header file <boost/mpl/placeholders.hpp> is also included by 'TTIntrospection.hpp' so you need
+the header file <boost/mpl/placeholders.hpp> is also included by 'tti.hpp' so you need
 not manually include it yourself in order to use placeholder expressions.]
 
 A table of these metafunctions is given, based on the inner element whose 

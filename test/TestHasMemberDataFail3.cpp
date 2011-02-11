@@ -1,4 +1,4 @@
-#include "TestHasMemberData.hpp"
+#include "test_has_member_data.hpp"
 
 int main()
   {

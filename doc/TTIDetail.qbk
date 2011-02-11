@@ -9,7 +9,7 @@ the name of the metafunction and the second macro parameter designates the 'name
 introspected. Other than that difference, the two forms of the macro produce the exact same 
 results.
 
-To use these metafunctions you need to include the main header file 'TTIntrospection.hpp',
+To use these metafunctions you need to include the main header file 'tti.hpp',
 unless otherwise noted.
 
 A table of these macros is given, with the inner element whose 
@@ -77,7 +77,7 @@ specifies whether or not the inner element exists.
     ]
   ]
   [
-    [Class Template with params using variadic macros[footnote Header file is TTIntrospectionVM.hpp.]]
+    [Class Template with params using variadic macros[footnote Header file is tti_vm.hpp.]]
     [
     [macroref TTI_VM_HAS_TEMPLATE_CHECK_PARAMS](name,...[footnote The template parameters as variadic data.])
     ]

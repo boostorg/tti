@@ -2,12 +2,12 @@
 #define TT_INTROSPECTION_VM_HPP
 
 #include <boost/config.hpp>
-#include "TTIntrospectionTemplate.hpp"
+#include "mf_template_params.hpp"
 
 #if !defined(BOOST_NO_VARIADIC_MACROS)
 
 #include <boost/preprocessor/cat.hpp>
-#include "detail/TTIntrospectionVMDetail.hpp"
+#include "detail/dtti_vm.hpp"
 
 /*
 

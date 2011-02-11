@@ -1,8 +1,8 @@
 #if !defined(TEST_HAS_TEMPLATE_CHECK_PARAMS_HPP)
 #define TEST_HAS_TEMPLATE_CHECK_PARAMS_HPP
 
-#include "TestStructs.hpp"
-#include <boost/tti/TTIntrospection.hpp>
+#include "test_structs.hpp"
+#include <boost/tti/tti.hpp>
 
 TTI_HAS_TEMPLATE_CHECK_PARAMS(ATPMemberTemplate,(class))
 TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(HaveCL,CLMemberTemplate,(class)(class))

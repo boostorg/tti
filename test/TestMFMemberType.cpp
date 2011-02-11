@@ -1,4 +1,4 @@
-#include "TestMFMemberType.hpp"
+#include "test_mf_member_type.hpp"
 #include <boost/detail/lightweight_test.hpp>
 
 int main()

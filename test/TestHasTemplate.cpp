@@ -1,4 +1,4 @@
-#include "TestHasTemplate.hpp"
+#include "test_has_template.hpp"
 #include <boost/detail/lightweight_test.hpp>
 
 int main()

@@ -1,4 +1,4 @@
-#include "TestMFHasStaticData.hpp"
+#include "test_mf_has_static_data.hpp"
 #include <boost/detail/lightweight_test.hpp>
 
 int main()

@@ -1,4 +1,4 @@
-#include "TestHasStaticMemberFunction.hpp"
+#include "test_has_static_member_function.hpp"
 #include <boost/detail/lightweight_test.hpp>
 
 int main()
