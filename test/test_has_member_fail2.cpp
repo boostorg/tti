@@ -6,7 +6,7 @@ int main()
   
   // Wrong data signature for aMember
   
-  BOOST_MPL_ASSERT(( tti::has_member_aMember<int AnotherType::*> ));
+  BOOST_MPL_ASSERT(( boost::tti::has_member_aMember<int AnotherType::*> ));
   
   return 0;
 

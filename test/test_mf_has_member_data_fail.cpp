@@ -8,9 +8,9 @@ int main()
   
   // someDataMember does not exist at all
   
-  BOOST_MPL_ASSERT((tti::mf_has_member_data
+  BOOST_MPL_ASSERT((boost::tti::mf_has_member_data
                       <
-                      tti::has_member_data_someDataMember<_,_>,
+                      boost::tti::has_member_data_someDataMember<_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<short> 
                       >

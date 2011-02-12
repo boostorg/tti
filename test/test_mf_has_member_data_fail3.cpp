@@ -8,9 +8,9 @@ int main()
   
   // Wrong enclosing type
   
-  BOOST_MPL_ASSERT((tti::mf_has_member_data
+  BOOST_MPL_ASSERT((boost::tti::mf_has_member_data
                       <
-                      tti::has_member_data_aMember<_,_>,
+                      boost::tti::has_member_data_aMember<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<bool> 
                       >

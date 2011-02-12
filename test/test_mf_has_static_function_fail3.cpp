@@ -8,14 +8,14 @@ int main()
   
   // Wrong function parameter type
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::has_static_member_function_TSFunction<_,_,_>,
+                      boost::tti::has_static_member_function_TSFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
-                      tti::member_type_AStructType<AType>,
+                      boost::tti::member_type_AStructType<AType>,
                       boost::mpl::vector
                         <
-                        tti::NameIntType<AnotherType>,
+                        boost::tti::NameIntType<AnotherType>,
                         boost::mpl::identity<double>
                         >
                       >

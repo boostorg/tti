@@ -8,9 +8,9 @@ int main()
   
   // Not all 'typename' parameters
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::AMT<_>,
+                      boost::tti::AMT<_>,
                       boost::mpl::identity<AType>
                       >
                   ));

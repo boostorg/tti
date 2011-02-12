@@ -276,7 +276,7 @@ struct trait<T,U,boost::mpl::false_::type> \
   }; \
 \
 template<class T> \
-struct trait<T,tti::detail::notype,boost::mpl::true_::type> \
+struct trait<T,notype,boost::mpl::true_::type> \
   { \
   typedef boost::mpl::true_::type type; \
   BOOST_STATIC_CONSTANT(bool,value=type::value); \
@@ -949,54 +949,57 @@ struct trait<T,tti::detail::notype,boost::mpl::true_::type> \
 
 #endif // defined(BOOST_NO_NULLPTR)
 
-namespace tti
+namespace boost
   {
-  namespace detail
+  namespace tti
     {
-    struct notype
+    namespace detail
       {
-      };
+      struct notype
+        {
+        };
       
-    template <class T>
-    struct tself : T
-      {
-      };
+      template <class T>
+      struct tself : T
+        {
+        };
   
-    template
-      <
-      class T,
-      class R,
-      class FS,
-      class TAG
-      >
-    struct ptmf_seq
-      {
-      typedef typename boost::mpl::push_front<FS,T>::type tfs1;
-      typedef typename boost::mpl::push_front<tfs1,R>::type tfs2;
-      typedef typename boost::function_types::member_function_pointer<tfs2,TAG>::type type;
-      };
+      template
+        <
+        class T,
+        class R,
+        class FS,
+        class TAG
+        >
+      struct ptmf_seq
+        {
+        typedef typename boost::mpl::push_front<FS,T>::type tfs1;
+        typedef typename boost::mpl::push_front<tfs1,R>::type tfs2;
+        typedef typename boost::function_types::member_function_pointer<tfs2,TAG>::type type;
+        };
 
-    template
-      <
-      class T,
-      class R
-      >
-    struct ptmd
-      {
-      typedef R T::* type;
-      };
+      template
+        <
+        class T,
+        class R
+        >
+      struct ptmd
+        {
+        typedef R T::* type;
+        };
       
-    template
-      <
-      class R,
-      class FS,
-      class TAG
-      >
-    struct tfunction_seq
-      {
-      typedef typename boost::mpl::push_front<FS,R>::type ftseq;
-      typedef typename boost::function_types::function_type<ftseq,TAG>::type type;
-      };
+      template
+        <
+        class R,
+        class FS,
+        class TAG
+        >
+      struct tfunction_seq
+        {
+        typedef typename boost::mpl::push_front<FS,R>::type ftseq;
+        typedef typename boost::function_types::function_type<ftseq,TAG>::type type;
+        };
+      }
     }
   }
   

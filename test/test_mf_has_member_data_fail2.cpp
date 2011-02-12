@@ -8,9 +8,9 @@ int main()
   
   // Wrong data signature for AnInt
   
-  BOOST_MPL_ASSERT((tti::mf_has_member_data
+  BOOST_MPL_ASSERT((boost::tti::mf_has_member_data
                       <
-                      tti::has_member_data_AnInt<_,_>,
+                      boost::tti::has_member_data_AnInt<_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<double> 
                       >

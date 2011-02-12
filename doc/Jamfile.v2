@@ -50,7 +50,7 @@ doxygen TypeTraitsIntrospectionReference
 
 xml TypeTraitsIntrospection
   :
-    TypeTraitsIntrospection.qbk
+    type_traits_introspection.qbk
   :
     <dependency>TypeTraitsIntrospectionReference
 ;

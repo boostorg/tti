@@ -6,7 +6,7 @@ int main()
   
   // Wrong enclosing type
   
-  BOOST_MPL_ASSERT((tti::has_template_ATPMemberTemplate<AnotherType>));
+  BOOST_MPL_ASSERT((boost::tti::has_template_ATPMemberTemplate<AnotherType>));
   
   return 0;
 

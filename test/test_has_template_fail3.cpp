@@ -6,7 +6,7 @@ int main()
   
   // Too many 'typename' parameters
   
-  BOOST_MPL_ASSERT((tti::has_template_SomeMemberTemplate<AnotherType>));
+  BOOST_MPL_ASSERT((boost::tti::has_template_SomeMemberTemplate<AnotherType>));
   
   return 0;
 

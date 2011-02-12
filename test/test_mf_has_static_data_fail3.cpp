@@ -8,9 +8,9 @@ int main()
   
   // Wrong member type
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_data
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_data
                       <
-                      tti::has_static_member_DSMember<_,_>,
+                      boost::tti::has_static_member_DSMember<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<int>
                       >

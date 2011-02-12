@@ -8,10 +8,10 @@ int main()
   
   // Wrong typedef type
   
-  BOOST_MPL_ASSERT((tti::mf_has_type
+  BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      tti::TheInteger<_,_>,
-                      tti::member_type_BType<AType>,
+                      boost::tti::TheInteger<_,_>,
+                      boost::tti::member_type_BType<AType>,
                       boost::mpl::identity<long>
                       >
                   ));

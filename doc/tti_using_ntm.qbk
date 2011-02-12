@@ -96,32 +96,32 @@ with any lambda expression as the first template parameter.
 We start off by creating typedef's, as nullary metafunctions, for our 
 theoretical inner types in relation to T . None of these typedefs 
 will produce a compiler error even if our structure does not correspond 
-to T's reality. This also illustrates using 'tti::mf_member_type'.
+to T's reality. This also illustrates using 'boost::tti::mf_member_type'.
 
- TTI_MEMBER_TYPE(BType)
- TTI_MTFC_MEMBER_TYPE(CType)
- TTI_MEMBER_TYPE(DType)
+ BOOST_TTI_MEMBER_TYPE(BType)
+ BOOST_TTI_MTFC_MEMBER_TYPE(CType)
+ BOOST_TTI_MEMBER_TYPE(DType)
  
  typedef
- tti::mf_member_type
+ boost::tti::mf_member_type
    <
-   tti::member_type_BType<_>,
+   boost::tti::member_type_BType<_>,
    boost::mpl::identity<T>
    >
  BTypeNM;
 
  typedef
- tti::mf_member_type
+ boost::tti::mf_member_type
    <
-   tti::mtfc_member_type_CType,
+   boost::tti::mtfc_member_type_CType,
    BTypeNM
    >
  CTypeNM;
 
  typedef
- tti::mf_member_type
+ boost::tti::mf_member_type
    <
-   tti::member_type_DType<_>,
+   boost::tti::member_type_DType<_>,
    CTypeNM
    >
  DTypeNM;
@@ -132,18 +132,18 @@ We will use these typedefs in the ensuing examples.
 
 Does T have a nested type called 'DType' within 'BType::CType' ?
 
- TTI_HAS_TYPE(DType)
+ BOOST_TTI_HAS_TYPE(DType)
   
- tti::mf_has_type
+ boost::tti::mf_has_type
    <
-   tti::has_type_DType<_>,
+   boost::tti::has_type_DType<_>,
    CTypeNM
    >
    
-We could just have easily used the tti::mf_valid_member_type
+We could just have easily used the boost::tti::mf\_valid\_member\_type
 metafunction to the same effect:
 
-  tti::mf_valid_member_type
+  boost::tti::mf_valid_member_type
     <
     DTypeNM
     >
@@ -153,11 +153,11 @@ metafunction to the same effect:
 Does T have a nested typedef called 'ADoubleType' 
 within 'BType::CType::DType' whose type is a 'double' ?
 
- TTI_MTFC_HAS_TYPE(ADoubleType)
+ BOOST_TTI_MTFC_HAS_TYPE(ADoubleType)
  
- tti::mf_has_type
+ boost::tti::mf_has_type
    <
-   tti::mtfc_has_type_ADoubleType,
+   boost::tti::mtfc_has_type_ADoubleType,
    DTypeNM,
    boost::mpl::identity<double>
    >
@@ -167,11 +167,11 @@ within 'BType::CType::DType' whose type is a 'double' ?
 Does T have a nested class template called 'AMemberTemplate' 
 within 'BType::CType' whose template parameters are all types ('class' or 'typename') ?
 
- TTI_MTFC_HAS_TEMPLATE(AMemberTemplate)
+ BOOST_TTI_MTFC_HAS_TEMPLATE(AMemberTemplate)
  
- tti::mf_has_template
+ boost::tti::mf_has_template
    <
-   tti::mtfc_has_template_AMemberTemplate,
+   boost::tti::mtfc_has_template_AMemberTemplate,
    CTypeNM
    >
 
@@ -180,11 +180,11 @@ within 'BType::CType' whose template parameters are all types ('class' or 'typen
 Does T have a nested class template called 'ManyParameters' 
 within 'BType' whose template parameters are specified exactly ?
 
- TTI_HAS_TEMPLATE_CHECK_PARAMS(ManyParameters,(class)(class)(int)(class)(template <class> class InnerTemplate)(class)(long))
+ BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS(ManyParameters,(class)(class)(int)(class)(template <class> class InnerTemplate)(class)(long))
  
- tti::mf_has_template_check_params
+ boost::tti::mf_has_template_check_params
    <
-   tti::has_template_check_params_ManyParameters<_>,
+   boost::tti::has_template_check_params_ManyParameters<_>,
    BTypeNM
    >
 
@@ -196,11 +196,11 @@ within 'BType::CType' whose template parameters are specified exactly ?
 [note Include the 'tti_vm.hpp' header file
 when using this macro.]
 
- TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,class,class,int,short,class,template <class,int> class InnerTemplate,class)
+ BOOST_TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,class,class,int,short,class,template <class,int> class InnerTemplate,class)
  
- tti::mf_has_template_check_params
+ boost::tti::mf_has_template_check_params
    <
-   tti::mtfc_has_template_check_params_MoreParameters,
+   boost::tti::mtfc_has_template_check_params_MoreParameters,
    CTypeNM
    >
 
@@ -208,11 +208,11 @@ when using this macro.]
 
 Does T have a member data called 'IntBT' whose type is 'BType' ?
 
- TTI_MTFC_HAS_MEMBER_DATA(IntBT)
+ BOOST_TTI_MTFC_HAS_MEMBER_DATA(IntBT)
  
- tti::mf_has_member_data
+ boost::tti::mf_has_member_data
    <
-   tti::mtfc_has_member_data_IntBT,
+   boost::tti::mtfc_has_member_data_IntBT,
    boost::mpl::identity<T>,
    BTypeNM
    >
@@ -222,11 +222,11 @@ Does T have a member data called 'IntBT' whose type is 'BType' ?
 Does T have a member function called 'IntFunction' 
 within 'BType::CType::DType' whose type is 'int (short) const' ?
 
- TTI_HAS_MEMBER_FUNCTION(IntFunction)
+ BOOST_TTI_HAS_MEMBER_FUNCTION(IntFunction)
  
- tti::mf_has_member_function
+ boost::tti::mf_has_member_function
    <
-   tti::has_member_function_IntFunction<_,_,_,_>,
+   boost::tti::has_member_function_IntFunction<_,_,_,_>,
    DTypeNM,
    boost::mpl::identity<int>,
    boost::mpl::vector<boost::mpl::identity<short> >,
@@ -238,11 +238,11 @@ within 'BType::CType::DType' whose type is 'int (short) const' ?
 Does T have a static member data called 'DSMember' 
 within 'BType::CType::DType' whose type is 'short' ?
 
- TTI_MTFC_HAS_STATIC_MEMBER(DSMember)
+ BOOST_TTI_MTFC_HAS_STATIC_MEMBER(DSMember)
  
- tti::mf_has_static_data
+ boost::tti::mf_has_static_data
    <
-   tti::mtfc_has_static_member_DSMember,
+   boost::tti::mtfc_has_static_member_DSMember,
    DTypeNM,
    boost::mpl::identity<short>
    >
@@ -252,11 +252,11 @@ within 'BType::CType::DType' whose type is 'short' ?
 Does T have a static member function called 'SIntFunction' 
 within 'BType::CType::DType' whose type is 'int (long,double)' ?
 
- TTI_HAS_STATIC_MEMBER_FUNCTION(SIntFunction)
+ BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION(SIntFunction)
  
- tti::mf_has_static_member_function
+ boost::tti::mf_has_static_member_function
    <
-   tti::has_static_member_function_SIntFunction<_,_,_>,
+   boost::tti::has_static_member_function_SIntFunction<_,_,_>,
    DTypeNM,
    boost::mpl::identity<int>,
    boost::mpl::vector<boost::mpl::identity<long>,boost::mpl::identity<double> >

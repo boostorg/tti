@@ -8,9 +8,9 @@ int main()
   
   // Too many 'typename' parameters
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::has_template_SomeMemberTemplate<_>,
+                      boost::tti::has_template_SomeMemberTemplate<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));

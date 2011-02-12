@@ -4,11 +4,11 @@
 int main()
   {
   
-  BOOST_TEST((tti::HaveTheSIntFunction<AType,int,boost::mpl::vector<long,double> >::value));
-  BOOST_TEST((!tti::TheTIntFunction<AType,AType,boost::mpl::vector<long,double> >::value));
-  BOOST_TEST((tti::TheTIntFunction<AnotherType,AType,boost::mpl::vector<long,double> >::value));
-  BOOST_TEST((tti::has_static_member_function_TSFunction<AnotherType,AType::AStructType,boost::mpl::vector<AType::AnIntType,double> >::value));
-  BOOST_TEST((!tti::Pickedname<AnotherType,void>::value));
+  BOOST_TEST((boost::tti::HaveTheSIntFunction<AType,int,boost::mpl::vector<long,double> >::value));
+  BOOST_TEST((!boost::tti::TheTIntFunction<AType,AType,boost::mpl::vector<long,double> >::value));
+  BOOST_TEST((boost::tti::TheTIntFunction<AnotherType,AType,boost::mpl::vector<long,double> >::value));
+  BOOST_TEST((boost::tti::has_static_member_function_TSFunction<AnotherType,AType::AStructType,boost::mpl::vector<AType::AnIntType,double> >::value));
+  BOOST_TEST((!boost::tti::Pickedname<AnotherType,void>::value));
   
   return boost::report_errors();
 

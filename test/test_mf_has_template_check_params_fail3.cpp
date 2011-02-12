@@ -8,9 +8,9 @@ int main()
   
   // Wrong template types
   
-  BOOST_MPL_ASSERT((tti::mf_has_template_check_params
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template_check_params
                       <
-                      tti::WrongParametersForMP<_>,
+                      boost::tti::WrongParametersForMP<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));

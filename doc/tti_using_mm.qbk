@@ -71,18 +71,18 @@ to avoid ODR violations.
 
 Does T have a nested type called 'AnIntType' ?
 
- TTI_HAS_TYPE(AnIntType)
+ BOOST_TTI_HAS_TYPE(AnIntType)
  
- tti::has_type_AnIntType
+ boost::tti::has_type_AnIntType
    <
    T
    >
    
 Does T have a nested type called 'BType' ?
 
- TTI_HAS_TYPE(BType)
+ BOOST_TTI_HAS_TYPE(BType)
   
- tti::has_type_BType
+ boost::tti::has_type_BType
    <
    T
    >
@@ -91,7 +91,7 @@ Does T have a nested type called 'BType' ?
 
 Does T have a nested typedef called 'AnIntType' whose type is an 'int' ?
 
- tti::has_type_AnIntType
+ boost::tti::has_type_AnIntType
    <
    T,
    int
@@ -102,9 +102,9 @@ Does T have a nested typedef called 'AnIntType' whose type is an 'int' ?
 Does T have a nested class template called 'AMemberTemplate' whose template 
 parameters are all types ('class' or 'typename') ?
 
- TTI_HAS_TEMPLATE(AMemberTemplate)
+ BOOST_TTI_HAS_TEMPLATE(AMemberTemplate)
  
- tti::has_template_AMemberTemplate
+ boost::tti::has_template_AMemberTemplate
    <
    T
    >
@@ -114,9 +114,9 @@ parameters are all types ('class' or 'typename') ?
 Does T have a nested class template called 'MoreParameters' whose template 
 parameters are specified exactly ?
 
- TTI_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,(class)(class)(int)(short)(class)(template <class)(int> class InnerTemplate)(class))
+ BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS(MoreParameters,(class)(class)(int)(short)(class)(template <class)(int> class InnerTemplate)(class))
  
- tti::has_template_check_params_MoreParameters
+ boost::tti::has_template_check_params_MoreParameters
    <
    T
    >
@@ -129,9 +129,9 @@ when using this macro.]
 Does T have a nested class template called 'ManyParameters' whose template 
 parameters are specified exactly ?
 
- TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(ManyParameters,class,class,int,class,template <class> class InnerTemplate,class,long)
+ BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(ManyParameters,class,class,int,class,template <class> class InnerTemplate,class,long)
  
- tti::has_template_check_params_ManyParameters
+ boost::tti::has_template_check_params_ManyParameters
    <
    T
    >
@@ -140,9 +140,9 @@ parameters are specified exactly ?
 
 Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
 
- TTI_HAS_MEMBER(IntBT)
+ BOOST_TTI_HAS_MEMBER(IntBT)
  
- tti::has_member_IntBT
+ boost::tti::has_member_IntBT
    <
    AType::BType T::*
    >
@@ -151,9 +151,9 @@ Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
 
 Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
 
- TTI_HAS_MEMBER_DATA(IntBT)
+ BOOST_TTI_HAS_MEMBER_DATA(IntBT)
  
- tti::has_member_data_IntBT
+ boost::tti::has_member_data_IntBT
    <
    T,
    AType::BType
@@ -164,9 +164,9 @@ Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
 Does T have a member function called 'IntFunction' whose type is 
 'int (short)' ?
 
- TTI_HAS_MEMBER(IntFunction)
+ BOOST_TTI_HAS_MEMBER(IntFunction)
  
- tti::has_member_IntFunction
+ boost::tti::has_member_IntFunction
    <
    int (T::*)(short)
    >
@@ -176,9 +176,9 @@ Does T have a member function called 'IntFunction' whose type is
 Does T have a member function called 'IntFunction' whose type is 
 'int (short)' ?
 
- TTI_HAS_MEMBER_FUNCTION(IntFunction)
+ BOOST_TTI_HAS_MEMBER_FUNCTION(IntFunction)
  
- tti::has_member_function_IntFunction
+ boost::tti::has_member_function_IntFunction
    <
    T,
    int,
@@ -189,9 +189,9 @@ Does T have a member function called 'IntFunction' whose type is
 
 Does T have a static member data called 'DSMember' whose type is 'short' ?
 
- TTI_HAS_STATIC_MEMBER(DSMember)
+ BOOST_TTI_HAS_STATIC_MEMBER(DSMember)
  
- tti::has_static_member_DSMember
+ boost::tti::has_static_member_DSMember
    <
    T,
    short
@@ -202,9 +202,9 @@ Does T have a static member data called 'DSMember' whose type is 'short' ?
 Does T have a static member function called 'SIntFunction' whose type 
 is 'int (long,double)' ?
 
- TTI_HAS_STATIC_MEMBER(SIntFunction)
+ BOOST_TTI_HAS_STATIC_MEMBER(SIntFunction)
  
- tti::has_static_member_SIntFunction
+ boost::tti::has_static_member_SIntFunction
    <
    T,
    int (long,double)
@@ -215,9 +215,9 @@ is 'int (long,double)' ?
 Does T have a static member function called 'SIntFunction' whose type 
 is 'int (long,double)' ?
 
- TTI_HAS_STATIC_MEMBER(SIntFunction)
+ BOOST_TTI_HAS_STATIC_MEMBER(SIntFunction)
  
- tti::has_static_member_SIntFunction
+ boost::tti::has_static_member_SIntFunction
    <
    T,
    int,
@@ -229,14 +229,14 @@ is 'int (long,double)' ?
 Create a nested type T::BType::CType without creating a compiler error
 if T does not have the nested type BType::CType ?
 
- TTI_MEMBER_TYPE(BType)
- TTI_MEMBER_TYPE(CType)
+ BOOST_TTI_MEMBER_TYPE(BType)
+ BOOST_TTI_MEMBER_TYPE(CType)
  
  typename
- tti::member_type_CType
+ boost::tti::member_type_CType
    <
    typename
-   tti::member_type_BType
+   boost::tti::member_type_BType
      <
      T
      >::type
@@ -247,21 +247,21 @@ if T does not have the nested type BType::CType ?
 Does a nested type T::BType::CType, created without creating a compiler error
 if T does not have the nested type BType::CType, actually exist ?
 
- TTI_MEMBER_TYPE(BType)
- TTI_MEMBER_TYPE(CType)
+ BOOST_TTI_MEMBER_TYPE(BType)
+ BOOST_TTI_MEMBER_TYPE(CType)
  
  typedef typename
- tti::member_type_CType
+ boost::tti::member_type_CType
    <
    typename
-   tti::member_type_BType
+   boost::tti::member_type_BType
      <
      T
      >::type
    >::type
  AType;
  
- tti::valid_member_type
+ boost::tti::valid_member_type
    <
    AType
    >

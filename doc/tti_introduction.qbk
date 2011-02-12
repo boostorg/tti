@@ -61,7 +61,7 @@ macro with variadic macro support, is
 [headerref boost/tti/tti_vm.hpp 'tti_vm.hpp'].
 
 Furthermore there is a third header file which both of the header 
-files above include, called 'mf_template_params.hpp' but 
+files above include, called 'mf\_template\_params.hpp' but 
 this should never be included itself but only through either 
 of the main header files.
         
@@ -69,9 +69,9 @@ The library is dependent on Boost PP, Boost MPL,
 Boost Type Traits, and Boost Function Types. 
 
 If the secondary header is used the library is also dependent 
-on the variadic_macro_data library currently in the sandbox. 
+on the variadic\_macro\_data library currently in the sandbox. 
 If the secondary header is not used there is no need to download 
-the variadic_macro_data library and use it in any way.
+the variadic\_macro\_data library and use it in any way.
 
 Since the dependencies of the library are all header only 
 libraries, there is no need to build anything in order to use 

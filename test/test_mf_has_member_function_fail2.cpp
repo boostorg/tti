@@ -8,9 +8,9 @@ int main()
   
   // Wrong function signature
   
-  BOOST_MPL_ASSERT((tti::mf_has_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_member_function
                       <
-                      tti::FunctionReturningInt<_,_>,
+                      boost::tti::FunctionReturningInt<_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<short>
                       >

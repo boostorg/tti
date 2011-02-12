@@ -8,9 +8,9 @@ int main()
   
   // You can always instantiate without compiler errors
   
-  tti::mf_has_static_member_function
+  boost::tti::mf_has_static_member_function
     <
-    tti::HaveTheSIntFunction<_,_,_>,
+    boost::tti::HaveTheSIntFunction<_,_,_>,
     boost::mpl::identity<AType>,
     boost::mpl::identity<int>,
     boost::mpl::vector
@@ -20,9 +20,9 @@ int main()
       >
     > aVar;
   
-  tti::mf_has_static_member_function
+  boost::tti::mf_has_static_member_function
     <
-    tti::MTFCPickedname,
+    boost::tti::MTFCPickedname,
     boost::mpl::identity<AType>,
     boost::mpl::identity<double>,
     boost::mpl::vector<boost::mpl::identity<float> >
@@ -30,9 +30,9 @@ int main()
   
   // Compile time asserts
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::HaveTheSIntFunction<_,_,_>,
+                      boost::tti::HaveTheSIntFunction<_,_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<int>,
                       boost::mpl::vector
@@ -43,9 +43,9 @@ int main()
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::TheTIntFunction<_,_,_>,
+                      boost::tti::TheTIntFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<AType>,
                       boost::mpl::vector
@@ -56,22 +56,22 @@ int main()
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::has_static_member_function_TSFunction<_,_,_>,
+                      boost::tti::has_static_member_function_TSFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
-                      tti::member_type_AStructType<AType>,
+                      boost::tti::member_type_AStructType<AType>,
                       boost::mpl::vector
                         <
-                        tti::NameIntType<AType>,
+                        boost::tti::NameIntType<AType>,
                         boost::mpl::identity<double>
                         >
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::MFHaveTheSIntFunction,
+                      boost::tti::MFHaveTheSIntFunction,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<int>,
                       boost::mpl::vector
@@ -82,9 +82,9 @@ int main()
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::MFCTheTIntFunction,
+                      boost::tti::MFCTheTIntFunction,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<AType>,
                       boost::mpl::vector
@@ -95,14 +95,14 @@ int main()
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::mtfc_has_static_member_function_TSFunction,
+                      boost::tti::mtfc_has_static_member_function_TSFunction,
                       boost::mpl::identity<AnotherType>,
-                      tti::member_type_AStructType<AType>,
+                      boost::tti::member_type_AStructType<AType>,
                       boost::mpl::vector
                         <
-                        tti::NameIntType<AType>,
+                        boost::tti::NameIntType<AType>,
                         boost::mpl::identity<double>
                         >
                       >

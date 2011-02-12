@@ -4,11 +4,11 @@
 #include "test_structs.hpp"
 #include <boost/tti/tti.hpp>
 
-TTI_HAS_MEMBER_FUNCTION(VoidFunction)
-TTI_TRAIT_HAS_MEMBER_FUNCTION(FunctionReturningInt,IntFunction)
-TTI_HAS_MEMBER_FUNCTION(aFunction)
-TTI_TRAIT_HAS_MEMBER_FUNCTION(AnotherIntFunction,anotherFunction)
-TTI_HAS_MEMBER_FUNCTION(sFunction)
-TTI_HAS_MEMBER_FUNCTION(someFunctionMember)
+BOOST_TTI_HAS_MEMBER_FUNCTION(VoidFunction)
+BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION(FunctionReturningInt,IntFunction)
+BOOST_TTI_HAS_MEMBER_FUNCTION(aFunction)
+BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION(AnotherIntFunction,anotherFunction)
+BOOST_TTI_HAS_MEMBER_FUNCTION(sFunction)
+BOOST_TTI_HAS_MEMBER_FUNCTION(someFunctionMember)
 
 #endif // TEST_HAS_MEMBER_FUNCTION_HPP

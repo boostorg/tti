@@ -8,9 +8,9 @@ int main()
   
   // Wrong enclosing type
   
-  BOOST_MPL_ASSERT((tti::mf_has_static_member_function
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      tti::HaveTheSIntFunction<_,_,_>,
+                      boost::tti::HaveTheSIntFunction<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<int>,
                       boost::mpl::vector

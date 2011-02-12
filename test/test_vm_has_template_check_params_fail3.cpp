@@ -8,7 +8,7 @@ int main()
 
   // Wrong template parameters
   
-  BOOST_MPL_ASSERT((tti::WrongParametersForMP<AnotherType>));
+  BOOST_MPL_ASSERT((boost::tti::WrongParametersForMP<AnotherType>));
   
 #endif //!defined(BOOST_NO_VARIADIC_MACROS)
 

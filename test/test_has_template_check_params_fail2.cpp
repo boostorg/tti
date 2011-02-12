@@ -6,7 +6,7 @@ int main()
   
   // Wrong enclosing type
   
-  BOOST_MPL_ASSERT((tti::HaveCL<AnotherType>));
+  BOOST_MPL_ASSERT((boost::tti::HaveCL<AnotherType>));
   
   return 0;
 

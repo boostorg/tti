@@ -5,7 +5,7 @@ int main()
   
   // Enclosing type does not exist
   
-  tti::TheInteger<AType::EType> aVar;
+  boost::tti::TheInteger<AType::EType> aVar;
   
   return 0;
 

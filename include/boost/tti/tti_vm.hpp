@@ -25,7 +25,7 @@
     name  = the name of the inner class template.<br />
     ...   = variadic macro data which has the class template parameters.
 
-    returns = a metafunction called "tti::trait" where 'trait' is the macro parameter.
+    returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction types and return:
     
@@ -35,20 +35,23 @@
                           otherwise 'value' is false.
     
 */
-#define TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
+#define BOOST_TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
+namespace boost \
   { \
-  namespace detail \
+  namespace tti \
     { \
-    TTI_VM_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
+    namespace detail \
+      { \
+      TTI_VM_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
+      } \
+    template<class T> \
+    struct trait \
+      { \
+      typedef typename detail::trait<T>::type type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
     } \
-  template<class T> \
-  struct trait \
-    { \
-    typedef typename detail::trait<T>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
-    }; \
   } \
 /**/
 
@@ -59,7 +62,7 @@ namespace tti \
     name  = the name of the inner class template.<br />
     ...   = variadic macro data which has the class template parameters.
 
-    returns = a metafunction class called "tti::trait" where 'trait' is the macro parameter.
+    returns = a metafunction class called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -69,23 +72,26 @@ namespace tti \
                           otherwise 'value' is false.
     
 */
-#define TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
-namespace tti \
+#define BOOST_TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
+namespace boost \
   { \
-  namespace detail \
+  namespace tti \
     { \
-    TTI_VM_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
-    } \
-  struct trait \
-    { \
-    template<class T> \
-    struct apply \
+    namespace detail \
       { \
-      typedef typename detail::trait::apply<T>::type type; \
-      \
-      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      TTI_VM_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
+      } \
+    struct trait \
+      { \
+      template<class T> \
+      struct apply \
+        { \
+        typedef typename detail::trait::apply<T>::type type; \
+        \
+        BOOST_STATIC_CONSTANT(bool,value=type::value); \
+        }; \
       }; \
-    }; \
+    } \
   } \
 /**/
 
@@ -96,7 +102,7 @@ namespace tti \
     name  = the name of the inner class template.<br />
     ...   = variadic macro data which has the class template parameters.
 
-    returns = a metafunction called "tti::has_template_check_params_name" where 'name' is the macro parameter.
+    returns = a metafunction called "boost::tti::has_template_check_params_name" where 'name' is the macro parameter.
     
               The metafunction types and return:
     
@@ -106,8 +112,8 @@ namespace tti \
                           otherwise 'value' is false.
     
 */
-#define TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
-  TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
+#define BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
+  BOOST_TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
   BOOST_PP_CAT(has_template_check_params_,name), \
   name, \
@@ -121,7 +127,7 @@ namespace tti \
     name  = the name of the inner class template.<br />
     ...   = variadic macro data which has the class template parameters.
 
-    returns = a metafunction class called "tti::mtfc_has_template_check_params_name" where 'name' is the macro parameter.
+    returns = a metafunction class called "boost::tti::mtfc_has_template_check_params_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
@@ -131,8 +137,8 @@ namespace tti \
                           otherwise 'value' is false.
     
 */
-#define TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
-  TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
+#define BOOST_TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
+  BOOST_TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
   BOOST_PP_CAT(mtfc_has_template_check_params_,name), \
   name, \

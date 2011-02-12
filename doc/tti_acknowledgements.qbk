@@ -1,7 +1,7 @@
 [section:tti_acknowledgments Acknowledgments]
 
 The TTI library came out of my effort to take the 
-type_traits_ext part of the unfinished Concept Traits
+type\_traits\_ext part of the unfinished Concept Traits
 Library and expand it. So my first thanks go to 
 Terje Slettebo and Tobias Schwinger, the authors of 
 the CTL. I have taken, and hopefully improved upon, 

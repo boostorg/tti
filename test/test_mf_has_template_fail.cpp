@@ -8,10 +8,10 @@ int main()
   
   // TemplateNotExist does not exist at all
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::has_template_TemplateNotExist<_>,
-                      tti::MT_BType<AType>
+                      boost::tti::has_template_TemplateNotExist<_>,
+                      boost::tti::MT_BType<AType>
                       >
                   ));
   

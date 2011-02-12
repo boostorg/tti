@@ -10,12 +10,12 @@ int main()
   
   // Wrong enclosing type
   
-  BOOST_MPL_ASSERT((tti::mf_has_template_check_params
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template_check_params
                       <
-                      tti::has_template_check_params_CTManyParameters<_>,
-                      tti::mf_member_type
+                      boost::tti::has_template_check_params_CTManyParameters<_>,
+                      boost::tti::mf_member_type
                         <
-                        tti::member_type_CType<_>,
+                        boost::tti::member_type_CType<_>,
                         boost::mpl::identity<AType>
                         >
                       >

@@ -8,13 +8,13 @@ int main()
   
   // Template does not exist
   
-  BOOST_MPL_ASSERT((tti::mf_has_template_check_params
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template_check_params
                       <
-                      tti::has_template_check_params_TemplateNotExist<_>,
-                      tti::mf_member_type
+                      boost::tti::has_template_check_params_TemplateNotExist<_>,
+                      boost::tti::mf_member_type
                         <
-                        tti::member_type_CType<_>,
-                        tti::MT_BType<AType>
+                        boost::tti::member_type_CType<_>,
+                        boost::tti::MT_BType<AType>
                         >
                       >
                   ));

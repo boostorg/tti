@@ -8,97 +8,97 @@ int main()
 
   using namespace boost::mpl::placeholders;
   
-  BOOST_TEST((tti::mf_has_template_check_params
+  BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                tti::HT_Str<_>,
-                tti::member_type_AStructType<AType>
+                boost::tti::HT_Str<_>,
+                boost::tti::member_type_AStructType<AType>
                 >
               ::value
             ));
   
-  BOOST_TEST((tti::mf_has_template_check_params
+  BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                tti::has_template_check_params_AnotherMemberTemplate<_>,
+                boost::tti::has_template_check_params_AnotherMemberTemplate<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
             ));
   
-  BOOST_TEST((!tti::mf_has_template_check_params
+  BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                tti::WrongParametersForMP<_>,
+                boost::tti::WrongParametersForMP<_>,
                 boost::mpl::identity<AnotherType>
                 >
               ::value
             ));
   
-  BOOST_TEST((tti::mf_has_template_check_params
+  BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                tti::has_template_check_params_CTManyParameters<_>,
-                tti::mf_member_type
+                boost::tti::has_template_check_params_CTManyParameters<_>,
+                boost::tti::mf_member_type
                   <
-                  tti::member_type_CType<_>,
-                  tti::MT_BType<AType>
+                  boost::tti::member_type_CType<_>,
+                  boost::tti::MT_BType<AType>
                   >
                 >
               ::value
             ));
   
-  BOOST_TEST((!tti::mf_has_template_check_params
+  BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                tti::has_template_check_params_TemplateNotExist<_>,
-                tti::mf_member_type
+                boost::tti::has_template_check_params_TemplateNotExist<_>,
+                boost::tti::mf_member_type
                   <
-                  tti::member_type_CType<_>,
-                  tti::MT_BType<AType>
+                  boost::tti::member_type_CType<_>,
+                  boost::tti::MT_BType<AType>
                   >
                 >
               ::value
             ));
   
-  BOOST_TEST((tti::mf_has_template_check_params
+  BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                tti::MF_HT_Str,
-                tti::member_type_AStructType<AType>
+                boost::tti::MF_HT_Str,
+                boost::tti::member_type_AStructType<AType>
                 >
               ::value
             ));
   
-  BOOST_TEST((tti::mf_has_template_check_params
+  BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                tti::mtfc_has_template_check_params_AnotherMemberTemplate,
+                boost::tti::mtfc_has_template_check_params_AnotherMemberTemplate,
                 boost::mpl::identity<AType>
                 >
               ::value
             ));
   
-  BOOST_TEST((!tti::mf_has_template_check_params
+  BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                tti::AllWrongParametersForMP,
+                boost::tti::AllWrongParametersForMP,
                 boost::mpl::identity<AnotherType>
                 >
               ::value
             ));
   
-  BOOST_TEST((tti::mf_has_template_check_params
+  BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                tti::mtfc_has_template_check_params_CTManyParameters,
-                tti::mf_member_type
+                boost::tti::mtfc_has_template_check_params_CTManyParameters,
+                boost::tti::mf_member_type
                   <
-                  tti::member_type_CType<_>,
-                  tti::MT_BType<AType>
+                  boost::tti::member_type_CType<_>,
+                  boost::tti::MT_BType<AType>
                   >
                 >
               ::value
             ));
   
-  BOOST_TEST((!tti::mf_has_template_check_params
+  BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                tti::mtfc_has_template_check_params_TemplateNotExist,
-                tti::mf_member_type
+                boost::tti::mtfc_has_template_check_params_TemplateNotExist,
+                boost::tti::mf_member_type
                   <
-                  tti::mtfc_member_type_CType,
-                  tti::MT_BType<AType>
+                  boost::tti::mtfc_member_type_CType,
+                  boost::tti::MT_BType<AType>
                   >
                 >
               ::value

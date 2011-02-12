@@ -8,9 +8,9 @@ int main()
   
   // NoOtherType does not exist at all
   
-  BOOST_MPL_ASSERT((tti::mf_has_type
+  BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      tti::has_type_NoOtherType<_>,
+                      boost::tti::has_type_NoOtherType<_>,
                       boost::mpl::identity<AType>
                       >
                   ));

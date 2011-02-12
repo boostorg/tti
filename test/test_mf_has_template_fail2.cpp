@@ -8,10 +8,10 @@ int main()
   
   // Wrong enclosing type
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::HaveMStr<_>,
-                      tti::member_type_AStructType<AnotherType>
+                      boost::tti::HaveMStr<_>,
+                      boost::tti::member_type_AStructType<AnotherType>
                       >
                   ));
   

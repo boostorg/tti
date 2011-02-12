@@ -8,72 +8,72 @@ int main()
   
   // You can always instantiate without compiler errors
   
-  tti::mf_has_template
+  boost::tti::mf_has_template
     <
-    tti::has_template_TemplateNotExist<_>,
-    tti::MT_BType<AType>
+    boost::tti::has_template_TemplateNotExist<_>,
+    boost::tti::MT_BType<AType>
     > aVar;
     
-  tti::mf_has_template
+  boost::tti::mf_has_template
     <
-    tti::mtfc_has_template_ATPMemberTemplate,
+    boost::tti::mtfc_has_template_ATPMemberTemplate,
     boost::mpl::identity<AnotherType>
     > aVar2;
   
   // Compile time asserts
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::HaveMStr<_>,
-                      tti::member_type_AStructType<AType>
+                      boost::tti::HaveMStr<_>,
+                      boost::tti::member_type_AStructType<AType>
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::has_template_ATPMemberTemplate<_>,
+                      boost::tti::has_template_ATPMemberTemplate<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::HaveCL<_>,
+                      boost::tti::HaveCL<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::has_template_SimpleTMP<_>,
+                      boost::tti::has_template_SimpleTMP<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));
 
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::MetaHaveMStr,
-                      tti::member_type_AStructType<AType>
+                      boost::tti::MetaHaveMStr,
+                      boost::tti::member_type_AStructType<AType>
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::mtfc_has_template_ATPMemberTemplate,
+                      boost::tti::mtfc_has_template_ATPMemberTemplate,
                       boost::mpl::identity<AType>
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::MFClassHaveCL,
+                      boost::tti::MFClassHaveCL,
                       boost::mpl::identity<AType>
                       >
                   ));
   
-  BOOST_MPL_ASSERT((tti::mf_has_template
+  BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      tti::mtfc_has_template_SimpleTMP,
+                      boost::tti::mtfc_has_template_SimpleTMP,
                       boost::mpl::identity<AnotherType>
                       >
                   ));
