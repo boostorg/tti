@@ -1,6 +1,6 @@
 [section:tti_detail Macro Metafunctions]
 
-The TTI library uses macros to create metafunctions, in the top-level 'tti' namespace, 
+The TTI library uses macros to create metafunctions, in the boost::tti' namespace, 
 for introspecting an inner element by name. Each macro for a particular type of inner 
 element has two forms, the simple one where the first macro parameter designating the 
 'name' of the inner element is used to create the name of the metafunction, and the 
