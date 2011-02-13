@@ -1,6 +1,6 @@
 [section:tti_intro Introduction]
 
-Welcome to the Type Traits Introspection library version 1.2 .
+Welcome to the Type Traits Introspection library version 1.3.
 
 The Type Traits Introspection library, or TTI for short, is a library 
 of macros generating metafunctions, and a set of parallel nullary type 
