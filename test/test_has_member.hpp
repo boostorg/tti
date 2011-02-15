@@ -2,7 +2,7 @@
 #define TEST_HAS_MEMBER_HPP
 
 #include "test_structs.hpp"
-#include <boost/tti/tti.hpp>
+#include <boost/tti/member.hpp>
 
 BOOST_TTI_HAS_MEMBER(AnInt)
 BOOST_TTI_HAS_MEMBER(VoidFunction)

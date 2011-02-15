@@ -2,7 +2,7 @@
 #define TEST_HAS_TEMPLATE_HPP
 
 #include "test_structs.hpp"
-#include <boost/tti/tti.hpp>
+#include <boost/tti/template.hpp>
 
 BOOST_TTI_HAS_TEMPLATE(ATPMemberTemplate)
 BOOST_TTI_TRAIT_HAS_TEMPLATE(HaveCL,CLMemberTemplate)

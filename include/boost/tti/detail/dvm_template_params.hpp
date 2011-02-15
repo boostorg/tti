@@ -1,5 +1,5 @@
-#if !defined(TT_INTROSPECTION_VM_DETAIL_HPP)
-#define TT_INTROSPECTION_VM_DETAIL_HPP
+#if !defined(TTI_VM_DETAIL_TEMPLATE_PARAMS_HPP)
+#define TTI_VM_DETAIL_TEMPLATE_PARAMS_HPP
 
 #include <boost/config.hpp>
 
@@ -10,7 +10,7 @@
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/variadic_macro_data/vmd.hpp>
-#include "dtti.hpp"
+#include "dtemplate_params.hpp"
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
@@ -64,4 +64,4 @@
 
 #endif // !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #endif // !defined(BOOST_NO_VARIADIC_MACROS)
-#endif // TT_INTROSPECTION_VM_DETAIL_HPP
+#endif // TTI_VM_DETAIL_TEMPLATE_PARAMS_HPP

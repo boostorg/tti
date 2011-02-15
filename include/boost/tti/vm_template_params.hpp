@@ -1,0 +1,152 @@
+#if !defined(TTI_VM_TEMPLATE_PARAMS_HPP)
+#define TTI_VM_TEMPLATE_PARAMS_HPP
+
+#include <boost/config.hpp>
+
+#if !defined(BOOST_NO_VARIADIC_MACROS)
+
+#include <boost/mpl/apply.hpp>
+#include <boost/mpl/identity.hpp>
+#include <boost/preprocessor/cat.hpp>
+#include "mf_template_params.hpp"
+#include "detail/dvm_template_params.hpp"
+
+/*
+
+  The succeeding comments in this file are in doxygen format.
+
+*/
+
+/** \file
+*/
+
+/// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
+/**
+
+    trait = the name of the metafunction within the tti namespace.<br />
+    name  = the name of the inner class template.<br />
+    ...   = variadic macro data which has the class template parameters.
+
+    returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.
+    
+              The metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' class template, with the signature
+                          as defined by the '...' variadic macro data, exists within the enclosing type,
+                          otherwise 'value' is false.
+    
+*/
+#define BOOST_TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
+namespace boost \
+  { \
+  namespace tti \
+    { \
+    namespace detail \
+      { \
+      TTI_VM_DETAIL_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
+      } \
+    template<class T> \
+    struct trait \
+      { \
+      typedef typename detail::trait<T>::type type; \
+      \
+      BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      }; \
+    } \
+  } \
+/**/
+
+/// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
+/**
+
+    trait = the name of the metafunction class within the tti namespace.<br />
+    name  = the name of the inner class template.<br />
+    ...   = variadic macro data which has the class template parameters.
+
+    returns = a metafunction class called "boost::tti::trait" where 'trait' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' class template, with the signature
+                          as defined by the '...' variadic macro data, exists within the enclosing type,
+                          otherwise 'value' is false.
+    
+*/
+#define BOOST_TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,...) \
+namespace boost \
+  { \
+  namespace tti \
+    { \
+    namespace detail \
+      { \
+      TTI_VM_DETAIL_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(trait,name,__VA_ARGS__) \
+      } \
+    struct trait \
+      { \
+      template<class T> \
+      struct apply \
+        { \
+        typedef typename detail::trait::apply<T>::type type; \
+        \
+        BOOST_STATIC_CONSTANT(bool,value=type::value); \
+        }; \
+      }; \
+    } \
+  } \
+/**/
+
+
+/// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
+/**
+
+    name  = the name of the inner class template.<br />
+    ...   = variadic macro data which has the class template parameters.
+
+    returns = a metafunction called "boost::tti::has_template_check_params_name" where 'name' is the macro parameter.
+    
+              The metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' class template, with the signature
+                          as defined by the '...' variadic macro data, exists within the enclosing type,
+                          otherwise 'value' is false.
+    
+*/
+#define BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
+  BOOST_TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
+  ( \
+  BOOST_PP_CAT(has_template_check_params_,name), \
+  name, \
+  __VA_ARGS__ \
+  ) \
+/**/
+
+/// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
+/**
+
+    name  = the name of the inner class template.<br />
+    ...   = variadic macro data which has the class template parameters.
+
+    returns = a metafunction class called "boost::tti::mtfc_has_template_check_params_name" where 'name' is the macro parameter.
+    
+              The metafunction class's 'apply' metafunction types and return:
+    
+                T = the enclosing type in which to look for our 'name'.<br />
+                returns = 'value' is true if the 'name' class template, with the signature
+                          as defined by the '...' variadic macro data, exists within the enclosing type,
+                          otherwise 'value' is false.
+    
+*/
+#define BOOST_TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
+  BOOST_TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
+  ( \
+  BOOST_PP_CAT(mtfc_has_template_check_params_,name), \
+  name, \
+  __VA_ARGS__ \
+  ) \
+/**/
+
+#endif // !defined(BOOST_NO_VARIADIC_MACROS)
+#endif // TTI_VM_TEMPLATE_PARAMS_HPP

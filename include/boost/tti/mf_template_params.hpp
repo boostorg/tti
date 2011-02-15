@@ -1,10 +1,10 @@
-#if !defined(TT_INTROSPECTION_TEMPLATE_HPP)
-#define TT_INTROSPECTION_TEMPLATE_HPP
+#if !defined(TTI_MF_TEMPLATE_PARAMS_HPP)
+#define TTI_MF_TEMPLATE_PARAMS_HPP
 
 #include <boost/config.hpp>
-#include <boost/mpl/identity.hpp>
 #include <boost/mpl/apply.hpp>
-#include "detail/dtti.hpp"
+#include <boost/mpl/identity.hpp>
+#include <boost/mpl/placeholders.hpp>
 
 /*
 
@@ -53,4 +53,4 @@ namespace boost
     }
   }
   
-#endif // TT_INTROSPECTION_TEMPLATE_HPP
+#endif // TTI_MF_TEMPLATE_PARAMS_HPP

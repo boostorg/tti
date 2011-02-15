@@ -4,7 +4,7 @@
 #if !defined(BOOST_NO_VARIADIC_MACROS)
 
 #include "test_structs.hpp"
-#include <boost/tti/tti_vm.hpp>
+#include <boost/tti/vm_template_params.hpp>
 
 BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(ATPMemberTemplate,class)
 BOOST_TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS(HaveCL,CLMemberTemplate,class,class)
