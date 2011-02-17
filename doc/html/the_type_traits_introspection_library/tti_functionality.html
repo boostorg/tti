@@ -4,8 +4,8 @@
 <title>General Functionality</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.0">
-<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.3">
-<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.3">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.4">
+<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.4">
 <link rel="prev" href="tti_terminology.html" title="Terminology">
 <link rel="next" href="tti_detail.html" title="Macro Metafunctions">
 </head>
@@ -75,19 +75,19 @@
     </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
-          In the simplest form the 'name' of the inner element is used directly to
-          generate the name of the metafunction as well as serving as the 'name'
+          In the simplest macro form the 'name' of the inner element is used directly
+          to generate the name of the metafunction as well as serving as the 'name'
           to introspect. To generate the name of the metafunction the 'name' is appended
           to the name of the macro, with the BOOST_TTI_ prefix removed, a final underscore
-          added, and the macro part of the name in lower case. As an example, for
+          added, and the macro parameter 'name' in lower case. As an example, for
           the macro BOOST_TTI_HAS_TYPE(MyType) the name of the metafunction is 'boost::tti::has_type_MyType'
           and it will look for an inner type called 'MyType'.
         </li>
 <li class="listitem">
-          In the slightly more complicated form, which I call the complex form, the
+          In the more complicated macro form, which I call the complex form, the
           macro starts with BOOST_TTI_TRAIT_ and a 'trait' name is passed as the
           first parameter, with the 'name' of the inner element as the second parameter.
-          The 'trait' name serves only to completely name the metafunction in the
+          The 'trait' name serves solely to completely name the metafunction in the
           boost::tti namespace. As an example, for the macro BOOST_TTI_TRAIT_HAS_TYPE(MyTrait,MyType)
           the name of the metafunction is 'boost::tti::MyTrait' and it will look
           for an inner type called 'MyType'. Every macro has a corresponding complex

@@ -1,5 +1,9 @@
 [section:tti_history History]
 
+[heading Version 1.4]
+
+* Inclusion of specific header files for faster compilation is now supported.
+
 [heading Version 1.3]
 
 * Breaking changes

@@ -21,18 +21,18 @@ generate an appropriate metafunction, which the template metaprogrammer can then
 introspect the information that is needed. The name itself of the inner element is always passed 
 to the macro as a macro parameter, but other macro parameters may also be needed in some cases.
 
-All of the macros start with the prefix BOOST\_TTI\_, create their metafunctions in a  
+All of the macros start with the prefix BOOST\_TTI\_, create their metafunctions in a
 namespace called 'boost::tti', and come in two forms: 
 
-# In the simplest form the 'name' of the inner element is used directly to generate the name 
+# In the simplest macro form the 'name' of the inner element is used directly to generate the name 
   of the metafunction as well as serving as the 'name' to introspect. To generate the name of 
   the metafunction the 'name' is appended to the name of the macro, with the BOOST\_TTI\_ prefix removed, 
-  a final underscore added, and the macro part of the name in lower case. As an example, for the 
+  a final underscore added, and the macro parameter 'name' in lower case. As an example, for the 
   macro BOOST\_TTI\_HAS\_TYPE(MyType) the name of the metafunction is 'boost::tti::has_type_MyType' and it will 
   look for an inner type called 'MyType'.
-# In the slightly more complicated form, which I call the complex form, the macro starts with 
+# In the more complicated macro form, which I call the complex form, the macro starts with 
   BOOST\_TTI\_TRAIT\_ and a 'trait' name is passed as the first parameter, with the 'name' of the inner 
-  element as the second parameter. The 'trait' name serves only to completely name the metafunction in 
+  element as the second parameter. The 'trait' name serves solely to completely name the metafunction in 
   the boost::tti namespace. As an example, for the macro BOOST\_TTI\_TRAIT\_HAS\_TYPE(MyTrait,MyType) the name of 
   the metafunction is 'boost::tti::MyTrait' and it will look for an inner type called 'MyType'. Every
   macro has a corresponding complex form.

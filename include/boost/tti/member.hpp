@@ -19,7 +19,8 @@
 /// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.<br />
+    trait = the name of the metafunction within the tti namespace.
+    
     name  = the name of the inner member.
 
     returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.<br />
@@ -27,7 +28,8 @@
               The metafunction types and return:
     
                 T = the type, in the form of a member data pointer or member function pointer, 
-                    in which to look for our 'name'.<br />
+                    in which to look for our 'name'.
+                    
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
                           otherwise 'value' is false.
                           
@@ -53,15 +55,17 @@ namespace boost \
 /// Expands to a metafunction class which tests whether a member data or member function with a particular name and type exists.
 /**
 
-    trait = the name of the metafunction class within the tti namespace.<br />
+    trait = the name of the metafunction class within the tti namespace.
+    
     name  = the name of the inner member.
 
-    returns = a metafunction class called "boost::tti::trait" where 'trait' is the macro parameter.<br />
+    returns = a metafunction class called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
                 T = the type, in the form of a member data pointer or member function pointer, 
-                    in which to look for our 'name'.<br />
+                    in which to look for our 'name'.
+                    
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
                           otherwise 'value' is false.
                           
@@ -97,7 +101,8 @@ namespace boost \
               The metafunction types and return:
     
                 T = the type, in the form of a member data pointer or member function pointer, 
-                    in which to look for our 'name'.<br />
+                    in which to look for our 'name'.
+                    
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
                           otherwise 'value' is false.
                           
@@ -120,7 +125,8 @@ namespace boost \
               The metafunction class's 'apply' metafunction types and return:
     
                 T = the type, in the form of a member data pointer or member function pointer, 
-                    in which to look for our 'name'.<br />
+                    in which to look for our 'name'.
+                    
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
                           otherwise 'value' is false.
                           

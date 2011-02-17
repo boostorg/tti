@@ -35,8 +35,16 @@ else
 
 doxygen tti_reference
   :
-    $(here)/../../../boost/tti/tti.hpp
-    $(here)/../../../boost/tti/tti_vm.hpp
+    $(here)/../../../boost/tti/type.hpp
+    $(here)/../../../boost/tti/template.hpp
+    $(here)/../../../boost/tti/template_params.hpp
+    $(here)/../../../boost/tti/vm_template_params.hpp
+    $(here)/../../../boost/tti/member.hpp
+    $(here)/../../../boost/tti/member_data.hpp
+    $(here)/../../../boost/tti/member_function.hpp
+    $(here)/../../../boost/tti/static_member.hpp
+    $(here)/../../../boost/tti/static_member_function.hpp
+    $(here)/../../../boost/tti/member_type.hpp
     $(here)/../../../boost/tti/mf_template_params.hpp
   : 
     <doxygen:param>PROJECT_NAME="TTI"

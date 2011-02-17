@@ -22,7 +22,7 @@ without producing compiler errors. Of course if we absolutely know what types we
 that a nested type exists, and these declarations are within our scope, we can always use 
 an expression like T::InnerType without error. But this is often not the case when doing template 
 programming since the type being passed to us at compile-time in a class or function template 
-is chosen at instantiation time.
+is chosen at instantiation time and is created by the user of a template.
 
 One solution to this is afforded by the library itself. Given an enclosing type 'T' 
 which we know must exist, either because it is a top-level type we know about or 
@@ -119,7 +119,17 @@ Next we create our metafunction:
   
 and use this in our metaprogramming code. Our metafunction now tells us whether the nested type 
 FindType has a static member data called MyData of type 'int', even if FindType does not actually 
-exist as we have specified it as a type.
+exist as we have specified it as a type. If we had tried to do this using normal C++ nested type
+notation our metafunction code above would be:
+
+ boost::tti::has_static_member_MyData
+   <
+   typename T::AType::BType::CType::FindType,
+   int
+   >
+   
+But this fails with a compiler error if there is no such nested type, and 
+that is exactly what we do not want in our compile-time metaprogramming code.
 
 We can also directly find out whether the deeply nested type 'FindType' 
 actually exists in a similar manner. Our metafunction would be:
@@ -171,7 +181,7 @@ for a syntactical notation which is easy to specify, but because of that composi
 can not use the nested type functionality in BOOST\_TTI\_MEMBER\_TYPE very easily. But
 when we use the BOOST\_TTI\_HAS\_MEMBER\_DATA, BOOST\_TTI\_HAS\_MEMBER\_FUNCTION, and BOOST\_TTI\_HAS\_STATIC\_MEMBER\_FUNCTION
 the composite types in our signatures are broken down into their individual types so that using 
-BOOST\_TTI\_MEMBER\_TYPE, if necessary, for one of the individual types is easy.
+BOOST\_TTI\_MEMBER\_TYPE, if necessary, for any one of the individual types is easy.
 
 [heading A more elegant solution]
 

@@ -23,15 +23,18 @@
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner class template.<br />
+    trait = the name of the metafunction within the tti namespace.
+    
+    name  = the name of the inner class template.
+    
     ...   = variadic macro data which has the class template parameters.
 
     returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template, with the signature
                           as defined by the '...' variadic macro data, exists within the enclosing type,
                           otherwise 'value' is false.
@@ -60,15 +63,18 @@ namespace boost \
 /// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    trait = the name of the metafunction class within the tti namespace.<br />
-    name  = the name of the inner class template.<br />
+    trait = the name of the metafunction class within the tti namespace.
+    
+    name  = the name of the inner class template.
+    
     ...   = variadic macro data which has the class template parameters.
 
     returns = a metafunction class called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template, with the signature
                           as defined by the '...' variadic macro data, exists within the enclosing type,
                           otherwise 'value' is false.
@@ -101,14 +107,16 @@ namespace boost \
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    name  = the name of the inner class template.<br />
+    name  = the name of the inner class template.
+    
     ...   = variadic macro data which has the class template parameters.
 
     returns = a metafunction called "boost::tti::has_template_check_params_name" where 'name' is the macro parameter.
     
               The metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template, with the signature
                           as defined by the '...' variadic macro data, exists within the enclosing type,
                           otherwise 'value' is false.
@@ -126,14 +134,16 @@ namespace boost \
 /// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    name  = the name of the inner class template.<br />
+    name  = the name of the inner class template.
+    
     ...   = variadic macro data which has the class template parameters.
 
     returns = a metafunction class called "boost::tti::mtfc_has_template_check_params_name" where 'name' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template, with the signature
                           as defined by the '...' variadic macro data, exists within the enclosing type,
                           otherwise 'value' is false.

@@ -1,6 +1,6 @@
 [section:tti_detail Macro Metafunctions]
 
-The TTI library uses macros to create metafunctions, in the boost::tti' namespace, 
+The TTI library uses macros to create metafunctions, in the boost::tti namespace, 
 for introspecting an inner element by name. Each macro for a particular type of inner 
 element has two forms, the simple one where the first macro parameter designating the 
 'name' of the inner element is used to create the name of the metafunction, and the 
@@ -9,10 +9,11 @@ the name of the metafunction and the second macro parameter designates the 'name
 introspected. Other than that difference, the two forms of the macro produce the exact same 
 results.
 
-To use these metafunctions you need to include the main header file 'tti.hpp',
-unless otherwise noted.
+To use these metafunctions you can include the main general header file 'tti.hpp',
+unless otherwise noted. Alternatively you can include a specific header file as 
+given in the table below.
 
-A table of these macros is given, with the inner element whose 
+A table of these macros is given, based on the inner element whose 
 existence the metaprogrammer is introspecting. A more detailed explanation can be found 
 in the reference section, and examples of usage can be found in the 
 [link sectti_usingMM "Using the Macro Metafunctions"] section.
@@ -27,6 +28,7 @@ specifies whether or not the inner element exists.
     [Inner Element]
     [Macro]
     [Template]
+    [Specific Header File]
   ]
   [
     [Type]
@@ -38,6 +40,7 @@ specifies whether or not the inner element exists.
     
     class T = enclosing type
     ]
+    [[headerref boost/tti/type.hpp type.hpp]]
   ]
   [
     [Type with check]
@@ -51,6 +54,7 @@ specifies whether or not the inner element exists.
     
     class U = type to check against
     ]
+    [[headerref boost/tti/type.hpp type.hpp]]
   ]
   [
     [Class Template]
@@ -64,6 +68,7 @@ specifies whether or not the inner element exists.
     
     All of the template parameters must be 'class' ( or 'typename' ) parameters
     ]
+    [[headerref boost/tti/template.hpp template.hpp]]
   ]
   [
     [Class Template with params]
@@ -75,9 +80,10 @@ specifies whether or not the inner element exists.
     
     class T = enclosing type
     ]
+    [[headerref boost/tti/template_params.hpp template\_params.hpp]]
   ]
   [
-    [Class Template with params using variadic macros[footnote Header file is tti\_vm.hpp.]]
+    [Class Template with params using variadic macros[footnote General header file is tti\_vm.hpp.]]
     [
     [macroref BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS](name,...[footnote The template parameters as variadic data.])
     ]
@@ -86,6 +92,7 @@ specifies whether or not the inner element exists.
     
     class T = enclosing type
     ]
+    [[headerref boost/tti/vm_template_params.hpp vm\_template\_params.hpp]]
   ]
   [
     [Member data or function]
@@ -101,6 +108,7 @@ specifies whether or not the inner element exists.
     
     The form for T is 'ReturnType (Class::*)(Zero or more comma-separated parameter types)' for member function
     ]
+    [[headerref boost/tti/member.hpp member.hpp]]
   ]
   [
     [Member data as individual types]
@@ -114,6 +122,7 @@ specifies whether or not the inner element exists.
     
     class R = data type
     ]
+    [[headerref boost/tti/member_data.hpp member\_data.hpp]]
   ]
   [
     [Member function as individual types]
@@ -134,6 +143,7 @@ specifies whether or not the inner element exists.
     class TAG = (optional) Boost function\_types tag type.
                 Defaults to boost::function\_types::null\_tag.
     ]
+    [[headerref boost/tti/member_function.hpp member\_function.hpp]]
   ]
   [
     [Static member data or static member function]
@@ -151,6 +161,7 @@ specifies whether or not the inner element exists.
     
     The form for Type is 'ReturnType (Zero or more comma-separated parameter types)' as a function type
     ]
+    [[headerref boost/tti/static_member.hpp static\_member.hpp]]
   ]
   [
     [Static member function as individual types]
@@ -171,6 +182,7 @@ specifies whether or not the inner element exists.
     class TAG = (optional) Boost function\_types tag type.
                 Defaults to boost::function\_types::null\_tag.
     ]
+    [[headerref boost/tti/static_member_function.hpp static\_member\_function.hpp]]
   ]
 ]
 
@@ -184,6 +196,7 @@ it returns an unspecified type.
     [Inner Element]
     [Macro]
     [Template]
+    [Specific Header File]
   ]
   [
     [Type]
@@ -197,6 +210,7 @@ it returns an unspecified type.
     
     returns = the type of 'name' if it exists, else an unspecified type, as a typedef 'type'.
     ]
+    [[headerref boost/tti/member_type.hpp member\_type.hpp]]
   ]
 ]
 
@@ -210,6 +224,7 @@ or not as a boolean constant.
     [Inner Element]
     [Macro]
     [Template]
+    [Specific Header File]
   ]
   [
     [Type]
@@ -222,6 +237,7 @@ or not as a boolean constant.
     returns = true if the type exists, false if it does not.
               'Existence' is determined by whether the type does not equal an unspecified type.
     ]
+    [[headerref boost/tti/member_type.hpp member\_type.hpp]]
   ]
 ]
 

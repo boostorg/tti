@@ -20,17 +20,20 @@
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.<br />
-    name  = the name of the inner class template.<br />
+    trait = the name of the metafunction within the tti namespace.
+    
+    name  = the name of the inner class template.
+    
     tpSeq = a Boost PP sequence which has the class template parameters.
             Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.<br />
+            is put in a separate sequence element.
 
     returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template with the signature
                           as defined by the 'tpSeq' exists within the enclosing type,
                           otherwise 'value' is false.
@@ -57,17 +60,20 @@ namespace boost \
 /// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    trait = the name of the metafunction class within the tti namespace.<br />
-    name  = the name of the inner class template.<br />
+    trait = the name of the metafunction class within the tti namespace.
+    
+    name  = the name of the inner class template.
+    
     tpSeq = a Boost PP sequence which has the class template parameters.
             Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.<br />
+            is put in a separate sequence element.
 
     returns = a metafunction class called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template with the signature
                           as defined by the 'tpSeq' exists within the enclosing type,
                           otherwise 'value' is false.
@@ -97,7 +103,8 @@ namespace boost \
 /// Expands to a metafunction which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    name  = the name of the inner class template.<br />
+    name  = the name of the inner class template.
+    
     tpSeq = a Boost PP sequence which has the class template parameters.
             Each part of the template parameters separated by a comma ( , )
             is put in a separate sequence element.
@@ -106,7 +113,8 @@ namespace boost \
     
               The metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template with the signature
                           as defined by the 'tpSeq' exists within the enclosing type,
                           otherwise 'value' is false.
@@ -124,7 +132,8 @@ namespace boost \
 /// Expands to a metafunction class which tests whether an inner class template with a particular name and signature exists.
 /**
 
-    name  = the name of the inner class template.<br />
+    name  = the name of the inner class template.
+    
     tpSeq = a Boost PP sequence which has the class template parameters.
             Each part of the template parameters separated by a comma ( , )
             is put in a separate sequence element.
@@ -133,7 +142,8 @@ namespace boost \
     
               The metafunction class's 'apply' metafunction types and return:
     
-                T = the enclosing type in which to look for our 'name'.<br />
+                T = the enclosing type in which to look for our 'name'.
+                
                 returns = 'value' is true if the 'name' class template with the signature
                           as defined by the 'tpSeq' exists within the enclosing type,
                           otherwise 'value' is false.

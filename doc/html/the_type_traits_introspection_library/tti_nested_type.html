@@ -4,8 +4,8 @@
 <title>Nested Types</title>
 <link rel="stylesheet" href="../boostbook.css" type="text/css">
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.0">
-<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.3">
-<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.3">
+<link rel="home" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.4">
+<link rel="up" href="../index.html" title="Chapter&#160;1.&#160;The Type Traits Introspection Library 1.4">
 <link rel="prev" href="tti_detail.html" title="Macro Metafunctions">
 <link rel="next" href="tti_usingMM.html" title="Using the Macro Metafunctions">
 </head>
@@ -21,7 +21,7 @@
     Types</a>
 </h2></div></div></div>
 <a name="the_type_traits_introspection_library.tti_nested_type.the_problem"></a><h4>
-<a name="id950406"></a>
+<a name="id950901"></a>
       <a class="link" href="tti_nested_type.html#the_type_traits_introspection_library.tti_nested_type.the_problem">The
       problem</a>
     </h4>
@@ -52,7 +52,7 @@
       are within our scope, we can always use an expression like T::InnerType without
       error. But this is often not the case when doing template programming since
       the type being passed to us at compile-time in a class or function template
-      is chosen at instantiation time.
+      is chosen at instantiation time and is created by the user of a template.
     </p>
 <p>
       One solution to this is afforded by the library itself. Given an enclosing
@@ -74,7 +74,7 @@
       code which we want.
     </p>
 <a name="the_type_traits_introspection_library.tti_nested_type.the_solution"></a><h4>
-<a name="id950437"></a>
+<a name="id950932"></a>
       <a class="link" href="tti_nested_type.html#the_type_traits_introspection_library.tti_nested_type.the_solution">The
       solution</a>
     </h4>
@@ -173,6 +173,18 @@
       and use this in our metaprogramming code. Our metafunction now tells us whether
       the nested type FindType has a static member data called MyData of type 'int',
       even if FindType does not actually exist as we have specified it as a type.
+      If we had tried to do this using normal C++ nested type notation our metafunction
+      code above would be:
+    </p>
+<pre class="programlisting"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">has_static_member_MyData</span>
+  <span class="special">&lt;</span>
+  <span class="keyword">typename</span> <span class="identifier">T</span><span class="special">::</span><span class="identifier">AType</span><span class="special">::</span><span class="identifier">BType</span><span class="special">::</span><span class="identifier">CType</span><span class="special">::</span><span class="identifier">FindType</span><span class="special">,</span>
+  <span class="keyword">int</span>
+  <span class="special">&gt;</span>
+</pre>
+<p>
+      But this fails with a compiler error if there is no such nested type, and that
+      is exactly what we do not want in our compile-time metaprogramming code.
     </p>
 <p>
       We can also directly find out whether the deeply nested type 'FindType' actually
@@ -234,10 +246,10 @@
       easily. But when we use the BOOST_TTI_HAS_MEMBER_DATA, BOOST_TTI_HAS_MEMBER_FUNCTION,
       and BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION the composite types in our signatures
       are broken down into their individual types so that using BOOST_TTI_MEMBER_TYPE,
-      if necessary, for one of the individual types is easy.
+      if necessary, for any one of the individual types is easy.
     </p>
 <a name="the_type_traits_introspection_library.tti_nested_type.a_more_elegant_solution"></a><h4>
-<a name="id951111"></a>
+<a name="id951688"></a>
       <a class="link" href="tti_nested_type.html#the_type_traits_introspection_library.tti_nested_type.a_more_elegant_solution">A
       more elegant solution</a>
     </h4>

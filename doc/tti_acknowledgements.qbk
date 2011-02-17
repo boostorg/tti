@@ -6,7 +6,7 @@ Library and expand it. So my first thanks go to
 Terje Slettebo and Tobias Schwinger, the authors of 
 the CTL. I have taken, and hopefully improved upon, 
 the ideas and implementation in that library, and added
-some needed new functionality.
+some new functionality.
 
 I would also like to thank Joel Falcou for 
 his help and his introspection work. 
