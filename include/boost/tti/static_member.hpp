@@ -6,7 +6,7 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include "detail/dstatic_member.hpp"
+#include "detail/dstatic_mem.hpp"
 
 /*
 

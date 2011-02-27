@@ -9,7 +9,7 @@
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/is_same.hpp>
-#include "detail/dmember_type.hpp"
+#include "detail/dmem_type.hpp"
 #include "detail/dnotype.hpp"
 
 /*

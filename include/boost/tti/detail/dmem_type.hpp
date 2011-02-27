@@ -1,5 +1,5 @@
-#if !defined(TTI_DETAIL_MEMBER_TYPE_HPP)
-#define TTI_DETAIL_MEMBER_TYPE_HPP
+#if !defined(TTI_DETAIL_MEM_TYPE_HPP)
+#define TTI_DETAIL_MEM_TYPE_HPP
 
 #include <boost/config.hpp>
 #include <boost/mpl/has_xxx.hpp>
@@ -29,4 +29,4 @@ namespace member_type \
   } \
 /**/
 
-#endif // TTI_DETAIL_MEMBER_TYPE_HPP
+#endif // TTI_DETAIL_MEM_TYPE_HPP

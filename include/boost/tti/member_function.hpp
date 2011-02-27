@@ -10,7 +10,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/remove_const.hpp>
-#include "detail/dmember_function.hpp"
+#include "detail/dmem_fun.hpp"
 #include "detail/dtself.hpp"
 
 /*

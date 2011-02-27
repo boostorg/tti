@@ -11,7 +11,7 @@
 #include <boost/type_traits/remove_const.hpp>
 #include <boost/variadic_macro_data/vmd.hpp>
 #include "mf_member_function_template.hpp"
-#include "detail/dmember_function_template.hpp"
+#include "detail/dmem_fun_template.hpp"
 
 /*
 

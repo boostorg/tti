@@ -9,7 +9,7 @@
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include "detail/dstatic_member_function.hpp"
+#include "detail/dstatic_mem_fun.hpp"
 #include "detail/dtself.hpp"
 
 /*

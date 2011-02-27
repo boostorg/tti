@@ -7,7 +7,7 @@
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/remove_const.hpp>
-#include "detail/dmember_data.hpp"
+#include "detail/dmem_data.hpp"
 
 /*
 

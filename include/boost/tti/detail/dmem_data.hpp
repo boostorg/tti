@@ -1,11 +1,11 @@
-#if !defined(TTI_DETAIL_MEMBER_DATA_HPP)
-#define TTI_DETAIL_MEMBER_DATA_HPP
+#if !defined(TTI_DETAIL_MEM_DATA_HPP)
+#define TTI_DETAIL_MEM_DATA_HPP
 
 #include <boost/config.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #if !defined(BOOST_MSVC)
-#include "dmember_function.hpp"
+#include "dmem_fun.hpp"
 #endif
 
 #if defined(BOOST_MSVC)
@@ -91,4 +91,4 @@ namespace boost
     }
   }
   
-#endif // TTI_DETAIL_MEMBER_DATA_HPP
+#endif // TTI_DETAIL_MEM_DATA_HPP

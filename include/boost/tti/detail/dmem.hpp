@@ -1,5 +1,5 @@
-#if !defined(TTI_DETAIL_MEMBER_HPP)
-#define TTI_DETAIL_MEMBER_HPP
+#if !defined(TTI_DETAIL_MEM_HPP)
+#define TTI_DETAIL_MEM_HPP
 
 #include <boost/config.hpp>
 #include <boost/mpl/at.hpp>
@@ -379,4 +379,4 @@
 
 #endif // defined(BOOST_MSVC)
 
-#endif // TTI_DETAIL_MEMBER_HPP
+#endif // TTI_DETAIL_MEM_HPP
