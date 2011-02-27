@@ -1,4 +1,4 @@
-#include "test_has_type_check_typedef.hpp"
+#include "test_has_type_ct.hpp"
 #include <boost/mpl/assert.hpp>
 
 int main()

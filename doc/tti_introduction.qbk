@@ -102,11 +102,11 @@ of nested elements to be introspected. These header files are:
   ]
   [
     [Member data]
-    [[headerref boost/tti/member_data.hpp member\_data.hpp]]
+    [[headerref boost/tti/mem_data.hpp mem\_data.hpp]]
   ]
   [
     [Member function]
-    [[headerref boost/tti/member_function.hpp member\_function.hpp]]
+    [[headerref boost/tti/mem_fun.hpp mem\_fun.hpp]]
   ]
   [
     [Static member data]
@@ -114,17 +114,20 @@ of nested elements to be introspected. These header files are:
   ]
   [
     [Static member function]
-    [[headerref boost/tti/static_member_function.hpp static\_member\_function.hpp]]
+    [[headerref boost/tti/static_mem_fun.hpp static\_mem\_fun.hpp]]
   ]
   [
     [Member type]
-    [[headerref boost/tti/member_type.hpp member\_type.hpp]]
+    [[headerref boost/tti/mem_type.hpp mem\_type.hpp]]
   ]
 ]
 
 If the general header file 'tti_vm.hpp' 
-or the specific header file [headerref boost/tti/vm_template_params.hpp 'vm_template_params.hpp']
-is used the library is also dependent 
+or the specific header files 
+[headerref boost/tti/vm_template_params.hpp 'vm\_template\_params.hpp'],
+[headerref boost/tti/vm_mem_fun_template.hpp 'vm\_mem\_fun\_template.hpp'],
+[headerref boost/tti/vm_static_mem_fun_template.hpp 'vm\_static\_mem\_fun\_template.hpp'],
+are used the library is also dependent 
 on the variadic\_macro\_data library currently in the sandbox. 
 If this header is not used there is no need to download 
 the variadic\_macro\_data library and use it in any way.

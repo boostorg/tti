@@ -1,4 +1,4 @@
-#include "test_vm_has_template_check_params.hpp"
+#include "test_vm_has_template_cp.hpp"
 #include <boost/mpl/assert.hpp>
 
 int main()

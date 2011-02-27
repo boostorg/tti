@@ -3,9 +3,9 @@
 !scan boost/tti/template_params.hpp
 !scan boost/tti/vm_template_params.hpp
 !scan boost/tti/member.hpp
-!scan boost/tti/member_data.hpp
-!scan boost/tti/member_function.hpp
+!scan boost/tti/mem_data.hpp
+!scan boost/tti/mem_fun.hpp
 !scan boost/tti/static_member.hpp
-!scan boost/tti/static_member_function.hpp
-!scan boost/tti/member_type.hpp
+!scan boost/tti/static_mem_fun.hpp
+!scan boost/tti/mem_type.hpp
 !scan boost/tti/mf_template_params.hpp

@@ -122,7 +122,7 @@ specifies whether or not the inner element exists.
     
     class R = data type
     ]
-    [[headerref boost/tti/member_data.hpp member\_data.hpp]]
+    [[headerref boost/tti/mem_data.hpp mem\_data.hpp]]
   ]
   [
     [Member function as individual types]
@@ -143,7 +143,7 @@ specifies whether or not the inner element exists.
     class TAG = (optional) Boost function\_types tag type.
                 Defaults to boost::function\_types::null\_tag.
     ]
-    [[headerref boost/tti/member_function.hpp member\_function.hpp]]
+    [[headerref boost/tti/mem_fun.hpp mem\_fun.hpp]]
   ]
   [
     [Static member data or static member function]
@@ -182,7 +182,7 @@ specifies whether or not the inner element exists.
     class TAG = (optional) Boost function\_types tag type.
                 Defaults to boost::function\_types::null\_tag.
     ]
-    [[headerref boost/tti/static_member_function.hpp static\_member\_function.hpp]]
+    [[headerref boost/tti/static_mem_fun.hpp static\_mem\_fun.hpp]]
   ]
 ]
 
@@ -210,7 +210,7 @@ it returns an unspecified type.
     
     returns = the type of 'name' if it exists, else an unspecified type, as a typedef 'type'.
     ]
-    [[headerref boost/tti/member_type.hpp member\_type.hpp]]
+    [[headerref boost/tti/mem_type.hpp mem\_type.hpp]]
   ]
 ]
 
@@ -237,7 +237,7 @@ or not as a boolean constant.
     returns = true if the type exists, false if it does not.
               'Existence' is determined by whether the type does not equal an unspecified type.
     ]
-    [[headerref boost/tti/member_type.hpp member\_type.hpp]]
+    [[headerref boost/tti/mem_type.hpp mem\_type.hpp]]
   ]
 ]
 

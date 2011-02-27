@@ -3,6 +3,8 @@
 [heading Version 1.4]
 
 * Inclusion of specific header files for faster compilation is now supported.
+* Shorten the names of the test files and test header files to conform to Boost specifications.
+* Added support for introspecting function templates.
 
 [heading Version 1.3]
 

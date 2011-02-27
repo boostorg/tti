@@ -1,4 +1,4 @@
-#include "test_member_type.hpp"
+#include "test_mem_type.hpp"
 #include <boost/mpl/assert.hpp>
 
 int main()

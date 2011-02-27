@@ -3,7 +3,7 @@
 
 #include "test_structs.hpp"
 #include <boost/tti/template.hpp>
-#include <boost/tti/member_type.hpp>
+#include <boost/tti/mem_type.hpp>
 
 BOOST_TTI_TRAIT_HAS_TEMPLATE(HaveMStr,MStrMemberTemplate)
 BOOST_TTI_HAS_TEMPLATE(TemplateNotExist)

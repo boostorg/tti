@@ -6,7 +6,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/remove_const.hpp>
-#include "mf_member_function_template.hpp"
+#include "mf_mem_fun_template.hpp"
 #include "detail/dmem_fun_template.hpp"
 
 /*
