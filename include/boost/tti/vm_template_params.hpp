@@ -5,8 +5,6 @@
 
 #if !defined(BOOST_NO_VARIADIC_MACROS)
 
-#include <boost/mpl/apply.hpp>
-#include <boost/mpl/identity.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include "mf_template_params.hpp"
 #include "detail/dvm_template_params.hpp"

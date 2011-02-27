@@ -116,6 +116,7 @@ alias tti
         [ compile-fail test_mf_has_template_check_params_fail3.cpp ]
         [ run test_mf_member_type.cpp ]
         [ compile test_mf_member_type_compile.cpp ]
+        [ run test_has_function_template.cpp ]
     ;
 
 alias ttiVM
