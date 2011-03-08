@@ -3,10 +3,14 @@
 [heading Version 1.4]
 
 * Breaking changes
-  * BOOST\_TTI\_HAS\_MEMBER has been changed to BOOST\_TTI\_HAS\_COMP_MEMBER\_FUNCTION.
-    It now supports only member functions with composite syntax.
-  * BOOST\_TTI\_HAS\_STATIC\_MEMBER has been changed to BOOST\_TTI\_HAS\_COMP\_STATIC\_MEMBER\_FUNCTION.
-    It now supports only static member functions with composite syntax.
+  * BOOST\_TTI\_HAS\_MEMBER (BOOST\_TTI\_TRAIT\_HAS\_MEMBER) has been changed to BOOST\_TTI\_HAS\_COMP_MEMBER\_FUNCTION (BOOST\_TTI\_TRAIT\_HAS\_COMP_MEMBER\_FUNCTION)
+    and 
+    BOOST\_TTI\_MTFC\_HAS\_MEMBER (BOOST\_TTI\_MTFC\_TRAIT\_HAS\_MEMBER) has been changed to BOOST\_TTI\_MTFC\_HAS\_COMP_MEMBER\_FUNCTION (BOOST\_TTI\_MTFC\_TRAIT\_HAS\_COMP_MEMBER\_FUNCTION).
+    This family of functionality now supports only member functions with composite syntax.
+  * BOOST\_TTI\_HAS\_STATIC\_MEMBER (BOOST\_TTI\_TRAIT\_HAS\_STATIC\_MEMBER) has been changed to BOOST\_TTI\_HAS\_COMP\_STATIC_MEMBER\_FUNCTION (BOOST\_TTI\_TRAIT\_HAS\_COMP\_STATIC_MEMBER\_FUNCTION)
+    and 
+    BOOST\_TTI\_MTFC\_HAS\_STATIC\_MEMBER (BOOST\_TTI\_MTFC\_TRAIT\_HAS\_STATIC\_MEMBER) has been changed to BOOST\_TTI\_MTFC\_HAS\_COMP\_STATIC_MEMBER\_FUNCTION (BOOST\_TTI\_MTFC\_TRAIT\_HAS\_COMP\_STATIC_MEMBER\_FUNCTION).
+    This family of functionality now supports only static member functions with composite syntax.
 * Added BOOST_TTI_HAS_STATIC_MEMBER_DATA and family for introspecting static member data.
 * Inclusion of specific header files for faster compilation is now supported.
 * Shorten the names of the test files and test header files.
