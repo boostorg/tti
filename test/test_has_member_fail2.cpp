@@ -1,12 +1,11 @@
 #include "test_has_member.hpp"
-#include <boost/mpl/assert.hpp>
 
 int main()
   {
   
-  // Wrong data signature for aMember
+  // Function signature has type which does not exist
   
-  BOOST_MPL_ASSERT(( boost::tti::has_member_aMember<int AnotherType::*> ));
+  boost::tti::has_member_sFunction<AType::AnIntType (NVType::*)(short,long,double)> aVar;
   
   return 0;
 

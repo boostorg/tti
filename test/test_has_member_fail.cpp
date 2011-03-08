@@ -4,9 +4,9 @@
 int main()
   {
   
-  // someDataMember does not exist at all
+  // Wrong function signature for sFunction
   
-  BOOST_MPL_ASSERT(( boost::tti::has_member_someDataMember<short AType::*> ));
+  BOOST_MPL_ASSERT(( boost::tti::has_member_sFunction<AType::AnIntType (AnotherType::*)(short,long,double)> ));
   
   return 0;
 
