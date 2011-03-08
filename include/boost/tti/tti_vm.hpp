@@ -4,5 +4,7 @@
 #include "vm_template_params.hpp"
 #include "vm_mem_fun_template.hpp"
 #include "vm_static_mem_fun_template.hpp"
+#include "vm_comp_mem_fun_template.hpp"
+#include "vm_comp_static_mem_fun_template.hpp"
 
 #endif // TT_INTROSPECTION_VM_HPP
