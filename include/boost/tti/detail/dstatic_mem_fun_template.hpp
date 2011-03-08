@@ -3,13 +3,12 @@
 
 #include <boost/config.hpp>
 #include <boost/mpl/bool.hpp>
-#include <boost/preprocessor/seq/enum.hpp>
+#include <boost/preprocessor/list/enum.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
-#include "dtfunction.hpp"
 
 #if defined(BOOST_NO_NULLPTR)
 
-#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tpseq) \
+#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \
   template<class T,class Type> \
   struct trait \
     { \
@@ -17,7 +16,7 @@
     struct helper; \
     \
     template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name<BOOST_PP_SEQ_ENUM(tpseq)> > *); \
+    static ::boost::type_traits::yes_type check(helper<&U::template name<BOOST_PP_LIST_ENUM(tplst)> > *); \
     \
     template<class U> \
     static ::boost::type_traits::no_type check(...); \
@@ -30,7 +29,7 @@
 
 #else // !defined(BOOST_NO_NULLPTR)
 
-#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tpseq) \
+#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \
   template<class T,class Type> \
   struct trait \
     { \
@@ -38,7 +37,7 @@
     struct helper; \
     \
     template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::name<BOOST_PP_SEQ_ENUM(tpseq)> > *); \
+    static ::boost::type_traits::yes_type check(helper<&U::template name<BOOST_PP_LIST_ENUM(tplst)> > *); \
     \
     template<class U> \
     static ::boost::type_traits::no_type check(...); \

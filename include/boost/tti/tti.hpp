@@ -6,11 +6,13 @@
 #include "template.hpp"
 #include "template_params.hpp"
 #include "member.hpp"
-#include "mem_fun.hpp"
 #include "mem_data.hpp"
+#include "mem_fun.hpp"
+#include "mem_fun_template.hpp"
+#include "mem_fun_template_params.hpp"
 #include "static_member.hpp"
 #include "static_mem_fun.hpp"
-#include "mem_fun_template.hpp"
 #include "static_mem_fun_template.hpp"
+#include "static_mem_fun_template_params.hpp"
 
 #endif // TT_INTROSPECTION_HPP

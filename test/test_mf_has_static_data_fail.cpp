@@ -8,9 +8,9 @@ int main()
   
   // SomeStaticData does not exist at all
   
-  BOOST_MPL_ASSERT((boost::tti::mf_has_static_data
+  BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_data
                       <
-                      boost::tti::has_static_member_SomeStaticData<_,_>,
+                      boost::tti::has_static_member_data_SomeStaticData<_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<int>
                       >

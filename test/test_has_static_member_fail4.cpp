@@ -3,9 +3,9 @@
 int main()
   {
   
-  // Data signature has type which does not exist
+  // Function signature has type which does not exist
   
-  boost::tti::has_static_member_DSMember<NoType,short> aVar;
+  boost::tti::has_static_member_TSFunction<AnotherType,AType::AClassType (AType::AnIntType,double)> aVar;
   
   return 0;
 

@@ -2,6 +2,7 @@
 #define TTI_DETAIL_STATIC_MEM_HPP
 
 #include <boost/config.hpp>
+#include <boost/function_types/is_function.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 
@@ -20,7 +21,7 @@
     template<class U> \
     static ::boost::type_traits::no_type check(...); \
     \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
+    BOOST_STATIC_CONSTANT(bool,value=(boost::function_types::is_function<Type>::value) && (sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type))); \
     \
     typedef boost::mpl::bool_<value> type; \
     }; \
@@ -41,7 +42,7 @@
       template<class U> \
       static ::boost::type_traits::no_type check(...); \
       \
-      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type)); \
+      BOOST_STATIC_CONSTANT(bool,value=(boost::function_types::is_function<Type>::value) && (sizeof(check<T>(0))==sizeof(::boost::type_traits::yes_type))); \
       \
       typedef boost::mpl::bool_<value> type; \
       }; \
@@ -63,7 +64,7 @@
     template<class U> \
     static ::boost::type_traits::no_type check(...); \
     \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+    BOOST_STATIC_CONSTANT(bool,value=(boost::function_types::is_function<Type>::value) && (sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type))); \
     \
     typedef boost::mpl::bool_<value> type; \
     }; \
@@ -84,7 +85,7 @@
       template<class U> \
       static ::boost::type_traits::no_type check(...); \
       \
-      BOOST_STATIC_CONSTANT(bool,value=sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type)); \
+      BOOST_STATIC_CONSTANT(bool,value=(boost::function_types::is_function<Type>::value) && (sizeof(check<T>(nullptr))==sizeof(::boost::type_traits::yes_type))); \
       \
       typedef boost::mpl::bool_<value> type; \
       }; \

@@ -4,9 +4,9 @@
 int main()
   {
   
-  // SomeStaticData does not exist at all
+  // Wrong function signature for SIntFunction
   
-  BOOST_MPL_ASSERT((boost::tti::has_static_member_SomeStaticData<AnotherType,float>));
+  BOOST_MPL_ASSERT((boost::tti::HaveTheSIntFunction<AType,int (float,double)>));
   
   return 0;
 

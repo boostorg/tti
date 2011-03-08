@@ -18,17 +18,13 @@
 /** \file
 */
 
-/// Expands to a metafunction which tests whether a member function template with a particular name and signature exists.
+/// Expands to a metafunction which tests whether a member function template with a particular name exists.
 /**
 
     trait = the name of the metafunction within the tti namespace.
     
     name  = the name of the inner member.
     
-    tpseq = a Boost PP sequence which has the function template parameters.
-            Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.
-
     returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.<br />
     
               The metafunction types and return:
@@ -45,14 +41,14 @@
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,tpseq) \
+#define BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name) \
 namespace boost \
   { \
   namespace tti \
     { \
     namespace detail \
       { \
-      TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,tpseq) \
+      TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,BOOST_PP_NIL) \
       } \
     template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
     struct trait : \
@@ -70,10 +66,6 @@ namespace boost \
     
     name  = the name of the inner member.
 
-    tpseq = a Boost PP sequence which has the function template parameters.
-            Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.
-
     returns = a metafunction class called "boost::tti::trait" where 'trait' is the macro parameter.
     
               The metafunction class's 'apply' metafunction types and return:
@@ -90,14 +82,14 @@ namespace boost \
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,tpseq) \
+#define BOOST_TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name) \
 namespace boost \
   { \
   namespace tti \
     { \
     namespace detail \
       { \
-      TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,tpseq) \
+      TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,BOOST_PP_NIL) \
       } \
     struct trait \
       { \
@@ -111,15 +103,11 @@ namespace boost \
   } \
 /**/
 
-/// Expands to a metafunction which tests whether a member function templaten with a particular name and signature exists.
+/// Expands to a metafunction which tests whether a member function templaten with a particular name exists.
 /**
 
     name  = the name of the inner member.
     
-    tpseq = a Boost PP sequence which has the function template parameters.
-            Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.
-
     returns = a metafunction called "boost::tti::has_member_function_template_name" where 'name' is the macro parameter.
     
               The metafunction types and return:
@@ -136,23 +124,18 @@ namespace boost \
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name,tpseq) \
+#define BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name) \
   BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE \
   ( \
   BOOST_PP_CAT(has_member_function_template_,name), \
-  name, \
-  tpseq \
+  name \
   ) \
 /**/
 
-/// Expands to a metafunction class which tests whether a member function template with a particular name and signature exists.
+/// Expands to a metafunction class which tests whether a member function template with a particular name exists.
 /**
 
     name  = the name of the inner member.
-
-    tpseq = a Boost PP sequence which has the function template parameters.
-            Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.
 
     returns = a metafunction class called "boost::tti::mtfc_has_member_function_template_name" where 'name' is the macro parameter.
     
@@ -170,12 +153,11 @@ namespace boost \
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_TEMPLATE(name,tpseq) \
+#define BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_TEMPLATE(name) \
   BOOST_TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE \
   ( \
   BOOST_PP_CAT(mtfc_has_member_function_template_,name), \
-  name, \
-  tpseq \
+  name \
   ) \
 /**/
 

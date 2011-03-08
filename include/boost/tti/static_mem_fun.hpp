@@ -10,6 +10,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include "detail/dstatic_mem_fun.hpp"
+#include "detail/dtfunction.hpp"
 #include "detail/dtself.hpp"
 
 /*

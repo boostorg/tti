@@ -17,6 +17,10 @@ int main()
                       >
                   ));
   
+#else
+  
+  BOOST_MPL_ASSERT((boost::mpl::false_));
+  
 #endif //!defined(BOOST_NO_VARIADIC_MACROS)
 
   return 0;

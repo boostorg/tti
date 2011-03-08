@@ -10,6 +10,7 @@ struct AType
   struct AStructType
     {
     template <class> struct MStrMemberTemplate { };
+    template<class X,class Y,short AA> static int StatFuncTemplate(X *,Y) { int ret(AA); return ret; }
     };
   typedef int & AnIntTypeReference;
   struct BType
@@ -19,6 +20,7 @@ struct AType
       {
       typedef int AnotherIntegerType;
       template <class,class,int,short,class,template <class,int> class InnerTemplate,class> struct CTManyParameters { };
+      template<class X,class Y,class Z,short AA> double SomeFuncTemplate(X,Y *,Z &) { double ret(AA); return ret; }
       };
     };
     
@@ -40,6 +42,11 @@ struct AType
   void VoidFunction() { }
   int IntFunction() { return 0; }
   
+  // Function Templates
+  
+  template<class X,int Y> int AFuncTemplate(const X &) { return Y; }
+  template<class X,class Y,class Z> void AFuncTemplate(X *,Y,Z &) { }
+  
   // Static Data
   
   static short DSMember;
@@ -47,6 +54,10 @@ struct AType
   // Static Function
   
   static int SIntFunction(long,double) { return 2; }
+  
+  // Static Function Template
+  
+  template<class X,class Y,class Z> static void AnotherFuncTemplate(X,Y &,const Z &) { }
   
   };
   
@@ -78,15 +89,26 @@ struct AnotherType
   AType::AnIntType sFunction(int,long,double) { return 0; }
   double IntFunction(int) { return 0; }
   
-  // Static Data
+  // Function Templates
+  
+  template<class X> long MyFuncTemplate(X &) { return 0; }
   
   // Static Function
   
   static AType TIntFunction(long,double) { return AType(); }
   static AType::AStructType TSFunction(AType::AnIntType,double) { return AType::AStructType(); }
   
+  // Static Data
+  
+  static AType::AStructType AnStat;
+  
+  // Static Function Template
+  
+  template<class X,class Y> static void YetAnotherFuncTemplate(const X &,Y &) { }
+  
   };
 
 short AType::DSMember(5622);
+AType::AStructType AnotherType::AnStat;
 
 #endif // TEST_STRUCTS_HPP

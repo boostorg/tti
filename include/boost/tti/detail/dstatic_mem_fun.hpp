@@ -4,7 +4,6 @@
 #include <boost/config.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
-#include "dtfunction.hpp"
 
 #if defined(BOOST_NO_NULLPTR)
 

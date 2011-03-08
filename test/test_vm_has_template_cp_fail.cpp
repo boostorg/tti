@@ -10,6 +10,10 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::has_template_check_params_TemplateNotExist<AType>));
   
+#else
+  
+  BOOST_MPL_ASSERT((boost::mpl::false_));
+  
 #endif //!defined(BOOST_NO_VARIADIC_MACROS)
 
   return 0;

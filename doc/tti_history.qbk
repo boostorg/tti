@@ -2,8 +2,12 @@
 
 [heading Version 1.4]
 
+* Breaking changes
+  * BOOST_TTI_HAS_STATIC_MEMBER and family supports only composite static member functions.
+  * BOOST_TTI_HAS_MEMBER and family supports only composite member functions.
+* Added BOOST_TTI_HAS_STATIC_MEMBER_DATA and family for introspecting static member data.
 * Inclusion of specific header files for faster compilation is now supported.
-* Shorten the names of the test files and test header files to conform to Boost specifications.
+* Shorten the names of the test files and test header files.
 * Added support for introspecting function templates.
 
 [heading Version 1.3]

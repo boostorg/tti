@@ -1,6 +1,8 @@
 #if !defined(TEST_VM_MF_HAS_TEMPLATE_CHECK_PARAMS_HPP)
 #define TEST_VM_MF_HAS_TEMPLATE_CHECK_PARAMS_HPP
 
+#include <boost/config.hpp>
+
 #if !defined(BOOST_NO_VARIADIC_MACROS)
 
 #include "test_structs.hpp"

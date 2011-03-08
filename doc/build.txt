@@ -13,7 +13,7 @@ run the tests for this library.
 When running the tests you can use either of 
 two targets if you like. The 'tti' target runs all 
 the tests except for those involving variadic macro 
-support in the library. The 'ttiVM' target runs 
+support in the library. The 'ttivm' target runs 
 the tests involving variadic macro support in the 
 library. If you do not specify a target all tests 
 are run.

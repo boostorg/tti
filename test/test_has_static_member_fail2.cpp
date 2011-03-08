@@ -1,12 +1,11 @@
 #include "test_has_static_member.hpp"
-#include <boost/mpl/assert.hpp>
 
 int main()
   {
   
-  // Wrong enclosing type for DSMember
+  // Function signature has type which does not exist
   
-  BOOST_MPL_ASSERT((boost::tti::has_static_member_DSMember<AnotherType,short>));
+  boost::tti::has_static_member_TSFunction<AnotherType,AType::AClassType (AType::AnIntType,double)> aVar;
   
   return 0;
 
