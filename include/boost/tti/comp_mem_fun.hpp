@@ -16,7 +16,7 @@
 /** \file
 */
 
-/// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
+/// Expands to a metafunction which tests whether a member function with a particular name and composite type exists.
 /**
 
     trait = the name of the metafunction within the tti namespace.
@@ -27,7 +27,8 @@
     
               The metafunction types and return:
     
-                T = the type, in the form of a member data pointer or member function pointer, 
+                T = the member function type, 
+                    in the form of a member function pointer - 'return_type (Class::*)(parameter_types...)', 
                     in which to look for our 'name'.
                     
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
@@ -52,7 +53,7 @@ namespace boost \
   } \
 /**/
 
-/// Expands to a metafunction class which tests whether a member data or member function with a particular name and type exists.
+/// Expands to a metafunction class which tests whether a member function with a particular name and composite type exists.
 /**
 
     trait = the name of the metafunction class within the tti namespace.
@@ -63,7 +64,8 @@ namespace boost \
     
               The metafunction class's 'apply' metafunction types and return:
     
-                T = the type, in the form of a member data pointer or member function pointer, 
+                T = the member function type, 
+                    in the form of a member function pointer - 'return_type (Class::*)(parameter_types...)', 
                     in which to look for our 'name'.
                     
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
@@ -91,7 +93,7 @@ namespace boost \
   } \
 /**/
 
-/// Expands to a metafunction which tests whether a member data or member function with a particular name and type exists.
+/// Expands to a metafunction which tests whether a member function with a particular name and composite type exists.
 /**
 
     name  = the name of the inner member.
@@ -100,7 +102,8 @@ namespace boost \
     
               The metafunction types and return:
     
-                T = the type, in the form of a member data pointer or member function pointer, 
+                T = the member function type, 
+                    in the form of a member function pointer - 'return_type (Class::*)(parameter_types...)', 
                     in which to look for our 'name'.
                     
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
@@ -115,7 +118,7 @@ namespace boost \
   ) \
 /**/
 
-/// Expands to a metafunction class which tests whether a member data or member function with a particular name and type exists.
+/// Expands to a metafunction class which tests whether a member function with a particular name and composite type exists.
 /**
 
     name  = the name of the inner member.
@@ -124,7 +127,8 @@ namespace boost \
     
               The metafunction class's 'apply' metafunction types and return:
     
-                T = the type, in the form of a member data pointer or member function pointer, 
+                T = the member function type, 
+                    in the form of a member function pointer - 'return_type (Class::*)(parameter_types...)', 
                     in which to look for our 'name'.
                     
                 returns = 'value' is true if the 'name' exists, with the appropriate type,
