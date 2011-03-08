@@ -5,7 +5,7 @@
 #include <boost/mpl/apply.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include "detail/dmem.hpp"
+#include "detail/dcomp_mem_fun.hpp"
 
 /*
 

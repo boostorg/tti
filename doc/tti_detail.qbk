@@ -95,23 +95,7 @@ specifies whether or not the inner element exists.
     [[headerref boost/tti/vm_template_params.hpp vm\_template\_params.hpp]]
   ]
   [
-    [Member data or function]
-    [
-    [macroref BOOST_TTI_HAS_MEMBER](name)
-    ]
-    [
-    boost::tti::has\_member\_'name'
-    
-    class T = pointer to data or function member
-    
-    The form for T is 'Type Class::*' for member data
-    
-    The form for T is 'ReturnType (Class::*)(Zero or more comma-separated parameter types)' for member function
-    ]
-    [[headerref boost/tti/member.hpp member.hpp]]
-  ]
-  [
-    [Member data as individual types]
+    [Member data]
     [
     [macroref BOOST_TTI_HAS_MEMBER_DATA](name)
     ]
@@ -146,22 +130,32 @@ specifies whether or not the inner element exists.
     [[headerref boost/tti/mem_fun.hpp mem\_fun.hpp]]
   ]
   [
-    [Static member data or static member function]
+    [Member function as a composite type]
     [
-    [macroref BOOST_TTI_HAS_STATIC_MEMBER](name)
+    [macroref BOOST_TTI_HAS_MEMBER](name)
     ]
     [
-    boost::tti::has\_static\_member\_'name'
+    boost::tti::has\_member\_'name'
+    
+    class T = pointer to data or function member
+    
+    The form for T is 'ReturnType (Class::*)(Zero or more comma-separated parameter types)' for member function
+    ]
+    [[headerref boost/tti/comp_mem_fun.hpp comp\_mem\_fun.hpp]]
+  ]
+  [
+    [Static member data]
+    [
+    [macroref BOOST_TTI_HAS_STATIC_MEMBER_DATA](name)
+    ]
+    [
+    boost::tti::has\_static\_member\_data\_'name'
     
     class T = enclosing type
     
-    class Type = data or function type
-    
-    The form for Type is just 'Type' as a data type
-    
-    The form for Type is 'ReturnType (Zero or more comma-separated parameter types)' as a function type
+    class Type = data type
     ]
-    [[headerref boost/tti/static_member.hpp static\_member.hpp]]
+    [[headerref boost/tti/static_mem_data.hpp static\_mem\_data.hpp]]
   ]
   [
     [Static member function as individual types]
@@ -183,6 +177,22 @@ specifies whether or not the inner element exists.
                 Defaults to boost::function\_types::null\_tag.
     ]
     [[headerref boost/tti/static_mem_fun.hpp static\_mem\_fun.hpp]]
+  ]
+  [
+    [Static member function as a composite type]
+    [
+    [macroref BOOST_TTI_HAS_STATIC_MEMBER](name)
+    ]
+    [
+    boost::tti::has\_static\_member\_'name'
+    
+    class T = enclosing type
+    
+    class Type = function type
+    
+    The form for Type is 'ReturnType (Zero or more comma-separated parameter types)' as a function type
+    ]
+    [[headerref boost/tti/comp_static_mem_fun.hpp comp\_static\_mem\_fun.hpp]]
   ]
 ]
 

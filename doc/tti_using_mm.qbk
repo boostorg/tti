@@ -139,18 +139,7 @@ parameters are specified exactly ?
    T
    >
 
-[heading Member data with composite type]
-
-Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
-
- BOOST_TTI_HAS_MEMBER(IntBT)
- 
- boost::tti::has_member_IntBT
-   <
-   AType::BType T::*
-   >
-
-[heading Member data with individual types]
+[heading Member data]
 
 Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
 
@@ -192,9 +181,9 @@ Does T have a member function called 'IntFunction' whose type is
 
 Does T have a static member data called 'DSMember' whose type is 'short' ?
 
- BOOST_TTI_HAS_STATIC_MEMBER(DSMember)
+ BOOST_TTI_HAS_STATIC_MEMBER_DATA(DSMember)
  
- boost::tti::has_static_member_DSMember
+ boost::tti::has_static_member_data_DSMember
    <
    T,
    short
@@ -218,9 +207,9 @@ is 'int (long,double)' ?
 Does T have a static member function called 'SIntFunction' whose type 
 is 'int (long,double)' ?
 
- BOOST_TTI_HAS_STATIC_MEMBER(SIntFunction)
+ BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION(SIntFunction)
  
- boost::tti::has_static_member_SIntFunction
+ boost::tti::has_static_member_function_SIntFunction
    <
    T,
    int,

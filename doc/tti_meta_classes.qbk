@@ -125,6 +125,16 @@ metafunction.
     [boost::tti::'trait']
   ]
   [
+    [[macroref BOOST_TTI_HAS_STATIC_MEMBER_DATA]]
+    [[macroref BOOST_TTI_MTFC_HAS_STATIC_MEMBER_DATA]]
+    [boost::tti::mtfc\_has\_static\_member\_data\_'name']
+  ]
+  [
+    [[macroref BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_DATA]]
+    [[macroref BOOST_TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_DATA]]
+    [boost::tti::'trait']
+  ]
+  [
     [[macroref BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION]]
     [[macroref BOOST_TTI_MTFC_HAS_STATIC_MEMBER_FUNCTION]]
     [boost::tti::mtfc\_has\_static\_member\_function\_'name']

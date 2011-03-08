@@ -180,14 +180,14 @@ all have a particular name based on the type of its functionality, and all begin
     [classref boost::tti::mf_has_static_data]
     ]
     [
-    class HasStaticMember = macro metafunction as lambda expression
+    class HasStaticMemberData = macro metafunction as lambda expression
     
     class T = enclosing type nullary metafunction
     
     class R = type of static data nullary metafunction
     ]
-    [BOOST\_TTI\_HAS\_STATIC\_MEMBER]
-    [[headerref boost/tti/static_member.hpp static\_member.hpp]]
+    [BOOST\_TTI\_HAS\_STATIC\_MEMBER\_DATA]
+    [[headerref boost/tti/static_mem_data.hpp static\_mem\_data.hpp]]
   ]
   [
     [Static function]

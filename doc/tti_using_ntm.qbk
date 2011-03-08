@@ -241,11 +241,11 @@ within 'BType::CType::DType' whose type is 'int (short) const' ?
 Does T have a static member data called 'DSMember' 
 within 'BType::CType::DType' whose type is 'short' ?
 
- BOOST_TTI_MTFC_HAS_STATIC_MEMBER(DSMember)
+ BOOST_TTI_MTFC_HAS_STATIC_MEMBER_DATA(DSMember)
  
  boost::tti::mf_has_static_data
    <
-   boost::tti::mtfc_has_static_member_DSMember,
+   boost::tti::mtfc_has_static_member_data_DSMember,
    DTypeNM,
    boost::mpl::identity<short>
    >

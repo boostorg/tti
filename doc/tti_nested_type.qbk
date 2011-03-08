@@ -107,11 +107,11 @@ a compiler error when we use it.
 
 As one example, let's ask whether FindType has a static member data called MyData of type 'int'. We add:
 
- BOOST_TTI_HAS_STATIC_MEMBER(MyData)
+ BOOST_TTI_HAS_STATIC_MEMBER_DATA(MyData)
 
 Next we create our metafunction:
 
- boost::tti::has_static_member_MyData
+ boost::tti::has_static_member_data_MyData
    <
    MyFindType,
    int
@@ -122,7 +122,7 @@ FindType has a static member data called MyData of type 'int', even if FindType 
 exist as we have specified it as a type. If we had tried to do this using normal C++ nested type
 notation our metafunction code above would be:
 
- boost::tti::has_static_member_MyData
+ boost::tti::has_static_member_data_MyData
    <
    typename T::AType::BType::CType::FindType,
    int
@@ -175,11 +175,11 @@ a compiler error when the type does not actually exist, is the main reason we ha
 but similar functionality among our macro metafunctions to determine whether a member data, a member function, or a static member 
 function exists within an enclosing type. 
 
-In the more general case, when using BOOST\_TTI\_HAS\_MEMBER and BOOST\_TTI\_HAS\_STATIC\_MEMBER, the signature for the member 
-data, member function, and the function portion of a static member function is a composite type. This makes 
+In the more general case, when using BOOST\_TTI\_HAS\_MEMBER and BOOST\_TTI\_HAS\_STATIC\_MEMBER, 
+the signature for the member function and the static member function is a composite type. This makes 
 for a syntactical notation which is easy to specify, but because of that composite type notation we 
 can not use the nested type functionality in BOOST\_TTI\_MEMBER\_TYPE very easily. But
-when we use the BOOST\_TTI\_HAS\_MEMBER\_DATA, BOOST\_TTI\_HAS\_MEMBER\_FUNCTION, and BOOST\_TTI\_HAS\_STATIC\_MEMBER\_FUNCTION
+when we use BOOST\_TTI\_HAS\_MEMBER\_FUNCTION and BOOST\_TTI\_HAS\_STATIC\_MEMBER\_FUNCTION
 the composite types in our signatures are broken down into their individual types so that using 
 BOOST\_TTI\_MEMBER\_TYPE, if necessary, for any one of the individual types is easy.
 
