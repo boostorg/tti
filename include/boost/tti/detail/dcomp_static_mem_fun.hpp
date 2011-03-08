@@ -1,5 +1,5 @@
-#if !defined(TTI_DETAIL_STATIC_MEM_HPP)
-#define TTI_DETAIL_STATIC_MEM_HPP
+#if !defined(TTI_DETAIL_COMP_STATIC_MEM_FUN_HPP)
+#define TTI_DETAIL_COMP_STATIC_MEM_FUN_HPP
 
 #include <boost/config.hpp>
 #include <boost/function_types/is_function.hpp>
@@ -8,7 +8,7 @@
 
 #if defined(BOOST_NO_NULLPTR)
 
-#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+#define TTI_DETAIL_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION(trait,name) \
   template<class T,class Type> \
   struct trait \
     { \
@@ -27,7 +27,7 @@
     }; \
 /**/
 
-#define TTI_DETAIL_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+#define TTI_DETAIL_MTFC_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION(trait,name) \
   struct trait \
     { \
     template<class T,class Type> \
@@ -51,7 +51,7 @@
 
 #else // !defined(BOOST_NO_NULLPTR)
 
-#define TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+#define TTI_DETAIL_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION(trait,name) \
   template<class T,class Type> \
   struct trait \
     { \
@@ -70,7 +70,7 @@
     }; \
 /**/
 
-#define TTI_DETAIL_MTFC_TRAIT_HAS_STATIC_MEMBER(trait,name) \
+#define TTI_DETAIL_MTFC_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION(trait,name) \
   struct trait \
     { \
     template<class T,class Type> \
@@ -94,4 +94,4 @@
 
 #endif // defined(BOOST_NO_NULLPTR)
 
-#endif // TTI_DETAIL_STATIC_MEM_HPP
+#endif // TTI_DETAIL_COMP_STATIC_MEM_FUN_HPP

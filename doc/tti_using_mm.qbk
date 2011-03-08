@@ -151,18 +151,6 @@ Does T have a member data called 'IntBT' whose type is 'AType::BType' ?
    AType::BType
    >
 
-[heading Member function with composite type]
-
-Does T have a member function called 'IntFunction' whose type is 
-'int (short)' ?
-
- BOOST_TTI_HAS_MEMBER(IntFunction)
- 
- boost::tti::has_member_IntFunction
-   <
-   int (T::*)(short)
-   >
-
 [heading Member function with individual types]
 
 Does T have a member function called 'IntFunction' whose type is 
@@ -177,6 +165,18 @@ Does T have a member function called 'IntFunction' whose type is
    boost::mpl::vector<short>
    >
 
+[heading Member function with composite type]
+
+Does T have a member function called 'IntFunction' whose type is 
+'int (short)' ?
+
+ BOOST_TTI_HAS_COMP_MEMBER_FUNCTION(IntFunction)
+ 
+ boost::tti::has_comp_member_function_IntFunction
+   <
+   int (T::*)(short)
+   >
+
 [heading Static member data]
 
 Does T have a static member data called 'DSMember' whose type is 'short' ?
@@ -187,19 +187,6 @@ Does T have a static member data called 'DSMember' whose type is 'short' ?
    <
    T,
    short
-   >
-
-[heading Static member function with composite type]
-
-Does T have a static member function called 'SIntFunction' whose type 
-is 'int (long,double)' ?
-
- BOOST_TTI_HAS_STATIC_MEMBER(SIntFunction)
- 
- boost::tti::has_static_member_SIntFunction
-   <
-   T,
-   int (long,double)
    >
 
 [heading Static member function with individual types]
@@ -214,6 +201,19 @@ is 'int (long,double)' ?
    T,
    int,
    boost::mpl::vector<long,double>
+   >
+
+[heading Static member function with composite type]
+
+Does T have a static member function called 'SIntFunction' whose type 
+is 'int (long,double)' ?
+
+ BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION(SIntFunction)
+ 
+ boost::tti::has_comp_static_member_function_SIntFunction
+   <
+   T,
+   int (long,double)
    >
 
 [heading Member type]

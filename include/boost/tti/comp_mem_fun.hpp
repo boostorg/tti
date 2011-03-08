@@ -1,5 +1,5 @@
-#if !defined(TTI_MEMBER_HPP)
-#define TTI_MEMBER_HPP
+#if !defined(TTI_COMP_MEM_FUN_HPP)
+#define TTI_COMP_MEM_FUN_HPP
 
 #include <boost/config.hpp>
 #include <boost/mpl/apply.hpp>
@@ -34,14 +34,14 @@
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_TRAIT_HAS_MEMBER(trait,name) \
+#define BOOST_TTI_TRAIT_HAS_COMP_MEMBER_FUNCTION(trait,name) \
 namespace boost \
   { \
   namespace tti \
     { \
     namespace detail \
       { \
-      TTI_DETAIL_TRAIT_HAS_MEMBER(trait,name) \
+      TTI_DETAIL_TRAIT_HAS_COMP_MEMBER_FUNCTION(trait,name) \
       } \
     template<class T> \
     struct trait : \
@@ -70,14 +70,14 @@ namespace boost \
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_MTFC_TRAIT_HAS_MEMBER(trait,name) \
+#define BOOST_TTI_MTFC_TRAIT_HAS_COMP_MEMBER_FUNCTION(trait,name) \
 namespace boost \
   { \
   namespace tti \
     { \
     namespace detail \
       { \
-      TTI_DETAIL_TRAIT_HAS_MEMBER(trait,name) \
+      TTI_DETAIL_TRAIT_HAS_COMP_MEMBER_FUNCTION(trait,name) \
       } \
     struct trait \
       { \
@@ -107,10 +107,10 @@ namespace boost \
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_HAS_MEMBER(name) \
-  BOOST_TTI_TRAIT_HAS_MEMBER \
+#define BOOST_TTI_HAS_COMP_MEMBER_FUNCTION(name) \
+  BOOST_TTI_TRAIT_HAS_COMP_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(has_member_,name), \
+  BOOST_PP_CAT(has_comp_member_function_,name), \
   name \
   ) \
 /**/
@@ -131,12 +131,12 @@ namespace boost \
                           otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_MTFC_HAS_MEMBER(name) \
-  BOOST_TTI_MTFC_TRAIT_HAS_MEMBER \
+#define BOOST_TTI_MTFC_HAS_COMP_MEMBER_FUNCTION(name) \
+  BOOST_TTI_MTFC_TRAIT_HAS_COMP_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(mtfc_has_member_,name), \
+  BOOST_PP_CAT(mtfc_has_comp_member_function_,name), \
   name \
   ) \
 /**/
 
-#endif // TTI_MEMBER_HPP
+#endif // TTI_COMP_MEM_FUN_HPP

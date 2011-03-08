@@ -13,7 +13,7 @@
 
 #if defined(BOOST_NO_NULLPTR)
 
-#define TTI_DETAIL_TRAIT_HAS_MEMBER(trait,name) \
+#define TTI_DETAIL_TRAIT_HAS_COMP_MEMBER_FUNCTION(trait,name) \
   template<class T> \
   struct trait \
     { \
@@ -59,7 +59,7 @@
 
 #else // !defined(BOOST_NO_NULLPTR)
 
-#define TTI_DETAIL_TRAIT_HAS_MEMBER(trait,name) \
+#define TTI_DETAIL_TRAIT_HAS_COMP_MEMBER_FUNCTION(trait,name) \
   template<class T> \
   struct trait \
     { \

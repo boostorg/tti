@@ -6,7 +6,7 @@ int main()
   
   // Wrong function signature for sFunction
   
-  BOOST_MPL_ASSERT(( boost::tti::has_member_sFunction<AType::AnIntType (AnotherType::*)(short,long,double)> ));
+  BOOST_MPL_ASSERT(( boost::tti::has_comp_member_function_sFunction<AType::AnIntType (AnotherType::*)(short,long,double)> ));
   
   return 0;
 

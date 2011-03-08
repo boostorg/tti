@@ -4,9 +4,9 @@
 #include "test_structs.hpp"
 #include <boost/tti/comp_static_mem_fun.hpp>
 
-BOOST_TTI_TRAIT_HAS_STATIC_MEMBER(HaveTheSIntFunction,SIntFunction)
-BOOST_TTI_TRAIT_HAS_STATIC_MEMBER(TheTIntFunction,TIntFunction)
-BOOST_TTI_HAS_STATIC_MEMBER(TSFunction)
-BOOST_TTI_TRAIT_HAS_STATIC_MEMBER(Pickedname,SomeStaticFunction)
+BOOST_TTI_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION(HaveTheSIntFunction,SIntFunction)
+BOOST_TTI_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION(TheTIntFunction,TIntFunction)
+BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION(TSFunction)
+BOOST_TTI_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION(Pickedname,SomeStaticFunction)
 
 #endif // TEST_HAS_STATIC_MEMBER_HPP

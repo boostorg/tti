@@ -5,7 +5,7 @@ int main()
   
   // Function signature has type which does not exist
   
-  boost::tti::has_member_sFunction<AType::AnIntType (NVType::*)(short,long,double)> aVar;
+  boost::tti::has_comp_member_function_sFunction<AType::AnIntType (NVType::*)(short,long,double)> aVar;
   
   return 0;
 

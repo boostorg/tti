@@ -85,16 +85,6 @@ metafunction.
     [boost::tti::'trait']
   ]
   [
-    [[macroref BOOST_TTI_HAS_MEMBER]]
-    [[macroref BOOST_TTI_MTFC_HAS_MEMBER]]
-    [boost::tti::mtfc\_has\_member\_'name']
-  ]
-  [
-    [[macroref BOOST_TTI_TRAIT_HAS_MEMBER]]
-    [[macroref BOOST_TTI_MTFC_TRAIT_HAS_MEMBER]]
-    [boost::tti::'trait']
-  ]
-  [
     [[macroref BOOST_TTI_HAS_MEMBER_DATA]]
     [[macroref BOOST_TTI_MTFC_HAS_MEMBER_DATA]]
     [boost::tti::mtfc\_has\_member\_data\_'name']
@@ -115,13 +105,13 @@ metafunction.
     [boost::tti::'trait']
   ]
   [
-    [[macroref BOOST_TTI_HAS_STATIC_MEMBER]]
-    [[macroref BOOST_TTI_MTFC_HAS_STATIC_MEMBER]]
-    [boost::tti::mtfc\_has\_static\_member\_'name']
+    [[macroref BOOST_TTI_HAS_COMP_MEMBER_FUNCTION]]
+    [[macroref BOOST_TTI_MTFC_HAS_COMP_MEMBER_FUNCTION]]
+    [boost::tti::mtfc\_has\_comp\_member\_function\_'name']
   ]
   [
-    [[macroref BOOST_TTI_TRAIT_HAS_STATIC_MEMBER]]
-    [[macroref BOOST_TTI_MTFC_TRAIT_HAS_STATIC_MEMBER]]
+    [[macroref BOOST_TTI_TRAIT_HAS_COMP_MEMBER_FUNCTION]]
+    [[macroref BOOST_TTI_MTFC_TRAIT_HAS_COMP_MEMBER_FUNCTION]]
     [boost::tti::'trait']
   ]
   [
@@ -142,6 +132,16 @@ metafunction.
   [
     [[macroref BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION]]
     [[macroref BOOST_TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_FUNCTION]]
+    [boost::tti::'trait']
+  ]
+  [
+    [[macroref BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION]]
+    [[macroref BOOST_TTI_MTFC_HAS_COMP_STATIC_MEMBER_FUNCTION]]
+    [boost::tti::mtfc\_has\_comp\_static\_member\_function\_'name']
+  ]
+  [
+    [[macroref BOOST_TTI_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION]]
+    [[macroref BOOST_TTI_MTFC_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION]]
     [boost::tti::'trait']
   ]
   [
