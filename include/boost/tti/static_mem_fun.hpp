@@ -9,6 +9,7 @@
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
+#include "gen/static_mem_fun_gen.hpp"
 #include "detail/dstatic_mem_fun.hpp"
 #include "detail/dtfunction.hpp"
 #include "detail/dtself.hpp"
@@ -131,7 +132,7 @@ namespace boost \
 #define BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION(name) \
   BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(has_static_member_function_,name), \
+  BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_GEN_BASE(name), \
   name \
   ) \
 /**/
@@ -160,7 +161,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_STATIC_MEMBER_FUNCTION(name) \
   BOOST_TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(mtfc_has_static_member_function_,name), \
+  BOOST_TTI_MTFC_HAS_STATIC_MEMBER_FUNCTION_GEN_BASE(name), \
   name \
   ) \
 /**/

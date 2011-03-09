@@ -6,6 +6,7 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include "mf_template_params.hpp"
+#include "gen/template_params_gen.hpp"
 #include "detail/dtemplate_params.hpp"
 
 /*
@@ -123,7 +124,7 @@ namespace boost \
 #define BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS(name,tpSeq) \
   BOOST_TTI_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
-  BOOST_PP_CAT(has_template_check_params_,name), \
+  BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS_GEN_BASE(name), \
   name, \
   tpSeq \
   ) \
@@ -152,7 +153,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,tpSeq) \
   BOOST_TTI_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
-  BOOST_PP_CAT(mtfc_has_template_check_params_,name), \
+  BOOST_TTI_MTFC_HAS_TEMPLATE_CHECK_PARAMS_GEN_BASE(name), \
   name, \
   tpSeq \
   ) \

@@ -9,6 +9,7 @@
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include "gen/mem_type_gen.hpp"
 #include "detail/dmem_type.hpp"
 #include "detail/dnotype.hpp"
 
@@ -139,7 +140,7 @@ namespace boost \
 #define BOOST_TTI_MEMBER_TYPE(name) \
   BOOST_TTI_TRAIT_MEMBER_TYPE \
   ( \
-  BOOST_PP_CAT(member_type_,name), \
+  BOOST_TTI_MEMBER_TYPE_GEN_BASE(name), \
   name \
   ) \
 /**/
@@ -167,7 +168,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_MEMBER_TYPE(name) \
   BOOST_TTI_MTFC_TRAIT_MEMBER_TYPE \
   ( \
-  BOOST_PP_CAT(mtfc_member_type_,name), \
+  BOOST_TTI_MTFC_MEMBER_TYPE_GEN_BASE(name), \
   name \
   ) \
 /**/

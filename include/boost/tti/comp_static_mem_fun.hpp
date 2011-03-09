@@ -5,6 +5,7 @@
 #include <boost/mpl/apply.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/preprocessor/cat.hpp>
+#include "gen/comp_static_mem_fun_gen.hpp"
 #include "detail/dcomp_static_mem_fun.hpp"
 
 /*
@@ -123,7 +124,7 @@ namespace boost \
 #define BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION(name) \
   BOOST_TTI_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(has_comp_static_member_function_,name), \
+  BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION_GEN_BASE(name), \
   name \
   ) \
 /**/
@@ -151,7 +152,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_COMP_STATIC_MEMBER_FUNCTION(name) \
   BOOST_TTI_MTFC_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(mtfc_has_comp_static_member_function_,name), \
+  BOOST_TTI_MTFC_HAS_COMP_STATIC_MEMBER_FUNCTION_GEN_BASE(name), \
   name \
   ) \
 /**/

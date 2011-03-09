@@ -10,6 +10,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/remove_const.hpp>
+#include "gen/mem_fun_gen.hpp"
 #include "detail/dmem_fun.hpp"
 #include "detail/dtself.hpp"
 
@@ -131,7 +132,7 @@ namespace boost \
 #define BOOST_TTI_HAS_MEMBER_FUNCTION(name) \
   BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(has_member_function_,name), \
+  BOOST_TTI_HAS_MEMBER_FUNCTION_GEN_BASE(name), \
   name \
   ) \
 /**/
@@ -160,7 +161,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION(name) \
   BOOST_TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION \
   ( \
-  BOOST_PP_CAT(mtfc_has_member_function_,name), \
+  BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_GEN_BASE(name), \
   name \
   ) \
 /**/

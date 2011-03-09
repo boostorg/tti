@@ -6,6 +6,7 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
+#include "gen/static_mem_data_gen.hpp"
 #include "detail/dstatic_mem_data.hpp"
 
 /*
@@ -124,7 +125,7 @@ namespace boost \
 #define BOOST_TTI_HAS_STATIC_MEMBER_DATA(name) \
   BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_DATA \
   ( \
-  BOOST_PP_CAT(has_static_member_data_,name), \
+  BOOST_TTI_HAS_STATIC_MEMBER_DATA_GEN_BASE(name), \
   name \
   ) \
 /**/
@@ -152,7 +153,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_STATIC_MEMBER_DATA(name) \
   BOOST_TTI_MTFC_TRAIT_HAS_STATIC_MEMBER_DATA \
   ( \
-  BOOST_PP_CAT(mtfc_has_static_member_data_,name), \
+  BOOST_TTI_MTFC_HAS_STATIC_MEMBER_DATA_GEN_BASE(name), \
   name \
   ) \
 /**/

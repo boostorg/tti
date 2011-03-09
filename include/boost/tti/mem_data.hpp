@@ -7,6 +7,7 @@
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/remove_const.hpp>
+#include "gen/mem_data_gen.hpp"
 #include "detail/dmem_data.hpp"
 
 /*
@@ -115,7 +116,7 @@ namespace boost \
 #define BOOST_TTI_HAS_MEMBER_DATA(name) \
   BOOST_TTI_TRAIT_HAS_MEMBER_DATA \
   ( \
-  BOOST_PP_CAT(has_member_data_,name), \
+  BOOST_TTI_HAS_MEMBER_DATA_GEN_BASE(name), \
   name \
   ) \
 /**/
@@ -140,7 +141,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_MEMBER_DATA(name) \
   BOOST_TTI_MTFC_TRAIT_HAS_MEMBER_DATA \
   ( \
-  BOOST_PP_CAT(mtfc_has_member_data_,name), \
+  BOOST_TTI_MTFC_HAS_MEMBER_DATA_GEN_BASE(name), \
   name \
   ) \
 /**/

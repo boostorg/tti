@@ -7,6 +7,7 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
+#include "gen/template_gen.hpp"
 
 /*
 
@@ -114,7 +115,7 @@ namespace boost \
 #define BOOST_TTI_HAS_TEMPLATE(name) \
   BOOST_TTI_TRAIT_HAS_TEMPLATE \
   ( \
-  BOOST_PP_CAT(has_template_,name), \
+  BOOST_TTI_HAS_TEMPLATE_GEN_BASE(name), \
   name \
   ) \
 /**/
@@ -139,7 +140,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_TEMPLATE(name) \
   BOOST_TTI_MTFC_TRAIT_HAS_TEMPLATE \
   ( \
-  BOOST_PP_CAT(mtfc_has_template_,name), \
+  BOOST_TTI_MTFC_HAS_TEMPLATE_GEN_BASE(name), \
   name \
   ) \
 /**/

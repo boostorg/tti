@@ -10,6 +10,7 @@
 #include <boost/preprocessor/tuple/to_list.hpp>
 #include <boost/type_traits/remove_const.hpp>
 #include "mf_mem_fun_template.hpp"
+#include "gen/mem_fun_template_params_gen.hpp"
 #include "detail/dmem_fun_template.hpp"
 
 /*
@@ -142,7 +143,7 @@ namespace boost \
 #define BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE_PARAMS(name,tpseq) \
   BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE_PARAMS \
   ( \
-  BOOST_PP_CAT(has_member_function_template_,name), \
+  BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE_PARAMS_GEN_BASE(name), \
   name, \
   tpseq \
   ) \
@@ -176,7 +177,7 @@ namespace boost \
 #define BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_TEMPLATE_PARAMS(name,tpseq) \
   BOOST_TTI_MTFC_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE_PARAMS \
   ( \
-  BOOST_PP_CAT(mtfc_has_member_function_template_,name), \
+  BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_TEMPLATE_PARAMS_GEN_BASE(name), \
   name, \
   tpseq \
   ) \

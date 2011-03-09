@@ -7,6 +7,7 @@
 
 #include <boost/preprocessor/cat.hpp>
 #include "mf_template_params.hpp"
+#include "gen/vm_template_params_gen.hpp"
 #include "detail/dvm_template_params.hpp"
 
 /*
@@ -123,7 +124,7 @@ namespace boost \
 #define BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
   BOOST_TTI_VM_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
-  BOOST_PP_CAT(has_template_check_params_,name), \
+  BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS_GEN_BASE(name), \
   name, \
   __VA_ARGS__ \
   ) \
@@ -150,7 +151,7 @@ namespace boost \
 #define BOOST_TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS(name,...) \
   BOOST_TTI_VM_MTFC_TRAIT_HAS_TEMPLATE_CHECK_PARAMS \
   ( \
-  BOOST_PP_CAT(mtfc_has_template_check_params_,name), \
+  BOOST_TTI_VM_MTFC_HAS_TEMPLATE_CHECK_PARAMS_GEN_BASE(name), \
   name, \
   __VA_ARGS__ \
   ) \

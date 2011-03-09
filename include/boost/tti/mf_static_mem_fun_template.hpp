@@ -55,7 +55,7 @@ namespace boost
       class FS = boost::mpl::vector<>,
       class TAG = boost::function_types::null_tag
       >
-    struct mf_has_static_member_function :
+    struct mf_has_static_member_function_template :
       boost::mpl::apply
         <
         HasStaticMemberFunctionTemplate,
