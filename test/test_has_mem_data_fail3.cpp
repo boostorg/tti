@@ -5,7 +5,7 @@ int main()
   
   // Data signature has type which does not exist
   
-  boost::tti::has_member_data_aMember<AnotherType,AType::NTHType> aVar;
+  BOOST_TTI_HAS_MEMBER_DATA_GEN(aMember)<AnotherType,AType::NTHType> aVar;
   
   return 0;
 
