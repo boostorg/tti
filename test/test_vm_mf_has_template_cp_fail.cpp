@@ -12,11 +12,11 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_template_check_params
                       <
-                      boost::tti::has_template_check_params_TemplateNotExist<_>,
+                      BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS_GEN(TemplateNotExist)<_>,
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_CType<_>,
-                        boost::tti::MT_BType<AType>
+                        BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                        BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                         >
                       >
                   ));
