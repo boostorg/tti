@@ -8,15 +8,15 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                boost::tti::HT_Str<_>,
-                boost::tti::member_type_AStructType<AType>
+                BOOST_TTI_TRAIT_GEN(HT_Str)<_>,
+                BOOST_TTI_MEMBER_TYPE_GEN(AStructType)<AType>
                 >
               ::value
             ));
   
   BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                boost::tti::has_template_check_params_AnotherMemberTemplate<_>,
+                BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS_GEN(AnotherMemberTemplate)<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -24,7 +24,7 @@ int main()
   
   BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                boost::tti::WrongParametersForMP<_>,
+                BOOST_TTI_TRAIT_GEN(WrongParametersForMP)<_>,
                 boost::mpl::identity<AnotherType>
                 >
               ::value
@@ -32,11 +32,11 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                boost::tti::has_template_check_params_CTManyParameters<_>,
+                BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS_GEN(CTManyParameters)<_>,
                 boost::tti::mf_member_type
                   <
-                  boost::tti::member_type_CType<_>,
-                  boost::tti::MT_BType<AType>
+                  BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                  BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                   >
                 >
               ::value
@@ -44,11 +44,11 @@ int main()
   
   BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                boost::tti::has_template_check_params_TemplateNotExist<_>,
+                BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS_GEN(TemplateNotExist)<_>,
                 boost::tti::mf_member_type
                   <
-                  boost::tti::member_type_CType<_>,
-                  boost::tti::MT_BType<AType>
+                  BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                  BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                   >
                 >
               ::value
@@ -56,15 +56,15 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                boost::tti::MF_HT_Str,
-                boost::tti::member_type_AStructType<AType>
+                BOOST_TTI_TRAIT_GEN(MF_HT_Str),
+                BOOST_TTI_MEMBER_TYPE_GEN(AStructType)<AType>
                 >
               ::value
             ));
   
   BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                boost::tti::mtfc_has_template_check_params_AnotherMemberTemplate,
+                BOOST_TTI_MTFC_HAS_TEMPLATE_CHECK_PARAMS_GEN(AnotherMemberTemplate),
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -72,7 +72,7 @@ int main()
   
   BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                boost::tti::MetaCWrongParametersForMP,
+                BOOST_TTI_TRAIT_GEN(MetaCWrongParametersForMP),
                 boost::mpl::identity<AnotherType>
                 >
               ::value
@@ -80,11 +80,11 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template_check_params
                 <
-                boost::tti::mtfc_has_template_check_params_CTManyParameters,
+                BOOST_TTI_MTFC_HAS_TEMPLATE_CHECK_PARAMS_GEN(CTManyParameters),
                 boost::tti::mf_member_type
                   <
-                  boost::tti::member_type_CType<_>,
-                  boost::tti::MT_BType<AType>
+                  BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                  BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                   >
                 >
               ::value
@@ -92,11 +92,11 @@ int main()
   
   BOOST_TEST((!boost::tti::mf_has_template_check_params
                 <
-                boost::tti::mtfc_has_template_check_params_TemplateNotExist,
+                BOOST_TTI_MTFC_HAS_TEMPLATE_CHECK_PARAMS_GEN(TemplateNotExist),
                 boost::tti::mf_member_type
                   <
-                  boost::tti::member_type_CType<_>,
-                  boost::tti::MT_BType<AType>
+                  BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                  BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                   >
                 >
               ::value

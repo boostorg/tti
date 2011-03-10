@@ -4,14 +4,14 @@
 int main()
   {
   
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::member_type_AnIntType<AType> >::value);
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::NameStruct<AType> >::value);
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::member_type_AnIntTypeReference<AType> >::value);
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::member_type_BType<AType> >::value);
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::TheInteger<AType::BType> >::value);
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::member_type_CType<AType::BType> >::value);
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::member_type_AnotherIntegerType<AType::BType::CType> >::value);
-  BOOST_TEST(boost::tti::mf_valid_member_type<boost::tti::SomethingElse<AnotherType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_MEMBER_TYPE_GEN(AnIntType)<AType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_TRAIT_GEN(NameStruct)<AType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_MEMBER_TYPE_GEN(AnIntTypeReference)<AType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_TRAIT_GEN(TheInteger)<AType::BType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_MEMBER_TYPE_GEN(CType)<AType::BType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_MEMBER_TYPE_GEN(AnotherIntegerType)<AType::BType::CType> >::value);
+  BOOST_TEST(boost::tti::mf_valid_member_type<BOOST_TTI_TRAIT_GEN(SomethingElse)<AnotherType> >::value);
   
   return boost::report_errors();
 

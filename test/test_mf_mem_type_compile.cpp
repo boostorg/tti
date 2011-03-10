@@ -10,7 +10,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_AnIntType<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(AnIntType)<_>,
                         boost::mpl::identity<AType>
                         >
                       >
@@ -20,7 +20,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::NameStruct<_>,
+                        BOOST_TTI_TRAIT_GEN(NameStruct)<_>,
                         boost::mpl::identity<AType>
                         >
                       >
@@ -30,7 +30,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_AnIntTypeReference<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(AnIntTypeReference)<_>,
                         boost::mpl::identity<AType>
                         >
                       >
@@ -40,7 +40,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_BType<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(BType)<_>,
                         boost::mpl::identity<AType>
                         >
                       >
@@ -50,8 +50,8 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::TheInteger<_>,
-                        boost::tti::member_type_BType<AType>
+                        BOOST_TTI_TRAIT_GEN(TheInteger)<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                         >
                       >
                   ));
@@ -60,8 +60,8 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_CType<_>,
-                        boost::tti::member_type_BType<AType>
+                        BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                         >
                       >
                   ));
@@ -70,11 +70,11 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_AnotherIntegerType<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(AnotherIntegerType)<_>,
                         boost::tti::mf_member_type
                           <
-                          boost::tti::member_type_CType<_>,
-                          boost::tti::member_type_BType<AType>
+                          BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                          BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                           >
                         >
                       >
@@ -84,7 +84,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::SomethingElse<_>,
+                        BOOST_TTI_TRAIT_GEN(SomethingElse)<_>,
                         boost::mpl::identity<AnotherType>
                         >
                       >
@@ -94,7 +94,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::mtfc_member_type_AnIntType,
+                        BOOST_TTI_MTFC_MEMBER_TYPE_GEN(AnIntType),
                         boost::mpl::identity<AType>
                         >
                       >
@@ -104,7 +104,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::MFNameStruct,
+                        BOOST_TTI_TRAIT_GEN(MFNameStruct),
                         boost::mpl::identity<AType>
                         >
                       >
@@ -114,7 +114,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::mtfc_member_type_AnIntTypeReference,
+                        BOOST_TTI_MTFC_MEMBER_TYPE_GEN(AnIntTypeReference),
                         boost::mpl::identity<AType>
                         >
                       >
@@ -124,7 +124,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::mtfc_member_type_BType,
+                        BOOST_TTI_MTFC_MEMBER_TYPE_GEN(BType),
                         boost::mpl::identity<AType>
                         >
                       >
@@ -134,8 +134,8 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::MFTheInteger,
-                        boost::tti::member_type_BType<AType>
+                        BOOST_TTI_TRAIT_GEN(MFTheInteger),
+                        BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                         >
                       >
                   ));
@@ -144,8 +144,8 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::mtfc_member_type_CType,
-                        boost::tti::member_type_BType<AType>
+                        BOOST_TTI_MTFC_MEMBER_TYPE_GEN(CType),
+                        BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                         >
                       >
                   ));
@@ -154,11 +154,11 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::mtfc_member_type_AnotherIntegerType,
+                        BOOST_TTI_MTFC_MEMBER_TYPE_GEN(AnotherIntegerType),
                         boost::tti::mf_member_type
                           <
-                          boost::tti::mtfc_member_type_CType,
-                          boost::tti::member_type_BType<AType>
+                          BOOST_TTI_MTFC_MEMBER_TYPE_GEN(CType),
+                          BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                           >
                         >
                       >
@@ -168,7 +168,7 @@ int main()
                       <
                       boost::tti::mf_member_type
                         <
-                        boost::tti::MetaClSomethingElse,
+                        BOOST_TTI_TRAIT_GEN(MetaClSomethingElse),
                         boost::mpl::identity<AnotherType>
                         >
                       >

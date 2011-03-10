@@ -4,13 +4,13 @@
 int main()
   {
   
-  BOOST_TEST(boost::tti::has_template_ATPMemberTemplate<AType>::value);
-  BOOST_TEST(boost::tti::HaveCL<AType>::value);
-  BOOST_TEST(!boost::tti::has_template_AMemberTemplate<AType>::value);
-  BOOST_TEST(!boost::tti::HaveAnotherMT<AType>::value);
-  BOOST_TEST(!boost::tti::has_template_SomeMemberTemplate<AnotherType>::value);
-  BOOST_TEST(!boost::tti::ATemplateWithParms<AnotherType>::value);
-  BOOST_TEST(boost::tti::has_template_SimpleTMP<AnotherType>::value);
+  BOOST_TEST(BOOST_TTI_HAS_TEMPLATE_GEN(ATPMemberTemplate)<AType>::value);
+  BOOST_TEST(BOOST_TTI_TRAIT_GEN(HaveCL)<AType>::value);
+  BOOST_TEST(!BOOST_TTI_HAS_TEMPLATE_GEN(AMemberTemplate)<AType>::value);
+  BOOST_TEST(!BOOST_TTI_TRAIT_GEN(HaveAnotherMT)<AType>::value);
+  BOOST_TEST(!BOOST_TTI_HAS_TEMPLATE_GEN(SomeMemberTemplate)<AnotherType>::value);
+  BOOST_TEST(!BOOST_TTI_TRAIT_GEN(ATemplateWithParms)<AnotherType>::value);
+  BOOST_TEST(BOOST_TTI_HAS_TEMPLATE_GEN(SimpleTMP)<AnotherType>::value);
 
   return boost::report_errors();
   

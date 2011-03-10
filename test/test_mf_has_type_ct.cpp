@@ -8,7 +8,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::has_type_AnIntType<_,_>,
+                BOOST_TTI_HAS_TYPE_GEN(AnIntType)<_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int>
                 >
@@ -17,16 +17,16 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::NameStruct<_,_>,
+                BOOST_TTI_TRAIT_GEN(NameStruct)<_,_>,
                 boost::mpl::identity<AType>,
-                boost::tti::member_type_AStructType<AType>
+                BOOST_TTI_MEMBER_TYPE_GEN(AStructType)<AType>
                 >
               ::value
             ));
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::has_type_AnIntTypeReference<_,_>,
+                BOOST_TTI_HAS_TYPE_GEN(AnIntTypeReference)<_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int &>
                 >
@@ -35,17 +35,17 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::has_type_BType<_,_>,
+                BOOST_TTI_HAS_TYPE_GEN(BType)<_,_>,
                 boost::mpl::identity<AType>,
-                boost::tti::member_type_BType<AType>
+                BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                 >
               ::value
             ));
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::TheInteger<_,_>,
-                boost::tti::member_type_BType<AType>,
+                BOOST_TTI_TRAIT_GEN(TheInteger)<_,_>,
+                BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>,
                 boost::mpl::identity<int>
                 >
               ::value
@@ -53,12 +53,12 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::has_type_CType<_,_>,
-                boost::tti::member_type_BType<AType>,
+                BOOST_TTI_HAS_TYPE_GEN(CType)<_,_>,
+                BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>,
                 boost::tti::mf_member_type
                   <
-                  boost::tti::member_type_CType<_>,
-                  boost::tti::member_type_BType<AType>
+                  BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                  BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                   >
                 >
               ::value
@@ -66,11 +66,11 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::has_type_AnotherIntegerType<_,_>,
+                BOOST_TTI_HAS_TYPE_GEN(AnotherIntegerType)<_,_>,
                 boost::tti::mf_member_type
                   <
-                  boost::tti::mtfc_member_type_CType,
-                  boost::tti::member_type_BType<AType>
+                  BOOST_TTI_MTFC_MEMBER_TYPE_GEN(CType),
+                  BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                   >,
                 boost::mpl::identity<int>
                 >
@@ -79,16 +79,16 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::SomethingElse<_,_>,
+                BOOST_TTI_TRAIT_GEN(SomethingElse)<_,_>,
                 boost::mpl::identity<AnotherType>,
-                boost::tti::member_type_AnIntType<AType>
+                BOOST_TTI_MEMBER_TYPE_GEN(AnIntType)<AType>
                 >
               ::value
             ));
             
   BOOST_TEST((!boost::tti::mf_has_type
                 <
-                boost::tti::has_type_NoOtherType<_,_>,
+                BOOST_TTI_HAS_TYPE_GEN(NoOtherType)<_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<double>
                 >
@@ -97,7 +97,7 @@ int main()
 
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::mtfc_has_type_AnIntType,
+                BOOST_TTI_MTFC_HAS_TYPE_GEN(AnIntType),
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int>
                 >
@@ -106,16 +106,16 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::MFunctionNameStruct,
+                BOOST_TTI_TRAIT_GEN(MFunctionNameStruct),
                 boost::mpl::identity<AType>,
-                boost::tti::member_type_AStructType<AType>
+                BOOST_TTI_MEMBER_TYPE_GEN(AStructType)<AType>
                 >
               ::value
             ));
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::mtfc_has_type_AnIntTypeReference,
+                BOOST_TTI_MTFC_HAS_TYPE_GEN(AnIntTypeReference),
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int &>
                 >
@@ -124,17 +124,17 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::mtfc_has_type_BType,
+                BOOST_TTI_MTFC_HAS_TYPE_GEN(BType),
                 boost::mpl::identity<AType>,
-                boost::tti::member_type_BType<AType>
+                BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                 >
               ::value
             ));
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::MFCTheInteger,
-                boost::tti::member_type_BType<AType>,
+                BOOST_TTI_TRAIT_GEN(MFCTheInteger),
+                BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>,
                 boost::mpl::identity<int>
                 >
               ::value
@@ -142,12 +142,12 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::mtfc_has_type_CType,
-                boost::tti::member_type_BType<AType>,
+                BOOST_TTI_MTFC_HAS_TYPE_GEN(CType),
+                BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>,
                 boost::tti::mf_member_type
                   <
-                  boost::tti::member_type_CType<_>,
-                  boost::tti::member_type_BType<AType>
+                  BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                  BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                   >
                 >
               ::value
@@ -155,11 +155,11 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::mtfc_has_type_AnotherIntegerType,
+                BOOST_TTI_MTFC_HAS_TYPE_GEN(AnotherIntegerType),
                 boost::tti::mf_member_type
                   <
-                  boost::tti::mtfc_member_type_CType,
-                  boost::tti::member_type_BType<AType>
+                  BOOST_TTI_MTFC_MEMBER_TYPE_GEN(CType),
+                  BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                   >,
                 boost::mpl::identity<int>
                 >
@@ -168,16 +168,16 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_type
                 <
-                boost::tti::FClassSomethingElse,
+                BOOST_TTI_TRAIT_GEN(FClassSomethingElse),
                 boost::mpl::identity<AnotherType>,
-                boost::tti::member_type_AnIntType<AType>
+                BOOST_TTI_MEMBER_TYPE_GEN(AnIntType)<AType>
                 >
               ::value
             ));
             
   BOOST_TEST((!boost::tti::mf_has_type
                 <
-                boost::tti::mtfc_has_type_NoOtherType,
+                BOOST_TTI_MTFC_HAS_TYPE_GEN(NoOtherType),
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<double>
                 >

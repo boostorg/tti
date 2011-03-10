@@ -10,7 +10,7 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      boost::tti::Pickedname<_,_,_>,
+                      BOOST_TTI_TRAIT_GEN(Pickedname)<_,_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<short>,
                       boost::mpl::vector

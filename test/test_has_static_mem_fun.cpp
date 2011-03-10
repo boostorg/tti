@@ -4,11 +4,11 @@
 int main()
   {
   
-  BOOST_TEST((boost::tti::HaveTheSIntFunction<AType,int,boost::mpl::vector<long,double> >::value));
-  BOOST_TEST((!boost::tti::TheTIntFunction<AType,AType,boost::mpl::vector<long,double> >::value));
-  BOOST_TEST((boost::tti::TheTIntFunction<AnotherType,AType,boost::mpl::vector<long,double> >::value));
-  BOOST_TEST((boost::tti::has_static_member_function_TSFunction<AnotherType,AType::AStructType,boost::mpl::vector<AType::AnIntType,double> >::value));
-  BOOST_TEST((!boost::tti::Pickedname<AnotherType,void>::value));
+  BOOST_TEST((BOOST_TTI_TRAIT_GEN(HaveTheSIntFunction)<AType,int,boost::mpl::vector<long,double> >::value));
+  BOOST_TEST((!BOOST_TTI_TRAIT_GEN(TheTIntFunction)<AType,AType,boost::mpl::vector<long,double> >::value));
+  BOOST_TEST((BOOST_TTI_TRAIT_GEN(TheTIntFunction)<AnotherType,AType,boost::mpl::vector<long,double> >::value));
+  BOOST_TEST((BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_GEN(TSFunction)<AnotherType,AType::AStructType,boost::mpl::vector<AType::AnIntType,double> >::value));
+  BOOST_TEST((!BOOST_TTI_TRAIT_GEN(Pickedname)<AnotherType,void>::value));
   
   return boost::report_errors();
 

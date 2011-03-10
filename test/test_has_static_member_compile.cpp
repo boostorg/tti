@@ -6,14 +6,14 @@ int main()
   
   // You can always instantiate without compiler errors
   
-  boost::tti::TheTIntFunction<AType,void (long,double)> aVar;
-  boost::tti::Pickedname<AnotherType,AType (long,long)> aVar3;
+  BOOST_TTI_TRAIT_GEN(TheTIntFunction<AType),void (long,double)> aVar;
+  BOOST_TTI_TRAIT_GEN(Pickedname)<AnotherType,AType (long,long)> aVar3;
   
   // Compile time asserts
   
-  BOOST_MPL_ASSERT((boost::tti::HaveTheSIntFunction<AType,int (long,double)>));
-  BOOST_MPL_ASSERT((boost::tti::TheTIntFunction<AnotherType,AType (long,double)>));
-  BOOST_MPL_ASSERT((boost::tti::has_comp_static_member_function_TSFunction<AnotherType,AType::AStructType (AType::AnIntType,double)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_TRAIT_GEN(HaveTheSIntFunction)<AType,int (long,double)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_TRAIT_GEN(TheTIntFunction)<AnotherType,AType (long,double)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION_GEN(TSFunction)<AnotherType,AType::AStructType (AType::AnIntType,double)>));
   
   return 0;
 

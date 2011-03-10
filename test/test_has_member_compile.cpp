@@ -6,16 +6,16 @@ int main()
   
   // You can always instantiate without compiler errors
   
-  boost::tti::has_comp_member_function_someFunctionMember<double (AnotherType::*)(short,short,long,int)> aVar3;
+  BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(someFunctionMember)<double (AnotherType::*)(short,short,long,int)> aVar3;
   
   // Compile time asserts
   
-  BOOST_MPL_ASSERT((boost::tti::has_comp_member_function_VoidFunction<void (AType::*)()>));
-  BOOST_MPL_ASSERT((boost::tti::FunctionReturningInt<int (AType::*)()>));
-  BOOST_MPL_ASSERT((boost::tti::FunctionReturningInt<double (AnotherType::*)(int)>));
-  BOOST_MPL_ASSERT((boost::tti::has_comp_member_function_aFunction<AType (AnotherType::*)(int)>));
-  BOOST_MPL_ASSERT((boost::tti::AnotherIntFunction<int (AnotherType::*)(AType)>));
-  BOOST_MPL_ASSERT((boost::tti::has_comp_member_function_sFunction<AType::AnIntType (AnotherType::*)(int,long,double)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(VoidFunction)<void (AType::*)()>));
+  BOOST_MPL_ASSERT((BOOST_TTI_TRAIT_GEN(FunctionReturningInt)<int (AType::*)()>));
+  BOOST_MPL_ASSERT((BOOST_TTI_TRAIT_GEN(FunctionReturningInt)<double (AnotherType::*)(int)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(aFunction)<AType (AnotherType::*)(int)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_TRAIT_GEN(AnotherIntFunction)<int (AnotherType::*)(AType)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(sFunction)<AType::AnIntType (AnotherType::*)(int,long,double)>));
   
   return 0;
 

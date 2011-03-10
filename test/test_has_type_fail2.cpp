@@ -6,7 +6,7 @@ int main()
   
   // Wrong enclosing type
   
-  BOOST_MPL_ASSERT((boost::tti::has_type_BType<AnotherType>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_TYPE_GEN(BType)<AnotherType>));
   
   return 0;
 

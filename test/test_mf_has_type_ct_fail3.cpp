@@ -10,8 +10,8 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::TheInteger<_,_>,
-                      boost::tti::member_type_BType<AType>,
+                      BOOST_TTI_TRAIT_GEN(TheInteger)<_,_>,
+                      BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>,
                       boost::mpl::identity<long>
                       >
                   ));

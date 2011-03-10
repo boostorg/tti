@@ -8,7 +8,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::has_member_function_VoidFunction<_,_>,
+                BOOST_TTI_HAS_MEMBER_FUNCTION_GEN(VoidFunction)<_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<void>
                 >
@@ -17,7 +17,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::FunctionReturningInt<_,_>,
+                BOOST_TTI_TRAIT_GEN(FunctionReturningInt)<_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int>
                 >
@@ -26,7 +26,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::FunctionReturningInt<_,_,_>,
+                BOOST_TTI_TRAIT_GEN(FunctionReturningInt)<_,_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<double>,
                 boost::mpl::vector<boost::mpl::identity<int> >
@@ -36,7 +36,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::has_member_function_aFunction<_,_,_>,
+                BOOST_TTI_HAS_MEMBER_FUNCTION_GEN(aFunction)<_,_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<AType>,
                 boost::mpl::vector<boost::mpl::identity<int> >
@@ -46,7 +46,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::AnotherIntFunction<_,_,_>,
+                BOOST_TTI_TRAIT_GEN(AnotherIntFunction)<_,_,_>,
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<int>,
                 boost::mpl::vector<boost::mpl::identity<AType> >
@@ -56,9 +56,9 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::has_member_function_sFunction<_,_,_>,
+                BOOST_TTI_HAS_MEMBER_FUNCTION_GEN(sFunction)<_,_,_>,
                 boost::mpl::identity<AnotherType>,
-                boost::tti::member_type_AnIntType<AType>,
+                BOOST_TTI_MEMBER_TYPE_GEN(AnIntType)<AType>,
                 boost::mpl::vector
                   <
                   boost::mpl::identity<int>,
@@ -71,7 +71,7 @@ int main()
             
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::mtfc_has_member_function_VoidFunction,
+                BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_GEN(VoidFunction),
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<void>
                 >
@@ -80,7 +80,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::MFFunctionReturningInt,
+                BOOST_TTI_TRAIT_GEN(MFFunctionReturningInt),
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<int>
                 >
@@ -89,7 +89,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::MFFunctionReturningInt,
+                BOOST_TTI_TRAIT_GEN(MFFunctionReturningInt),
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<double>,
                 boost::mpl::vector<boost::mpl::identity<int> >
@@ -99,7 +99,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::mtfc_has_member_function_aFunction,
+                BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_GEN(aFunction),
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<AType>,
                 boost::mpl::vector<boost::mpl::identity<int> >
@@ -109,7 +109,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::MFAnotherIntFunction,
+                BOOST_TTI_TRAIT_GEN(MFAnotherIntFunction),
                 boost::mpl::identity<AnotherType>,
                 boost::mpl::identity<int>,
                 boost::mpl::vector<boost::mpl::identity<AType> >
@@ -119,9 +119,9 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_member_function
                 <
-                boost::tti::mtfc_has_member_function_sFunction,
+                BOOST_TTI_MTFC_HAS_MEMBER_FUNCTION_GEN(sFunction),
                 boost::mpl::identity<AnotherType>,
-                boost::tti::member_type_AnIntType<AType>,
+                BOOST_TTI_MEMBER_TYPE_GEN(AnIntType)<AType>,
                 boost::mpl::vector
                   <
                   boost::mpl::identity<int>,

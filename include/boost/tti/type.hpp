@@ -6,6 +6,7 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/preprocessor/cat.hpp>
+#include "gen/type_gen.hpp"
 #include "detail/dtype.hpp"
 #include "detail/dnotype.hpp"
 

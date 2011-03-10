@@ -8,7 +8,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_static_member_data
                 <
-                boost::tti::has_static_member_data_DSMember<_,_>,
+                BOOST_TTI_HAS_STATIC_MEMBER_DATA_GEN(DSMember)<_,_>,
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<short>
                 >
@@ -17,7 +17,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_static_member_data
                 <
-                boost::tti::mtfc_has_static_member_data_DSMember,
+                BOOST_TTI_MTFC_HAS_STATIC_MEMBER_DATA_GEN(DSMember),
                 boost::mpl::identity<AType>,
                 boost::mpl::identity<short>
                 >

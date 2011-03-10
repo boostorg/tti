@@ -10,7 +10,7 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      boost::tti::has_template_SomeMemberTemplate<_>,
+                      BOOST_TTI_HAS_TEMPLATE_GEN(SomeMemberTemplate)<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));

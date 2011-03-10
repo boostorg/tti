@@ -4,13 +4,13 @@
 int main()
   {
   
-  BOOST_TEST(boost::tti::has_comp_member_function_VoidFunction<void (AType::*)()>::value);
-  BOOST_TEST(boost::tti::FunctionReturningInt<int (AType::*)()>::value);
-  BOOST_TEST(boost::tti::FunctionReturningInt<double (AnotherType::*)(int)>::value);
-  BOOST_TEST(boost::tti::has_comp_member_function_aFunction<AType (AnotherType::*)(int)>::value);
-  BOOST_TEST(boost::tti::AnotherIntFunction<int (AnotherType::*)(AType)>::value);
-  BOOST_TEST(boost::tti::has_comp_member_function_sFunction<AType::AnIntType (AnotherType::*)(int,long,double)>::value);
-  BOOST_TEST(!boost::tti::has_comp_member_function_someFunctionMember<AType (AnotherType::*)(long,int)>::value);
+  BOOST_TEST(BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(VoidFunction)<void (AType::*)()>::value);
+  BOOST_TEST(BOOST_TTI_TRAIT_GEN(FunctionReturningInt)<int (AType::*)()>::value);
+  BOOST_TEST(BOOST_TTI_TRAIT_GEN(FunctionReturningInt)<double (AnotherType::*)(int)>::value);
+  BOOST_TEST(BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(aFunction)<AType (AnotherType::*)(int)>::value);
+  BOOST_TEST(BOOST_TTI_TRAIT_GEN(AnotherIntFunction)<int (AnotherType::*)(AType)>::value);
+  BOOST_TEST(BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(sFunction)<AType::AnIntType (AnotherType::*)(int,long,double)>::value);
+  BOOST_TEST(!BOOST_TTI_HAS_COMP_MEMBER_FUNCTION_GEN(someFunctionMember)<AType (AnotherType::*)(long,int)>::value);
   
   return boost::report_errors();
 

@@ -10,13 +10,13 @@ int main()
   
   boost::tti::mf_has_type
     <
-    boost::tti::mtfc_has_type_AnIntType,
+    BOOST_TTI_MTFC_HAS_TYPE_GEN(AnIntType),
     boost::mpl::identity<AnotherType>
     > aVar;
   
   boost::tti::mf_has_type
     <
-    boost::tti::has_type_NoOtherType<_>,
+    BOOST_TTI_HAS_TYPE_GEN(NoOtherType)<_>,
     boost::mpl::identity<AnotherType>
     > aVar2;
   
@@ -24,120 +24,120 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::has_type_AnIntType<_>,
+                      BOOST_TTI_HAS_TYPE_GEN(AnIntType)<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
             
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::NameStruct<_>,
+                      BOOST_TTI_TRAIT_GEN(NameStruct)<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::has_type_AnIntTypeReference<_>,
+                      BOOST_TTI_HAS_TYPE_GEN(AnIntTypeReference)<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::has_type_BType<_>,
+                      BOOST_TTI_HAS_TYPE_GEN(BType)<_>,
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::TheInteger<_>,
-                      boost::tti::member_type_BType<AType>
+                      BOOST_TTI_TRAIT_GEN(TheInteger)<_>,
+                      BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::has_type_CType<_>,
-                      boost::tti::member_type_BType<AType>
+                      BOOST_TTI_HAS_TYPE_GEN(CType)<_>,
+                      BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::has_type_AnotherIntegerType<_>,
+                      BOOST_TTI_HAS_TYPE_GEN(AnotherIntegerType)<_>,
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_CType<_>,
-                        boost::tti::member_type_BType<AType>
+                        BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                         >
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::SomethingElse<_>,
+                      BOOST_TTI_TRAIT_GEN(SomethingElse)<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));
             
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::mtfc_has_type_AnIntType,
+                      BOOST_TTI_MTFC_HAS_TYPE_GEN(AnIntType),
                       boost::mpl::identity<AType>
                       >
                   ));
             
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::MetaFNameStruct,
+                      BOOST_TTI_TRAIT_GEN(MetaFNameStruct),
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::mtfc_has_type_AnIntTypeReference,
+                      BOOST_TTI_MTFC_HAS_TYPE_GEN(AnIntTypeReference),
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::mtfc_has_type_BType,
+                      BOOST_TTI_MTFC_HAS_TYPE_GEN(BType),
                       boost::mpl::identity<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::MClassTheInteger,
-                      boost::tti::member_type_BType<AType>
+                      BOOST_TTI_TRAIT_GEN(MClassTheInteger),
+                      BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::mtfc_has_type_CType,
-                      boost::tti::member_type_BType<AType>
+                      BOOST_TTI_MTFC_HAS_TYPE_GEN(CType),
+                      BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::mtfc_has_type_AnotherIntegerType,
+                      BOOST_TTI_MTFC_HAS_TYPE_GEN(AnotherIntegerType),
                       boost::tti::mf_member_type
                         <
-                        boost::tti::member_type_CType<_>,
-                        boost::tti::member_type_BType<AType>
+                        BOOST_TTI_MEMBER_TYPE_GEN(CType)<_>,
+                        BOOST_TTI_MEMBER_TYPE_GEN(BType)<AType>
                         >
                       >
                   ));
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::MTFCSomethingElse,
+                      BOOST_TTI_TRAIT_GEN(MTFCSomethingElse),
                       boost::mpl::identity<AnotherType>
                       >
                   ));

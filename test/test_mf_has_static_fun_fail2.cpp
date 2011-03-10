@@ -10,7 +10,7 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      boost::tti::HaveTheSIntFunction<_,_,_>,
+                      BOOST_TTI_TRAIT_GEN(HaveTheSIntFunction)<_,_,_>,
                       boost::mpl::identity<AnotherType>,
                       boost::mpl::identity<int>,
                       boost::mpl::vector

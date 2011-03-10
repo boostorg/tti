@@ -10,8 +10,8 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_template
                       <
-                      boost::tti::has_template_TemplateNotExist<_>,
-                      boost::tti::MT_BType<AType>
+                      BOOST_TTI_HAS_TEMPLATE_GEN(TemplateNotExist)<_>,
+                      BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                       >
                   ));
   

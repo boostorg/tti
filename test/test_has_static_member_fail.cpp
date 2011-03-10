@@ -6,7 +6,7 @@ int main()
   
   // Wrong function signature for SIntFunction
   
-  BOOST_MPL_ASSERT((boost::tti::HaveTheSIntFunction<AType,int (float,double)>));
+  BOOST_MPL_ASSERT((BOOST_TTI_TRAIT_GEN(HaveTheSIntFunction)<AType,int (float,double)>));
   
   return 0;
 

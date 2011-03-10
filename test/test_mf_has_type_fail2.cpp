@@ -10,7 +10,7 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_type
                       <
-                      boost::tti::has_type_AnIntType<_>,
+                      BOOST_TTI_HAS_TYPE_GEN(AnIntType)<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));

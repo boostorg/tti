@@ -6,7 +6,7 @@ int main()
   
   // Wrong typedef type
   
-  BOOST_MPL_ASSERT((boost::tti::has_type_AnotherIntegerType<AType::BType::CType,long>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_TYPE_GEN(AnotherIntegerType)<AType::BType::CType,long>));
   
   return 0;
 

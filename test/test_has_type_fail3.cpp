@@ -5,7 +5,7 @@ int main()
   
   // Enclosing type does not exist
   
-  boost::tti::TheInteger<AType::EType> aVar;
+  BOOST_TTI_TRAIT_GEN(TheInteger)<AType::EType> aVar;
   
   return 0;
 

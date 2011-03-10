@@ -10,7 +10,7 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_data
                       <
-                      boost::tti::has_static_member_data_DSMember<_,_>,
+                      BOOST_TTI_HAS_STATIC_MEMBER_DATA_GEN(DSMember)<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<int>
                       >

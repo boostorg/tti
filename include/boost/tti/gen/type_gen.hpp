@@ -3,6 +3,7 @@
 
 #include <boost/config.hpp>
 #include <boost/preprocessor/cat.hpp>
+#include "trait_gen.hpp"
 
 #define BOOST_TTI_HAS_TYPE_GEN_BASE(name) \
   BOOST_PP_CAT(has_type_,name) \

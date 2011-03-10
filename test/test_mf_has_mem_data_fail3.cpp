@@ -10,7 +10,7 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_member_data
                       <
-                      boost::tti::has_member_data_aMember<_,_>,
+                      BOOST_TTI_HAS_MEMBER_DATA_GEN(aMember)<_,_>,
                       boost::mpl::identity<AType>,
                       boost::mpl::identity<bool> 
                       >

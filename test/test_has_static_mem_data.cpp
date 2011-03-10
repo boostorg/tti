@@ -4,9 +4,9 @@
 int main()
   {
   
-  BOOST_TEST((boost::tti::has_static_member_data_DSMember<AType,short>::value));
-  BOOST_TEST((!boost::tti::has_static_member_data_SomeStaticData<AnotherType,float>::value));
-  BOOST_TEST((boost::tti::StatName<AnotherType,AType::AStructType>::value));
+  BOOST_TEST((BOOST_TTI_HAS_STATIC_MEMBER_DATA_GEN(DSMember)<AType,short>::value));
+  BOOST_TEST((!BOOST_TTI_HAS_STATIC_MEMBER_DATA_GEN(SomeStaticData)<AnotherType,float>::value));
+  BOOST_TEST((BOOST_TTI_TRAIT_GEN(StatName)<AnotherType,AType::AStructType>::value));
   
   return boost::report_errors();
 

@@ -6,7 +6,7 @@ int main()
   
   // NoOtherType does not exist at all
   
-  BOOST_MPL_ASSERT((boost::tti::has_type_NoOtherType<AnotherType>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_TYPE_GEN(NoOtherType)<AnotherType>));
   
   return 0;
 

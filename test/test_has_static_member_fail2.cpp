@@ -5,7 +5,7 @@ int main()
   
   // Function signature has type which does not exist
   
-  boost::tti::has_comp_static_member_function_TSFunction<AnotherType,AType::AClassType (AType::AnIntType,double)> aVar;
+  BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION_GEN(TSFunction)<AnotherType,AType::AClassType (AType::AnIntType,double)> aVar;
   
   return 0;
 

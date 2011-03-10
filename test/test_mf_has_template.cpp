@@ -8,23 +8,23 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::HaveMStr<_>,
-                boost::tti::member_type_AStructType<AType>
+                BOOST_TTI_TRAIT_GEN(HaveMStr)<_>,
+                BOOST_TTI_MEMBER_TYPE_GEN(AStructType)<AType>
                 >
               ::value
             ));
   
   BOOST_TEST((!boost::tti::mf_has_template
                 <
-                boost::tti::has_template_TemplateNotExist<_>,
-                boost::tti::MT_BType<AType>
+                BOOST_TTI_HAS_TEMPLATE_GEN(TemplateNotExist)<_>,
+                BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                 >
               ::value
             ));
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::has_template_ATPMemberTemplate<_>,
+                BOOST_TTI_HAS_TEMPLATE_GEN(ATPMemberTemplate)<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -32,7 +32,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::HaveCL<_>,
+                BOOST_TTI_TRAIT_GEN(HaveCL)<_>,
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -40,7 +40,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::has_template_SimpleTMP<_>,
+                BOOST_TTI_HAS_TEMPLATE_GEN(SimpleTMP)<_>,
                 boost::mpl::identity<AnotherType>
                 >
               ::value
@@ -48,23 +48,23 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::MetaHaveMStr,
-                boost::tti::member_type_AStructType<AType>
+                BOOST_TTI_TRAIT_GEN(MetaHaveMStr),
+                BOOST_TTI_MEMBER_TYPE_GEN(AStructType)<AType>
                 >
               ::value
             ));
   
   BOOST_TEST((!boost::tti::mf_has_template
                 <
-                boost::tti::mtfc_has_template_TemplateNotExist,
-                boost::tti::MT_BType<AType>
+                BOOST_TTI_MTFC_HAS_TEMPLATE_GEN(TemplateNotExist),
+                BOOST_TTI_TRAIT_GEN(MT_BType)<AType>
                 >
               ::value
             ));
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::mtfc_has_template_ATPMemberTemplate,
+                BOOST_TTI_MTFC_HAS_TEMPLATE_GEN(ATPMemberTemplate),
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -72,7 +72,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::MFClassHaveCL,
+                BOOST_TTI_TRAIT_GEN(MFClassHaveCL),
                 boost::mpl::identity<AType>
                 >
               ::value
@@ -80,7 +80,7 @@ int main()
   
   BOOST_TEST((boost::tti::mf_has_template
                 <
-                boost::tti::mtfc_has_template_SimpleTMP,
+                BOOST_TTI_MTFC_HAS_TEMPLATE_GEN(SimpleTMP),
                 boost::mpl::identity<AnotherType>
                 >
               ::value

@@ -10,12 +10,12 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_static_member_function
                       <
-                      boost::tti::has_static_member_function_TSFunction<_,_,_>,
+                      BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_GEN(TSFunction)<_,_,_>,
                       boost::mpl::identity<AnotherType>,
-                      boost::tti::member_type_AStructType<AType>,
+                      BOOST_TTI_MEMBER_TYPE_GEN(AStructType)<AType>,
                       boost::mpl::vector
                         <
-                        boost::tti::NameIntType<AnotherType>,
+                        BOOST_TTI_TRAIT_GEN(NameIntType)<AnotherType>,
                         boost::mpl::identity<double>
                         >
                       >

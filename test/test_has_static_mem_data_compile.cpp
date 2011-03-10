@@ -6,12 +6,12 @@ int main()
   
   // You can always instantiate without compiler errors
   
-  boost::tti::has_static_member_data_SomeStaticData<AnotherType,long> aVar2;
+  BOOST_TTI_HAS_STATIC_MEMBER_DATA_GEN(SomeStaticData)<AnotherType,long> aVar2;
   
   // Compile time asserts
   
-  BOOST_MPL_ASSERT((boost::tti::has_static_member_data_DSMember<AType,short>));
-  BOOST_MPL_ASSERT((boost::tti::StatName<AnotherType,AType::AStructType>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_STATIC_MEMBER_DATA_GEN(DSMember)<AType,short>));
+  BOOST_MPL_ASSERT((BOOST_TTI_TRAIT_GEN(StatName)<AnotherType,AType::AStructType>));
   
   return 0;
 

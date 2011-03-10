@@ -6,6 +6,7 @@
 #if !defined(BOOST_NO_VARIADIC_MACROS)
 
 #include <boost/preprocessor/cat.hpp>
+#include "trait_gen.hpp"
 
 #define BOOST_TTI_VM_HAS_TEMPLATE_CHECK_PARAMS_GEN_BASE(name) \
   BOOST_PP_CAT(has_template_check_params_,name) \

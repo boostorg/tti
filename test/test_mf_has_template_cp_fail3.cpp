@@ -10,7 +10,7 @@ int main()
   
   BOOST_MPL_ASSERT((boost::tti::mf_has_template_check_params
                       <
-                      boost::tti::WrongParametersForMP<_>,
+                      BOOST_TTI_TRAIT_GEN(WrongParametersForMP)<_>,
                       boost::mpl::identity<AnotherType>
                       >
                   ));

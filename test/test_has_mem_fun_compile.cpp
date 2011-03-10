@@ -1,5 +1,4 @@
 #include "test_has_mem_fun.hpp"
-#include <boost/tti/gen/trait_gen.hpp>
 #include <boost/mpl/assert.hpp>
 
 int main()
