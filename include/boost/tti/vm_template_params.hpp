@@ -5,8 +5,7 @@
 
 #if !defined(BOOST_NO_VARIADIC_MACROS)
 
-#include <boost/preprocessor/cat.hpp>
-#include "mf_template_params.hpp"
+#include "mf/mf_template_params.hpp"
 #include "gen/vm_template_params_gen.hpp"
 #include "detail/dvm_template_params.hpp"
 

@@ -8,7 +8,7 @@
 #include <boost/mpl/placeholders.hpp>
 #include <boost/mpl/transform.hpp>
 #include <boost/mpl/vector.hpp>
-#include "detail/dtself.hpp"
+#include "../detail/dtself.hpp"
 
 /*
 

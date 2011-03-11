@@ -2,10 +2,7 @@
 #define TTI_TEMPLATE_PARAMS_HPP
 
 #include <boost/config.hpp>
-#include <boost/mpl/apply.hpp>
-#include <boost/mpl/identity.hpp>
-#include <boost/preprocessor/cat.hpp>
-#include "mf_template_params.hpp"
+#include "mf/mf_template_params.hpp"
 #include "gen/template_params_gen.hpp"
 #include "detail/dtemplate_params.hpp"
 

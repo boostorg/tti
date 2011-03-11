@@ -2,7 +2,6 @@
 #define TTI_TRAIT_GEN_HPP
 
 #include <boost/config.hpp>
-#include <boost/preprocessor/cat.hpp>
 
 #define BOOST_TTI_TRAIT_GEN_BASE(name) \
   name \

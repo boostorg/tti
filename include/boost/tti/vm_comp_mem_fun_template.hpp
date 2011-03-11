@@ -7,11 +7,11 @@
 
 #include <boost/mpl/apply.hpp>
 #include <boost/mpl/identity.hpp>
-#include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/comparison/equal.hpp>
 #include <boost/preprocessor/control/iif.hpp>
 #include <boost/preprocessor/list/adt.hpp>
 #include <boost/variadic_macro_data/vmd.hpp>
+#include "gen/vm_comp_mem_fun_template_gen.hpp"
 #include "detail/dcomp_mem_fun_template.hpp"
 
 /*
@@ -151,7 +151,7 @@ namespace boost \
 #define BOOST_TTI_VM_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(...) \
   BOOST_TTI_VM_TRAIT_HAS_COMP_MEMBER_FUNCTION_TEMPLATE \
   ( \
-  BOOST_PP_CAT(has_comp_member_function_template_,BOOST_VMD_DATA_ELEM(0,__VA_ARGS__)), \
+  BOOST_TTI_VM_HAS_COMP_MEMBER_FUNCTION_TEMPLATE_GEN_BASE(BOOST_VMD_DATA_ELEM(0,__VA_ARGS__)), \
   __VA_ARGS__ \
   ) \
 /**/
@@ -175,7 +175,7 @@ namespace boost \
 #define BOOST_TTI_VM_MTFC_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(...) \
   BOOST_TTI_VM_MTFC_TRAIT_HAS_COMP_MEMBER_FUNCTION_TEMPLATE \
   ( \
-  BOOST_PP_CAT(mtfc_has_comp_member_function_template_,BOOST_VMD_DATA_ELEM(0,__VA_ARGS__)), \
+  BOOST_TTI_VM_MTFC_HAS_COMP_MEMBER_FUNCTION_TEMPLATE_GEN_BASE(BOOST_VMD_DATA_ELEM(0,__VA_ARGS__)), \
   __VA_ARGS__ \
   ) \
 /**/
