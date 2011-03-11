@@ -133,7 +133,6 @@ alias tti
         [ compile-fail test_mf_has_template_cp_fail3.cpp ]
         [ run test_mf_mem_type.cpp ]
         [ compile test_mf_mem_type_compile.cpp ]
-#        [ run test_has_fun_template.cpp ]
     ;
 
 alias ttivm

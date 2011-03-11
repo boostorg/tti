@@ -46,7 +46,7 @@ namespace boost \
       } \
     template<class T,class R> \
     struct trait : \
-      boost::tti::detail::trait<typename boost::tti::detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> \
+      BOOST_TTI_NAMESPACE::detail::trait<typename BOOST_TTI_NAMESPACE::detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> \
       { \
       }; \
     } \
@@ -85,7 +85,7 @@ namespace boost \
       { \
       template<class T,class R> \
       struct apply : \
-        boost::tti::detail::trait<typename boost::tti::detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> \
+        BOOST_TTI_NAMESPACE::detail::trait<typename BOOST_TTI_NAMESPACE::detail::ptmd<T,R>::type,typename boost::remove_const<T>::type> \
         { \
         }; \
       }; \

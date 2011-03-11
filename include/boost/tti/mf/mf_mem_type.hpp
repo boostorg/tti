@@ -7,6 +7,7 @@
 #include <boost/mpl/not.hpp>
 #include <boost/mpl/placeholders.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include "../gen/namespace_gen.hpp"
 #include "../detail/dnotype.hpp"
 
 /*
@@ -43,7 +44,7 @@ namespace boost
         boost::is_same
           <
           T,
-          boost::tti::detail::notype
+          BOOST_TTI_NAMESPACE::detail::notype
           >
         >
       {
@@ -69,7 +70,7 @@ namespace boost
         boost::is_same
           <
           typename T::type,
-          boost::tti::detail::notype
+          BOOST_TTI_NAMESPACE::detail::notype
           >
         >
       {

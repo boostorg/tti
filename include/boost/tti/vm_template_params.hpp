@@ -50,7 +50,7 @@ namespace boost \
     template<class T> \
     struct trait \
       { \
-      typedef typename boost::tti::detail::trait<T>::type type; \
+      typedef typename BOOST_TTI_NAMESPACE::detail::trait<T>::type type; \
       \
       BOOST_STATIC_CONSTANT(bool,value=type::value); \
       }; \
@@ -92,7 +92,7 @@ namespace boost \
       template<class T> \
       struct apply \
         { \
-        typedef typename boost::tti::detail::trait::apply<T>::type type; \
+        typedef typename BOOST_TTI_NAMESPACE::detail::trait::apply<T>::type type; \
         \
         BOOST_STATIC_CONSTANT(bool,value=type::value); \
         }; \

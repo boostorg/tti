@@ -52,7 +52,7 @@ namespace boost \
       } \
     template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
     struct trait : \
-      boost::tti::detail::trait<T,typename boost::tti::detail::tfunction_seq<R,FS,TAG>::type> \
+      BOOST_TTI_NAMESPACE::detail::trait<T,typename BOOST_TTI_NAMESPACE::detail::tfunction_seq<R,FS,TAG>::type> \
       { \
       }; \
     } \
@@ -95,7 +95,7 @@ namespace boost \
       { \
       template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
       struct apply : \
-        boost::tti::detail::trait<T,typename boost::tti::detail::tfunction_seq<R,FS,TAG>::type> \
+        BOOST_TTI_NAMESPACE::detail::trait<T,typename BOOST_TTI_NAMESPACE::detail::tfunction_seq<R,FS,TAG>::type> \
         { \
         }; \
       }; \

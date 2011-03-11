@@ -48,7 +48,7 @@ namespace boost \
       } \
     template<class T> \
     struct trait : \
-      boost::tti::detail::trait<T> \
+      BOOST_TTI_NAMESPACE::detail::trait<T> \
       { \
       }; \
     } \
@@ -90,7 +90,7 @@ namespace boost \
       { \
       template<class T> \
       struct apply : \
-        boost::tti::detail::trait::apply<T> \
+        BOOST_TTI_NAMESPACE::detail::trait::apply<T> \
         { \
         }; \
       }; \

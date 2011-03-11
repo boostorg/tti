@@ -1,0 +1,6 @@
+#if !defined(TTI_NAMESPACE_GEN_HPP)
+#define TTI_NAMESPACE_GEN_HPP
+
+#define BOOST_TTI_NAMESPACE boost::tti
+
+#endif // TTI_NAMESPACE_GEN_HPP

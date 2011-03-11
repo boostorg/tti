@@ -14,11 +14,11 @@
 /**/
 
 #define BOOST_TTI_HAS_TYPE_GEN(name) \
-  boost::tti::BOOST_TTI_HAS_TYPE_GEN_BASE(name) \
+  BOOST_TTI_NAMESPACE::BOOST_TTI_HAS_TYPE_GEN_BASE(name) \
 /**/
 
 #define BOOST_TTI_MTFC_HAS_TYPE_GEN(name) \
-  boost::tti::BOOST_TTI_MTFC_HAS_TYPE_GEN_BASE(name) \
+  BOOST_TTI_NAMESPACE::BOOST_TTI_MTFC_HAS_TYPE_GEN_BASE(name) \
 /**/
 
 #endif // TTI_TYPE_GEN_HPP

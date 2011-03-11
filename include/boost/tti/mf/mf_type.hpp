@@ -5,6 +5,7 @@
 #include <boost/mpl/apply.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/placeholders.hpp>
+#include "../gen/namespace_gen.hpp"
 #include "../detail/dnotype.hpp"
 
 /*
@@ -45,7 +46,7 @@ namespace boost
       <
       class HasType,
       class T,
-      class U = boost::mpl::identity<boost::tti::detail::notype>
+      class U = boost::mpl::identity<BOOST_TTI_NAMESPACE::detail::notype>
       >
     struct mf_has_type :
       boost::mpl::apply
