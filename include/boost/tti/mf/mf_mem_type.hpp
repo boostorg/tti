@@ -43,7 +43,7 @@ namespace boost
         boost::is_same
           <
           T,
-          detail::notype
+          boost::tti::detail::notype
           >
         >
       {
@@ -69,7 +69,7 @@ namespace boost
         boost::is_same
           <
           typename T::type,
-          detail::notype
+          boost::tti::detail::notype
           >
         >
       {

@@ -52,7 +52,7 @@ namespace boost \
       } \
     template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
     struct trait : \
-      detail::trait<typename detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> \
+      boost::tti::detail::trait<typename boost::tti::detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> \
       { \
       }; \
     } \
@@ -95,7 +95,7 @@ namespace boost \
       { \
       template<class T,class R,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
       struct apply : \
-        detail::trait<typename detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> \
+        boost::tti::detail::trait<typename boost::tti::detail::ptmf_seq<T,R,FS,TAG>::type,typename boost::remove_const<T>::type> \
         { \
         }; \
       }; \

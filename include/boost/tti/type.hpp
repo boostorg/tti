@@ -45,13 +45,13 @@ namespace boost \
       { \
       TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
       } \
-    template<class T,class U = detail::notype> \
+    template<class T,class U = boost::tti::detail::notype> \
     struct trait : \
-      detail::trait \
+      boost::tti::detail::trait \
         < \
         T, \
         U, \
-        typename detail::mpl::trait<T>::type \
+        typename boost::tti::detail::ttimpl::trait<T>::type \
         > \
       { \
       }; \
@@ -90,13 +90,13 @@ namespace boost \
       } \
     struct trait \
       { \
-      template<class T,class U = detail::notype> \
+      template<class T,class U = boost::tti::detail::notype> \
       struct apply : \
-        detail::trait \
+        boost::tti::detail::trait \
           < \
           T, \
           U, \
-          typename detail::mpl::trait<T>::type \
+          typename boost::tti::detail::ttimpl::trait<T>::type \
           > \
         { \
         }; \

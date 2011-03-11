@@ -9,7 +9,7 @@
 #include "dnotype.hpp"
 
 #define TTI_DETAIL_TRAIT_HAS_TYPE(trait,name) \
-namespace mpl \
+namespace ttimpl \
   { \
   BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
   } \

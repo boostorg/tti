@@ -45,7 +45,7 @@ namespace boost
       <
       class HasType,
       class T,
-      class U = boost::mpl::identity<detail::notype>
+      class U = boost::mpl::identity<boost::tti::detail::notype>
       >
     struct mf_has_type :
       boost::mpl::apply

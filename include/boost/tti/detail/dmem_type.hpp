@@ -5,14 +5,14 @@
 #include <boost/mpl/has_xxx.hpp>
 
 #define TTI_DETAIL_TRAIT_HAS_TYPE_MEMBER_TYPE(trait,name) \
-namespace mpl \
+namespace ttimpl \
   { \
   BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, false) \
   } \
 template<class T> \
 struct trait \
   { \
-  typedef typename mpl::trait<T>::type type; \
+  typedef typename ttimpl::trait<T>::type type; \
   \
   BOOST_STATIC_CONSTANT(bool,value=type::value); \
   }; \

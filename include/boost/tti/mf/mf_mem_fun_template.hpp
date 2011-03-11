@@ -63,7 +63,7 @@ namespace boost
         HasMemberFunctionTemplate,
         typename T::type,
         typename R::type,
-        typename boost::mpl::transform<FS,detail::tself<boost::mpl::_1> >::type,
+        typename boost::mpl::transform<FS,boost::tti::detail::tself<boost::mpl::_1> >::type,
         TAG
         >::type
       {

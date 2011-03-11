@@ -54,9 +54,9 @@ namespace boost \
     struct trait : \
       boost::mpl::eval_if \
         < \
-        detail::trait<T>, \
-        detail::member_type::trait<T>, \
-        boost::mpl::identity<detail::notype> \
+        boost::tti::detail::trait<T>, \
+        boost::tti::detail::member_type::trait<T>, \
+        boost::mpl::identity<boost::tti::detail::notype> \
         > \
       { \
       }; \
@@ -102,9 +102,9 @@ namespace boost \
       struct apply : \
         boost::mpl::eval_if \
           < \
-          detail::trait<T>, \
-          detail::member_type::trait<T>, \
-          boost::mpl::identity<detail::notype> \
+          boost::tti::detail::trait<T>, \
+          boost::tti::detail::member_type::trait<T>, \
+          boost::mpl::identity<boost::tti::detail::notype> \
           > \
         { \
         }; \
