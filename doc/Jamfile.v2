@@ -36,27 +36,37 @@ else
 doxygen tti_reference
   :
     $(here)/../../../boost/tti/comp_mem_fun.hpp
-    $(here)/../../../boost/tti/comp_mem_fun_template.hpp
     $(here)/../../../boost/tti/comp_static_mem_fun.hpp
-    $(here)/../../../boost/tti/comp_static_mem_fun_template.hpp
     $(here)/../../../boost/tti/mem_data.hpp
     $(here)/../../../boost/tti/mem_fun.hpp
-    $(here)/../../../boost/tti/mem_fun_template.hpp
     $(here)/../../../boost/tti/mem_type.hpp
-    $(here)/../../../boost/tti/mf/mf_mem_fun_template.hpp
-    $(here)/../../../boost/tti/mf/mf_static_mem_fun_template.hpp
-    $(here)/../../../boost/tti/mf/mf_template_params.hpp
     $(here)/../../../boost/tti/static_mem_data.hpp
     $(here)/../../../boost/tti/static_mem_fun.hpp
-    $(here)/../../../boost/tti/static_mem_fun_template.hpp
     $(here)/../../../boost/tti/template.hpp
     $(here)/../../../boost/tti/template_params.hpp
     $(here)/../../../boost/tti/type.hpp
-    $(here)/../../../boost/tti/vm_comp_mem_fun_template.hpp
-    $(here)/../../../boost/tti/vm_comp_static_mem_fun_template.hpp
-    $(here)/../../../boost/tti/vm_mem_fun_template.hpp
-    $(here)/../../../boost/tti/vm_static_mem_fun_template.hpp
     $(here)/../../../boost/tti/vm_template_params.hpp
+    $(here)/../../../boost/tti/gen/comp_mem_fun_gen.hpp
+    $(here)/../../../boost/tti/gen/comp_static_mem_fun_gen.hpp
+    $(here)/../../../boost/tti/gen/mem_data_gen.hpp
+    $(here)/../../../boost/tti/gen/mem_fun_gen.hpp
+    $(here)/../../../boost/tti/gen/mem_type_gen.hpp
+    $(here)/../../../boost/tti/gen/namespace_gen.hpp
+    $(here)/../../../boost/tti/gen/static_mem_data_gen.hpp
+    $(here)/../../../boost/tti/gen/static_mem_fun_gen.hpp
+    $(here)/../../../boost/tti/gen/template_gen.hpp
+    $(here)/../../../boost/tti/gen/template_params_gen.hpp
+    $(here)/../../../boost/tti/gen/trait_gen.hpp
+    $(here)/../../../boost/tti/gen/type_gen.hpp
+    $(here)/../../../boost/tti/gen/vm_template_params_gen.hpp
+    $(here)/../../../boost/tti/mf/mf_mem_data.hpp
+    $(here)/../../../boost/tti/mf/mf_mem_fun.hpp
+    $(here)/../../../boost/tti/mf/mf_mem_type.hpp
+    $(here)/../../../boost/tti/mf/mf_static_mem_data.hpp
+    $(here)/../../../boost/tti/mf/mf_static_mem_fun.hpp
+    $(here)/../../../boost/tti/mf/mf_template.hpp
+    $(here)/../../../boost/tti/mf/mf_template_params.hpp
+    $(here)/../../../boost/tti/mf/mf_type.hpp
   : 
     <doxygen:param>PROJECT_NAME="TTI"
     <doxygen:param>PROJECT_NUMBER=1

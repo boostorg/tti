@@ -3,12 +3,33 @@
 
 #include "namespace_gen.hpp"
 
-#define BOOST_TTI_TRAIT_GEN_BASE(name) \
-  name \
+/*
+
+  The succeeding comments in this file are in doxygen format.
+
+*/
+
+/** \file
+*/
+
+/// Generates the macro metafunction name for any macro metafunction using the 'trait' form.
+/**
+    trait  = the name of the trait.
+
+    returns = the generated macro metafunction name.
+*/
+#define BOOST_TTI_TRAIT_GEN_BASE(trait) \
+  trait \
 /**/
 
-#define BOOST_TTI_TRAIT_GEN(name) \
-  BOOST_TTI_NAMESPACE::BOOST_TTI_TRAIT_GEN_BASE(name) \
+/// Generates the macro metafunction name within the Boost TTI namespace for any macro metafunction using the 'trait' form.
+/**
+    trait  = the name of the trait.
+
+    returns = the generated macro metafunction name.
+*/
+#define BOOST_TTI_TRAIT_GEN(trait) \
+  BOOST_TTI_NAMESPACE::BOOST_TTI_TRAIT_GEN_BASE(trait) \
 /**/
 
 #endif // TTI_TRAIT_GEN_HPP

@@ -5,18 +5,51 @@
 #include <boost/preprocessor/cat.hpp>
 #include "trait_gen.hpp"
 
+/*
+
+  The succeeding comments in this file are in doxygen format.
+
+*/
+
+/** \file
+*/
+
+/// Generates the macro metafunction name for BOOST_TTI_MEMBER_TYPE.
+/**
+    name  = the name of the inner type.
+
+    returns = the generated macro metafunction name.
+*/
 #define BOOST_TTI_MEMBER_TYPE_GEN_BASE(name) \
   BOOST_PP_CAT(member_type_,name) \
 /**/
   
+/// Generates the macro metafunction name for BOOST_TTI_MTFC_MEMBER_TYPE.
+/**
+    name  = the name of the inner type.
+
+    returns = the generated macro metafunction name.
+*/
 #define BOOST_TTI_MTFC_MEMBER_TYPE_GEN_BASE(name) \
   BOOST_PP_CAT(mtfc_member_type_,name) \
 /**/
 
+/// Generates the macro metafunction name within the Boost TTI namespace for BOOST_TTI_MEMBER_TYPE.
+/**
+    name  = the name of the inner type.
+
+    returns = the generated macro metafunction name.
+*/
 #define BOOST_TTI_MEMBER_TYPE_GEN(name) \
   BOOST_TTI_NAMESPACE::BOOST_TTI_MEMBER_TYPE_GEN_BASE(name) \
 /**/
   
+/// Generates the macro metafunction name within the Boost TTI namespace for BOOST_TTI_MTFC_MEMBER_TYPE.
+/**
+    name  = the name of the inner type.
+
+    returns = the generated macro metafunction name.
+*/
 #define BOOST_TTI_MTFC_MEMBER_TYPE_GEN(name) \
   BOOST_TTI_NAMESPACE::BOOST_TTI_MTFC_MEMBER_TYPE_GEN_BASE(name) \
 /**/

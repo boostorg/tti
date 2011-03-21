@@ -36,7 +36,7 @@ The functionality of the library may be summed up as:
   allow for an easier to use syntax, where 
   the types being passed are in the form of nullary metafunctions
   themselves. They always work with individual types 
-  when specifying function and data syntax rather than a 
+  when specifying function syntax rather than a 
   composite type. These metafunctions are called 'nullary type
   metafunctions' in the documentation.
 * Provide a set of macros for all of the macro metafunctions
@@ -68,8 +68,8 @@ which bring in all the rest of the specific header files.
 support for variadic macros, is 'tti.hpp'.
 This can be used for the vast majority of functionality in the library.
 # The secondary header, which uses a small subset of the 
-library functionality, providing an alternate use of a particular 
-macro with variadic macro support, is 'tti_vm.hpp'.
+library functionality, providing an alternate use of particular 
+macros with variadic macro support, is 'tti_vm.hpp'.
 
 There are also separate specific header files for each of the elements to be 
 introspected by the library. This allows for finer-grained inclusion

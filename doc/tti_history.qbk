@@ -14,7 +14,6 @@
 * Added BOOST_TTI_HAS_STATIC_MEMBER_DATA and family for introspecting static member data.
 * Inclusion of specific header files for faster compilation is now supported.
 * Shorten the names of the test files and test header files.
-* Added support for introspecting function templates.
 
 [heading Version 1.3]
 
