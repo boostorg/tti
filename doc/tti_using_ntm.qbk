@@ -140,7 +140,7 @@ Does T have a nested type called 'DType' within 'BType::CType' ?
    CTypeNM
    >
    
-We could just have easily used the boost::tti::mf\_valid\_member\_type
+We could just have easily used the `boost::tti::mf_valid_member_type`
 metafunction to the same effect:
 
   boost::tti::mf_valid_member_type
@@ -194,8 +194,8 @@ Does T have a nested class template called 'MoreParameters'
 within 'BType::CType' whose template parameters are specified exactly ?
 
 [
-note Include the 'tti_vm.hpp' general header file, or the 
-'vm\_template\_params.hpp' specific header file,
+note Include the `tti_vm.hpp` general header file, or the 
+`vm_template_params.hpp` specific header file,
 when using this macro.
 ]
 
@@ -243,7 +243,7 @@ within 'BType::CType::DType' whose type is 'short' ?
 
  BOOST_TTI_MTFC_HAS_STATIC_MEMBER_DATA(DSMember)
  
- boost::tti::mf_has_static_data
+ boost::tti::mf_has_static_member_data
    <
    boost::tti::mtfc_has_static_member_data_DSMember,
    DTypeNM,

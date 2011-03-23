@@ -8,7 +8,8 @@ the_type_traits_introspection_library/tti_usingMM.html
 the_type_traits_introspection_library/tti_metaclasses.html
 the_type_traits_introspection_library/tti_metafunctions.html
 the_type_traits_introspection_library/tti_usingNTM.html
-typetraitsintrospection_reference.html
+the_type_traits_introspection_library/tti_func_templates.html
+type_traits_introspection_reference.html
 BOOST_TTI_TRAIT_HAS_COMP_MEMBER_FUNCTION.html
 BOOST_TTI_MTFC_TRAIT_HAS_COMP_MEMBER_FUNCTION.html
 BOOST_TTI_HAS_COMP_MEMBER_FUNCTION.html
@@ -104,11 +105,11 @@ boost/tti/mf_member_type.html
 header/boost/tti/mf/mf_static_mem_data_hpp.html
 boost/tti/mf_has_static_member_data.html
 header/boost/tti/mf/mf_static_mem_fun_hpp.html
-boost/tti/mf_has_static_member_fu_id437966.html
+boost/tti/mf_has_static_member_fu_id398778.html
 header/boost/tti/mf/mf_template_hpp.html
 boost/tti/mf_has_template.html
 header/boost/tti/mf/mf_template_params_hpp.html
-boost/tti/mf_has_template_check_p_id438063.html
+boost/tti/mf_has_template_check_p_id398876.html
 header/boost/tti/mf/mf_type_hpp.html
 boost/tti/mf_has_type.html
 header/boost/tti/static_mem_data_hpp.html
@@ -145,4 +146,4 @@ the_type_traits_introspection_library/tti_tests.html
 the_type_traits_introspection_library/tti_history.html
 the_type_traits_introspection_library/tti_todo.html
 the_type_traits_introspection_library/tti_acknowledgments.html
-index/s16.html
+index/s17.html

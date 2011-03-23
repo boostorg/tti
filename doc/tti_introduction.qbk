@@ -48,7 +48,7 @@ The functionality of the library may be summed up as:
 The library is dependent on Boost PP, Boost MPL, 
 Boost Type Traits, and Boost Function Types. 
 The library is also dependent 
-on the variadic\_macro\_data library currently in the sandbox 
+on the `variadic_macro_data` library currently in the sandbox 
 if the variadic macros in the library are used.
 
 The library is a header only library.
@@ -65,11 +65,11 @@ functionality supporting variadic macros is to be used,
 which bring in all the rest of the specific header files.
 
 # The main header, which does not require using the library 
-support for variadic macros, is 'tti.hpp'.
+support for variadic macros, is `tti.hpp`.
 This can be used for the vast majority of functionality in the library.
 # The secondary header, which uses a small subset of the 
 library functionality, providing an alternate use of particular 
-macros with variadic macro support, is 'tti_vm.hpp'.
+macros with variadic macro support, is `tti_vm.hpp`.
 
 There are also separate specific header files for each of the elements to be 
 introspected by the library. This allows for finer-grained inclusion
@@ -82,57 +82,57 @@ of nested elements to be introspected. These header files are:
   ]
   [
     [Type]
-    [[headerref boost/tti/type.hpp type.hpp]]
+    [[headerref boost/tti/type.hpp `type.hpp`]]
   ]
   [
     [Template]
-    [[headerref boost/tti/template.hpp template.hpp]]
+    [[headerref boost/tti/template.hpp `template.hpp`]]
   ]
   [
     [Template with params]
-    [[headerref boost/tti/template_params.hpp template\_params.hpp]]
+    [[headerref boost/tti/template_params.hpp `template_params.hpp`]]
   ]
   [
     [Template with params - variadic macros]
-    [[headerref boost/tti/vm_template_params.hpp vm\_template\_params.hpp]]
+    [[headerref boost/tti/vm_template_params.hpp `vm_template_params.hpp`]]
   ]
   [
     [Member data]
-    [[headerref boost/tti/mem_data.hpp mem\_data.hpp]]
+    [[headerref boost/tti/mem_data.hpp `mem_data.hpp`]]
   ]
   [
     [Member function]
-    [[headerref boost/tti/mem_fun.hpp mem\_fun.hpp]]
+    [[headerref boost/tti/mem_fun.hpp `mem_fun.hpp`]]
   ]
   [
     [Member function - composite syntax]
-    [[headerref boost/tti/comp_mem_fun.hpp comp\_mem\_fun.hpp]]
+    [[headerref boost/tti/comp_mem_fun.hpp `comp_mem_fun.hpp`]]
   ]
   [
     [Static member data]
-    [[headerref boost/tti/static_mem_data.hpp static\_mem\_data.hpp]]
+    [[headerref boost/tti/static_mem_data.hpp `static_mem_data.hpp`]]
   ]
   [
     [Static member function]
-    [[headerref boost/tti/static_mem_fun.hpp static\_mem\_fun.hpp]]
+    [[headerref boost/tti/static_mem_fun.hpp `static_mem_fun.hpp`]]
   ]
   [
     [Static member function - composite syntax]
-    [[headerref boost/tti/comp_static_mem_fun.hpp comp\_static\_mem\_fun.hpp]]
+    [[headerref boost/tti/comp_static_mem_fun.hpp `comp_static_mem_fun.hpp`]]
   ]
   [
     [Member type]
-    [[headerref boost/tti/mem_type.hpp mem\_type.hpp]]
+    [[headerref boost/tti/mem_type.hpp `mem_type.hpp`]]
   ]
 ]
 
-If the general header file 'tti_vm.hpp' 
+If the general header file `tti_vm.hpp`
 or the specific header file 
-[headerref boost/tti/vm_template_params.hpp 'vm\_template\_params.hpp'],
+[headerref boost/tti/vm_template_params.hpp `vm_template_params.hpp`],
 are used the library is also dependent 
-on the variadic\_macro\_data library currently in the sandbox. 
+on the `variadic_macro_data` library currently in the sandbox. 
 If this header is not used there is no need to download 
-the variadic\_macro\_data library and use it in any way.
+the `variadic_macro_data` library and use it in any way.
 
 [endsect]
 

@@ -29,33 +29,50 @@
           Breaking changes
           <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
-                BOOST_TTI_HAS_MEMBER (BOOST_TTI_TRAIT_HAS_MEMBER) has been changed
-                to BOOST_TTI_HAS_COMP_MEMBER_FUNCTION (BOOST_TTI_TRAIT_HAS_COMP_MEMBER_FUNCTION)
-                and BOOST_TTI_MTFC_HAS_MEMBER (BOOST_TTI_MTFC_TRAIT_HAS_MEMBER) has
-                been changed to BOOST_TTI_MTFC_HAS_COMP_MEMBER_FUNCTION (BOOST_TTI_MTFC_TRAIT_HAS_COMP_MEMBER_FUNCTION).
+                <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_MEMBER</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_TRAIT_HAS_MEMBER</span></code>)
+                has been changed to <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_COMP_MEMBER_FUNCTION</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_TRAIT_HAS_COMP_MEMBER_FUNCTION</span></code>)
+                and <code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_HAS_MEMBER</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_TRAIT_HAS_MEMBER</span></code>)
+                has been changed to <code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_HAS_COMP_MEMBER_FUNCTION</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_TRAIT_HAS_COMP_MEMBER_FUNCTION</span></code>).
                 This family of functionality now supports only member functions with
                 composite syntax.
               </li>
 <li class="listitem">
-                BOOST_TTI_HAS_STATIC_MEMBER (BOOST_TTI_TRAIT_HAS_STATIC_MEMBER) has
-                been changed to BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION (BOOST_TTI_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION)
-                and BOOST_TTI_MTFC_HAS_STATIC_MEMBER (BOOST_TTI_MTFC_TRAIT_HAS_STATIC_MEMBER)
-                has been changed to BOOST_TTI_MTFC_HAS_COMP_STATIC_MEMBER_FUNCTION
-                (BOOST_TTI_MTFC_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION). This family
-                of functionality now supports only static member functions with composite
-                syntax.
+                <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_STATIC_MEMBER</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_TRAIT_HAS_STATIC_MEMBER</span></code>)
+                has been changed to <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION</span></code>)
+                and <code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_HAS_STATIC_MEMBER</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_TRAIT_HAS_STATIC_MEMBER</span></code>)
+                has been changed to <code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_HAS_COMP_STATIC_MEMBER_FUNCTION</span></code>
+                (<code class="computeroutput"><span class="identifier">BOOST_TTI_MTFC_TRAIT_HAS_COMP_STATIC_MEMBER_FUNCTION</span></code>).
+                This family of functionality now supports only static member functions
+                with composite syntax.
+              </li>
+<li class="listitem">
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_static_data</span></code> has been changed
+                to <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_static_member_data</span></code>.
               </li>
 </ul></div>
         </li>
 <li class="listitem">
-          Added BOOST_TTI_HAS_STATIC_MEMBER_DATA and family for introspecting static
-          member data.
+          Added <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_STATIC_MEMBER_DATA</span></code>
+          and family for introspecting static member data.
         </li>
 <li class="listitem">
           Inclusion of specific header files for faster compilation is now supported.
         </li>
 <li class="listitem">
+          Inclusion of macro metafunction name generating macros.
+        </li>
+<li class="listitem">
           Shorten the names of the test files and test header files.
+        </li>
+<li class="listitem">
+          Added documentation topic about introspecting function templates.
         </li>
 </ul></div>
 <a name="the_type_traits_introspection_library.tti_history.version_1_3"></a><h4>
@@ -80,7 +97,8 @@
                       The top-level tti namespace has become the boost::tti namespace.
                     </li>
 <li class="listitem">
-                      The macros now start with BOOST_TTI_ rather than just TTI_
+                      The macros now start with <code class="computeroutput"><span class="identifier">BOOST_TTI_</span></code>
+                      rather than just <code class="computeroutput"><span class="identifier">TTI_</span></code>
                       as previously.
                     </li>
 </ul></div>
@@ -118,7 +136,8 @@
           are now called "nullary type metafunctions'.
         </li>
 <li class="listitem">
-          BOOST_TTI_HAS_TYPE and boost::tti::mf_has_type now have optional typedef
+          <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_TYPE</span></code> and
+          <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_type</span></code> now have optional typedef
           checking.
         </li>
 <li class="listitem">
@@ -126,34 +145,36 @@
           treated as individual types has been implemented. These include:
           <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
-                BOOST_TTI_HAS_MEMBER_DATA
+                <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_MEMBER_DATA</span></code>
               </li>
 <li class="listitem">
-                BOOST_TTI_HAS_MEMBER_FUNCTION
+                <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_MEMBER_FUNCTION</span></code>
               </li>
 <li class="listitem">
-                BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION
+                <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION</span></code>
               </li>
 </ul></div>
         </li>
 <li class="listitem">
-          New nullary type metafunction boost::tti::mf_has_static_member_function
-          uses the new underlying BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION macro metafunction.
-          Its signature uses an optional MPL forward sequence for the parameter types
-          and an optional Boost function_types tag type.
+          New nullary type metafunction <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_static_member_function</span></code>
+          uses the new underlying <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION</span></code>
+          macro metafunction. Its signature uses an optional MPL forward sequence
+          for the parameter types and an optional Boost <code class="computeroutput"><span class="identifier">function_types</span></code>
+          tag type.
         </li>
 <li class="listitem">
-          New nullary type metafunctions boost::tti::valid_member_type and boost::tti::mf_valid_member_type
-          for checking if the 'type' returned from invoking the BOOST_TTI_MEMBER_TYPE
-          or boost::tti::mf_member_type metafunctions is valid.
+          New nullary type metafunctions <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">valid_member_type</span></code>
+          and <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_valid_member_type</span></code> for checking if
+          the 'type' returned from invoking the <code class="computeroutput"><span class="identifier">BOOST_TTI_MEMBER_TYPE</span></code>
+          or <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_member_type</span></code> metafunctions is valid.
         </li>
 <li class="listitem">
           Breaking changes
           <div class="itemizedlist"><ul class="itemizedlist" type="circle">
 <li class="listitem">
-                BOOST_TTI_HAS_TYPE_CHECK_TYPEDEF and boost::tti::mf_has_type_check_typedef
-                have been removed, and the functionality in them folded into BOOST_TTI_HAS_TYPE
-                and boost::tti::mf_has_type.
+                <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_TYPE_CHECK_TYPEDEF</span></code>
+                and <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_type_check_typedef</span></code> have
+                been removed, and the functionality in them folded into <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_TYPE</span></code> and <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_type</span></code>.
               </li>
 <li class="listitem">
                 BOOST_TTI_MEMBER_TYPE and boost::tti::mf_member_type no longer also
@@ -162,17 +183,20 @@
                 ).
               </li>
 <li class="listitem">
-                boost::tti::mf_has_static_function has been removed and its functionality
-                moved to boost::tti::mf_has_static_member_function ( see above ).
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_static_function</span></code> has been
+                removed and its functionality moved to <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_static_member_function</span></code>
+                ( see above ).
               </li>
 <li class="listitem">
-                boost::tti::mf_member_data uses the new underlying BOOST_TTI_HAS_MEMBER_DATA
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_member_data</span></code> uses the new underlying
+                <code class="computeroutput"><span class="identifier">BOOST_TTI_HAS_MEMBER_DATA</span></code>
                 macro metafunction.
               </li>
 <li class="listitem">
-                The signature for boost::tti::mf_has_member_function has changed
-                to use an optional MPL forward sequence for the parameter types and
-                an optional Boost function_types tag type.
+                The signature for <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mf_has_member_function</span></code>
+                has changed to use an optional MPL forward sequence for the parameter
+                types and an optional Boost <code class="computeroutput"><span class="identifier">function_types</span></code>
+                tag type.
               </li>
 <li class="listitem">
                 All nullary type metafunctions take their corresponding macro metafunction

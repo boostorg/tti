@@ -37,9 +37,11 @@
       Using a placeholder expression is the easiest way and does not require the
       programmer to create a metafunction class for passing the metadata. The syntax
       for this is fairly simple. The syntax for passing a macro metafunction becomes
-      'macrometafunction&lt;_&gt;' etc. depending on how many parameters are bring
-      passed. Thus for two parameters we would have 'macrometafunction&lt;_,_&gt;'
-      etc., with another placeholder ('_') added for each subsequent parameter.
+      <code class="computeroutput"><span class="identifier">macrometafunction</span><span class="special">&lt;</span><span class="identifier">_</span><span class="special">&gt;</span></code> etc.
+      depending on how many parameters are bring passed. Thus for two parameters
+      we would have <code class="computeroutput"><span class="identifier">macrometafunction</span><span class="special">&lt;</span><span class="identifier">_</span><span class="special">,</span><span class="identifier">_</span><span class="special">&gt;</span></code> etc.,
+      with another placeholder (<code class="computeroutput"><span class="identifier">_</span></code>)
+      added for each subsequent parameter.
     </p>
 <p>
       However using a placeholder expression may not be the fastest way when considering
@@ -57,11 +59,13 @@
       For these metafunction class macros there is a simple form and a complex form
       name just as there is for the macro metafunctions. For each macro metafunction,
       the name for the corresponding metafunction class macro is the macro metafunction
-      name with the sequence 'MTFC_' ( for "MeTaFunction Class" ) following
-      the BOOST_TTI_ ( or BOOST_TTI_VM_ ) portion of the macro metafunction name.
-      The subsequent metafunction class name, using the simple form, is the same
-      name as the corresponding macro metafunction name but with 'mtfc_' prepended
-      to the name.
+      name with the sequence <code class="computeroutput"><span class="identifier">MTFC_</span></code>
+      ( for "MeTaFunction Class" ) following the <code class="computeroutput"><span class="identifier">BOOST_TTI_</span></code>
+      ( or <code class="computeroutput"><span class="identifier">BOOST_TTI_VM_</span></code> ) portion
+      of the macro metafunction name. The subsequent metafunction class name, using
+      the simple form, is the same name as the corresponding macro metafunction name
+      but with <code class="computeroutput"><span class="identifier">mtfc_</span></code> prepended to
+      the name.
     </p>
 <p>
       As with the complex form name of the macro metafunctions, the complex form
@@ -111,7 +115,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_type_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_type_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -128,7 +132,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -145,7 +149,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_template_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_template_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -162,7 +166,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -179,7 +183,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_template_check_params_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_template_check_params_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -196,7 +200,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -213,7 +217,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_template_check_params_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_template_check_params_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -230,7 +234,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -247,7 +251,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_member_data_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_member_data_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -264,7 +268,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -281,7 +285,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_member_function_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_member_function_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -298,7 +302,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -315,7 +319,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_comp_member_function_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_comp_member_function_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -332,7 +336,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -349,7 +353,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_static_member_data_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_static_member_data_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -366,7 +370,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -383,7 +387,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_static_member_function_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_static_member_function_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -400,7 +404,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -417,7 +421,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_has_comp_static_member_function_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_has_comp_static_member_function_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -434,7 +438,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>
@@ -451,7 +455,7 @@
             </td>
 <td>
               <p>
-                boost::tti::mtfc_member_type_'name'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="identifier">mtfc_member_type_</span><span class="char">'name'</span></code>
               </p>
             </td>
 </tr>
@@ -468,7 +472,7 @@
             </td>
 <td>
               <p>
-                boost::tti::'trait'
+                <code class="computeroutput"><span class="identifier">boost</span><span class="special">::</span><span class="identifier">tti</span><span class="special">::</span><span class="char">'trait'</span></code>
               </p>
             </td>
 </tr>

@@ -124,8 +124,8 @@ parameters are specified exactly ?
 [heading Template with params using variadic macros]
 
 [
-note Include the 'tti_vm.hpp' general header file, or the 
-'vm\_template\_params.hpp' specific header file,
+note Include the `tti_vm.hpp` general header file, or the 
+`vm_template_params.hpp` specific header file,
 when using this macro.
 ]
 

@@ -27,15 +27,15 @@ is chosen at instantiation time and is created by the user of a template.
 One solution to this is afforded by the library itself. Given an enclosing type 'T' 
 which we know must exist, either because it is a top-level type we know about or 
 it is passed to us in some template as a 'class T' or 'typename T', and given an inner type 
-named 'InnerType' whose existence we would like ascertain, we can use a BOOST\_TTI\_HAS\_TYPE(InnerType) macro and it's related 
-boost::tti::has\_type\_InnerType metafunction to determine if the nested type 'InnerType' exists. This solution is perfectly valid 
+named 'InnerType' whose existence we would like ascertain, we can use a `BOOST_TTI_HAS_TYPE(InnerType)` macro and it's related 
+`boost::tti::has_type_InnerType` metafunction to determine if the nested type 'InnerType' exists. This solution is perfectly valid 
 and, with Boost MPL's selection metafunctions, we can do compile-time selection to generate the 
 correct template code. 
 
 However this does not scale that well syntactically if we need to drill down further from a 
 top-level enclosing type to a deeply nested type, or even to look for some deeply nested type's 
-inner elements. We are going to be generating a great deal of boost::mpl::if\_ and/or 
-boost::mpl::eval\_if type selection statements to get to some final condition where we know we 
+inner elements. We are going to be generating a great deal of `boost::mpl::if_` and/or 
+`boost::mpl::eval_if` type selection statements to get to some final condition where we know we 
 can generate the compile-time code which we want.
 
 [heading The solution]
@@ -44,14 +44,14 @@ The TTI library offers a better solution in the form of constructs which work wi
 nested types without producing a compiler error if the nested type does not exist, but still 
 are able to do the introspecting for inner elements that our TTI macro metafunctions do.
 
-We have already seen one of those constructs, the macro BOOST\_TTI\_MEMBER\_TYPE, 
+We have already seen one of those constructs, the macro `BOOST_TTI_MEMBER_TYPE`, 
 which generates a metafunction based on the name 
 of an inner type. But instead of telling us whether that inner type exists it instead returns
 a typedef 'type' which is that inner type if it exists, else it is an unspecified type if it 
 does not. In this way we have created a metafunction, very similar in functionality to 
 boost::mpl::identity, but which still returns some unspecified marker 'type' if our nested type is invalid.
 
-We can use the functionality of BOOST\_TTI\_MEMBER\_TYPE to construct nested types
+We can use the functionality of `BOOST_TTI_MEMBER_TYPE` to construct nested types
 for our other macro metafunctions, without having to use the T::InnerType syntax and produce a compiler 
 error if no such type actually exists within our scope. We can even do this in deeply nested contexts 
 by stringing together, so to speak, a series of these macro metafunction results.
@@ -169,23 +169,23 @@ we could create the nullary metafunction:
  
 directly instead of replicating the same functionality with our 'boost::tti::has_type_FindType' metafunction.
 
-The using of BOOST\_TTI\_MEMBER\_TYPE to create a nested type which may or may not exist, and which can
+The using of `BOOST_TTI_MEMBER_TYPE` to create a nested type which may or may not exist, and which can
 subsequently be used with our macro metafunctions whenever a nested type is required, without producing 
 a compiler error when the type does not actually exist, is the main reason we have separate 
 but similar functionality among our macro metafunctions to determine whether a member data, a member function, or a static member 
 function exists within an enclosing type. 
 
-In the more general case, when using BOOST\_TTI\_HAS\_MEMBER and BOOST\_TTI\_HAS\_STATIC\_MEMBER, 
+In the more general case, when using `BOOST_TTI_HAS_MEMBER` and `BOOST_TTI_HAS_STATIC_MEMBER`, 
 the signature for the member function and the static member function is a composite type. This makes 
 for a syntactical notation which is easy to specify, but because of that composite type notation we 
-can not use the nested type functionality in BOOST\_TTI\_MEMBER\_TYPE very easily. But
-when we use BOOST\_TTI\_HAS\_MEMBER\_FUNCTION and BOOST\_TTI\_HAS\_STATIC\_MEMBER\_FUNCTION
+can not use the nested type functionality in `BOOST_TTI_MEMBER_TYPE` very easily. But
+when we use `BOOST_TTI_HAS_MEMBER_FUNCTION` and `BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION`
 the composite types in our signatures are broken down into their individual types so that using 
-BOOST\_TTI\_MEMBER\_TYPE, if necessary, for any one of the individual types is easy.
+`BOOST_TTI_MEMBER_TYPE`, if necessary, for any one of the individual types is easy.
 
 [heading A more elegant solution]
 
-Although using BOOST\_TTI\_MEMBER\_TYPE represents a good solution to creating a nested type 
+Although using `BOOST_TTI_MEMBER_TYPE` represents a good solution to creating a nested type 
 without the possible compile-time error of the T::InnerType syntax, reaching in to 
 specify all those ::type expressions, along with their repeated 'typename', 
 does get syntactically tedious. 
@@ -195,7 +195,7 @@ metafunctions to the macro metafunctions where the 'types' specified are themsel
 This parallel set of metafunctions, using nullary metafunctions to specify individual types, 
 rather than the actual types themselves,
 are called 'nullary type metafunctions'. In this group there is also a nullary metafunction 
-paralleling our BOOST\_TTI\_MEMBER\_TYPE macro metafunction, and therefore a further construct 
+paralleling our `BOOST_TTI_MEMBER_TYPE` macro metafunction, and therefore a further construct 
 making the specifying of nested types easy and error-free to use.
 
 This group of nullary type metafunctions will be fully explained later.

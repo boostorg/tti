@@ -43,9 +43,11 @@
     Type Metafunctions</a></span></dt>
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_usingNTM.html">Using
     the Nullary Type Metafunctions</a></span></dt>
-<dt><span class="section"><a href="typetraitsintrospection_reference.html">TypeTraitsIntrospection Reference</a></span></dt>
+<dt><span class="section"><a href="the_type_traits_introspection_library/tti_func_templates.html">Introspecting
+    Function Templates</a></span></dt>
+<dt><span class="section"><a href="type_traits_introspection_reference.html">Type Traits Introspection Reference</a></span></dt>
 <dd><dl>
-<dt><span class="section"><a href="typetraitsintrospection_reference.html#header.boost.tti.comp_mem_fun_hpp">Header &lt;boost/tti/comp_mem_fun.hpp&gt;</a></span></dt>
+<dt><span class="section"><a href="type_traits_introspection_reference.html#header.boost.tti.comp_mem_fun_hpp">Header &lt;boost/tti/comp_mem_fun.hpp&gt;</a></span></dt>
 <dd><dl></dl></dd>
 <dt><span class="section"><a href="header/boost/tti/comp_static_mem_fun_hpp.html">Header &lt;boost/tti/comp_static_mem_fun.hpp&gt;</a></span></dt>
 <dd><dl></dl></dd>
@@ -115,7 +117,7 @@
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_history.html">History</a></span></dt>
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_todo.html">ToDo</a></span></dt>
 <dt><span class="section"><a href="the_type_traits_introspection_library/tti_acknowledgments.html">Acknowledgments</a></span></dt>
-<dt><span class="section"><a href="index/s16.html">Index</a></span></dt>
+<dt><span class="section"><a href="index/s17.html">Index</a></span></dt>
 </dl>
 </div>
 <div class="section">
@@ -178,8 +180,9 @@
 </ul></div>
 <p>
       The library is dependent on Boost PP, Boost MPL, Boost Type Traits, and Boost
-      Function Types. The library is also dependent on the variadic_macro_data library
-      currently in the sandbox if the variadic macros in the library are used.
+      Function Types. The library is also dependent on the <code class="computeroutput"><span class="identifier">variadic_macro_data</span></code>
+      library currently in the sandbox if the variadic macros in the library are
+      used.
     </p>
 <p>
       The library is a header only library.
@@ -201,13 +204,13 @@
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem">
             The main header, which does not require using the library support for
-            variadic macros, is 'tti.hpp'. This can be used for the vast majority
-            of functionality in the library.
+            variadic macros, is <code class="computeroutput"><span class="identifier">tti</span><span class="special">.</span><span class="identifier">hpp</span></code>.
+            This can be used for the vast majority of functionality in the library.
           </li>
 <li class="listitem">
             The secondary header, which uses a small subset of the library functionality,
             providing an alternate use of particular macros with variadic macro support,
-            is 'tti_vm.hpp'.
+            is <code class="computeroutput"><span class="identifier">tti_vm</span><span class="special">.</span><span class="identifier">hpp</span></code>.
           </li>
 </ol></div>
 <p>
@@ -315,7 +318,7 @@
               </td>
 <td>
                 <p>
-                  <code class="computeroutput"><a class="link" href="typetraitsintrospection_reference.html#header.boost.tti.comp_mem_fun_hpp" title="Header &lt;boost/tti/comp_mem_fun.hpp&gt;">comp_mem_fun.hpp</a></code>
+                  <code class="computeroutput"><a class="link" href="type_traits_introspection_reference.html#header.boost.tti.comp_mem_fun_hpp" title="Header &lt;boost/tti/comp_mem_fun.hpp&gt;">comp_mem_fun.hpp</a></code>
                 </p>
               </td>
 </tr>
@@ -371,16 +374,18 @@
 </table></div>
 </div>
 <br class="table-break"><p>
-        If the general header file 'tti_vm.hpp' or the specific header file <code class="computeroutput"><a class="link" href="header/boost/tti/vm_template_params_hpp.html" title="Header &lt;boost/tti/vm_template_params.hpp&gt;">'vm_template_params.hpp'</a></code>,
-        are used the library is also dependent on the variadic_macro_data library
-        currently in the sandbox. If this header is not used there is no need to
-        download the variadic_macro_data library and use it in any way.
+        If the general header file <code class="computeroutput"><span class="identifier">tti_vm</span><span class="special">.</span><span class="identifier">hpp</span></code> or
+        the specific header file <code class="computeroutput"><a class="link" href="header/boost/tti/vm_template_params_hpp.html" title="Header &lt;boost/tti/vm_template_params.hpp&gt;">vm_template_params.hpp</a></code>, are used the library
+        is also dependent on the <code class="computeroutput"><span class="identifier">variadic_macro_data</span></code>
+        library currently in the sandbox. If this header is not used there is no
+        need to download the <code class="computeroutput"><span class="identifier">variadic_macro_data</span></code>
+        library and use it in any way.
       </p>
 </div>
 </div>
 </div>
 <table xmlns:rev="http://www.cs.rpi.edu/~gregod/boost/tools/doc/revision" width="100%"><tr>
-<td align="left"><p><small>Last revised: March 21, 2011 at 19:17:13 GMT</small></p></td>
+<td align="left"><p><small>Last revised: March 23, 2011 at 00:04:55 GMT</small></p></td>
 <td align="right"><div class="copyright-footer"></div></td>
 </tr></table>
 <hr>
