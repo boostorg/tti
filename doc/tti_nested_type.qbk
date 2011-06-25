@@ -1,3 +1,10 @@
+[/ 
+  (C) Copyright Edward Diener 2011
+  Use, modification and distribution are subject to the Boost Software License,
+  Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+  http://www.boost.org/LICENSE_1_0.txt).
+]
+
 [section:tti_nested_type Nested Types]
 
 [heading The problem]
@@ -172,10 +179,10 @@ directly instead of replicating the same functionality with our 'boost::tti::has
 The using of `BOOST_TTI_MEMBER_TYPE` to create a nested type which may or may not exist, and which can
 subsequently be used with our macro metafunctions whenever a nested type is required, without producing 
 a compiler error when the type does not actually exist, is the main reason we have separate 
-but similar functionality among our macro metafunctions to determine whether a member data, a member function, or a static member 
+but similar functionality among our macro metafunctions to determine whether a member function or a static member 
 function exists within an enclosing type. 
 
-In the more general case, when using `BOOST_TTI_HAS_MEMBER` and `BOOST_TTI_HAS_STATIC_MEMBER`, 
+In the more general case, when using `BOOST_TTI_HAS_COMP_MEMBER_FUNCTION` and `BOOST_TTI_HAS_COMP_STATIC_MEMBER_FUNCTION`, 
 the signature for the member function and the static member function is a composite type. This makes 
 for a syntactical notation which is easy to specify, but because of that composite type notation we 
 can not use the nested type functionality in `BOOST_TTI_MEMBER_TYPE` very easily. But
