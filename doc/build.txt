@@ -1,7 +1,10 @@
 The library comes with full documentation with an index, 
-in both HTML and PDF format. However, you can use the 
-jamfile in the doc directory to regenerate the documentation 
-for this library. 
+in both HTML and PDF format. The HTML documentation is at 
+tti\libs\tti\doc\html\index.html and the PDF documentation 
+is at tti\libs\tti\doc\TypeTraitsIntrospection.pdf.
+
+You can use the jamfile in the doc directory to regenerate 
+the documentation for this library. 
 
 Add '--enable-index' to the command line to have an index 
 with the documentation. Add 'pdf' on the command line to
