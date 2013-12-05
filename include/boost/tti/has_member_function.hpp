@@ -7,6 +7,7 @@
 #if !defined(BOOST_TTI_HAS_MEMBER_FUNCTION_HPP)
 #define BOOST_TTI_HAS_MEMBER_FUNCTION_HPP
 
+#include <boost/config.hpp>
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
