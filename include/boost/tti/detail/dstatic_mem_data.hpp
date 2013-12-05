@@ -55,8 +55,6 @@
       }; \
     \
     typedef typename ttc_sd<BOOST_TTI_DETAIL_TP_TYPE,BOOST_TTI_DETAIL_TP_T>::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
 /**/
 
@@ -75,9 +73,7 @@
     template<class BOOST_TTI_DETAIL_TP_U> \
     static ::boost::type_traits::no_type chkt(...); \
     \
-    BOOST_STATIC_CONSTANT(bool,value=(!boost::function_types::is_function<BOOST_TTI_DETAIL_TP_TYPE>::value) && (sizeof(chkt<BOOST_TTI_DETAIL_TP_T>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type))); \
-    \
-    typedef boost::mpl::bool_<value> type; \
+    typedef boost::mpl::bool_<(!boost::function_types::is_function<BOOST_TTI_DETAIL_TP_TYPE>::value) && (sizeof(chkt<BOOST_TTI_DETAIL_TP_T>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type))> type; \
     }; \
 /**/
 

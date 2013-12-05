@@ -32,21 +32,18 @@ struct BOOST_PP_CAT(trait,_detail_type) \
   { \
   BOOST_MPL_ASSERT((BOOST_TTI_NAMESPACE::detail::is_lambda_expression<BOOST_TTI_DETAIL_TP_U>)); \
   typedef typename BOOST_PP_CAT(trait,_detail_type_invoke)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_U>::type type; \
-  BOOST_STATIC_CONSTANT(bool,value=type::value); \
   }; \
 \
 template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_U> \
-struct BOOST_PP_CAT(trait,_detail_type)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_U,boost::mpl::false_::type> \
+struct BOOST_PP_CAT(trait,_detail_type)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_U,boost::mpl::false_::type> : \
+  boost::mpl::false_ \
   { \
-  typedef boost::mpl::false_::type type; \
-  BOOST_STATIC_CONSTANT(bool,value=type::value); \
   }; \
 \
 template<class BOOST_TTI_DETAIL_TP_T> \
-struct BOOST_PP_CAT(trait,_detail_type)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_NAMESPACE::detail::deftype,boost::mpl::true_::type> \
+struct BOOST_PP_CAT(trait,_detail_type)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_NAMESPACE::detail::deftype,boost::mpl::true_::type> : \
+  boost::mpl::true_ \
   { \
-  typedef boost::mpl::true_::type type; \
-  BOOST_STATIC_CONSTANT(bool,value=type::value); \
   }; \
 /**/
 

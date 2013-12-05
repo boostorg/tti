@@ -38,9 +38,7 @@
     template<class BOOST_TTI_DETAIL_TP_U> \
     static ::boost::type_traits::no_type chkt(...); \
     \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(chkt<typename cl_type<BOOST_TTI_DETAIL_TP_T>::type>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)); \
-    \
-    typedef boost::mpl::bool_<value> type; \
+    typedef boost::mpl::bool_<sizeof(chkt<typename cl_type<BOOST_TTI_DETAIL_TP_T>::type>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
     }; \
 /**/
 

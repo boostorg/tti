@@ -7,7 +7,6 @@
 #if !defined(BOOST_TTI_DETAIL_STATIC_MEM_FUN_HPP)
 #define BOOST_TTI_DETAIL_STATIC_MEM_FUN_HPP
 
-#include <boost/config.hpp>
 #include <boost/function_types/is_function.hpp>
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/and.hpp>
@@ -35,9 +34,7 @@
     template<class BOOST_TTI_DETAIL_TP_U> \
     static ::boost::type_traits::no_type chkt(...); \
     \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(chkt<BOOST_TTI_DETAIL_TP_T>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)); \
-    \
-    typedef boost::mpl::bool_<value> type; \
+    typedef boost::mpl::bool_<sizeof(chkt<BOOST_TTI_DETAIL_TP_T>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
     }; \
 /**/
 
