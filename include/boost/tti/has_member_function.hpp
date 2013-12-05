@@ -64,9 +64,11 @@
 #define BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION(trait,name) \
   template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_R = BOOST_TTI_NAMESPACE::detail::deftype,class BOOST_TTI_TP_FS = boost::mpl::vector<>,class BOOST_TTI_TP_TAG = boost::function_types::null_tag> \
-  struct trait : \
-    BOOST_PP_CAT(trait,_detail_hmf)<BOOST_TTI_TP_T,BOOST_TTI_TP_R,BOOST_TTI_TP_FS,BOOST_TTI_TP_TAG> \
+  struct trait \
     { \
+    typedef typename \
+    BOOST_PP_CAT(trait,_detail_hmf)<BOOST_TTI_TP_T,BOOST_TTI_TP_R,BOOST_TTI_TP_FS,BOOST_TTI_TP_TAG>::type type; \
+    BOOST_STATIC_CONSTANT(bool,value=type::value); \
     }; \
 /**/
 

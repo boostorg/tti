@@ -39,9 +39,7 @@
     template<class BOOST_TTI_DETAIL_TP_EC> \
     static ::boost::type_traits::no_type chkt(...); \
     \
-    BOOST_STATIC_CONSTANT(bool,value=sizeof(chkt<BOOST_TTI_DETAIL_TP_C>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)); \
-    \
-    typedef boost::mpl::bool_<value> type; \
+    typedef boost::mpl::bool_<sizeof(chkt<BOOST_TTI_DETAIL_TP_C>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
     }; \
 /**/
 
@@ -72,9 +70,7 @@
   BOOST_TTI_DETAIL_TRAIT_HAS_CALL_TYPES_MEMBER_FUNCTION(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_CHECK_HAS_COMP_MEMBER_FUNCTION(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
-  struct BOOST_PP_CAT(trait,_detail_hmf) \
-    { \
-    typedef typename \
+  struct BOOST_PP_CAT(trait,_detail_hmf) : \
     boost::mpl::eval_if \
       < \
       boost::mpl::and_ \
@@ -85,9 +81,8 @@
         >, \
       BOOST_PP_CAT(trait,_detail_check_comp)<BOOST_TTI_DETAIL_TP_T>, \
       BOOST_PP_CAT(trait,_detail_call_types)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG> \
-      >::type type; \
-    \
-    BOOST_STATIC_CONSTANT(bool,value=type::value); \
+      > \
+    { \
     }; \
 /**/
 
