@@ -20,6 +20,8 @@ int main()
   BOOST_TEST((NestedData<AType,AType::BType::CType>::value));
   BOOST_TEST((AOther<AnotherType,AType>::value));
   BOOST_TEST((BOOST_TTI_HAS_MEMBER_DATA_GEN(ONestStr)<AnotherType,AType::AStructType>::value));
+  BOOST_TEST((!CMember<bool,bool>::value));
+  BOOST_TEST((!BOOST_TTI_HAS_MEMBER_DATA_GEN(AnInt)<int,long>::value));
   
   return boost::report_errors();
 

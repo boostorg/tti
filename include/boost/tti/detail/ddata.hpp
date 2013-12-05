@@ -11,8 +11,6 @@
 #include <boost/preprocessor/cat.hpp>
 #include <boost/tti/detail/dmem_data.hpp>
 #include <boost/tti/detail/dstatic_mem_data.hpp>
-#include <boost/tti/gen/namespace_gen.hpp>
-#include <boost/type_traits/remove_const.hpp>
 
 #define BOOST_TTI_DETAIL_TRAIT_HAS_DATA(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_HAS_MEMBER_DATA(trait,name) \
@@ -22,11 +20,7 @@
     { \
     \
     typedef typename \
-    BOOST_PP_CAT(trait,_detail_hmd) \
-      < \
-      typename BOOST_TTI_NAMESPACE::detail::ptmd<BOOST_TTI_DETAIL_TP_ET,BOOST_TTI_DETAIL_TP_DT>::type, \
-      typename boost::remove_const<BOOST_TTI_DETAIL_TP_ET>::type \
-      >::type hmdtype; \
+    BOOST_PP_CAT(trait,_detail_hmd_with_enclosing_class)<BOOST_TTI_DETAIL_TP_ET,BOOST_TTI_DETAIL_TP_DT>::type hmdtype; \
     \
     typedef typename \
     BOOST_PP_CAT(trait,_detail_hsd)<BOOST_TTI_DETAIL_TP_ET,BOOST_TTI_DETAIL_TP_DT>::type hsdtype; \
