@@ -18,35 +18,6 @@
 
 #if defined(BOOST_MSVC)
 
-#if BOOST_MSVC < 1700
-
-#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA(trait,name) \
-  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
-  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
-  struct BOOST_PP_CAT(trait,_detail_hsd) : \
-	boost::mpl::eval_if \
-		< \
- 		boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
- 		BOOST_PP_CAT(trait,_detail_hsd_op)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_TYPE>, \
- 		boost::mpl::false_ \
-		> \
-    { \
-    }; \
-/**/
-    
-#else
-
-#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA(trait,name) \
-  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
-  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
-  struct BOOST_PP_CAT(trait,_detail_hsd) : \
-  	BOOST_PP_CAT(trait,_detail_hsd_op)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_TYPE> \
-    { \
-    }; \
-/**/
-    
-#endif
-
 #define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
   struct BOOST_PP_CAT(trait,_detail_hsd_op) \
@@ -91,9 +62,9 @@
 
 #else // !defined(BOOST_MSVC)
 
-#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA(trait,name) \
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
-  struct BOOST_PP_CAT(trait,_detail_hsd) \
+  struct BOOST_PP_CAT(trait,_detail_hsd_op) \
     { \
     template<BOOST_TTI_DETAIL_TP_TYPE *> \
     struct helper; \
@@ -110,4 +81,18 @@
 
 #endif // defined(BOOST_MSVC)
 
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA(trait,name) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
+  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
+  struct BOOST_PP_CAT(trait,_detail_hsd) : \
+	boost::mpl::eval_if \
+		< \
+ 		boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+ 		BOOST_PP_CAT(trait,_detail_hsd_op)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_TYPE>, \
+ 		boost::mpl::false_ \
+		> \
+    { \
+    }; \
+/**/
+    
 #endif // BOOST_TTI_DETAIL_STATIC_MEM_DATA_HPP
