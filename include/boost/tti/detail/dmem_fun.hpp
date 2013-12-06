@@ -18,6 +18,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
+#include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/remove_const.hpp>
 #include <boost/tti/detail/dcomp_mem_fun.hpp>
@@ -43,15 +44,35 @@
     }; \
 /**/
 
-#define BOOST_TTI_DETAIL_TRAIT_HAS_CALL_TYPES_MEMBER_FUNCTION(trait,name) \
+#define BOOST_TTI_DETAIL_TRAIT_CTMF_INVOKE(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
-  struct BOOST_PP_CAT(trait,_detail_call_types) : \
+  struct BOOST_PP_CAT(trait,_detail_ctmf_invoke) : \
     BOOST_PP_CAT(trait,_detail_types) \
       < \
       typename BOOST_TTI_NAMESPACE::detail::ptmf_seq<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>::type, \
       BOOST_TTI_DETAIL_TP_T \
       > \
+    { \
+    }; \
+/**/
+
+#define BOOST_TTI_DETAIL_TRAIT_HAS_CALL_TYPES_MEMBER_FUNCTION(trait,name) \
+  BOOST_TTI_DETAIL_TRAIT_CTMF_INVOKE(trait,name) \
+  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
+  struct BOOST_PP_CAT(trait,_detail_call_types) : \
+	boost::mpl::eval_if \
+		< \
+ 		boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+ 		BOOST_PP_CAT(trait,_detail_ctmf_invoke) \
+ 			< \
+ 			BOOST_TTI_DETAIL_TP_T, \
+ 			BOOST_TTI_DETAIL_TP_R, \
+ 			BOOST_TTI_DETAIL_TP_FS, \
+ 			BOOST_TTI_DETAIL_TP_TAG \
+ 			>, \
+ 		boost::mpl::false_ \
+		> \
     { \
     }; \
 /**/
