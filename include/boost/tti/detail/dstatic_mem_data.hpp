@@ -60,7 +60,26 @@
     }; \
 /**/
 
-#else // !defined(BOOST_MSVC)
+#elif defined(__SUNPRO_CC)
+
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
+  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
+  struct BOOST_PP_CAT(trait,_detail_hsd_op) \
+    { \
+    template<BOOST_TTI_DETAIL_TP_TYPE *> \
+    struct helper {}; \
+    \
+    template<class BOOST_TTI_DETAIL_TP_U> \
+    static ::boost::type_traits::yes_type chkt(helper<&BOOST_TTI_DETAIL_TP_U::name> *); \
+    \
+    template<class BOOST_TTI_DETAIL_TP_U> \
+    static ::boost::type_traits::no_type chkt(...); \
+    \
+    typedef boost::mpl::bool_<(!boost::function_types::is_function<BOOST_TTI_DETAIL_TP_TYPE>::value) && (sizeof(chkt<BOOST_TTI_DETAIL_TP_T>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type))> type; \
+    }; \
+/**/
+
+#else
 
 #define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
