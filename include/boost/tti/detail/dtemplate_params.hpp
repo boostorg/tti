@@ -51,34 +51,6 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
 
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
 
-#if defined(__SUNPRO_CC)
-
-#define BOOST_TTI_DETAIL_HAS_MEMBER_MULTI_SUBSTITUTE(z,n,args) \
-  template \
-    < \
-    template \
-      < \
-      BOOST_PP_ENUM_ ## z \
-        ( \
-        BOOST_PP_SUB \
-          ( \
-          BOOST_PP_ARRAY_SIZE(args), \
-          4 \
-          ), \
-        BOOST_TTI_DETAIL_TEMPLATE_PARAMETERS, \
-        args \
-        ) \
-      > \
-    class BOOST_TTI_DETAIL_TM_V \
-    > \
-  struct BOOST_MPL_HAS_MEMBER_INTROSPECTION_SUBSTITUTE_NAME(args, n) \
-    { \
-    typedef void type; \
-    }; \
-/**/
-
-#else
-
 #define BOOST_TTI_DETAIL_HAS_MEMBER_MULTI_SUBSTITUTE(z,n,args) \
   template \
     < \
@@ -101,8 +73,6 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     { \
     }; \
 /**/
-
-#endif
 
 #define BOOST_TTI_DETAIL_HAS_MEMBER_SUBSTITUTE(args) \
   BOOST_PP_REPEAT \
