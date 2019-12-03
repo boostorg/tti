@@ -21,7 +21,7 @@
 /** \file
 */
 
-/// Expands to a metafunction which tests whether a static member data with a particular name and type exists.
+/// A macro which expands to a metafunction which tests whether a static member data with a particular name and type exists.
 /**
 
     trait = the name of the metafunction within the tti namespace.
@@ -55,7 +55,7 @@
     }; \
 /**/
 
-/// Expands to a metafunction which tests whether a static member data with a particular name and type exists.
+/// A macro which expands to a metafunction which tests whether a static member data with a particular name and type exists.
 /**
 
     name  = the name of the inner member.

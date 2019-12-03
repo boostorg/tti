@@ -27,7 +27,7 @@
 /** \file
 */
 
-/// Expands to a metafunction whose typedef 'type' is either the named type or a marker type.
+/// A macro expands to a metafunction whose typedef 'type' is either the named type or a marker type.
 /**
 
     trait = the name of the metafunction within the tti namespace.
@@ -80,7 +80,7 @@
       }; \
 /**/
 
-/// Expands to a metafunction whose typedef 'type' is either the named type or a marker type.
+/// A macro which expands to a metafunction whose typedef 'type' is either the named type or a marker type.
 /**
 
     name  = the name of the inner type.

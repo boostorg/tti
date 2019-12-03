@@ -22,7 +22,7 @@
 /** \file
 */
 
-/// Expands to a metafunction which tests whether member data or static member with a particular name and type exists.
+/// A macro which expands to a metafunction which tests whether member data or static member with a particular name and type exists.
 /**
 
     trait = the name of the metafunction.
@@ -63,7 +63,7 @@
     }; \
 /**/
 
-/// Expands to a metafunction which tests whether member data or static member data with a particular name and type exists.
+/// A macro which expands to a metafunction which tests whether member data or static member data with a particular name and type exists.
 /**
 
     name  = the name of the inner member.

@@ -28,7 +28,7 @@
 #include <boost/preprocessor/variadic/size.hpp>
 #include <boost/tti/detail/dvm_template_params.hpp>
 
-/// Expands to a metafunction which tests whether an inner class template with a particular name exists.
+/// A macro which expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
     trait = the name of the metafunction.
@@ -121,7 +121,7 @@
     (trait,__VA_ARGS__) \
 /**/
 
-/// Expands to a metafunction which tests whether an inner class template with a particular name exists.
+/// A macro which expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
     ...   = variadic parameters.
