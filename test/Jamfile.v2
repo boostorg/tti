@@ -187,6 +187,9 @@ alias ttitmpcp
 alias ttity
     :
         [ run test_has_type.cpp ]
+        [ run test_has_class.cpp ]
+        [ run test_has_union.cpp ]
+        [ run test_has_enum.cpp ]
         [ compile test_has_type_compile.cpp ]
         [ compile-fail test_has_type_fail.cpp ]
         [ compile-fail test_has_type_fail2.cpp ]
