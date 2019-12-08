@@ -20,4 +20,14 @@ BOOST_TTI_HAS_ENUM(AnotherIntegerType)
 BOOST_TTI_TRAIT_HAS_ENUM(SomethingElse,someOtherType)
 BOOST_TTI_HAS_ENUM(NoOtherType)
 
+BOOST_TTI_TRAIT_HAS_ENUM(EInB,BTypeEnum)
+BOOST_TTI_HAS_ENUM(AnEnumTtype)
+BOOST_TTI_TRAIT_HAS_ENUM(AnotherE,AnotherEnumTtype)
+BOOST_TTI_TRAIT_HAS_ENUM(EClass,AnEnumClassType)
+BOOST_TTI_HAS_ENUM(AnotherEnumClassType)
+
+BOOST_TTI_HAS_ENUM(CTypeUnion)
+BOOST_TTI_TRAIT_HAS_ENUM(SimpleUT,AnUnion)
+BOOST_TTI_HAS_ENUM(AnotherUnion)
+
 #endif // TEST_HAS_ENUM_HPP

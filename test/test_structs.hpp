@@ -7,6 +7,8 @@
 #if !defined(TEST_STRUCTS_HPP)
 #define TEST_STRUCTS_HPP
 
+#include <boost/config.hpp>
+
 struct AType 
   {
   
@@ -22,12 +24,48 @@ struct AType
   struct BType
     {
     typedef int AnIntegerType;
+    enum BTypeEnum
+        {
+        BTypeEnum1,
+        BTypeEnum2
+        };
     struct CType
       {
       typedef int AnotherIntegerType;
       template <class,class,int,short,class,template <class,int> class,class> struct CTManyParameters { };
       template<class X,class Y,class Z,short AA> double SomeFuncTemplate(X,Y *,Z &) { double ret(AA); return ret; }
+      union CTypeUnion
+        {
+        long l;
+        bool b;
+        };
       };
+    };
+    
+  // Enum
+  
+  enum AnEnumTtype
+    {
+    AnEnumTtype1,
+    AnEnumTtype2
+    };
+    
+#if !defined(BOOST_NO_CXX11_SCOPED_ENUMS)
+  
+  enum class AnEnumClassType
+    {
+    AnEnumClassType1,
+    AnEnumClassType2
+    };
+  
+#endif
+  
+  // Union
+  
+  union AnUnion
+    {
+    int i;
+    double d;
     };
     
   // Template
@@ -88,6 +126,32 @@ struct AnotherType
   // Type
   
   typedef AType::AnIntType someOtherType;
+    
+  // Enum
+  
+  enum AnotherEnumTtype
+    {
+    AnotherEnumType1,
+    AnotherEnumType2
+    };
+    
+#if !defined(BOOST_NO_CXX11_SCOPED_ENUMS)
+  
+  enum class AnotherEnumClassType
+    {
+    AnotherEnumClassType1,
+    AnotherEnumClassType2
+    };
+  
+#endif
+  
+  // Union
+  
+  union AnotherUnion
+    {
+    short s;
+    char ch;
+    };
     
   // Template
   
