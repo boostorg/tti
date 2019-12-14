@@ -15,11 +15,13 @@
 #include <boost/mpl/assert.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
+#include <boost/mpl/or.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include <boost/type_traits/is_union.hpp>
 #include <boost/type_traits/remove_const.hpp>
 #include <boost/tti/detail/dcomp_mem_fun.hpp>
 #include <boost/tti/detail/ddeftype.hpp>
@@ -86,7 +88,11 @@
   struct BOOST_PP_CAT(trait,_detail_call_types) : \
     boost::mpl::eval_if \
         < \
-        boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+        boost::mpl::or_ \
+            < \
+            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
+            >, \
         BOOST_PP_CAT(trait,_detail_ctmf_invoke) \
             < \
             BOOST_TTI_DETAIL_TP_T, \

@@ -38,6 +38,7 @@ struct AType
         {
         long l;
         bool b;
+        void CMemberFunction() { }
         };
       };
     };
@@ -66,6 +67,15 @@ struct AType
     {
     int i;
     double d;
+    struct UNStruct
+        {
+        short sh;
+        };
+    enum UEnumV
+        {
+        UEnumV1,
+        UEnumV2
+        };
     };
     
   // Template
@@ -151,6 +161,8 @@ struct AnotherType
     {
     short s;
     char ch;
+    template <class,class> struct UnionMemberTemplate { };
+    static void UnionStaticMemberFunction() { }
     };
     
   // Template

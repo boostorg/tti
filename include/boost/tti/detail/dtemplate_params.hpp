@@ -11,6 +11,7 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/has_xxx.hpp>
+#include <boost/mpl/or.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/arithmetic/sub.hpp>
 #include <boost/preprocessor/array/elem.hpp>
@@ -21,6 +22,7 @@
 #include <boost/preprocessor/array/enum.hpp>
 #include <boost/preprocessor/array/size.hpp>
 #include <boost/type_traits/is_class.hpp>
+#include <boost/type_traits/is_union.hpp>
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 
@@ -206,7 +208,11 @@ BOOST_PP_ARRAY_ELEM(BOOST_PP_ADD(4,n),args) \
     typedef typename \
       boost::mpl::eval_if \
         < \
-        boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+        boost::mpl::or_ \
+            < \
+            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
+            >, \
         BOOST_PP_CAT(trait,_detail_cp_op)<BOOST_TTI_DETAIL_TP_T>, \
         boost::mpl::false_ \
         >::type type; \

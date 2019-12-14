@@ -23,6 +23,7 @@
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
+#include <boost/type_traits/is_union.hpp>
 #include <boost/type_traits/remove_const.hpp>
 
 #if defined(BOOST_MSVC) || (BOOST_WORKAROUND(BOOST_GCC, >= 40400) && BOOST_WORKAROUND(BOOST_GCC, < 40600))
@@ -127,7 +128,11 @@
   struct BOOST_PP_CAT(trait,_detail_hmd_with_enclosing_class) : \
     boost::mpl::eval_if \
         < \
-        boost::is_class<BOOST_TTI_DETAIL_TP_ET>, \
+        boost::mpl::or_ \
+            < \
+            boost::is_class<BOOST_TTI_DETAIL_TP_ET>, \
+            boost::is_union<BOOST_TTI_DETAIL_TP_ET> \
+            >, \
         BOOST_PP_CAT(trait,_detail_hmd_invoke_enclosing_class) \
             < \
             BOOST_TTI_DETAIL_TP_ET, \

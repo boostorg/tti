@@ -13,11 +13,13 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/has_xxx.hpp>
+#include <boost/mpl/or.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/tti/detail/ddeftype.hpp>
 #include <boost/tti/detail/dlambda.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 #include <boost/type_traits/is_class.hpp>
+#include <boost/type_traits/is_union.hpp>
 
 #define BOOST_TTI_DETAIL_TRAIT_INVOKE_HAS_CLASS(trait,name) \
 template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_MFC> \
@@ -74,7 +76,11 @@ template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_U> \
 struct BOOST_PP_CAT(trait,_detail_class) : \
     boost::mpl::eval_if \
         < \
-        boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+        boost::mpl::or_ \
+            < \
+            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
+            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
+            >, \
         BOOST_PP_CAT(trait,_detail_class_op)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_U>, \
         boost::mpl::false_ \
         > \
