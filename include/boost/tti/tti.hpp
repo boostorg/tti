@@ -7,7 +7,9 @@
 #if !defined(BOOST_TTI_INTROSPECTION_HPP)
 #define BOOST_TTI_INTROSPECTION_HPP
 
+#include "has_class.hpp"
 #include "has_data.hpp"
+#include "has_enum.hpp"
 #include "has_function.hpp"
 #include "has_member_data.hpp"
 #include "has_member_function.hpp"
@@ -15,6 +17,7 @@
 #include "has_static_member_function.hpp"
 #include "has_template.hpp"
 #include "has_type.hpp"
+#include "has_union.hpp"
 #include "member_type.hpp"
 
 #endif // BOOST_TTI_INTROSPECTION_HPP

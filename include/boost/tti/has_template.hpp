@@ -31,6 +31,10 @@
 /// A macro which expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
+    BOOST_TTI_TRAIT_HAS_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner class template with a particular name exists.
+    The macro takes the form of BOOST_TTI_TRAIT_HAS_TEMPLATE(trait,...) where
+    
     trait = the name of the metafunction.
     ...   = variadic parameters.
     
@@ -59,7 +63,7 @@
             Otherwise the inner class template must have its template parameters matching the 
             sequence of the optional variadic parameters.
     
-    generates a metafunction called "trait" where 'trait' is the first macro parameter.
+    BOOST_TTI_TRAIT_HAS_TEMPLATE generates a metafunction called "trait" where 'trait' is the first macro parameter.
     
               template<class BOOST_TTI_TP_T>
               struct trait
@@ -71,6 +75,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 returns = 'value' is true if the 'name' template exists within the enclosing type,
                           otherwise 'value' is false.
@@ -124,6 +129,10 @@
 /// A macro which expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
+    BOOST_TTI_HAS_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner class template with a particular name exists.
+    The macro takes the form of BOOST_TTI_HAS_TEMPLATE(...) where
+    
     ...   = variadic parameters.
     
             The first variadic parameter is the inner class template name.
@@ -151,7 +160,7 @@
             Otherwise the inner class template must have its template parameters matching the 
             sequence of the optional variadic parameters.
     
-    generates a metafunction called "has_template_'name'" where 'name' is the first variadic parameter.
+    BOOST_TTI_HAS_TEMPLATE generates a metafunction called "has_template_'name'" where 'name' is the first variadic parameter.
     
               template<class BOOST_TTI_TP_T>
               struct has_template_'name'
@@ -163,6 +172,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 returns = 'value' is true if the 'name' template exists within the enclosing type,
                           otherwise 'value' is false.
@@ -215,9 +225,13 @@
 #include <boost/tti/detail/dtemplate.hpp>
 #include <boost/tti/detail/dtemplate_params.hpp>
 
-/// Expands to a metafunction which tests whether an inner class template with a particular name exists.
+/// A macro which expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
+    BOOST_TTI_TRAIT_HAS_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner class template with a particular name exists.
+    The macro takes the form of BOOST_TTI_TRAIT_HAS_TEMPLATE(trait,name,params) where
+    
     trait  = the name of the metafunction.
     name   = the inner class template name.
     params = If the  parameter is BOOST_PP_NIL the inner class template 
@@ -229,9 +243,9 @@
              template must have its template parameters matching the sequence in the tuple portion 
              of the Boost PP array.
             
-             Otherwise a compiler error occurs.
+             If the parameter is anything else a compiler error occurs.
     
-    generates a metafunction called "trait" where 'trait' is the first macro parameter.
+    BOOST_TTI_TRAIT_HAS_TEMPLATE generates a metafunction called "trait" where 'trait' is the first macro parameter.
     
               template<class BOOST_TTI_TP_T>
               struct trait
@@ -243,6 +257,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 returns = 'value' is true if the 'name' template exists within the enclosing type,
                           otherwise 'value' is false.
@@ -281,9 +296,13 @@
     (trait,name,params) \
 /**/
   
-/// Expands to a metafunction which tests whether an inner class template with a particular name exists.
+/// A macro which expands to a metafunction which tests whether an inner class template with a particular name exists.
 /**
 
+    BOOST_TTI_HAS_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner class template with a particular name exists.
+    The macro takes the form of BOOST_TTI_HAS_TEMPLATE(name,params) where
+    
     name   = the inner class template name.
     params = If the  parameter is BOOST_PP_NIL the inner class template 
              being introspected must be all template type parameters ( template parameters 
@@ -294,12 +313,12 @@
              template must have its template parameters matching the sequence in the tuple portion 
              of the Boost PP array.
             
-             Otherwise a compiler error occurs.
+             If the parameter is anything else a compiler error occurs.
     
-    generates a metafunction called "has_template_'name'" where 'name' is the first macro parameter.
+    BOOST_TTI_HAS_TEMPLATE generates a metafunction called "has_template_'name'" where 'name' is the first macro parameter.
     
               template<class BOOST_TTI_TP_T>
-              struct trait
+              struct has_template_'name'
                 {
                 static const value = unspecified;
                 typedef mpl::bool_<true-or-false> type;
@@ -308,6 +327,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 returns = 'value' is true if the 'name' template exists within the enclosing type,
                           otherwise 'value' is false.

@@ -23,18 +23,18 @@
 /** \file
 */
 
+/// A macro which expands to a metafunction which tests whether an inner type with a particular name exists.
 /**
 
     BOOST_TTI_TRAIT_HAS_TYPE is a macro which expands to a metafunction.
     The metafunction tests whether an inner type with a particular name exists
     and, optionally, whether a lambda expression invoked with the inner type 
-    is true or not.
+    is true or not. The macro takes the form of BOOST_TTI_TRAIT_HAS_TYPE(trait,name) where
     
-    trait = the name of the metafunction within the tti namespace.
-    
+    trait = the name of the metafunction.
     name  = the name of the inner type.
 
-    generates a metafunction called "trait" where 'trait' is the macro parameter.
+    BOOST_TTI_TRAIT_HAS_TYPE generates a metafunction called "trait" where 'trait' is the macro parameter.
     
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_U>
               struct trait
@@ -46,6 +46,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 BOOST_TTI_TP_U = (optional) An optional template parameter, defaulting to a marker type.
                                    If specified it is an MPL lambda expression which is invoked 
@@ -97,16 +98,17 @@
     }; \
 /**/
 
+/// A macro which expands to a metafunction which tests whether an inner type with a particular name exists.
 /**
 
     BOOST_TTI_HAS_TYPE is a macro which expands to a metafunction.
     The metafunction tests whether an inner type with a particular name exists
     and, optionally, whether a lambda expression invoked with the inner type 
-    is true or not.
+    is true or not. The macro takes the form of BOOST_TTI_HAS_TYPE(name) where
     
     name  = the name of the inner type.
 
-    generates a metafunction called "has_type_'name'" where 'name' is the macro parameter.
+    BOOST_TTI_HAS_TYPE generates a metafunction called "has_type_'name'" where 'name' is the macro parameter.
     
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_U>
               struct has_type_'name'
@@ -118,6 +120,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 BOOST_TTI_TP_U = (optional) An optional template parameter, defaulting to a marker type.
                                    If specified it is an MPL lambda expression which is invoked 

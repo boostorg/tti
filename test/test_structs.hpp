@@ -38,7 +38,7 @@ struct AType
         {
         long l;
         bool b;
-        void CMemberFunction() { }
+        void CMemberFunction(int) { }
         };
       };
     };
@@ -76,6 +76,7 @@ struct AType
         UEnumV1,
         UEnumV2
         };
+    template <int,class,long> struct NestedMemberTemplate { };
     };
     
   // Template
@@ -163,6 +164,11 @@ struct AnotherType
     char ch;
     template <class,class> struct UnionMemberTemplate { };
     static void UnionStaticMemberFunction() { }
+    union InnerUnion
+        {
+        int i;
+        char ch;
+        };
     };
     
   // Template

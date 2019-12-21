@@ -23,18 +23,18 @@
 /** \file
 */
 
+/// A macro which expands to a metafunction which tests whether an inner class/struct with a particular name exists.
 /**
 
     BOOST_TTI_TRAIT_HAS_CLASS is a macro which expands to a metafunction.
     The metafunction tests whether an inner class/struct with a particular name exists
     and, optionally, whether a lambda expression invoked with the inner class/struct
-    is true or not.
+    is true or not. The macro takes the form of BOOST_TTI_TRAIT_HAS_CLASS(trait,name) where
     
-    trait = the name of the metafunction within the tti namespace.
-    
+    trait = the name of the metafunction
     name  = the name of the inner class/struct.
 
-    generates a metafunction called "trait" where 'trait' is the macro parameter.
+    BOOST_TTI_TRAIT_HAS_CLASS generates a metafunction called "trait" where 'trait' is the macro parameter.
     
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_U>
               struct trait
@@ -46,6 +46,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 BOOST_TTI_TP_U = (optional) An optional template parameter, defaulting to a marker type.
                                    If specified it is an MPL lambda expression which is invoked 
@@ -67,7 +68,7 @@
                              
   Example usage:
   
-  BOOST_TTI_TRAIT_HAS_CLASS(LookFor,MyType) generates the metafunction LookFor in the current scope
+  BOOST_TTI_TRAIT_HAS_CLASS(LookFor,MyType) generates the metafunction "LookFor" in the current scope
   to look for an inner class/struct called MyType.
   
   LookFor<EnclosingType>::value is true if MyType is an inner class/struct of EnclosingType, otherwise false.
@@ -97,16 +98,17 @@
     }; \
 /**/
 
+/// A macro which expands to a metafunction which tests whether an inner class/struct with a particular name exists.
 /**
 
     BOOST_TTI_HAS_CLASS is a macro which expands to a metafunction.
     The metafunction tests whether an inner class/struct with a particular name exists
     and, optionally, whether a lambda expression invoked with the inner class/struct 
-    is true or not.
+    is true or not. The macro takes the form of BOOST_TTI_HAS_CLASS(name) where
     
     name  = the name of the inner class/struct.
 
-    generates a metafunction called "has_class_'name'" where 'name' is the macro parameter.
+    BOOST_TTI_HAS_CLASS generates a metafunction called "has_class_'name'" where 'name' is the macro parameter.
     
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_U>
               struct has_class_'name'
@@ -118,6 +120,7 @@
               The metafunction types and return:
     
                 BOOST_TTI_TP_T = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
                 
                 BOOST_TTI_TP_U = (optional) An optional template parameter, defaulting to a marker type.
                                    If specified it is an MPL lambda expression which is invoked 
@@ -139,7 +142,7 @@
                              
   Example usage:
   
-  BOOST_TTI_HAS_CLASS(MyType) generates the metafunction has_class_MyType in the current scope
+  BOOST_TTI_HAS_CLASS(MyType) generates the metafunction "has_class_MyType" in the current scope
   to look for an inner class/struct called MyType.
   
   has_class_MyType<EnclosingType>::value is true if MyType is an inner class/struct of EnclosingType, otherwise false.

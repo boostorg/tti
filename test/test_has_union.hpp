@@ -30,4 +30,6 @@ BOOST_TTI_TRAIT_HAS_UNION(AnotherE,AnotherEnumTtype)
 BOOST_TTI_TRAIT_HAS_UNION(EClass,AnEnumClassType)
 BOOST_TTI_HAS_UNION(AnotherEnumClassType)
 
+BOOST_TTI_HAS_UNION(InnerUnion)
+
 #endif // TEST_HAS_UNION_HPP

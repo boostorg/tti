@@ -17,10 +17,10 @@
 #include <boost/type_traits/is_union.hpp>
 
 #define BOOST_TTI_DETAIL_TRAIT_HAS_TYPE_MEMBER_TYPE_OP(trait,name) \
-  BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(BOOST_PP_CAT(trait,_detail_mpl), name, false) \
+  BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(BOOST_PP_CAT(trait,_detail_member_type_mpl), name, false) \
   template<class BOOST_TTI_DETAIL_TP_T> \
-  struct BOOST_PP_CAT(trait,_detail_op) : \
-    BOOST_PP_CAT(trait,_detail_mpl)<BOOST_TTI_DETAIL_TP_T> \
+  struct BOOST_PP_CAT(trait,_detail_member_type_op) : \
+    BOOST_PP_CAT(trait,_detail_member_type_mpl)<BOOST_TTI_DETAIL_TP_T> \
     { \
     }; \
 /**/
@@ -28,7 +28,7 @@
 #define BOOST_TTI_DETAIL_TRAIT_HAS_TYPE_MEMBER_TYPE(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_HAS_TYPE_MEMBER_TYPE_OP(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T> \
-  struct BOOST_PP_CAT(trait,_detail) \
+  struct BOOST_PP_CAT(trait,_detail_has_type_member_type) \
     { \
     typedef typename \
     boost::mpl::eval_if \
@@ -38,7 +38,7 @@
             boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
             boost::is_union<BOOST_TTI_DETAIL_TP_T> \
             >, \
-        BOOST_PP_CAT(trait,_detail_op)<BOOST_TTI_DETAIL_TP_T>, \
+        BOOST_PP_CAT(trait,_detail_member_type_op)<BOOST_TTI_DETAIL_TP_T>, \
         boost::mpl::false_ \
         >::type type; \
     \
