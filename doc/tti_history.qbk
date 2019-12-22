@@ -7,6 +7,10 @@
 
 [section:tti_history History]
 
+[heading Boost 1.72]
+* The enclosing type to be introspected can now also be a union
+* You can introspect for the specific nested types of class/struct, enumeration, or union
+
 [heading Post Boost 1.55 development]
 * Passing a valid non-class as the enclosing type of the query macro metafunctions
   always returns false, rather than producing a compiler error.

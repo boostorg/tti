@@ -14,7 +14,7 @@ With this type we can illustrate the use of the macro metafunctions. This is
 just meant to serve as a model for what a type T might entail from within 
 a class or function template where 'T' is a type passed to the template.
 
- // An enclosing type
+ // An enclosing type, this could also be a class or a union
 
  struct AType
    {
@@ -23,11 +23,34 @@ a class or function template where 'T' is a type passed to the template.
    
    typedef int AnIntType; // as a typedef
    
-   struct BType // as a nested type
+   // Class/Struct
+   
+   struct BType // as a nested struct
      {
      struct CType
        {
        };
+     };
+     
+   class AClass // as a nested class
+     {
+     };
+     
+   // Enumeration
+   
+   enum EColor // as a nested enumeration
+     {
+     Red,
+     Blue,
+     Green
+     };
+     
+   // Union
+   
+   union AUnion // as a nested union
+     {
+     int i;
+     long l;
      };
    
    // Template
@@ -77,6 +100,8 @@ to avoid ODR violations.
  
 [heading Type]
 
+C++ named types can be typedefs or type aliases, class, structs, unions, or enumerations
+
 Does T have a nested type called 'AnIntType' ?
 
  BOOST_TTI_HAS_TYPE(AnIntType)
@@ -95,7 +120,34 @@ Does T have a nested type called 'BType' ?
    T
    >
    
-[heading Type checking the typedef using a lambda expression]
+Does T have a nested type called 'AClass' ?
+
+ BOOST_TTI_HAS_TYPE(AClass)
+  
+ has_type_ACLass
+   <
+   T
+   >
+   
+Does T have a nested type called 'EColor' ?
+
+ BOOST_TTI_HAS_TYPE(EColor)
+  
+ has_type_EColor
+   <
+   T
+   >
+   
+Does T have a nested type called 'AUnion' ?
+
+ BOOST_TTI_HAS_TYPE(AUnion)
+  
+ has_type_AUnion
+   <
+   T
+   >
+   
+[heading Type checking the typedef using an MPL lambda expression]
 
 Does T have a nested typedef called 'AnIntType' whose type is an 'int' ?
 
@@ -109,6 +161,54 @@ Does T have a nested typedef called 'AnIntType' whose type is an 'int' ?
    boost::is_same<_1,int>
    >
 
+[heading Class/Struct]
+
+Does T have a nested class called 'AClass' ?
+
+ BOOST_TTI_HAS_CLASS(AClass)
+  
+ has_class_AClass
+   <
+   T
+   >
+   
+Does T have a nested struct called 'BType' ?
+
+ BOOST_TTI_HAS_CLASS(BType)
+  
+ has_class_BType
+   <
+   T
+   >
+   
+You can also use an MPL lambda expression with a class/struct just as you can with a general type.
+   
+[heading Enumeration]
+
+Does T have a nested enumeration called 'EColor' ?
+
+ BOOST_TTI_HAS_ENUM(EColor)
+  
+ has_enum_EColor
+   <
+   T
+   >
+   
+You can also use an MPL lambda expression with an enumeration just as you can with a general type.
+   
+[heading Union]
+
+Does T have a nested union called 'AUnion' ?
+
+ BOOST_TTI_HAS_UNION(AUnion)
+  
+ has_union_AUnion
+   <
+   T
+   >
+   
+You can also use an MPL lambda expression with a union just as you can with a general type.
+   
 [heading Template]
 
 Does T have a nested class template called 'AMemberTemplate' whose template 

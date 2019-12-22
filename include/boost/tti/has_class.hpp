@@ -28,7 +28,7 @@
 
     BOOST_TTI_TRAIT_HAS_CLASS is a macro which expands to a metafunction.
     The metafunction tests whether an inner class/struct with a particular name exists
-    and, optionally, whether a lambda expression invoked with the inner class/struct
+    and, optionally, whether an MPL lambda expression invoked with the inner class/struct
     is true or not. The macro takes the form of BOOST_TTI_TRAIT_HAS_CLASS(trait,name) where
     
     trait = the name of the metafunction
@@ -59,7 +59,7 @@
                           exists within the enclosing type BOOST_TTI_TP_T; otherwise 'value' is false.
                           
                           If BOOST_TTI_TP_U is specified , then 'value' is true if the 'name' class/struct exists 
-                          within the enclosing type BOOST_TTI_TP_T and the lambda expression as specified 
+                          within the enclosing type BOOST_TTI_TP_T and the MPL lambda expression as specified 
                           by BOOST_TTI_TP_U, invoked by passing the actual inner class/struct of 'name', returns 
                           a 'value' of true; otherwise 'value' is false.
                              
@@ -103,7 +103,7 @@
 
     BOOST_TTI_HAS_CLASS is a macro which expands to a metafunction.
     The metafunction tests whether an inner class/struct with a particular name exists
-    and, optionally, whether a lambda expression invoked with the inner class/struct 
+    and, optionally, whether an MPL lambda expression invoked with the inner class/struct 
     is true or not. The macro takes the form of BOOST_TTI_HAS_CLASS(name) where
     
     name  = the name of the inner class/struct.
@@ -133,7 +133,7 @@
                           exists within the enclosing type BOOST_TTI_TP_T; otherwise 'value' is false.
                           
                           If BOOST_TTI_TP_U is specified, then 'value' is true if the 'name' class/struct exists 
-                          within the enclosing type BOOST_TTI_TP_T and the lambda expression as specified 
+                          within the enclosing type BOOST_TTI_TP_T and the MPL lambda expression as specified 
                           by BOOST_TTI_TP_U, invoked by passing the actual inner class/struct of 'name', returns 
                           a 'value' of true; otherwise 'value' is false.
                              

@@ -46,11 +46,13 @@ The functionality of the library may be summed up as:
   subsequently invoked to determine whether or not the 
   element exists within the type. These generated metafunctions 
   will be called "macro metafunctions" in the documentation.
+  The type to be introspected can be a class, struct, or union.
    
 * Provide the means to create a typedef for a type which may
-  not exist. This typedef type can be used as a type in the 
-  metafunctions of the library without producing compile-time 
-  errors.
+  not exist. If the type does not exist an empty marker type
+  is returned as the typedef type. This typedef type can be
+  used as a type in the metafunctions of the library without
+  producing compile-time errors.
    
 The library is dependent on Boost PP, Boost MPL, 
 Boost Type Traits, and Boost Function Types. 
@@ -82,6 +84,18 @@ of the nested elements to be introspected. These header files are:
   [
     [Type]
     [[headerref boost/tti/has_type.hpp `has_type.hpp`]]
+  ]
+  [
+    [Class/Struct]
+    [[headerref boost/tti/has_class.hpp `has_class.hpp`]]
+  ]
+  [
+    [Enumeration]
+    [[headerref boost/tti/has_enum.hpp `has_enum.hpp`]]
+  ]
+  [
+    [Union]
+    [[headerref boost/tti/has_union.hpp `has_union.hpp`]]
   ]
   [
     [Class Template]
