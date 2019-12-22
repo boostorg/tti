@@ -221,8 +221,8 @@ metafunction names are given in the following table:
 As with the general type you can also use the
 complex macros form of BOOST_TTI_TRAIT_HAS_CLASS(trait,name),
 BOOST_TTI_TRAIT_HAS_ENUM(trait,name), and
-BOOST_TTI_TRAIT_HAS_UNION(trait,name) respectively to generate
-directly the metafunction name.
+BOOST_TTI_TRAIT_HAS_UNION(trait,name) respectively to
+directly generate the metafunction name.
 
 If you introspect for a specific user-defined type with a
 given name, and some other type with that given name is found,
