@@ -20,7 +20,7 @@
   struct BOOST_PP_CAT(trait,_detail_hf) : \
     boost::mpl::or_ \
         < \
-        BOOST_PP_CAT(trait,_detail_call_types)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>, \
+        BOOST_PP_CAT(trait,_detail_hmf_call_types)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>, \
         BOOST_PP_CAT(trait,_detail_ihsmf) \
             < \
             BOOST_TTI_DETAIL_TP_T, \

@@ -88,7 +88,7 @@
   BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_C> \
   struct BOOST_PP_CAT(trait,_detail_hmd_op) : \
-    BOOST_PP_CAT(trait,_detail_types)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_C> \
+    BOOST_PP_CAT(trait,_detail_hmf_types)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_C> \
     { \
     }; \
 /**/

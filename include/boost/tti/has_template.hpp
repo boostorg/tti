@@ -4,6 +4,9 @@
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt).
 
+#if !defined(BOOST_TTI_HAS_TEMPLATE_HPP)
+#define BOOST_TTI_HAS_TEMPLATE_HPP
+
 /*
 
   The succeeding comments in this file are in doxygen format.
@@ -12,9 +15,6 @@
 
 /** \file
 */
-
-#if !defined(BOOST_TTI_HAS_TEMPLATE_HPP)
-#define BOOST_TTI_HAS_TEMPLATE_HPP
 
 #include <boost/config.hpp>
 #include <boost/tti/gen/has_template_gen.hpp>
