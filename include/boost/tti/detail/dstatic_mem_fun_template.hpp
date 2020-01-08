@@ -9,7 +9,7 @@
 #include <boost/mpl/or.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include <boost/preprocessor/list/enum.hpp>
+#include <boost/preprocessor/array/enum.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_union.hpp>
@@ -19,15 +19,15 @@
 #include <boost/tti/detail/dtfunction.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 
-#define BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \
+#define BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
-  struct trait \
+  struct BOOST_PP_CAT(trait,_detail_ihsmft) \
     { \
     template<BOOST_TTI_DETAIL_TP_TYPE *> \
     struct helper BOOST_TTI_DETAIL_MACRO_SUNFIX ; \
     \
     template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::template name<BOOST_PP_LIST_ENUM(tplst)> > *); \
+    static ::boost::type_traits::yes_type check(helper<&U::template name<BOOST_PP_ARRAY_ENUM(pparray)> > *); \
     \
     template<class U> \
     static ::boost::type_traits::no_type check(...); \
@@ -36,8 +36,8 @@
     }; \
 /**/
 
-#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_OP(trait,name,tplst) \
-  BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_OP(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
   struct BOOST_PP_CAT(trait,_detail_hsmft_op) : \
     BOOST_PP_CAT(trait,_detail_ihsmft) \
@@ -60,8 +60,8 @@
     }; \
 /**/
 
-#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \
-  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_OP(trait,name,tplst) \
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_OP(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
   struct BOOST_PP_CAT(trait,_detail_hsmft) : \
     boost::mpl::eval_if \

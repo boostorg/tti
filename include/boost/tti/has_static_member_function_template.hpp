@@ -1,23 +1,17 @@
 #if !defined(BOOST_TTI_STATIC_MEM_FUN_TEMPLATE_HPP)
 #define BOOST_TTI_STATIC_MEM_FUN_TEMPLATE_HPP
 
-#include <boost/preprocessor/config/config.hpp>
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/vector.hpp>
+#include <boost/preprocessor/cat.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 #include <boost/tti/gen/static_mem_fun_template_gen.hpp>
 #include <boost/tti/detail/ddeftype.hpp>
 #include <boost/tti/detail/dstatic_mem_fun_template.hpp>
-#include <boost/tti/detail/dtfunction.hpp>
 
 #if BOOST_PP_VARIADICS
 
-#include <boost/preprocessor/comparison/equal.hpp>
-#include <boost/preprocessor/control/iif.hpp>
-#include <boost/preprocessor/list/adt.hpp>
-#include <boost/preprocessor/variadic/elem.hpp>
-#include <boost/preprocessor/variadic/size.hpp>
-#include <boost/preprocessor/variadic/to_list.hpp>
+#include <boost/tti/detail/dfun_template.hpp>
 
 /*
 
@@ -28,47 +22,69 @@
 /** \file
 */
 
-/// Expands to a metafunction which tests whether a static member function template with a particular name and an optional signature exists.
+/// A macro which expands to a metafunction which tests whether an inner static member function template with a particular name exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.
+    BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner static member function template with a particular name exists.
+    The macro takes the form of BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,...) where
     
-    ...   = variadic macro data which has the name and optionally the function template parameters.
-
-    returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.<br />
+    trait = the name of the metafunction
+    name  = inner static member function template name
+    ...   = variadic parameters
     
-              The metafunction types and return:
+            The variadic parameter(s) are either:
+            
+            A sequence of valid instantiations for the static member function template parameters
+            ie. 'int,long,double' etc.
+                
+            or
+            
+            A single variadic parameter which is a Boost PP array whose elements are
+            a sequence of valid instantiations for the static member function template parameters
+            ie. '(3,(int,long,double))' etc. This form is allowed in order to be compatible
+            with using the non-variadic form of this macro.
     
-                T   = the enclosing type in which to look for our 'name'.
-                
-                R   = the return type of the static member function.
-                
-                FS  = an optional parameter which are the parameters of the static member function as a boost::mpl forward sequence.
-                
-                TAG = an optional parameter which is a boost::function_types tag to apply to the static member function.
-                
-                returns = 'value' is true if the 'name' exists, with the appropriate type,
-                          otherwise 'value' is false.
+    BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "trait" where 'trait' is the first macro parameter.
+    
+            template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
+            struct trait
+              {
+              static const value = unspecified;
+              typedef mpl::bool_<true-or-false> type;
+              };
+      
+            The metafunction types and return:
+      
+              BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
+                                          OR
+                                 a pointer to function as a single type
+                                 which encapsulates a single instantiation of
+                                 the static member function template.
+              
+              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
+                        in a single instantiation of the static member function template
+                        if the first parameter is the enclosing type.
+              
+              BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
+                        if the first parameter is the enclosing type and the static member function template parameters
+                        are not empty. These parameters are a single instantiation of the static member function template.
+              
+              BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
+                        if the first parameter is the enclosing type and a tag is needed.
+              
+              returns = 'value' is true if the 'name' exists, 
+                        with the appropriate static member function template type,
+                        otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,...) \
+#define BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,...) \
   BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE \
     ( \
     trait, \
-    BOOST_PP_VARIADIC_ELEM(0,__VA_ARGS__), \
-    BOOST_PP_IIF \
-      ( \
-      BOOST_PP_EQUAL \
-        ( \
-        BOOST_PP_VARIADIC_SIZE(__VA_ARGS__), \
-        1 \
-        ), \
-      BOOST_PP_NIL, \
-      BOOST_PP_LIST_REST \
-        ( \
-        BOOST_PP_VARIADIC_TO_LIST(__VA_ARGS__) \
-        ) \
-      ) \
+    name, \
+    BOOST_TTI_DETAIL_FUN_TEMPLATE_VARIADIC_TO_ARRAY(__VA_ARGS__) \
     ) \
   template<class T,class R = BOOST_TTI_NAMESPACE::detail::deftype,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
   struct trait \
@@ -80,40 +96,72 @@
 /**/
 
 
-/// Expands to a metafunction which tests whether a static member function template with a particular name and an optional signature exists.
+/// A macro which expands to a metafunction which tests whether an inner static member function template with a particular name exists.
 /**
 
-    ...   = variadic macro data which has the name and optionally the function template parameters.
+    BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner static member function template with a particular name exists.
+    The macro takes the form of BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(name,...) where
     
-    returns = a metafunction called "boost::tti::has_static_member_function_template_name" where 'name' is the first variadic macro parameter.
+    name  = inner static member function template name
+    ...   = variadic parameters
     
-              The metafunction types and return:
+            The variadic parameter(s) are either:
+            
+            A sequence of valid instantiations for the static member function template parameters
+            ie. 'int,long,double' etc.
+                
+            or
+            
+            A single variadic parameter which is a Boost PP array whose elements are
+            a sequence of valid instantiations for the static member function template parameters
+            ie. '(3,(int,long,double))' etc. This form is allowed in order to be compatible
+            with using the non-variadic form of this macro.
     
-                T   = the enclosing type in which to look for our 'name'.
-                
-                R   = the return type of the static member function.
-                
-                FS  = an optional parameter which are the parameters of the static member function as a boost::mpl forward sequence.
-                
-                TAG = an optional parameter which is a boost::function_types tag to apply to the static member function.
-                
-                returns = 'value' is true if the 'name' exists, with the appropriate type,
-                          otherwise 'value' is false.
+    BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "has_static_member_function_template_'name'" where 'name' is the first macro parameter.
+    
+            template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
+            struct has_static_member_function_template_'name'
+              {
+              static const value = unspecified;
+              typedef mpl::bool_<true-or-false> type;
+              };
+              
+            The metafunction types and return:
+      
+              BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
+                                          OR
+                                 a pointer to function as a single type
+                                 which encapsulates a single instantiation of
+                                 the static member function template.
+              
+              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
+                        in a single instantiation of the static member function template
+                        if the first parameter is the enclosing type.
+              
+              BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
+                        if the first parameter is the enclosing type and the static member function template parameters
+                        are not empty. These parameters are a single instantiation of the static member function template.
+              
+              BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
+                        if the first parameter is the enclosing type and a tag is needed.
+              
+              returns = 'value' is true if the 'name' exists, 
+                        with the appropriate static member function template type,
+                        otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(...) \
+#define BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(name,...) \
   BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE \
   ( \
-  BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_GEN(BOOST_PP_VARIADIC_ELEM(0,__VA_ARGS__)), \
+  BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_GEN(name), \
+  name, \
   __VA_ARGS__ \
   ) \
 /**/
 
-#else
-
-#include <boost/preprocessor/seq/size.hpp>
-#include <boost/preprocessor/seq/to_tuple.hpp>
-#include <boost/preprocessor/tuple/to_list.hpp>
+#else // !BOOST_PP_VARIADICS
 
 /*
 
@@ -124,35 +172,54 @@
 /** \file
 */
 
-/// Expands to a metafunction which tests whether a static member function template with a particular name and signature exists.
+/// A macro which expands to a metafunction which tests whether an inner static member function template with a particular name exists.
 /**
 
-    trait = the name of the metafunction within the tti namespace.
+    BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner static member function template with a particular name exists.
+    The macro takes the form of BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) where
     
-    name  = the name of the inner member.
-
-    tpseq = a Boost PP sequence which has the function template parameters.
-            Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.
-
-    returns = a metafunction called "boost::tti::trait" where 'trait' is the macro parameter.<br />
+    trait   = the name of the metafunction
+    name    = inner static member function template name
+    pparray = a Boost PP array whose elements are a sequence of valid instantiations for
+            the static member function template parameters ie. '(3,(int,long,double))' etc.
     
-              The metafunction types and return:
+    BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "trait" where 'trait' is the first macro parameter.
     
-                T   = the enclosing type in which to look for our 'name'.
-                
-                R   = the return type of the static member function.
-                
-                FS  = an optional parameter which are the parameters of the static member function as a boost::mpl forward sequence.
-                
-                TAG = an optional parameter which is a boost::function_types tag to apply to the static member function.
-                
-                returns = 'value' is true if the 'name' exists, with the appropriate type,
-                          otherwise 'value' is false.
+            template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
+            struct trait
+              {
+              static const value = unspecified;
+              typedef mpl::bool_<true-or-false> type;
+              };
+      
+            The metafunction types and return:
+      
+              BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
+                                          OR
+                                 a pointer to function as a single type
+                                 which encapsulates a single instantiation of
+                                 the static member function template.
+              
+              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
+                        in a single instantiation of the static member function template
+                        if the first parameter is the enclosing type.
+              
+              BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
+                        if the first parameter is the enclosing type and the static member function template parameters
+                        are not empty. These parameters are a single instantiation of the static member function template.
+              
+              BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
+                        if the first parameter is the enclosing type and a tag is needed.
+              
+              returns = 'value' is true if the 'name' exists, 
+                        with the appropriate static member function template type,
+                        otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tpseq) \
-  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,BOOST_PP_TUPLE_TO_LIST(BOOST_PP_SEQ_SIZE(tpseq),BOOST_PP_SEQ_TO_TUPLE(tpseq))) \
+#define BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   template<class T,class R = BOOST_TTI_NAMESPACE::detail::deftype,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
   struct trait \
     { \
@@ -162,40 +229,60 @@
     }; \
 /**/
 
-/// Expands to a metafunction which tests whether a static member function template with a particular name and signature exists.
+/// A macro which expands to a metafunction which tests whether an inner static member function template with a particular name exists.
 /**
 
-    name  = the name of the inner member.
-
-    tpseq = a Boost PP sequence which has the function template parameters.
-            Each part of the template parameters separated by a comma ( , )
-            is put in a separate sequence element.
-
-    returns = a metafunction called "boost::tti::has_static_member_function_name" where 'name' is the macro parameter.
+    BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
+    The metafunction tests whether an inner static member function template with a particular name exists.
+    The macro takes the form of BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(name,pparray) where
     
-              The metafunction types and return:
+    name    = inner static member function template name
+    pparray = a Boost PP array whose elements are a sequence of valid instantiations for
+              the static member function template parameters ie. '(3,(int,long,double))' etc.
     
-                T   = the enclosing type in which to look for our 'name'.
-                
-                R   = the return type of the static member function.
-                
-                FS  = an optional parameter which are the parameters of the static member function as a boost::mpl forward sequence.
-                
-                TAG = an optional parameter which is a boost::function_types tag to apply to the static member function.
-                
-                returns = 'value' is true if the 'name' exists, with the appropriate type,
-                          otherwise 'value' is false.
+    BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "has_static_member_function_template_'name'" where 'name' is the first macro parameter.
+    
+            template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
+            struct has_static_member_function_template_'name'
+              {
+              static const value = unspecified;
+              typedef mpl::bool_<true-or-false> type;
+              };
+              
+            The metafunction types and return:
+      
+              BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
+                                 The enclosing type can be a class, struct, or union.
+                                          OR
+                                 a pointer to function as a single type
+                                 which encapsulates a single instantiation of
+                                 the static member function template.
+              
+              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
+                        in a single instantiation of the static member function template
+                        if the first parameter is the enclosing type.
+              
+              BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
+                        if the first parameter is the enclosing type and the static member function template parameters
+                        are not empty. These parameters are a single instantiation of the static member function template.
+              
+              BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
+                        if the first parameter is the enclosing type and a tag is needed.
+              
+              returns = 'value' is true if the 'name' exists, 
+                        with the appropriate static member function template type,
+                        otherwise 'value' is false.
                           
 */
-#define BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(name,tpseq) \
+#define BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(name,pparray) \
   BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE \
   ( \
   BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_GEN(name), \
   name, \
-  tpseq \
+  pparray \
   ) \
 /**/
 
-#endif
+#endif // BOOST_PP_VARIADICS
 
 #endif // BOOST_TTI_STATIC_MEM_FUN_TEMPLATE_HPP

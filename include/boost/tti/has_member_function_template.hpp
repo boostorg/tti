@@ -7,9 +7,9 @@
 #if !defined(BOOST_TTI_MEMBER_FUNCTION_TEMPLATE_HPP)
 #define BOOST_TTI_MEMBER_FUNCTION_TEMPLATE_HPP
 
-#include <boost/preprocessor/config/config.hpp>
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/vector.hpp>
+#include <boost/preprocessor/cat.hpp>
 #include <boost/tti/detail/ddeftype.hpp>
 #include <boost/tti/detail/dmem_fun_template.hpp>
 #include <boost/tti/gen/has_member_function_template_gen.hpp>
@@ -17,14 +17,7 @@
 
 #if BOOST_PP_VARIADICS
 
-#include <boost/preprocessor/comparison/equal.hpp>
-#include <boost/preprocessor/control/iif.hpp>
-#include <boost/preprocessor/logical/and.hpp>
-#include <boost/preprocessor/variadic/elem.hpp>
-#include <boost/preprocessor/variadic/size.hpp>
-#include <boost/preprocessor/variadic/to_array.hpp>
-#include <boost/preprocessor/detail/is_binary.hpp>
-#include <boost/tti/detail/dmacro_fve.hpp>
+#include <boost/tti/detail/dfun_template.hpp>
 
 /*
 
@@ -39,7 +32,7 @@
 /**
 
     BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
-    The metafunction tests whether an inner class template with a particular name exists.
+    The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,...) where
     
     trait = the name of the metafunction
@@ -96,25 +89,8 @@
   BOOST_TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE \
     ( \
     trait, \
-    name,
-    BOOST_PP_IIF \
-      ( \
-      BOOST_PP_AND \
-        ( \
-        BOOST_PP_EQUAL \
-            ( \
-            BOOST_PP_VARIADIC_SIZE(__VA_ARGS__), \
-            1 \
-            ), \
-        BOOST_PP_IS_BINARY \
-          ( \
-          BOOST_PP_VARIADIC_ELEM(0,__VA_ARGS__) \
-          ) \
-        ), \
-      BOOST_TTI_DETAIL_FIRST_VARIADIC_ELEM, \
-      BOOST_PP_VARIADIC_TO_ARRAY \
-      ) \
-    (__VA_ARGS__) \
+    name, \
+    BOOST_TTI_DETAIL_FUN_TEMPLATE_VARIADIC_TO_ARRAY(__VA_ARGS__) \
     ) \
   template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_R = BOOST_TTI_NAMESPACE::detail::deftype,class BOOST_TTI_TP_FS = boost::mpl::vector<>,class BOOST_TTI_TP_TAG = boost::function_types::null_tag> \
   struct trait \
@@ -129,7 +105,7 @@
 /**
 
     BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
-    The metafunction tests whether an inner class template with a particular name exists.
+    The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name,...) where
     
     name  = inner member function template name
@@ -205,7 +181,7 @@
 /**
 
     BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
-    The metafunction tests whether an inner class template with a particular name exists.
+    The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) where
     
     trait   = the name of the metafunction
@@ -263,7 +239,7 @@
 /**
 
     BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE is a macro which expands to a metafunction.
-    The metafunction tests whether an inner class template with a particular name exists.
+    The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name,pparray) where
     
     name    = inner member function template name
