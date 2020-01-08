@@ -25,18 +25,17 @@
 #include <boost/type_traits/remove_const.hpp>
 #include <boost/tti/detail/dcomp_mem_fun.hpp>
 #include <boost/tti/detail/ddeftype.hpp>
+#include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/detail/dnullptr.hpp>
 #include <boost/tti/detail/dptmf.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 
-#if defined(__SUNPRO_CC)
-
 #define BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_PMEMF,class BOOST_TTI_DETAIL_TP_C> \
   struct BOOST_PP_CAT(trait,_detail_hmf_types) \
     { \
     template<BOOST_TTI_DETAIL_TP_PMEMF> \
-    struct helper {}; \
+    struct helper BOOST_TTI_DETAIL_MACRO_SUNFIX ; \
     \
     template<class BOOST_TTI_DETAIL_TP_EC> \
     static ::boost::type_traits::yes_type chkt(helper<&BOOST_TTI_DETAIL_TP_EC::name> *); \
@@ -47,27 +46,6 @@
     typedef boost::mpl::bool_<sizeof(chkt<BOOST_TTI_DETAIL_TP_C>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
     }; \
 /**/
-
-#else
-
-#define BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION(trait,name) \
-  template<class BOOST_TTI_DETAIL_TP_PMEMF,class BOOST_TTI_DETAIL_TP_C> \
-  struct BOOST_PP_CAT(trait,_detail_hmf_types) \
-    { \
-    template<BOOST_TTI_DETAIL_TP_PMEMF> \
-    struct helper; \
-    \
-    template<class BOOST_TTI_DETAIL_TP_EC> \
-    static ::boost::type_traits::yes_type chkt(helper<&BOOST_TTI_DETAIL_TP_EC::name> *); \
-    \
-    template<class BOOST_TTI_DETAIL_TP_EC> \
-    static ::boost::type_traits::no_type chkt(...); \
-    \
-    typedef boost::mpl::bool_<sizeof(chkt<BOOST_TTI_DETAIL_TP_C>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
-    }; \
-/**/
-
-#endif
 
 #define BOOST_TTI_DETAIL_TRAIT_CTMF_INVOKE(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION(trait,name) \

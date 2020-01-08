@@ -14,18 +14,17 @@
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_union.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
+#include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/detail/dnullptr.hpp>
 #include <boost/tti/detail/dtfunction.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 
-#if defined(__SUNPRO_CC)
-
 #define BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
   struct trait \
     { \
     template<BOOST_TTI_DETAIL_TP_TYPE *> \
-    struct helper {}; \
+    struct helper BOOST_TTI_DETAIL_MACRO_SUNFIX ; \
     \
     template<class U> \
     static ::boost::type_traits::yes_type check(helper<&U::template name<BOOST_PP_LIST_ENUM(tplst)> > *); \
@@ -36,27 +35,6 @@
     typedef boost::mpl::bool_<sizeof(check<BOOST_TTI_DETAIL_TP_T>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
     }; \
 /**/
-
-#else
-
-#define BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \
-  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
-  struct trait \
-    { \
-    template<BOOST_TTI_DETAIL_TP_TYPE *> \
-    struct helper; \
-    \
-    template<class U> \
-    static ::boost::type_traits::yes_type check(helper<&U::template name<BOOST_PP_LIST_ENUM(tplst)> > *); \
-    \
-    template<class U> \
-    static ::boost::type_traits::no_type check(...); \
-    \
-    typedef boost::mpl::bool_<sizeof(check<BOOST_TTI_DETAIL_TP_T>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
-    }; \
-/**/
-
-#endif
 
 #define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_OP(trait,name,tplst) \
   BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,tplst) \

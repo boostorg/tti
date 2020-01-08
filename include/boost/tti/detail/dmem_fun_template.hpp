@@ -7,7 +7,7 @@
 #if !defined(BOOST_TTI_DETAIL_MEM_FUN_TEMPLATE_HPP)
 #define BOOST_TTI_DETAIL_MEM_FUN_TEMPLATE_HPP
 
-#include <boost/config.hpp>
+// #include <boost/config.hpp>
 #include <boost/function_types/is_member_function_pointer.hpp>
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/and.hpp>
@@ -18,29 +18,27 @@
 #include <boost/mpl/or.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include <boost/preprocessor/list/enum.hpp>
+#include <boost/preprocessor/array/enum.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_union.hpp>
-#include <boost/type_traits/remove_const.hpp>
 #include <boost/tti/detail/dcomp_mem_fun_template.hpp>
 #include <boost/tti/detail/ddeftype.hpp>
 #include <boost/tti/detail/dnullptr.hpp>
 #include <boost/tti/detail/dptmf.hpp>
+#include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 
-#if defined(__SUNPRO_CC)
-
-#define BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
+#define BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_PMEMF,class BOOST_TTI_DETAIL_TP_C> \
   struct BOOST_PP_CAT(trait,_detail_hmft_types) \
     { \
     template<BOOST_TTI_DETAIL_TP_PMEMF> \
-    struct helper {}; \
+    struct helper BOOST_TTI_DETAIL_MACRO_SUNFIX ; \
     \
     template<class BOOST_TTI_DETAIL_TP_EC> \
-    static ::boost::type_traits::yes_type chkt(helper<&BOOST_TTI_DETAIL_TP_EC::template name<BOOST_PP_LIST_ENUM(tplst)> > *); \
+    static ::boost::type_traits::yes_type chkt(helper<&BOOST_TTI_DETAIL_TP_EC::template name<BOOST_PP_ARRAY_ENUM(pparray)> > *); \
     \
     template<class BOOST_TTI_DETAIL_TP_EC> \
     static ::boost::type_traits::no_type chkt(...); \
@@ -49,29 +47,8 @@
     }; \
 /**/
 
-#else
-
-#define BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
-  template<class BOOST_TTI_DETAIL_TP_PMEMF,class BOOST_TTI_DETAIL_TP_C> \
-  struct BOOST_PP_CAT(trait,_detail_hmft_types) \
-    { \
-    template<BOOST_TTI_DETAIL_TP_PMEMF> \
-    struct helper; \
-    \
-    template<class BOOST_TTI_DETAIL_TP_EC> \
-    static ::boost::type_traits::yes_type chkt(helper<&BOOST_TTI_DETAIL_TP_EC::template name<BOOST_PP_LIST_ENUM(tplst)> > *); \
-    \
-    template<class BOOST_TTI_DETAIL_TP_EC> \
-    static ::boost::type_traits::no_type chkt(...); \
-    \
-    typedef boost::mpl::bool_<sizeof(chkt<BOOST_TTI_DETAIL_TP_C>(BOOST_TTI_DETAIL_NULLPTR))==sizeof(::boost::type_traits::yes_type)> type; \
-    }; \
-/**/
-
-#endif
-
-#define BOOST_TTI_DETAIL_TRAIT_CTMF_INVOKE_TEMPLATE(trait,name,tplist) \
-  BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
+#define BOOST_TTI_DETAIL_TRAIT_CTMF_INVOKE_TEMPLATE(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
   struct BOOST_PP_CAT(trait,_detail_hmft_ctmf_invoke_template) : \
     BOOST_PP_CAT(trait,_detail_hmft_types) \
@@ -83,8 +60,8 @@
     }; \
 /**/
 
-#define BOOST_TTI_DETAIL_TRAIT_HAS_CALL_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
-  BOOST_TTI_DETAIL_TRAIT_CTMF_INVOKE_TEMPLATE(trait,name,tplist) \
+#define BOOST_TTI_DETAIL_TRAIT_HAS_CALL_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_CTMF_INVOKE_TEMPLATE(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
   struct BOOST_PP_CAT(trait,_detail_hmft_call_types) : \
     boost::mpl::eval_if \
@@ -107,8 +84,8 @@
     }; \
 /**/
 
-#define BOOST_TTI_DETAIL_TRAIT_CHECK_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
-  BOOST_TTI_DETAIL_TRAIT_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
+#define BOOST_TTI_DETAIL_TRAIT_CHECK_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_T> \
   struct BOOST_PP_CAT(trait,_detail_hmft_check_comp) : \
     BOOST_PP_CAT(trait,_detail_hcmft)<BOOST_TTI_DETAIL_TP_T> \
@@ -117,9 +94,9 @@
     }; \
 /**/
 
-#define BOOST_TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
-  BOOST_TTI_DETAIL_TRAIT_HAS_CALL_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
-  BOOST_TTI_DETAIL_TRAIT_CHECK_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(trait,name,tplist) \
+#define BOOST_TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_CALL_TYPES_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
+  BOOST_TTI_DETAIL_TRAIT_CHECK_HAS_COMP_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
   struct BOOST_PP_CAT(trait,_detail_hmft) : \
     boost::mpl::eval_if \
