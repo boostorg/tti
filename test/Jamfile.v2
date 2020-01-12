@@ -161,11 +161,10 @@ alias ttifun
 alias ttimftmp
     :
         [ run test_has_mem_fun_template.cpp ]
-#        [ compile test_has_template_compile.cpp : <define>BOOST_PP_VARIADICS=0 ]
-#        [ compile-fail test_has_template_fail.cpp : <define>BOOST_PP_VARIADICS=0 ]
-#        [ compile-fail test_has_template_fail2.cpp : <define>BOOST_PP_VARIADICS=0 ]
-#        [ compile-fail test_has_template_fail3.cpp : <define>BOOST_PP_VARIADICS=0 ]
-#        [ compile-fail test_has_template_fail4.cpp : <define>BOOST_PP_VARIADICS=0 ]
+        [ run test_has_mem_fun_template.cpp : : :
+          <define>BOOST_PP_VARIADICS=0 : 
+          test_has_mem_fun_template_nov ]
+        [ compile test_has_mem_fun_template_compile.cpp ]
     ;
 
 #
@@ -174,6 +173,10 @@ alias ttimftmp
 alias ttimftsig
     :
         [ run test_has_member_template.cpp ]
+        [ run test_has_member_template.cpp : : :
+          <define>BOOST_PP_VARIADICS=0 : 
+          test_has_member_template_nov ]
+        [ compile test_has_member_template_compile.cpp ]
     ;
 
 #
@@ -182,6 +185,10 @@ alias ttimftsig
 alias ttimftmpcv
     :
         [ run test_has_mem_fun_template_cv.cpp ]
+        [ run test_has_mem_fun_template_cv.cpp : : :
+          <define>BOOST_PP_VARIADICS=0 : 
+          test_has_mem_fun_template_cv_nov ]
+        [ compile test_has_mem_fun_template_cv_compile.cpp ]
     ;
 
 #
@@ -190,6 +197,10 @@ alias ttimftmpcv
 alias ttimftsigcv
     :
         [ run test_has_member_template_cv.cpp ]
+        [ run test_has_member_template_cv.cpp : : :
+          <define>BOOST_PP_VARIADICS=0 : 
+          test_has_member_template_cv_nov ]
+        [ compile test_has_member_template_cv_compile.cpp ]
     ;
 
 #
@@ -198,6 +209,10 @@ alias ttimftsigcv
 alias ttismftmp
     :
         [ run test_has_static_mem_fun_template.cpp ]
+        [ run test_has_static_mem_fun_template.cpp : : :
+          <define>BOOST_PP_VARIADICS=0 : 
+          test_has_static_mem_fun_template_nov ]
+        [ compile test_has_static_mem_fun_template_compile.cpp ]
     ;
 
 #
@@ -206,6 +221,10 @@ alias ttismftmp
 alias ttismftsig
     :
         [ run test_has_static_member_template.cpp ]
+        [ run test_has_static_member_template.cpp : : :
+          <define>BOOST_PP_VARIADICS=0 : 
+          test_has_static_member_template_nov ]
+        [ compile test_has_static_member_template_compile.cpp ]
     ;
 
 #

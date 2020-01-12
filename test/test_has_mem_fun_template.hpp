@@ -17,6 +17,8 @@ BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(SameName,AFuncTemplate,int,int,floa
 BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(AFuncTemplate,long,9983)
 BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(AnotherName,MyFuncTemplate,bool)
 
+BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(someFunctionMemberTemplate,short,int) // does not exist anywhere
+
 BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(FirstCMFT,AConstFunctionTemplate,short,long) // const
 BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(WFunctionTmp,int,long,bool) // const
 
@@ -32,6 +34,8 @@ BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(SomeFuncTemplate,(4,(int,long,double,50))
 BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(SameName,AFuncTemplate,(3,(int,int,float)))
 BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(AFuncTemplate,(2,(long,9983)))
 BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(AnotherName,MyFuncTemplate,(1,(bool)))
+
+BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(someFunctionMemberTemplate,(2,(short,int))) // does not exist anywhere
 
 BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(FirstCMFT,AConstFunctionTemplate,(2,(short,long))) // const
 BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(WFunctionTmp,(3,(int,long,bool))) // const
