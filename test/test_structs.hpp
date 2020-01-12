@@ -117,6 +117,21 @@ struct AType
   template<class X,int Y> int AFuncTemplate(const X &) { return Y; }
   template<class X,class Y,class Z> void AFuncTemplate(X *,Y,Z &) { }
   
+  // Const function template
+  
+  template<class X,class Y> double AConstFunctionTemplate(X, Y y) const { return (static_cast<double>(y)); }
+  template<class X,class Y,class Z> void WFunctionTmp(X **, Y &, Z) const { }
+  
+  // Volatile function template
+  
+  template<class X> double AVolatileFT(X, long, char) volatile { return 2.58; }
+  template<class X,int Y> void VolFTem(X &) volatile { }
+  
+  // Const Volatile function template
+  
+  template<class X,class Y> double ACVFunTemplate(X, Y) const volatile { return 2.59; }
+  template<int Y> void ConstVolTTFun(float, double) const volatile { }
+  
   // Static Data
   
   static short DSMember;

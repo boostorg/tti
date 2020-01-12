@@ -5,8 +5,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
-#include <boost/tti/gen/static_mem_fun_template_gen.hpp>
-#include <boost/tti/detail/ddeftype.hpp>
+#include <boost/tti/gen/has_static_member_function_template_gen.hpp>
 #include <boost/tti/detail/dstatic_mem_fun_template.hpp>
 
 #if BOOST_PP_VARIADICS
@@ -58,21 +57,20 @@
       
               BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
                                  The enclosing type can be a class, struct, or union.
+              
+              BOOST_TTI_TP_R   = the return type of the static member function template
+                                 in a single instantiation of the static member function template
                                           OR
                                  a pointer to function as a single type
                                  which encapsulates a single instantiation of
                                  the static member function template.
               
-              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
-                        in a single instantiation of the static member function template
-                        if the first parameter is the enclosing type.
-              
               BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
-                        if the first parameter is the enclosing type and the static member function template parameters
-                        are not empty. These parameters are a single instantiation of the static member function template.
+                                 if the second parameter is the enclosing type and the static member function template parameters
+                                 are not empty. These parameters are a single instantiation of the static member function template.
               
               BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
-                        if the first parameter is the enclosing type and a tag is needed.
+                                 if the second parameter is the enclosing type and a tag is needed.
               
               returns = 'value' is true if the 'name' exists, 
                         with the appropriate static member function template type,
@@ -86,7 +84,7 @@
     name, \
     BOOST_TTI_DETAIL_FUN_TEMPLATE_VARIADIC_TO_ARRAY(__VA_ARGS__) \
     ) \
-  template<class T,class R = BOOST_TTI_NAMESPACE::detail::deftype,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
+  template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_R,class BOOST_TTI_TP_FS = boost::mpl::vector<>,class BOOST_TTI_TP_TAG = boost::function_types::null_tag> \
   struct trait \
     { \
     typedef typename \
@@ -131,21 +129,20 @@
       
               BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
                                  The enclosing type can be a class, struct, or union.
+              
+              BOOST_TTI_TP_R   = the return type of the static member function template
+                                 in a single instantiation of the static member function template
                                           OR
                                  a pointer to function as a single type
                                  which encapsulates a single instantiation of
                                  the static member function template.
               
-              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
-                        in a single instantiation of the static member function template
-                        if the first parameter is the enclosing type.
-              
               BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
-                        if the first parameter is the enclosing type and the static member function template parameters
-                        are not empty. These parameters are a single instantiation of the static member function template.
+                                 if the second parameter is the enclosing type and the static member function template parameters
+                                 are not empty. These parameters are a single instantiation of the static member function template.
               
               BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
-                        if the first parameter is the enclosing type and a tag is needed.
+                                 if the second parameter is the enclosing type and a tag is needed.
               
               returns = 'value' is true if the 'name' exists, 
                         with the appropriate static member function template type,
@@ -197,21 +194,20 @@
       
               BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
                                  The enclosing type can be a class, struct, or union.
+              
+              BOOST_TTI_TP_R   = the return type of the static member function template
+                                 in a single instantiation of the static member function template
                                           OR
                                  a pointer to function as a single type
                                  which encapsulates a single instantiation of
                                  the static member function template.
               
-              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
-                        in a single instantiation of the static member function template
-                        if the first parameter is the enclosing type.
-              
               BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
-                        if the first parameter is the enclosing type and the static member function template parameters
-                        are not empty. These parameters are a single instantiation of the static member function template.
+                                 if the second parameter is the enclosing type and the static member function template parameters
+                                 are not empty. These parameters are a single instantiation of the static member function template.
               
               BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
-                        if the first parameter is the enclosing type and a tag is needed.
+                                 if the second parameter is the enclosing type and a tag is needed.
               
               returns = 'value' is true if the 'name' exists, 
                         with the appropriate static member function template type,
@@ -220,7 +216,7 @@
 */
 #define BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
-  template<class T,class R = BOOST_TTI_NAMESPACE::detail::deftype,class FS = boost::mpl::vector<>,class TAG = boost::function_types::null_tag> \
+  template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_R,class BOOST_TTI_TP_FS = boost::mpl::vector<>,class BOOST_TTI_TP_TAG = boost::function_types::null_tag> \
   struct trait \
     { \
     typedef typename \
@@ -253,21 +249,20 @@
       
               BOOST_TTI_TP_T   = the enclosing type in which to look for our 'name'.
                                  The enclosing type can be a class, struct, or union.
+              
+              BOOST_TTI_TP_R   = the return type of the static member function template
+                                 in a single instantiation of the static member function template
                                           OR
                                  a pointer to function as a single type
                                  which encapsulates a single instantiation of
                                  the static member function template.
               
-              BOOST_TTI_TP_R   = (optional) the return type of the static member function template
-                        in a single instantiation of the static member function template
-                        if the first parameter is the enclosing type.
-              
               BOOST_TTI_TP_FS  = (optional) the parameters of the static member function template as a boost::mpl forward sequence
-                        if the first parameter is the enclosing type and the static member function template parameters
-                        are not empty. These parameters are a single instantiation of the static member function template.
+                                 if the second parameter is the enclosing type and the static member function template parameters
+                                 are not empty. These parameters are a single instantiation of the static member function template.
               
               BOOST_TTI_TP_TAG = (optional) a boost::function_types tag to apply to the static member function template
-                        if the first parameter is the enclosing type and a tag is needed.
+                                 if the second parameter is the enclosing type and a tag is needed.
               
               returns = 'value' is true if the 'name' exists, 
                         with the appropriate static member function template type,
