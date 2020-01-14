@@ -244,6 +244,11 @@ alias ttismftsig
     ;
 
 #
+# Function templates
+#
+alias ttift : ttimftmp ttimftsig ttimftmpcv ttimftsigcv ttismftmp ttismftsig ;
+
+#
 # Templates
 #
 alias ttitmp
@@ -302,7 +307,7 @@ alias ttimemty
 #
 # All of tti, non-variadic macros
 #
-alias ttinovm : ttimfsig ttimfsigcv ttimd ttimfn ttimfncv ttismfsig ttismd ttismfn ttidata ttifun ttitmp ttitmpcp ttity ttimemty ;
+alias ttinovm : ttimfsig ttimfsigcv ttimd ttimfn ttimfncv ttismfsig ttismd ttismfn ttidata ttifun ttitmp ttitmpcp ttity ttimemty ttift ;
 
 alias ttitmpv : : 
         <toolset>gcc
