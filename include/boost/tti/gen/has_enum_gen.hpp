@@ -20,7 +20,7 @@
 
 /// Generates the macro metafunction name for BOOST_TTI_HAS_ENUM.
 /**
-    name  = the name of the class/struct.
+    name  = the name of the enumeration.
 
     returns = the generated macro metafunction name.
 */

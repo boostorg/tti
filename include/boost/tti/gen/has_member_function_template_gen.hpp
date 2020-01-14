@@ -20,7 +20,7 @@
 
 /// Generates the macro metafunction name for BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE.
 /**
-    name  = the name of the member function.
+    name  = the name of the member function template.
 
     returns = the generated macro metafunction name.
 */

@@ -20,7 +20,7 @@
 
 /// Generates the macro metafunction name for BOOST_TTI_HAS_UNION.
 /**
-    name  = the name of the class/struct.
+    name  = the name of the union.
 
     returns = the generated macro metafunction name.
 */
