@@ -21,6 +21,7 @@ int main()
   // Use volatile enclosing type
   
   BOOST_MPL_ASSERT((BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE_GEN(AVolatileFT)<volatile AType,double,boost::mpl::vector<float, long, char> >));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE_GEN(VWithDefault)<volatile AnotherType,void,boost::mpl::vector<float,double> >));
   
   // Use volatile_qualified
   

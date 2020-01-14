@@ -165,6 +165,9 @@ alias ttimftmp
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_mem_fun_template_nov ]
         [ compile test_has_mem_fun_template_compile.cpp ]
+        [ compile-fail test_has_mem_fun_template_fail.cpp ]
+        [ compile-fail test_has_mem_fun_template_fail2.cpp ]
+        [ compile-fail test_has_mem_fun_template_fail3.cpp ]
     ;
 
 #
@@ -177,6 +180,9 @@ alias ttimftsig
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_member_template_nov ]
         [ compile test_has_member_template_compile.cpp ]
+        [ compile-fail test_has_member_template_fail.cpp ]
+        [ compile-fail test_has_member_template_fail2.cpp ]
+        [ compile-fail test_has_member_template_fail3.cpp ]
     ;
 
 #
@@ -189,6 +195,9 @@ alias ttimftmpcv
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_mem_fun_template_cv_nov ]
         [ compile test_has_mem_fun_template_cv_compile.cpp ]
+        [ compile-fail test_has_mem_fun_template_cv_fail.cpp ]
+        [ compile-fail test_has_mem_fun_template_cv_fail2.cpp ]
+        [ compile-fail test_has_mem_fun_template_cv_fail3.cpp ]
     ;
 
 #
@@ -201,6 +210,9 @@ alias ttimftsigcv
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_member_template_cv_nov ]
         [ compile test_has_member_template_cv_compile.cpp ]
+        [ compile-fail test_has_member_template_cv_fail.cpp ]
+        [ compile-fail test_has_member_template_cv_fail2.cpp ]
+        [ compile-fail test_has_member_template_cv_fail3.cpp ]
     ;
 
 #
@@ -213,6 +225,8 @@ alias ttismftmp
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_static_mem_fun_template_nov ]
         [ compile test_has_static_mem_fun_template_compile.cpp ]
+        [ compile-fail test_has_static_mem_fun_template_fail.cpp ]
+        [ compile-fail test_has_static_mem_fun_template_fail2.cpp ]
     ;
 
 #
@@ -225,6 +239,8 @@ alias ttismftsig
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_static_member_template_nov ]
         [ compile test_has_static_member_template_compile.cpp ]
+        [ compile-fail test_has_static_member_template_fail.cpp ]
+        [ compile-fail test_has_static_member_template_fail2.cpp ]
     ;
 
 #

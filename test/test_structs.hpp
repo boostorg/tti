@@ -116,6 +116,7 @@ struct AType
   
   template<class X,int Y> int AFuncTemplate(const X &) { return Y; }
   template<class X,class Y,class Z> void AFuncTemplate(X *,Y,Z &) { }
+  template<class X> double FTHasDef(X, long, char = 'a') { return 3.58; }
   
   // Const function template
   
@@ -225,6 +226,7 @@ struct AnotherType
   // Function Templates
   
   template<class X> long MyFuncTemplate(X &) { return 0; }
+  template<int Y> void VWithDefault(float, double d = 2.67) volatile { }
   
   // Static Function
   
@@ -238,6 +240,7 @@ struct AnotherType
   // Static Function Template
   
   template<class X,class Y> static void YetAnotherFuncTemplate(const X &,Y &) { }
+  template<class X,class Y,class Z> static void StaticFTWithDefault(const X &,Y &,Z*,long = 27) { }
   
   static const int CIntValue = 10;
   

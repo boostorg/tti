@@ -19,6 +19,7 @@ int main()
   
   BOOST_MPL_ASSERT((BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE_GEN(AVolatileFT)<double (AType::*)(float, long, char) volatile>));
   BOOST_MPL_ASSERT((VolG<void (AType::*)(long &) volatile>));
+  BOOST_MPL_ASSERT((BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE_GEN(VWithDefault)<void (AnotherType::*)(float, double) volatile>));
   
   // Use const volatile
   

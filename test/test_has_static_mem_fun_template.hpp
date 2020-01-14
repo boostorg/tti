@@ -17,11 +17,15 @@ BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(StatFuncTemplate,short,long,7854)
 BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(TAnother,AnotherFuncTemplate,int,long,long)
 BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(YetAnotherFuncTemplate,double,float)
 
+BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(StaticFTWithDefault,int,long,bool) // default parameter
+
 #else
 
 BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(StatFuncTemplate,(3,(short,long,7854)))
 BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(TAnother,AnotherFuncTemplate,(3,(int,long,long)))
 BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(YetAnotherFuncTemplate,(2,(double,float)))
+
+BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(StaticFTWithDefault,(3,(int,long,bool))) // default parameter
 
 #endif
 
