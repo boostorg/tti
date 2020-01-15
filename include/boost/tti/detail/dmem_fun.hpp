@@ -15,18 +15,16 @@
 #include <boost/mpl/assert.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
-#include <boost/mpl/or.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
-#include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
-#include <boost/type_traits/is_union.hpp>
 #include <boost/type_traits/remove_const.hpp>
 #include <boost/tti/detail/dcomp_mem_fun.hpp>
 #include <boost/tti/detail/ddeftype.hpp>
 #include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/detail/dnullptr.hpp>
+#include <boost/tti/detail/denclosing_type.hpp>
 #include <boost/tti/detail/dptmf.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 
@@ -66,11 +64,7 @@
   struct BOOST_PP_CAT(trait,_detail_hmf_call_types) : \
     boost::mpl::eval_if \
         < \
-        boost::mpl::or_ \
-            < \
-            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
-            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
-            >, \
+        BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
         BOOST_PP_CAT(trait,_detail_hmf_ctmf_invoke) \
             < \
             BOOST_TTI_DETAIL_TP_T, \

@@ -11,10 +11,11 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/has_xxx.hpp>
-#include <boost/mpl/or.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/debug/assert.hpp>
 #include <boost/preprocessor/facilities/is_empty.hpp>
+#include <boost/tti/detail/denclosing_type.hpp>
+#include <boost/tti/gen/namespace_gen.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_union.hpp>
 
@@ -58,11 +59,7 @@
     typedef typename \
     boost::mpl::eval_if \
         < \
-        boost::mpl::or_ \
-            < \
-            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
-            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
-            >, \
+        BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
         BOOST_PP_CAT(trait,_tht)<BOOST_TTI_DETAIL_TP_T>, \
         boost::mpl::false_ \
         >::type type; \

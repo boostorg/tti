@@ -6,17 +6,15 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/identity.hpp>
-#include <boost/mpl/or.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/array/enum.hpp>
-#include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/is_same.hpp>
-#include <boost/type_traits/is_union.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/detail/dnullptr.hpp>
 #include <boost/tti/detail/dtfunction.hpp>
+#include <boost/tti/detail/denclosing_type.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 
 #define BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
@@ -66,11 +64,7 @@
   struct BOOST_PP_CAT(trait,_detail_hsmft) : \
     boost::mpl::eval_if \
         < \
-        boost::mpl::or_ \
-            < \
-            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
-            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
-            >, \
+        BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
         BOOST_PP_CAT(trait,_detail_hsmft_op)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>, \
         boost::mpl::false_ \
         > \

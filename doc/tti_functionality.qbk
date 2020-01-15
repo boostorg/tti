@@ -12,8 +12,12 @@ out at compile time are:
 
 * Does it have a nested type with a particular name ?
 * Does it have a nested type with a particular name which fulfills some other possibility for that nested type.
+* Does it have a particular user-defined nested type (struct/class, union, or enumaeration) with a particular name ?
+* Does it have a particular user-defined nested type with a particular name which fulfills some other possibility for that nested type.
 * Does it have a nested class template with a particular name ?
 * Does it have a nested class template with a particular name and a particular signature ?
+* Does it have a nested member function template with a particular name and a particular instantiated signature ?
+* Does it have a nested static function template with a particular name and a particular instantiated signature ?
 * Does it have a member function with a particular name and a particular signature ?
 * Does it have member data with a particular name and of a particular type ?
 * Does it have a static member function with a particular name and a particular signature ?

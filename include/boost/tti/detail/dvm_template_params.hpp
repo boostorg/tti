@@ -15,7 +15,6 @@
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/identity.hpp>
-#include <boost/mpl/or.hpp>
 #include <boost/preprocessor/arithmetic/add.hpp>
 #include <boost/preprocessor/variadic/size.hpp>
 #include <boost/preprocessor/cat.hpp>
@@ -29,8 +28,8 @@
 #include <boost/preprocessor/variadic/to_seq.hpp>
 #include <boost/tti/detail/dtemplate.hpp>
 #include <boost/tti/detail/dtemplate_params.hpp>
-#include <boost/type_traits/is_class.hpp>
-#include <boost/type_traits/is_union.hpp>
+#include <boost/tti/detail/denclosing_type.hpp>
+#include <boost/tti/gen/namespace_gen.hpp>
 
 #if !defined(BOOST_MPL_CFG_NO_HAS_XXX_TEMPLATE)
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1400)
@@ -153,11 +152,7 @@
     typedef typename \
     boost::mpl::eval_if \
         < \
-        boost::mpl::or_ \
-            < \
-            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
-            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
-            >, \
+        BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
         BOOST_PP_CAT(trait,_detail_vm_ct_invoke)<BOOST_TTI_DETAIL_TP_T>, \
         boost::mpl::false_ \
         >::type type; \

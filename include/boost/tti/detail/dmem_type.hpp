@@ -11,10 +11,9 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/has_xxx.hpp>
-#include <boost/mpl/or.hpp>
 #include <boost/preprocessor/cat.hpp>
-#include <boost/type_traits/is_class.hpp>
-#include <boost/type_traits/is_union.hpp>
+#include <boost/tti/detail/denclosing_type.hpp>
+#include <boost/tti/gen/namespace_gen.hpp>
 
 #define BOOST_TTI_DETAIL_TRAIT_HAS_TYPE_MEMBER_TYPE_OP(trait,name) \
   BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(BOOST_PP_CAT(trait,_detail_member_type_mpl), name, false) \
@@ -33,11 +32,7 @@
     typedef typename \
     boost::mpl::eval_if \
         < \
-        boost::mpl::or_ \
-            < \
-            boost::is_class<BOOST_TTI_DETAIL_TP_T>, \
-            boost::is_union<BOOST_TTI_DETAIL_TP_T> \
-            >, \
+        BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
         BOOST_PP_CAT(trait,_detail_member_type_op)<BOOST_TTI_DETAIL_TP_T>, \
         boost::mpl::false_ \
         >::type type; \
