@@ -18,7 +18,7 @@
 
 #if BOOST_PP_VARIADICS
 
-#include <boost/tti/detail/dfun_template.hpp>
+#include <boost/tti/detail/dmacro_fun_template.hpp>
 
 /*
 

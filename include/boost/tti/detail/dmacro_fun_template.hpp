@@ -1,5 +1,11 @@
-#if !defined(BOOST_TTI_DETAIL_FUN_TEMPLATE_HPP)
-#define BOOST_TTI_DETAIL_FUN_TEMPLATE_HPP
+
+//  (C) Copyright Edward Diener 2019
+//  Use, modification and distribution are subject to the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt).
+
+#if !defined(BOOST_TTI_DETAIL_MACRO_FUN_TEMPLATE_HPP)
+#define BOOST_TTI_DETAIL_MACRO_FUN_TEMPLATE_HPP
 
 #include <boost/preprocessor/comparison/equal.hpp>
 #include <boost/preprocessor/control/iif.hpp>
@@ -31,4 +37,4 @@
   (__VA_ARGS__) \
 /**/
 
-#endif // BOOST_TTI_DETAIL_FUN_TEMPLATE_HPP
+#endif // BOOST_TTI_DETAIL_MACRO_FUN_TEMPLATE_HPP
