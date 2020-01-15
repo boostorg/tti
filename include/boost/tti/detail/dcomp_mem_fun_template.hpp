@@ -7,7 +7,6 @@
 #if !defined(BOOST_TTI_DETAIL_COMP_MEM_FUN_TEMPLATE_HPP)
 #define BOOST_TTI_DETAIL_COMP_MEM_FUN_TEMPLATE_HPP
 
-// #include <boost/config.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/array/enum.hpp>

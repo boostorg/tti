@@ -7,7 +7,6 @@
 #if !defined(BOOST_TTI_DETAIL_CLASS_HPP)
 #define BOOST_TTI_DETAIL_CLASS_HPP
 
-#include <boost/config.hpp>
 #include <boost/mpl/and.hpp>
 #include <boost/mpl/apply.hpp>
 #include <boost/mpl/bool.hpp>

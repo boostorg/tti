@@ -7,7 +7,6 @@
 #if !defined(BOOST_TTI_DETAIL_MEM_FUN_HPP)
 #define BOOST_TTI_DETAIL_MEM_FUN_HPP
 
-#include <boost/config.hpp>
 #include <boost/function_types/is_member_function_pointer.hpp>
 #include <boost/function_types/property_tags.hpp>
 #include <boost/mpl/and.hpp>

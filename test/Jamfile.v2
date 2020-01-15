@@ -244,9 +244,21 @@ alias ttismftsig
     ;
 
 #
+# Member or static member function templates
+#
+alias ttifuntmp
+    :
+#        [ run test_has_fun_template.cpp ]
+#        [ compile test_has_fun_template_compile.cpp ]
+#        [ compile-fail test_has_fun_template_fail.cpp ]
+#        [ compile-fail test_has_fun_template_fail2.cpp ]
+#        [ compile-fail test_has_fun_template_fail3.cpp ]
+    ;
+
+#
 # Function templates
 #
-alias ttift : ttimftmp ttimftsig ttimftmpcv ttimftsigcv ttismftmp ttismftsig ;
+alias ttift : ttimftmp ttimftsig ttimftmpcv ttimftsigcv ttismftmp ttismftsig ttifuntmp ;
 
 #
 # Templates

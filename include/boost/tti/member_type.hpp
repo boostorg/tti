@@ -7,7 +7,6 @@
 #if !defined(BOOST_TTI_MEMBER_TYPE_HPP)
 #define BOOST_TTI_MEMBER_TYPE_HPP
   
-#include <boost/config.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/not.hpp>

@@ -16,7 +16,6 @@
 /** \file
 */
 
-#include <boost/config.hpp>
 #include <boost/tti/gen/has_template_gen.hpp>
 #include <boost/preprocessor/config/config.hpp>
 #include <boost/preprocessor/control/iif.hpp>

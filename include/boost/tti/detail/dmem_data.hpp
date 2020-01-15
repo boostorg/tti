@@ -7,7 +7,6 @@
 #if !defined(BOOST_TTI_DETAIL_MEM_DATA_HPP)
 #define BOOST_TTI_DETAIL_MEM_DATA_HPP
 
-#include <boost/config.hpp>
 #include <boost/detail/workaround.hpp>
 #include <boost/function_types/components.hpp>
 #include <boost/function_types/is_member_object_pointer.hpp>

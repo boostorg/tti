@@ -7,7 +7,6 @@
 #if !defined(BOOST_TTI_DETAIL_STATIC_MEM_DATA_HPP)
 #define BOOST_TTI_DETAIL_STATIC_MEM_DATA_HPP
 
-#include <boost/config.hpp>
 #include <boost/function_types/is_function.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
