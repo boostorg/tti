@@ -7,20 +7,16 @@
 #if !defined(BOOST_TTI_DETAIL_STATIC_MEM_FUN_HPP)
 #define BOOST_TTI_DETAIL_STATIC_MEM_FUN_HPP
 
-#include <boost/function_types/is_function.hpp>
-#include <boost/function_types/property_tags.hpp>
-#include <boost/mpl/and.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/identity.hpp>
-#include <boost/mpl/vector.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/tti/detail/dnullptr.hpp>
 #include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/detail/dtfunction.hpp>
 #include <boost/tti/detail/denclosing_type.hpp>
+#include <boost/tti/detail/dstatic_function_type.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
-#include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
 
 #define BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
@@ -50,12 +46,7 @@
       typename \
       boost::mpl::eval_if \
         < \
-        boost::mpl::and_ \
-          < \
-          boost::function_types::is_function<BOOST_TTI_DETAIL_TP_R>, \
-          boost::is_same<BOOST_TTI_DETAIL_TP_FS,boost::mpl::vector<> >, \
-          boost::is_same<BOOST_TTI_DETAIL_TP_TAG,boost::function_types::null_tag> \
-          >, \
+        BOOST_TTI_NAMESPACE::detail::static_function_type<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>, \
         boost::mpl::identity<BOOST_TTI_DETAIL_TP_R>, \
         BOOST_TTI_NAMESPACE::detail::tfunction_seq<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG> \
         >::type \
