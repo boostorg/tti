@@ -15,6 +15,7 @@
 #include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/detail/dtfunction.hpp>
 #include <boost/tti/detail/denclosing_type.hpp>
+#include <boost/tti/detail/dstatic_function_tags.hpp>
 #include <boost/tti/detail/dstatic_function_type.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
@@ -36,20 +37,33 @@
     }; \
 /**/
 
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEST_FUNC(trait,name) \
+  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
+  struct BOOST_PP_CAT(trait,_detail_hsmf_tt) : \
+    boost::mpl::eval_if \
+      < \
+      BOOST_TTI_NAMESPACE::detail::static_function_tag<BOOST_TTI_DETAIL_TP_TAG>, \
+      BOOST_PP_CAT(trait,_detail_ihsmf) \
+        < \
+        BOOST_TTI_DETAIL_TP_T, \
+        typename BOOST_TTI_NAMESPACE::detail::tfunction_seq<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>::type \
+        >, \
+      boost::mpl::false_ \
+      > \
+    { \
+    }; \
+/**/
+
 #define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_OP(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_IMPL_HAS_STATIC_MEMBER_FUNCTION(trait,name) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEST_FUNC(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
   struct BOOST_PP_CAT(trait,_detail_hsmf_op) : \
-    BOOST_PP_CAT(trait,_detail_ihsmf) \
+    boost::mpl::eval_if \
       < \
-      BOOST_TTI_DETAIL_TP_T, \
-      typename \
-      boost::mpl::eval_if \
-        < \
-        BOOST_TTI_NAMESPACE::detail::static_function_type<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>, \
-        boost::mpl::identity<BOOST_TTI_DETAIL_TP_R>, \
-        BOOST_TTI_NAMESPACE::detail::tfunction_seq<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG> \
-        >::type \
+      BOOST_TTI_NAMESPACE::detail::static_function_type<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>, \
+      BOOST_PP_CAT(trait,_detail_ihsmf)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R>, \
+      BOOST_PP_CAT(trait,_detail_hsmf_tt)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG> \
       > \
     { \
     }; \

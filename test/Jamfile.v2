@@ -253,9 +253,9 @@ alias ttifuntmp
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_fun_template_nov ]
         [ compile test_has_fun_template_compile.cpp ]
-#        [ compile-fail test_has_fun_template_fail.cpp ]
-#        [ compile-fail test_has_fun_template_fail2.cpp ]
-#        [ compile-fail test_has_fun_template_fail3.cpp ]
+        [ compile-fail test_has_fun_template_fail.cpp ]
+        [ compile-fail test_has_fun_template_fail2.cpp ]
+        [ compile-fail test_has_fun_template_fail3.cpp ]
     ;
 
 #

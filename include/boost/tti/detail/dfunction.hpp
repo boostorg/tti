@@ -7,6 +7,7 @@
 #if !defined(BOOST_TTI_DETAIL_FUNCTION_HPP)
 #define BOOST_TTI_DETAIL_FUNCTION_HPP
 
+#include <boost/mpl/and.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/or.hpp>
 #include <boost/preprocessor/cat.hpp>
@@ -14,6 +15,7 @@
 #include <boost/tti/detail/dstatic_mem_fun.hpp>
 #include <boost/tti/detail/dtfunction.hpp>
 #include <boost/tti/detail/denclosing_type.hpp>
+#include <boost/tti/detail/dstatic_function_tags.hpp>
 #include <boost/tti/gen/namespace_gen.hpp>
 
 #define BOOST_TTI_DETAIL_TRAIT_HAS_FUNCTION_STATIC(trait,name) \
@@ -22,7 +24,11 @@
   struct BOOST_PP_CAT(trait,_detail_hfs) : \
     boost::mpl::eval_if \
         < \
-        BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
+        boost::mpl::and_ \
+            < \
+            BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
+            BOOST_TTI_NAMESPACE::detail::static_function_tag<BOOST_TTI_DETAIL_TP_TAG> \
+            >, \
         BOOST_PP_CAT(trait,_detail_ihsmf) \
             < \
             BOOST_TTI_DETAIL_TP_T, \

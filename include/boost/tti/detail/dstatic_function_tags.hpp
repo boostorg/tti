@@ -24,7 +24,7 @@ namespace boost
       struct static_function_tag :
         boost::mpl::not_
           <
-          booost::mpl::or_
+          boost::mpl::or_
             <
             boost::function_types::has_const_property_tag<BOOST_TTI_DETAIL_TP_TAG>,
             boost::function_types::has_volatile_property_tag<BOOST_TTI_DETAIL_TP_TAG>
