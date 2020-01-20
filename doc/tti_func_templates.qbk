@@ -1,14 +1,11 @@
 [/ 
-  (C) Copyright Edward Diener 2011
+  (C) Copyright Edward Diener 2011,2019
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE_1_0.txt or copy at
   http://www.boost.org/LICENSE_1_0.txt).
 ]
 
-[section:tti_func_templates Introspecting Function Templates]
-
-The one nested element which the TTI library does not introspect is 
-function templates.
+[section:tti_func_templates Introspecting function templates]
 
 Function templates, like functions, can be member function templates or 
 static member function templates. In this respect they are related to 
@@ -18,11 +15,11 @@ family of possible class types.
 
 The technique for introspecting class templates in the TTI library is taken 
 from the implementation of the technique in the Boost MPL library. In the case
-of `BOOST_TTI_HAS_TEMPLATE` it directly uses the Boost MPL library functionality 
-while in the case of `BOOST_TTI_HAS_TEMPLATE_CHECK_PARAMS` it replicates much 
-of the technique in the Boost MPL library. The technique depends directly on 
-the fact that in C++ we can pass a template as a parameter to another template
-using what is called a "template template" parameter type. 
+of `BOOST_TTI_HAS_TEMPLATE` using the template type parameters form it directly
+uses the Boost MPL library functionality while in the case of `BOOST_TTI_HAS_TEMPLATE`
+using the specific form it replicates much of the technique in the Boost MPL library.
+The technique depends directly on the fact that in C++ we can pass a template as a
+parameter to another template using what is called a "template template" parameter type.
 
 One obvious thing about a template template parameter type is that it is a 
 class template. For whatever historical or technical reasons, no one has ever
@@ -39,125 +36,198 @@ which is in fact what Boost MPL does to pass templates as metadata, yet we still
 template template parameters as class templates.
 
 Nonetheless the fact that we can pass class templates as a template parameter but not
-function templates as a template parameter is the major factor why there is no really good
-method for introspecting function templates at compile time.
+function templates as a template parameter is the major factor why there is no equivalent
+method for introspecting function templates at compile time as there is for introspecting
+class templates.
 
 [heading Instantiating a nested function template]
 
-There is, however, an alternate but less certain way of introspecting a function template.
-I will endeavor to explain why this way is not currently included in the TTI library, 
-but first I will explain what it is.
-
+There is, however, an alternate way of introspecting a function template.
 It is possible to check whether some particular [*instantiation] of a nested function 
 template exists at compile-time without generating a compiler error. Although checking if 
 some particular instantiation of a nested function template exists at compile-time does
 not prove that the nested function template itself does or does not exist, 
-since the instantiation itself may be incorrect and fail even when the nested function 
-template exists, it provides a partial, if flawed, means of checking.
+since the instantiation itself may fail even when the nested function template exists,
+it provides a viable way of introspecting function templates bcause very few function templates
+are designed which limit the types used to instantiate.
 
-The code to do this for member function templates looks like this 
-( similar code also exists for static member function templates ):
-
-  template
-    <
-    class C,
-    class T
-    > 
-  struct TestFunctionTemplate
-    {
-    typedef char Bad;
-    struct Good { char x[2]; };
-    template<T> struct helper;
-    template<class U> static Good check(helper<&U::template SomeFuncTemplateName<int,long,double> > *);
-    template<class U> static Bad check(...);
-    static const bool value=sizeof(check<C>(0))==sizeof(Good);
-    };
-    
-where 'SomeFuncTemplateName' is the name of the nested function template, 
-followed by some parameters to instantiate it. The 'class C' is the type of 
-the enclosing class and the 'class T' is the type of the instantiated member 
-function template as a member function.
-
-As an example if we had:
+To see how this works in general I will give an example of a nested function template
+in a struct.
 
   struct AType 
     {
-    template<class X,class Y,class Z> double SomeFuncTemplateName(X,Y *,Z &) { return 0.0; }
+    template<class X,class Y,class Z> double AFuncTemplate(X,Y *,Z &) { ...some code; return 0.0; }
     };
     
-then instantiating the above template with:
+The code shows a member function function template within a user-defined struct. In order
+to introspect this function template in TTI we need to mentally [*instantiate] it as a
+function by providing types for `class X`, `class Y`, and `class Z` and present the parts
+of that instantiation, as well as the name of the function template and the enclosed type,
+to TTI functionality in order to see if the member function template actually exists.
 
-  TestFunctionTemplate
-    <
-    AType,
-    double (AType::*)(int,long *,double &)
-    >
-    
-would provide a compile-time boolean value which would tell us whether the 
-nested member function template exists for the particular instantiation 
-provided above. Furthermore, through the use of a macro, the TTI library
-could provide the means for specifying the name of the nested member function
-template ('SomeFuncTemplateName' above) and its set of instantiated 
-parameters ('int,long,double' above) for generating the template.
+Let's write out our instantiation of the member function template using
+`int` for X, `long` for Y, and `bool` for Z just to show what we will have
+to work with when using TTI to introspect our function template above.
+What we will now have as a declaration of our instantiated function template is:
 
-So why does not the TTI library not provide at least this much functionality for 
-introspecting member function templates, even if it represents a partially flawed
-way of doing so ? 
+  double AFuncTemplate<int,long,bool>(int,long *,bool &)
+  
+So what we have now which the TTI will need in order to find the
+member function template `template<class X,class Y,class Z> double AFuncTemplate(X,Y *,Z &)`
+within the `AType` struct is:
 
-The reason is stunningly disappointing. Although the above code is perfectly correct C++ 
-code ( 'clang' works correctly ), two of the major C++ compilers, in all of their different 
-releases, can not handle the above code correctly. Both gcc ( g++ ) and Visual C++ incorrectly 
-choose the wrong 'check' function even when the correct 'check' function applies ( Comeau C++
-also fails but I am less concerned about that compiler since it is not used nearly as much as 
-the other two ). All my attempts at alternatives to the above code have also failed. The problems 
-with both compilers, in this regard, can be seen more easily with this snippet:
+* The name of `AFuncTemplate`
+* The template parameters of `int,long,bool`
+* The enclosing type of `AType`
+* The return type of `double'
+* The function parameters of `int,long *,bool &`
 
-  struct AType
-   {
-   template<class AA> void SomeFuncTemplate() { }
-   };
-   
-  template<class T>
-  struct Test
-   {
-   template<T> struct helper;
-   template<class U> static void check(helper<&U::template SomeFuncTemplate<int> > *) { }
-   };
+[heading Generating the metafunction]
 
-  int main()
+As with all TTI functionality for introspecting entities within a user-defined
+type introspecting a member function template is a two step process. The first
+process is using a macro to generate a metafunction. The macro for
+member function templates is [macroref BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE].
+This macro takes the name of the member function template and the instantiated 
+template parameters, the first two items in our list above:
+
+  BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(AFuncTemplate,int,long,bool)
+  
+The macro generates a metafunction based on the pattern of
+"has_member_function_template_'name_of_inner_member_function_template'",
+which in our example case would be `has_member_function_template_AFuncTemplate`.
+
+[heading Invoking the metafunction]
+
+To use this macro to test whether our member function template exists
+the metafunction is invoked with the enclosing type, the return type,
+and the function parameters, with the resulting `value` being a compile time
+boolean constant which is `true` if the member function template exists,
+or `false` otherwise. There are two ways to do this. We can either
+use each of our needed types as separate parameters, with the function parameters
+being enclosed in an MPL forward sequence, or we can compose our needed type
+in the form of a pointer to member function type. In the first case we would have:
+
+  has_member_function_template_AFuncTemplate<AType,double,boost::mpl::vector<int,long *,bool &> >::value
+  
+and in the second case we would have:
+
+  has_member_function_template_AFuncTemplate<double (AType::*) (int,long *,bool &)>::value
+  
+Both invocations are equivalent in functionality.
+
+In the example I created I choose an instantiation for introspecting the member
+function template `AFuncTemplate` using `int` for X, `long` for Y, and `bool` for Z,
+but I could just as well have chosen any other combination of types for X, Y, and Z
+as long as an actual template called `AFuncTemplate` could be called without
+a compiler error for some other combination. This of course entails that the types
+chosen for X, Y, and Z are defined when I invoke the metafunction, but of course this
+is always the case for built-in C++ types. If you do use some user-defined types
+for instantiation, perhaps because the particular function template you are 
+introspecting can only be called with certain user-defined types, you must make sure
+your user-defined types are defined when invoking the metafunction. The types used
+for instantiation do not have to exist when creating the metafunction using the macro.
+
+[heading Static member function templates]
+
+Like static member functions and member functions an inner function template can be
+a static member function template as well as a member function template. Similar to
+the way in which we introspect a member function template, a static member function template
+is introspected using a mental instantiation, passing the the name of the static
+member function template and the instantiated template parameters to a macro,
+and then invoking the resulting metafunction with our enclosing type and instantiated
+return and function parameters types. Given the static member function template
+
+  struct AnotherType
     {
-    Test< void (AType::*)() >::check<AType>(0);
-    return 0;
-    }
+    template<class X,int Y> static int AStaticFunctionTemplate(X) { ...some code; return Y; }
+    };
     
-Both compilers report compile errors with this perfectly correct code,
+with an instantiation, let's say, of `char` for X and `483` for Y we have:
 
-gcc: 
+* The name of `AStaticFuncTemplate`
+* The template parameters of `char,483`
+* The enclosing type of `AnotherType`
+* The return type of `int'
+* The function parameters of `char`
 
-  error: no matching function for call to 'Test<void (AType::*)()>::check(int)'
+To generate the metfunction for a static member function template we use the
+macro [macroref BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE]. The parameters
+to this macro are the name and the template parameters
 
-and msvc:
+  BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(AStaticFuncTemplate,char,483)
+  
+The macro generates a metafunction based on the pattern of
+"has_static_member_function_template_'name_of_inner_static_member_function_template'",
+which in our example case would be `has_static_member_function_template_AStaticFuncTemplate`.
 
-  error C2770: invalid explicit template argument(s) for 'void Test<T>::check(Test<T>::helper<&U::SomeFuncTemplate<int>> *)'
+We invoke the metafunction by passing the enclosing type, return type, and function
+parameters as either
 
-There is a workaround for these compiler problems, which is to hardcode the name
-of the enclosing class, via a macro, in the generated template rather than pass it as a 
-template type. In that case both compilers can handle both the member function code and 
-the code snippet above correctly. In essence, when the line:
+  has_static_member_function_template_AStaticFuncTemplate<AnotherType,int,boost::mpl::vector<char> >::value
+  
+or as an enclosing type with a single function declaration
 
-   template<class U> static void check(helper<&U::template SomeFuncTemplate<int> > *) { }
-   
-gets replaced by:
+  has_static_member_function_template_AStaticFuncTemplate<AnotherType,int (char) >::value
 
-   template<class U> static void check(helper<&AType::template SomeFuncTemplate<int> > *) { }
+Both invocations are equivalent in functionality.
 
-both gcc and Visual C++ work correctly. The same goes for the 'check' line in the 
-'TestFunctionTemplate' above.
+[heading Function templates]
 
-But the workaround destroys one of the basic tenets of the TTI library, which is that 
-the enclosing class be passed as a template parameter, especially as the enclosing class 
-need not actually exist ( see `BOOST_TTI_MEMBER_TYPE` and the previous discussion of 'Nested Types' ), 
-without producing a compiler error. So I have decided not to implement even this methodology to 
-introspect nested function templates in the TTI library.
+We can also introspect an enclosing type for either a member function template
+or a static member function template by using the same technique of creating an
+instantiation of what we are looking for and using the macro
+[macroref BOOST_TTI_HAS_FUNCTION_TEMPLATE]. The macro takes the same parameters
+as the two we have just discussed, the name of the function temnplate and the
+instantiated template parameters, and generates a metafunction of the pattern
+"has_function_template_'name_of_inner_function_template'". Here when we
+invoke oour metafunction we always use the first form, which has separate template
+parameters for the enclosing type, the instantiated return type and the instantiated
+function parameters. The result is that the final `::value` is true if either an
+inner member function template or an inner static member function template matches, 
+otherwise the result is false.
+
+[heading Common function template functionality]
+
+The macros for generating the metafunctions for introspecting function templates
+all have, like other macros in the TTI library, a complex macro form where the
+end-user can directly specify the name of the metafunction to be generated. The
+corresponding macros are BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE, 
+BOOST_TTI_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE, and
+BOOST_TTI_TRAIT_HAS_FUNCTION_TEMPLATE, where the first parameter is the name
+of the metafunction to be generated, the second parameter is the function
+template name, and the remaining parameters are the instantiated template
+parameters. In all other respects the resulting metafunction generated
+works exactly the same as when using the simpler macro form previously
+illustrated.
+
+Furthermore for those very few compilers not supporting variadic macros
+the instantiated template parameters must be given as a single macro argument
+in the form of a Boost preprocessor library array. In this case instead of,
+let's say, macro parameters of `int,long,bool' the end-user must specify
+the single macro parameter of `(3,(int,long,bool))'. Even when using
+a compiler supporting variadic macros you can use the Boost preprocessor
+library array single parameter if you wish.
+
+If you do use the simple macro form, which generates the metafunction name
+from the name of the function template you are introspecting, you can use
+corresponding macros, each taking the name of the function template as a single
+parameter, to create the appropriate metafunction name if you do not want to
+remember the pattern for generating the metafunction name. These macro names are
+BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE_GEN,
+BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE_GEN, and
+BOOST_TTI_HAS_FUNCTION_TEMPLATE_GEN respectively for member function
+templates, static member function templates, or function templates.
+
+When invoking the appropriate metafunction using the long form of an enclosing
+type, instantiated return type, and instantiated function parameters, a fourth
+template argument may optionally be given which holds a Boost FunctionTypes tag
+type to specify cv-qualification. This means you can add 'const', 'volatile', or
+both by specifying an appropriate tag type. An alternate to using the tag type 
+is to specify the enclosing type as 'const', 'volatile', or both.
+As an example if you specify the tag type as 
+'boost::function_types::const_qualified' or if you specify the enclosing
+type as 'const YourEnclosingType', the member function template which you are
+introspecting must be a const function template to match correctly.
 
 [endsect]
