@@ -53,20 +53,8 @@ of the boolean constant value. This is always boost::mpl::bool_.
     `has_type_'name'`
     
     class BOOST_TTI_T = enclosing type
-    ]
-    [[headerref boost/tti/has_type.hpp `has_type.hpp`]]
-  ]
-  [
-    [Type with MPL lambda expression]
-    [
-    [macroref BOOST_TTI_HAS_TYPE](name)
-    ]
-    [
-    `has_type_'name'`
     
-    class BOOST_TTI_T = enclosing type
-    
-    class BOOST_TTI_U = MPL lambda expression invoked with the inner type and returning a boolean constant
+    class BOOST_TTI_U = (optional) MPL lambda expression invoked with the inner type and returning a boolean constant
     ]
     [[headerref boost/tti/has_type.hpp `has_type.hpp`]]
   ]
@@ -79,20 +67,8 @@ of the boolean constant value. This is always boost::mpl::bool_.
     `has_class_'name'`
     
     class BOOST_TTI_T = enclosing type
-    ]
-    [[headerref boost/tti/has_class.hpp `has_class.hpp`]]
-  ]
-  [
-    [Class/Struct with MPL lambda expression]
-    [
-    [macroref BOOST_TTI_HAS_CLASS](name)
-    ]
-    [
-    `has_class_'name'`
     
-    class BOOST_TTI_T = enclosing type
-    
-    class BOOST_TTI_U = MPL lambda expression invoked with the inner class/struct and returning a boolean constant
+    class BOOST_TTI_U = (optional) MPL lambda expression invoked with the inner class/struct and returning a boolean constant
     ]
     [[headerref boost/tti/has_class.hpp `has_class.hpp`]]
   ]
@@ -105,20 +81,8 @@ of the boolean constant value. This is always boost::mpl::bool_.
     `has_enum_'name'`
     
     class BOOST_TTI_T = enclosing type
-    ]
-    [[headerref boost/tti/has_enum.hpp `has_enum.hpp`]]
-  ]
-  [
-    [Enumeration with MPL lambda expression]
-    [
-    [macroref BOOST_TTI_HAS_ENUM](name)
-    ]
-    [
-    `has_enum_'name'`
     
-    class BOOST_TTI_T = enclosing type
-    
-    class BOOST_TTI_U = MPL lambda expression invoked with the inner enum and returning a boolean constant
+    class BOOST_TTI_U = (optional) MPL lambda expression invoked with the inner enum and returning a boolean constant
     ]
     [[headerref boost/tti/has_enum.hpp `has_enum.hpp`]]
   ]
@@ -131,40 +95,20 @@ of the boolean constant value. This is always boost::mpl::bool_.
     `has_union_'name'`
     
     class BOOST_TTI_T = enclosing type
+    
+    class BOOST_TTI_U = (optional) MPL lambda expression invoked with the inner union and returning a boolean constant
     ]
     [[headerref boost/tti/has_union.hpp `has_union.hpp`]]
-  ]
-  [
-    [Union with MPL lambda expression]
-    [
-    [macroref BOOST_TTI_HAS_UNION](name)
-    ]
-    [
-    `has_union_'name'`
-    
-    class BOOST_TTI_T = enclosing type
-    
-    class BOOST_TTI_U = MPL lambda expression invoked with the inner union and returning a boolean constant
-    ]
-    [[headerref boost/tti/has_union.hpp `has_union.hpp`]]
-  ]
-  [
-    [Class Template ( using variadic macros )]
-    [
-    [macroref BOOST_TTI_HAS_TEMPLATE](name)
-    ]
-    [
-    `has_template_'name'`
-    
-    class BOOST_TTI_T = enclosing type
-    
-    All of the template parameters must be template type parameters ( 'class' or 'typename' parameters )
-    ]
-    [[headerref boost/tti/has_template.hpp `has_template.hpp`]]
   ]
   [
     [Class Template]
     [
+    Using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_TEMPLATE](name)
+    
+    Not using variadic macros:
+    
     [macroref BOOST_TTI_HAS_TEMPLATE](name,BOOST_PP_NIL)
     ]
     [
@@ -177,21 +121,15 @@ of the boolean constant value. This is always boost::mpl::bool_.
     [[headerref boost/tti/has_template.hpp `has_template.hpp`]]
   ]
   [
-    [Class Template with params ( using variadic macros )]
-    [
-    [macroref BOOST_TTI_HAS_TEMPLATE](name,...[footnote The template parameters as variadic data.])
-    ]
-    [
-    `has_template_'name'`
-    
-    class BOOST_TTI_T = enclosing type
-    ]
-    [[headerref boost/tti/has_template.hpp `has_template.hpp`]]
-  ]
-  [
     [Class Template with params]
     [
-    [macroref BOOST_TTI_HAS_TEMPLATE](name,ppArray[footnote The template parameters as the tuple part of the PP array.])
+    Using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_TEMPLATE](name,...[footnote The template parameters as variadic data.])
+    
+    Not using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_TEMPLATE](name,ppArray[footnote The template parameters as the tuple part of a Boost PP array.])
     ]
     [
     `has_template_'name'`
@@ -228,7 +166,7 @@ of the boolean constant value. This is always boost::mpl::bool_.
     class BOOST_TTI_T   = enclosing type 
                         OR 
                     pointer to member function 
-                    ( 'Return_Type Enclosing_Type::* ( Zero or more comma-separated parameter types )' )
+                    ( 'Return_Type (Enclosing_Type::*) ( Zero or more comma-separated parameter types )' )
     
     class BOOST_TTI_R   = (optional) return type if the first parameter is the enclosing type.
                     If the first parameter is the pointer to member function this must not be specified.
@@ -243,6 +181,39 @@ of the boolean constant value. This is always boost::mpl::bool_.
                     Defaults to `boost::function_types::null_tag`.
     ]
     [[headerref boost/tti/has_member_function.hpp `has_member_function.hpp`]]
+  ]
+  [
+    [Member function template]
+    [
+    Using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE](name,...[footnote The instantiated template parameters as variadic data.])
+    
+    Not using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE](name,ppArray[footnote The instantiated template parameters as the tuple part of a Boost PP array.])
+    ]
+    [
+    `has_member_function_template_'name'`
+    
+    class BOOST_TTI_T   = enclosing type 
+                        OR 
+                    pointer to member function 
+                    ( 'Instantiated return_type (Enclosing_Type::*) ( Zero or more comma-separated instantiated parameter types )' )
+    
+    class BOOST_TTI_R   = (optional) instantiated return type if the first parameter is the enclosing type.
+                    If the first parameter is the pointer to member function this must not be specified.
+    
+    class BOOST_TTI_FS  = (optional) instantiated function parameter types as a Boost MPL forward sequence.
+                    If the first parameter is the pointer to member function this must not be specified.
+                    If there are no function parameters this does not have to be specified.
+                    Defaults to boost::mpl::vector<>.
+    
+    class BOOST_TTI_TAG = (optional) Boost `function_types` tag type.
+                    If the first parameter is the pointer to member function this must not be specified.
+                    Defaults to `boost::function_types::null_tag`.
+    ]
+    [[headerref boost/tti/has_member_function_template.hpp `has_member_function_template.hpp`]]
   ]
   [
     [Static member data]
@@ -284,6 +255,37 @@ of the boolean constant value. This is always boost::mpl::bool_.
     [[headerref boost/tti/has_static_member_function.hpp `has_static_member_function.hpp`]]
   ]
   [
+    [Static member function template]
+    [
+    Using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE](name,...[footnote The instantiated template parameters as variadic data.])
+    
+    Not using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE](name,ppArray[footnote The instantiated template parameters as the tuple part of a Boost PP array.])
+    ]
+    [
+    `has_static_member_function_template_'name'`
+    
+    class BOOST_TTI_T   = enclosing type
+    
+    class BOOST_TTI_R   = instantiated return type
+                        OR 
+                    function type ( 'Instantiated return_Type (Zero or more comma-separated instantiated parameter types)' )
+    
+    class BOOST_TTI_FS  = (optional) instantiated function parameter types as a Boost MPL forward sequence.
+                    If the second parameter is the function type this must not be specified.
+                    If there are no function parameters, this does not have to be specified.
+                    Defaults to boost::mpl::vector<>.
+    
+    class BOOST_TTI_TAG = (optional) Boost `function_types` tag type.
+                    If the second parameter is the function type this must not be specified.
+                    Defaults to `boost::function_types::null_tag`.
+    ]
+    [[headerref boost/tti/has_static_member_function_template.hpp `has_static_member_function_template.hpp`]]
+  ]
+  [
     [Data, either member data or static member data]
     [
     [macroref BOOST_TTI_HAS_DATA](name)
@@ -317,6 +319,33 @@ of the boolean constant value. This is always boost::mpl::bool_.
                     Defaults to `boost::function_types::null_tag`.
     ]
     [[headerref boost/tti/has_function.hpp `has_function.hpp`]]
+  ]
+  [
+    [Function template, either member function template or static member function template]
+    [
+    Using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_FUNCTION_TEMPLATE](name,...[footnote The instantiated template parameters as variadic data.])
+    
+    Not using variadic macros:
+    
+    [macroref BOOST_TTI_HAS_FUNCTION_TEMPLATE](name,ppArray[footnote The instantiated template parameters as the tuple part of a Boost PP array.])
+    ]
+    [
+    `has_function_template_'name'`
+    
+    class BOOST_TTI_T   = enclosing type
+    
+    class BOOST_TTI_R   = instantiated return type
+    
+    class BOOST_TTI_FS  = (optional) instantiated function parameter types as a Boost MPL forward sequence.
+                    If there are no function parameters, this does not have to be specified.
+                    Defaults to boost::mpl::vector<>.
+    
+    class BOOST_TTI_TAG = (optional) Boost `function_types` tag type.
+                    Defaults to `boost::function_types::null_tag`.
+    ]
+    [[headerref boost/tti/has_function_template.hpp `has_function_template.hpp`]]
   ]
 ]
 

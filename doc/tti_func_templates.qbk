@@ -22,20 +22,7 @@ The technique depends directly on the fact that in C++ we can pass a template as
 parameter to another template using what is called a "template template" parameter type.
 
 One obvious thing about a template template parameter type is that it is a 
-class template. For whatever historical or technical reasons, no one has ever
-proposed that C++ have a way of passing a function template directly as a template 
-parameter, perhaps to be called a "function template template" parameter type. 
-I personally think this would be a good addition to C++ and would 
-make the ability of passing a template as a parameter to another template 
-more orthogonal, since both class templates and function templates would be supported. 
-My efforts to discuss this on the major C++ newsgroups have 
-met with arguments both against its practical usage and the justification
-that one can pass a function template to another template nested in a non-template 
-class, which serves as a type. But of course we can do the same thing with class templates, 
-which is in fact what Boost MPL does to pass templates as metadata, yet we still have 
-template template parameters as class templates.
-
-Nonetheless the fact that we can pass class templates as a template parameter but not
+class template. The fact that we can pass class templates as a template parameter but not
 function templates as a template parameter is the major factor why there is no equivalent
 method for introspecting function templates at compile time as there is for introspecting
 class templates.
@@ -44,15 +31,16 @@ class templates.
 
 There is, however, an alternate way of introspecting a function template.
 It is possible to check whether some particular [*instantiation] of a nested function 
-template exists at compile-time without generating a compiler error. Although checking if 
-some particular instantiation of a nested function template exists at compile-time does
-not prove that the nested function template itself does or does not exist, 
-since the instantiation itself may fail even when the nested function template exists,
-it provides a viable way of introspecting function templates bcause very few function templates
-are designed which limit the types used to instantiate.
+template exists at compile-time without generating a compiler error. In plainer C++ terms
+we call the instantiation of a function template "calling ( or invoking ) the function template".
+Although checking if some particular instantiation of a nested function template exists
+at compile-time does not prove that the nested function template itself exists, since the
+instantiation itself may fail even when the nested function template does exist, it provides
+a viable way of introspecting function templates because the vast majority of function
+templates are designed to accept any type(s).
 
-To see how this works in general I will give an example of a nested function template
-in a struct.
+To see how this works in general in the TTI library I will give an example of a nested
+function template in a struct.
 
   struct AType 
     {
@@ -63,17 +51,24 @@ The code shows a member function function template within a user-defined struct.
 to introspect this function template in TTI we need to mentally [*instantiate] it as a
 function by providing types for `class X`, `class Y`, and `class Z` and present the parts
 of that instantiation, as well as the name of the function template and the enclosed type,
-to TTI functionality in order to see if the member function template actually exists.
+to TTI functionality in order to introspect the member function template. 
 
-Let's write out our instantiation of the member function template using
+This is usually different than the process of actually calling a function template, since
+in C++ this process most often involves just specifying the function template's arguments
+in a function call, with the C++ compiler automatically deducing the function template
+parameters from the argument type. But in some cases, when a function template parameter
+can not be deduced by a function template argument in a function call, the end-user must
+call the function template by manually specifying a function template parameter. In TTI we must
+always specify a function template parameter in order for TTI introspection to work correctly.
+
+Let's write out our mental instantiation of the member function template using, let's say,
 `int` for X, `long` for Y, and `bool` for Z just to show what we will have
-to work with when using TTI to introspect our function template above.
-What we will now have as a declaration of our instantiated function template is:
+to work with when using TTI to introspect our function template above:
 
   double AFuncTemplate<int,long,bool>(int,long *,bool &)
   
-So what we have now which the TTI will need in order to find the
-member function template `template<class X,class Y,class Z> double AFuncTemplate(X,Y *,Z &)`
+So what we have now which the TTI will need in order to find the member function
+template `template<class X,class Y,class Z> double AFuncTemplate(X,Y *,Z &)`
 within the `AType` struct is:
 
 * The name of `AFuncTemplate`
@@ -118,22 +113,22 @@ Both invocations are equivalent in functionality.
 
 In the example I created I choose an instantiation for introspecting the member
 function template `AFuncTemplate` using `int` for X, `long` for Y, and `bool` for Z,
-but I could just as well have chosen any other combination of types for X, Y, and Z
-as long as an actual template called `AFuncTemplate` could be called without
-a compiler error for some other combination. This of course entails that the types
-chosen for X, Y, and Z are defined when I invoke the metafunction, but of course this
-is always the case for built-in C++ types. If you do use some user-defined types
-for instantiation, perhaps because the particular function template you are 
-introspecting can only be called with certain user-defined types, you must make sure
-your user-defined types are defined when invoking the metafunction. The types used
+but I could just as well have chosen any other combination of types for X, Y, and Z,
+even using the same type for all, as long as an actual template called `AFuncTemplate`
+could be called without a compiler error for some other combination. This of course
+entails that the type(s) chosen for X, Y, and Z are declared when I invoke the metafunction.
+This is always the case for built-in C++ types. If you do use some
+user-defined types for instantiation, perhaps because the particular function template
+you are introspecting can only be called with certain user-defined types, you must make sure
+your user-defined types are declared when invoking the metafunction. The types used
 for instantiation do not have to exist when creating the metafunction using the macro.
 
 [heading Static member function templates]
 
 Like static member functions and member functions an inner function template can be
-a static member function template as well as a member function template. Similar to
+a static member function template or a member function template. Similar to
 the way in which we introspect a member function template, a static member function template
-is introspected using a mental instantiation, passing the the name of the static
+is introspected using some instantiation, passing the the name of the static
 member function template and the instantiated template parameters to a macro,
 and then invoking the resulting metafunction with our enclosing type and instantiated
 return and function parameters types. Given the static member function template
@@ -153,7 +148,7 @@ with an instantiation, let's say, of `char` for X and `483` for Y we have:
 
 To generate the metfunction for a static member function template we use the
 macro [macroref BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE]. The parameters
-to this macro are the name and the template parameters
+to this macro are the name of our function template and the template parameters:
 
   BOOST_TTI_HAS_STATIC_MEMBER_FUNCTION_TEMPLATE(AStaticFuncTemplate,char,483)
   
@@ -175,13 +170,13 @@ Both invocations are equivalent in functionality.
 [heading Function templates]
 
 We can also introspect an enclosing type for either a member function template
-or a static member function template by using the same technique of creating an
-instantiation of what we are looking for and using the macro
+or a static member function template at the same time by using the same technique
+of creating an instantiation of what we are looking for and using the macro
 [macroref BOOST_TTI_HAS_FUNCTION_TEMPLATE]. The macro takes the same parameters
 as the two we have just discussed, the name of the function temnplate and the
 instantiated template parameters, and generates a metafunction of the pattern
 "has_function_template_'name_of_inner_function_template'". Here when we
-invoke oour metafunction we always use the first form, which has separate template
+invoke our metafunction we always use the first form, which has separate template
 parameters for the enclosing type, the instantiated return type and the instantiated
 function parameters. The result is that the final `::value` is true if either an
 inner member function template or an inner static member function template matches, 
@@ -202,12 +197,16 @@ works exactly the same as when using the simpler macro form previously
 illustrated.
 
 Furthermore for those very few compilers not supporting variadic macros
-the instantiated template parameters must be given as a single macro argument
-in the form of a Boost preprocessor library array. In this case instead of,
-let's say, macro parameters of `int,long,bool' the end-user must specify
-the single macro parameter of `(3,(int,long,bool))'. Even when using
+the instantiated template parameters passed to the macro must be given as
+a single macro argument in the form of a Boost preprocessor library array.
+In this case instead of,let's say, macro parameters of `int,long,bool' the
+end-user must specify the single macro argument of `(3,(int,long,bool))',
+which is the form of a Boost preprocessor library array. Even when using
 a compiler supporting variadic macros you can use the Boost preprocessor
-library array single parameter if you wish.
+library array single argument if you wish rather than specifying each of the
+instantiated template parameters as individual macro arguments. You might
+want to do this if you are not sure if your compiler supports variadic
+macros.
 
 If you do use the simple macro form, which generates the metafunction name
 from the name of the function template you are introspecting, you can use
