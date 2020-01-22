@@ -5,7 +5,7 @@
   http://www.boost.org/LICENSE_1_0.txt).
 ]
 
-[section:tti_func_templates Introspecting function templates in TTI]
+[section:tti_function_templates Introspecting function templates]
 
 Function templates, like functions, can be entities within a user-defined
 type. Just as functions within a user-defined type can be member functions
@@ -83,8 +83,8 @@ a valid callable function which does not contain compile time errors.
 
 The actual types and/or values we use in an instantiation of a function template we introspect
 must be declared when we do the introspection. For built-in types this is always the case.
-If we use instead, for whatever reason, a user-defined type in a given instantiation that
-type must be declared when we invoke the metafunction which does the introspection.
+If we use instead, for whatever reason, a user-defined type in a given instantiation, that type
+must be declared when we invoke the metafunction which does the introspection.
 
 Further areas of the documentation will explain in its place how we use an instantiation of
 a function template to introspect respectively a member function template, a static member
