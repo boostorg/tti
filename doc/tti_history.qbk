@@ -10,6 +10,7 @@
 [heading Boost 1.72]
 * The enclosing type to be introspected can now also be a union
 * You can introspect for the specific nested types of class/struct, enumeration, or union
+* You can introspect for the nested type of function templates using function template instantiation
 
 [heading Post Boost 1.55 development]
 * Passing a valid non-class as the enclosing type of the query macro metafunctions

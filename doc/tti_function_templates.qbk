@@ -35,10 +35,11 @@ introspecting class templates signature.
 Although there is no way to introspect for a function template signature in TTI, there is
 an alternate way of introspecting a function template. It is possible to check whether some
 particular [*instantiation] of a nested function template exists at compile-time without
-generating a compiler error. In plainer C++ terms we call the instantiation of a function
-template "calling ( or invoking ) the function template". Although checking whether some
-particular instantiation of a nested function template exists at compile-time does not
-prove that the nested function template itself has a particular signature, since the
+generating a compiler error, as long as all the lower level indidual types in that instantiation
+exist at the time introspection of a function template occurs. In plainer C++ terms we call the
+instantiation of a function template "calling ( or invoking ) the function template". Although
+checking whether some particular instantiation of a nested function template exists at compile-time
+does not prove that the nested function template itself has a particular signature, since the
 instantiation itself may fail even when the nested function template does exist, it provides
 a viable way of introspecting function templates because the vast majority of function
 templates are designed to accept any type(s) and avoid compile time failure. Also when we

@@ -1,5 +1,5 @@
 [/ 
-  (C) Copyright Edward Diener 2019
+  (C) Copyright Edward Diener 2020
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE_1_0.txt or copy at
   http://www.boost.org/LICENSE_1_0.txt).
@@ -62,7 +62,7 @@ which in our example case would be `has_member_function_template_AFuncTemplate`.
 [heading Invoking the metafunction]
 
 To use this macro to test whether our member function template exists
-the metafunction is invoked with the enclosing type, the instantiated return type,
+the metafunction the macro creates is invoked with the enclosing type, the instantiated return type,
 and the instantiated function parameters, with the resulting `value` being a compile time
 boolean constant which is `true` if the member function template exists,
 or `false` otherwise. There are two ways to do this. We can either
