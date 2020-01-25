@@ -27,7 +27,7 @@ is a static member function template of the `AType` user-defined type.
 
 In order to introspect either function template we use some theoretical valid
 instantiations of `AFuncTemplate`. An instantiation of a function template was
-previously explained in the topic "Introspecting function templates".
+previously explained in the topic [link sectti_function_templates "Introspecting function templates technique"].
 
 For the purposes of illustration the instantiation we will use is:
 

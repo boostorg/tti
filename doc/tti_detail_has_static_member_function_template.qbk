@@ -20,7 +20,7 @@ of a user-defined type. An example of a static member function template would be
     
 In order to introspect the function template we use some theoretical valid instantiation of
 the static member function template `AStaticFuncTemplate`. An instantiation of a function template
-was previously explained in the topic "Introspecting function templates".
+was previously explained in the topic [link sectti_function_templates "Introspecting function templates technique"].
 
 For the purposes of illustration the instantiation we will use is:
 

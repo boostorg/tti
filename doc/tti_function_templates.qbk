@@ -5,7 +5,8 @@
   http://www.boost.org/LICENSE_1_0.txt).
 ]
 
-[section:tti_function_templates Introspecting function templates]
+[section:tti_function_templates Introspecting function templates technique]
+[#sectti_function_templates]
 
 Function templates, like functions, can be entities within a user-defined
 type. Just as functions within a user-defined type can be member functions

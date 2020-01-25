@@ -5,7 +5,7 @@
   http://www.boost.org/LICENSE_1_0.txt).
 ]
 
-[section:tti_usingMM An example using the Macro Metafunctions]
+[section:tti_usingMM An example using the macro metafunctions]
 [#sectti_usingMM]
 
 Using the macro metafunctions can be illustrated by first creating some hypothetical
