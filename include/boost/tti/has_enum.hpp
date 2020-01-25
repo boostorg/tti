@@ -68,6 +68,8 @@
                              
   Example usage:
   
+  @code
+  
   BOOST_TTI_TRAIT_HAS_ENUM(LookFor,MyType) generates the metafunction LookFor in the current scope
   to look for an inner enum called MyType.
   
@@ -81,6 +83,8 @@
   
   LookFor<EnclosingType,boost::is_same<_,SomeOtherType> >::value is true if MyType is an inner enum
     of EnclosingType and is the same type as SomeOtherType.
+  
+  @endcode
   
 */
 #define BOOST_TTI_TRAIT_HAS_ENUM(trait,name) \
@@ -142,6 +146,8 @@
                              
   Example usage:
   
+  @code
+  
   BOOST_TTI_HAS_ENUM(MyType) generates the metafunction has_enum_MyType in the current scope
   to look for an inner enum called MyType.
   
@@ -155,6 +161,8 @@
   
   has_enum_MyType<EnclosingType,boost::is_same<_,SomeOtherType> >::value is true if MyType is an inner enum
     of EnclosingType and is the same type as SomeOtherType.
+  
+  @endcode
   
 */
 #define BOOST_TTI_HAS_ENUM(name) \

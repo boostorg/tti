@@ -33,7 +33,7 @@ within the `AnotherType` struct is:
 * The name of `AStaticFuncTemplate`
 * The template parameters of `char,483`
 * The enclosing type of `AnotherType`
-* The return type of `int'
+* The return type of `int`
 * The function parameters of `char`
 
 [heading Generating the metafunction]

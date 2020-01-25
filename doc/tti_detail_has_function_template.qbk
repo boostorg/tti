@@ -40,7 +40,7 @@ within the `AType` struct is:
 * The name of `AFuncTemplate`
 * The template parameters of `char,bool,int`
 * The enclosing type of `AType`
-* The return type of `double'
+* The return type of `double`
 * The function parameters of `char,bool *,int &`
 
 [heading Generating the metafunction]
