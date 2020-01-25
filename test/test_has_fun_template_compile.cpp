@@ -15,6 +15,7 @@ int main()
   Sftem<AType,double,boost::mpl::vector<int,unsigned *,float &> > aVar;
   BOOST_TTI_HAS_FUNCTION_TEMPLATE_GEN(Nonexistent)<AType,int,boost::mpl::vector<short,bool,int> > aVar2;
   NotExist<AnotherType,AType,boost::mpl::vector<long,char> > aVar3;
+  BOOST_TTI_HAS_FUNCTION_TEMPLATE_GEN(StatFuncTemplate)<AType::AStructType,int,boost::mpl::vector<int *,bool>,boost::function_types::const_qualified> aVar4;
   
   BOOST_MPL_ASSERT((BOOST_TTI_HAS_FUNCTION_TEMPLATE_GEN(StatFuncTemplate)<AType::AStructType,int,boost::mpl::vector<int *,bool> >));
   BOOST_MPL_ASSERT((Sftem<AType::BType::CType,double,boost::mpl::vector<char,unsigned *,float &> >));

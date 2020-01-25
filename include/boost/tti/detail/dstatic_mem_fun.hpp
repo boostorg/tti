@@ -37,17 +37,26 @@
     }; \
 /**/
 
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEST_FUNC_CALL(trait,name) \
+  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
+  struct BOOST_PP_CAT(trait,_detail_hsmf_ttc) : \
+    BOOST_PP_CAT(trait,_detail_ihsmf) \
+      < \
+      BOOST_TTI_DETAIL_TP_T, \
+      typename BOOST_TTI_NAMESPACE::detail::tfunction_seq<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>::type \
+      > \
+    { \
+    }; \
+/**/
+
 #define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEST_FUNC(trait,name) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_FUNCTION_TEST_FUNC_CALL(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_R,class BOOST_TTI_DETAIL_TP_FS,class BOOST_TTI_DETAIL_TP_TAG> \
   struct BOOST_PP_CAT(trait,_detail_hsmf_tt) : \
     boost::mpl::eval_if \
       < \
       BOOST_TTI_NAMESPACE::detail::static_function_tag<BOOST_TTI_DETAIL_TP_TAG>, \
-      BOOST_PP_CAT(trait,_detail_ihsmf) \
-        < \
-        BOOST_TTI_DETAIL_TP_T, \
-        typename BOOST_TTI_NAMESPACE::detail::tfunction_seq<BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>::type \
-        >, \
+      BOOST_PP_CAT(trait,_detail_hsmf_ttc)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_R,BOOST_TTI_DETAIL_TP_FS,BOOST_TTI_DETAIL_TP_TAG>, \
       boost::mpl::false_ \
       > \
     { \
