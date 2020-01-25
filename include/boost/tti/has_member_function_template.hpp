@@ -36,24 +36,26 @@
     The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,...) where
     
-    trait = the name of the metafunction
-    name  = inner member function template name
-    ...   = variadic parameters
+    trait = the name of the metafunction <br/>
+    name  = inner member function template name <br/>
+    ...   = variadic parameters.
     
-            The variadic parameter(s) are either:
-            
-            A sequence of valid instantiations for the member function template parameters
-            ie. 'int,long,double' etc.
-                
-            or
-            
-            A single variadic parameter which is a Boost PP array whose elements are
-            a sequence of valid instantiations for the member function template parameters
-            ie. '(3,(int,long,double))' etc. This form is allowed in order to be compatible
-            with using the non-variadic form of this macro.
+    The variadic parameter(s) are either:
+    
+    A sequence of valid instantiations for the member function template parameters
+    ie. 'int,long,double' etc.
+        
+    or
+    
+    A single variadic parameter which is a Boost PP array whose elements are
+    a sequence of valid instantiations for the member function template parameters
+    ie. '(3,(int,long,double))' etc. This form is allowed in order to be compatible
+    with using the non-variadic form of this macro.
     
     BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "trait" where 'trait' is the first macro parameter.
     
+  @code
+  
             template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
             struct trait
               {
@@ -85,6 +87,8 @@
                         with the appropriate member function template type,
                         otherwise 'value' is false.
                           
+  @endcode
+  
 */
 #define BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,...) \
   BOOST_TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE \
@@ -109,23 +113,25 @@
     The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name,...) where
     
-    name  = inner member function template name
-    ...   = variadic parameters
+    name  = inner member function template name <br/>
+    ...   = variadic parameters.
     
-            The variadic parameter(s) are either:
-            
-            A sequence of valid instantiations for the member function template parameters
-            ie. 'int,long,double' etc.
-                
-            or
-            
-            A single variadic parameter which is a Boost PP array whose elements are
-            a sequence of valid instantiations for the member function template parameters
-            ie. '(3,(int,long,double))' etc. This form is allowed in order to be compatible
-            with using the non-variadic form of this macro.
+    The variadic parameter(s) are either:
+    
+    A sequence of valid instantiations for the member function template parameters
+    ie. 'int,long,double' etc.
+        
+    or
+    
+    A single variadic parameter which is a Boost PP array whose elements are
+    a sequence of valid instantiations for the member function template parameters
+    ie. '(3,(int,long,double))' etc. This form is allowed in order to be compatible
+    with using the non-variadic form of this macro.
     
     BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "has_member_function_template_'name'" where 'name' is the first macro parameter.
     
+  @code
+  
             template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
             struct has_member_function_template_'name'
               {
@@ -157,6 +163,8 @@
                         with the appropriate member function template type,
                         otherwise 'value' is false.
                           
+  @endcode
+  
 */
 #define BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name,...) \
   BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE \
@@ -185,13 +193,15 @@
     The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) where
     
-    trait   = the name of the metafunction
-    name    = inner member function template name
+    trait   = the name of the metafunction <br/>
+    name    = inner member function template name <br/>
     pparray = A Boost PP array whose elements are a sequence of valid instantiations for the
               member function template parameters ie. '(3,(int,long,double))' etc.
     
     BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "trait" where 'trait' is the first macro parameter.
     
+  @code
+  
             template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
             struct trait
               {
@@ -223,6 +233,8 @@
                         with the appropriate member function template type,
                         otherwise 'value' is false.
                           
+  @endcode
+  
 */
 #define BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
   BOOST_TTI_DETAIL_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE(trait,name,pparray) \
@@ -243,12 +255,14 @@
     The metafunction tests whether an inner member function template with a particular name exists.
     The macro takes the form of BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name,pparray) where
     
-    name    = inner member function template name
+    name    = inner member function template name <br/>
     pparray = A Boost PP array whose elements are a sequence of valid instantiations for the
               member function template parameters ie. '(3,(int,long,double))' etc.
     
     BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE generates a metafunction called "has_member_function_template_'name'" where 'name' is the first macro parameter.
     
+  @code
+  
             template<class BOOST_TTI_TP_T,class BOOST_TTI_R,class BOOST_TTI_FS,class BOOST_TTI_TAG>
             struct has_member_function_template_'name'
               {
@@ -280,6 +294,8 @@
                         with the appropriate member function template type,
                         otherwise 'value' is false.
                           
+  @endcode
+  
 */
 #define BOOST_TTI_HAS_MEMBER_FUNCTION_TEMPLATE(name,pparray) \
   BOOST_TTI_TRAIT_HAS_MEMBER_FUNCTION_TEMPLATE \

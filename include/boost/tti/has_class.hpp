@@ -31,11 +31,13 @@
     and, optionally, whether an MPL lambda expression invoked with the inner class/struct
     is true or not. The macro takes the form of BOOST_TTI_TRAIT_HAS_CLASS(trait,name) where
     
-    trait = the name of the metafunction
+    trait = the name of the metafunction <br/>
     name  = the name of the inner class/struct.
 
     BOOST_TTI_TRAIT_HAS_CLASS generates a metafunction called "trait" where 'trait' is the macro parameter.
     
+  @code
+  
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_U>
               struct trait
                 {
@@ -66,6 +68,8 @@
                           The action taken with BOOST_TTI_TP_U occurs only when the 'name' class/struct exists 
                           within the enclosing type BOOST_TTI_TP_T.
                              
+  @endcode
+  
   Example usage:
   
   @code
@@ -114,6 +118,8 @@
 
     BOOST_TTI_HAS_CLASS generates a metafunction called "has_class_'name'" where 'name' is the macro parameter.
     
+  @code
+  
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_U>
               struct has_class_'name'
                 {
@@ -144,6 +150,8 @@
                           The action taken with BOOST_TTI_TP_U occurs only when the 'name' class/struct exists 
                           within the enclosing type BOOST_TTI_TP_T.
                              
+  @endcode
+  
   Example usage:
   
   @code

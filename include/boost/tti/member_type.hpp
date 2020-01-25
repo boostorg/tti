@@ -34,11 +34,13 @@
     by returning the inner type or a marker type.
     The macro takes the form of BOOST_TTI_TRAIT_MEMBER_TYPE(trait,name) where
     
-    trait = the name of the metafunction.
+    trait = the name of the metafunction <br/>
     name  = the name of the inner type.
 
     BOOST_TTI_TRAIT_MEMBER_TYPE generates a metafunction called "trait" where 'trait' is the macro parameter.
     
+  @code
+  
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_MARKER_TYPE = boost::tti::detail::notype>
               struct trait
                 {
@@ -63,6 +65,8 @@
                 The metafunction also encapsulates the type of the marker type as
                 a nested 'boost_tti_marker_type'.
                           
+  @endcode
+  
     The purpose of this macro is to encapsulate the 'name' type as the typedef 'type'
     of a metafunction, but only if it exists within the enclosing type. This allows for
     an evaluation of inner type existence, without generating a compiler error,
@@ -97,6 +101,8 @@
 
     BOOST_TTI_MEMBER_TYPE generates a metafunction called "member_type_name" where 'name' is the macro parameter.
     
+  @code
+  
               template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_MARKER_TYPE = boost::tti::detail::notype>
               struct member_type_'name'
                 {
@@ -120,6 +126,8 @@
                 The metafunction also encapsulates the type of the marker type as
                 a nested 'boost_tti_marker_type'.
                           
+  @endcode
+  
     The purpose of this macro is to encapsulate the 'name' type as the typedef 'type'
     of a metafunction, but only if it exists within the enclosing type. This allows for
     an evaluation of inner type existence, without generating a compiler error,
@@ -144,6 +152,8 @@ namespace boost
     
         The metafunction 'valid_member_type', which is in the boost::tti namespace, takes the form of:
 
+  @code
+  
         template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_MARKER_TYPE = boost::tti::detail::notype>
         struct valid_member_type
           {
@@ -161,6 +171,8 @@ namespace boost
           returns                  = 'value' is true if the type is valid, otherwise 'value' is false.
                                      A valid type means that the returned inner 'type' is not the marker type.
                           
+  @endcode
+  
     */
     template<class BOOST_TTI_TP_T,class BOOST_TTI_TP_MARKER_TYPE = BOOST_TTI_NAMESPACE::detail::notype>
     struct valid_member_type :
@@ -176,6 +188,8 @@ namespace boost
 
         The metafunction 'valid_member_metafunction', which is in the boost::tti namespace, takes the form of:
 
+  @code
+  
         template<class BOOST_TTI_METAFUNCTION>
         struct valid_member_metafunction
           {
@@ -190,6 +204,8 @@ namespace boost
           returns          = 'value' is true if the nested type of the invoked metafunction is valid, otherwise 'value' is false.
                              A valid type means that the invoked metafunction's inner 'type' is not the marker type.
                           
+  @endcode
+  
     */
     template<class BOOST_TTI_METAFUNCTION>
     struct valid_member_metafunction :
