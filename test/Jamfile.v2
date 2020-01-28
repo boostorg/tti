@@ -165,8 +165,7 @@ alias ttifun
 alias ttimftmp
     :
         [ run test_has_mem_fun_template.cpp : : : [ check-target-builds function_template : : <build>no ] ]
-        [ run test_has_mem_fun_template.cpp : : :
-          [ check-target-builds function_template : : <build>no ]
+        [ run test_has_mem_fun_template.cpp : : : [ check-target-builds function_template : : <build>no ]
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_mem_fun_template_nov ]
         [ compile test_has_mem_fun_template_compile.cpp : [ check-target-builds function_template : : <build>no ] ]
@@ -181,8 +180,7 @@ alias ttimftmp
 alias ttimftsig
     :
         [ run test_has_member_template.cpp : : : [ check-target-builds function_template : : <build>no ] ]
-        [ run test_has_member_template.cpp : : :
-          [ check-target-builds function_template : : <build>no ]
+        [ run test_has_member_template.cpp : : : [ check-target-builds function_template : : <build>no ]
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_member_template_nov ]
         [ compile test_has_member_template_compile.cpp : [ check-target-builds function_template : : <build>no ] ]
@@ -197,8 +195,7 @@ alias ttimftsig
 alias ttimftmpcv
     :
         [ run test_has_mem_fun_template_cv.cpp : : : [ check-target-builds function_template : : <build>no ] ]
-        [ run test_has_mem_fun_template_cv.cpp : : :
-          [ check-target-builds function_template : : <build>no ]
+        [ run test_has_mem_fun_template_cv.cpp : : : [ check-target-builds function_template : : <build>no ]
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_mem_fun_template_cv_nov ]
         [ compile test_has_mem_fun_template_cv_compile.cpp : [ check-target-builds function_template : : <build>no ] ]
@@ -213,8 +210,7 @@ alias ttimftmpcv
 alias ttimftsigcv
     :
         [ run test_has_member_template_cv.cpp : : : [ check-target-builds function_template : : <build>no ] ]
-        [ run test_has_member_template_cv.cpp : : :
-          [ check-target-builds function_template : : <build>no ]
+        [ run test_has_member_template_cv.cpp : : : [ check-target-builds function_template : : <build>no ]
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_member_template_cv_nov ]
         [ compile test_has_member_template_cv_compile.cpp : [ check-target-builds function_template : : <build>no ] ]
@@ -229,8 +225,7 @@ alias ttimftsigcv
 alias ttismftmp
     :
         [ run test_has_static_mem_fun_template.cpp : : : [ check-target-builds function_template : : <build>no ] ]
-        [ run test_has_static_mem_fun_template.cpp : : :
-          [ check-target-builds function_template : : <build>no ]
+        [ run test_has_static_mem_fun_template.cpp : : : [ check-target-builds function_template : : <build>no ]
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_static_mem_fun_template_nov ]
         [ compile test_has_static_mem_fun_template_compile.cpp : [ check-target-builds function_template : : <build>no ] ]
@@ -244,8 +239,7 @@ alias ttismftmp
 alias ttismftsig
     :
         [ run test_has_static_member_template.cpp : : : [ check-target-builds function_template : : <build>no ] ]
-        [ run test_has_static_member_template.cpp : : :
-          [ check-target-builds function_template : : <build>no ]
+        [ run test_has_static_member_template.cpp : : : [ check-target-builds function_template : : <build>no ]
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_static_member_template_nov ]
         [ compile test_has_static_member_template_compile.cpp : [ check-target-builds function_template : : <build>no ] ]
@@ -259,8 +253,7 @@ alias ttismftsig
 alias ttifuntmp
     :
         [ run test_has_fun_template.cpp : : : [ check-target-builds function_template : : <build>no ] ]
-        [ run test_has_fun_template.cpp : : :
-          [ check-target-builds function_template : : <build>no ]
+        [ run test_has_fun_template.cpp : : : [ check-target-builds function_template : : <build>no ]
           <define>BOOST_PP_VARIADICS=0 : 
           test_has_fun_template_nov ]
         [ compile test_has_fun_template_compile.cpp : [ check-target-builds function_template : : <build>no ] ]

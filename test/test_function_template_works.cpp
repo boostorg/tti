@@ -1,3 +1,10 @@
+//  (C) Copyright Edward Diener 2020
+//  Use, modification and distribution are subject to the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
+//  http://www.boost.org/LICENSE_1_0.txt).
+
+#include <boost/tti/detail/dmacro_sunfix.hpp>
+
   struct AType 
     {
     template<class X,class Y,class Z> double SomeFuncTemplateName(X,Y *,Z &) { return 0.0; }
@@ -13,7 +20,7 @@
     {
     typedef char Bad;
     struct Good { char x[2]; };
-    template<T> struct helper;
+    template<T> struct helper BOOST_TTI_DETAIL_MACRO_SUNFIX ;
     template<class U> static Good check(helper<&U::template SomeFuncTemplateName<int,long,double> > *);
     template<class U> static Bad check(...);
     static const bool value=sizeof(check<C>(0))==sizeof(Good);
@@ -28,7 +35,7 @@
     {
     typedef char Bad;
     struct Good { char x[2]; };
-    template<T *> struct helper;
+    template<T *> struct helper BOOST_TTI_DETAIL_MACRO_SUNFIX ;
     template<class U> static Good check(helper<&U::template StatFuncTemplate<long,int,1234> > *);
     template<class U> static Bad check(...);
     static const bool value=sizeof(check<C>(0))==sizeof(Good);
