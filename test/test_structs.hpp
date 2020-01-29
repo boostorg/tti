@@ -77,8 +77,15 @@ struct AType
         UEnumV2
         };
     template <int,class,long> struct NestedMemberTemplate { };
-    };
     
+#if !defined(BOOST_NO_CXX11_UNRESTRICTED_UNION)
+
+    static float USMember;
+    
+#endif
+
+    };
+
   // Template
     
   template <class> struct ATPMemberTemplate { };
@@ -185,6 +192,13 @@ struct AnotherType
         int i;
         char ch;
         };
+        
+#if !defined(BOOST_NO_CXX11_UNRESTRICTED_UNION)
+
+    static char ASCData;
+    
+#endif
+
     };
     
   // Template
@@ -252,5 +266,12 @@ struct MarkerType
 
 short AType::DSMember(5622);
 AType::AStructType AnotherType::AnStat;
+
+#if !defined(BOOST_NO_CXX11_UNRESTRICTED_UNION)
+
+float AType::AnUnion::USMember(893.53);
+char AnotherType::AnotherUnion::ASCData('e');
+
+#endif
 
 #endif // TEST_STRUCTS_HPP

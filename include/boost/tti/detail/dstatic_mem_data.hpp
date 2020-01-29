@@ -7,14 +7,17 @@
 #if !defined(BOOST_TTI_DETAIL_STATIC_MEM_DATA_HPP)
 #define BOOST_TTI_DETAIL_STATIC_MEM_DATA_HPP
 
+#include <boost/config.hpp>
 #include <boost/function_types/is_function.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <boost/type_traits/is_class.hpp>
 #include <boost/type_traits/detail/yes_no_type.hpp>
+#include <boost/tti/detail/denclosing_type.hpp>
 #include <boost/tti/detail/dmacro_sunfix.hpp>
 #include <boost/tti/detail/dnullptr.hpp>
+#include <boost/tti/gen/namespace_gen.hpp>
 
 #if defined(BOOST_MSVC)
 
@@ -81,6 +84,8 @@
 
 #endif // defined(BOOST_MSVC)
 
+#if defined(BOOST_NO_CXX11_UNRESTRICTED_UNION)
+
 #define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA(trait,name) \
   BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
   template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
@@ -95,4 +100,22 @@
     }; \
 /**/
     
+#else
+
+#define BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA(trait,name) \
+  BOOST_TTI_DETAIL_TRAIT_HAS_STATIC_MEMBER_DATA_OP(trait,name) \
+  template<class BOOST_TTI_DETAIL_TP_T,class BOOST_TTI_DETAIL_TP_TYPE> \
+  struct BOOST_PP_CAT(trait,_detail_hsd) : \
+    boost::mpl::eval_if \
+        < \
+        BOOST_TTI_NAMESPACE::detail::enclosing_type<BOOST_TTI_DETAIL_TP_T>, \
+        BOOST_PP_CAT(trait,_detail_hsd_op)<BOOST_TTI_DETAIL_TP_T,BOOST_TTI_DETAIL_TP_TYPE>, \
+        boost::mpl::false_ \
+        > \
+    { \
+    }; \
+/**/
+    
+#endif
+
 #endif // BOOST_TTI_DETAIL_STATIC_MEM_DATA_HPP
