@@ -14,11 +14,23 @@ branches:
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      TOOLSET: msvc-10.0,msvc-11.0,msvc-12.0,msvc-14.0
+      TOOLSET: msvc-10.0
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      TOOLSET: msvc-11.0
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      TOOLSET: msvc-12.0
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      TOOLSET: msvc-14.0
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       TOOLSET: msvc-14.1
+      CXXSTD: 14,17,latest
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       TOOLSET: msvc-14.2
+      CXXSTD: 14,17,latest
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      TOOLSET: msvc-14.2
+      CXXSTD: 14,17,latest
+      PREPROCESSOR: /Zc:preprocessor
 
 install:
   - cd ..
@@ -37,4 +49,6 @@ install:
 build: off
 
 test_script:
-  - b2 libs/tti/test toolset=%TOOLSET%
+  - if not "%CXXSTD%" == "" set CXXSTD=cxxstd=%CXXSTD%
+  - if not "%PREPROCESSOR%" == "" set PREPROCESSOR=cxxflags="%PREPROCESSOR%"
+  - b2 libs/tti/test -j3 toolset=%TOOLSET% %CXXSTD% address-model=32,64 %PREPROCESSOR% variant=debug,release
